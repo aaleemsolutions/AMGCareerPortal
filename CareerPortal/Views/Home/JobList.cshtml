@@ -1,0 +1,289 @@
+﻿
+@{
+    ViewBag.Title = "JobList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="widget">
+                        <div class="search_widget">
+                            <div class="field_search">
+                                <input type="text" placeholder="Search Keywords">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <div class="field_search">
+                                <input type="text" placeholder="All Locations">
+                                <i class="fa fa-map-marker"></i>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="widget border">
+                            <h3 class="sb-title mb-3">Specialism</h3>
+                            <div class="specialism_widget" style="">
+                                <div class="simple-checkbox">
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">Accountancy (2)</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <label class="custom-control-label" for="customCheck2">Banking (2)</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                        <label class="custom-control-label" for="customCheck3">UI & UX (3)</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                                        <label class="custom-control-label" for="customCheck4">Digital &amp; Creative (4)</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5">Estate Agency (3)</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                        <label class="custom-control-label" for="customCheck6">Graduate (2)</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
+                                        <label class="custom-control-label" for="customCheck7">IT Contractor (7)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget border mb-0">
+                            <h3 class="sb-title mb-3">Team Size</h3>
+                            <div class="specialism_widget" style="">
+                                <div class="simple-checkbox">
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck8">
+                                        <label class="custom-control-label" for="customCheck8">1 - 10</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck9">
+                                        <label class="custom-control-label" for="customCheck9">100 - 200</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck10">
+                                        <label class="custom-control-label" for="customCheck10">201 - 301</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck11">
+                                        <label class="custom-control-label" for="customCheck11">301 - 401</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck12">
+                                        <label class="custom-control-label" for="customCheck12">401 - 501</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox sec-wrap">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck13">
+                                        <label class="custom-control-label" for="customCheck13">501 - 601</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck14">
+                                        <label class="custom-control-label" for="customCheck14">601 - 701</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="job-data-toolbar">
+                        <p>98 Jobs & Vacancies</p>
+                        <p>
+                            Sort by
+                            <select class="form-control ml-2">
+                                <option>Lates Post</option>
+                                <option>Top Rated</option>
+                            </select>
+                        </p>
+                    </div>
+
+                    <div class="Job-section">
+                        <div>
+                            <div class="job-data-wrap">
+                                <a href="job-single.html" class="job-data">
+                                    <div class="company-logo col-auto pl-0">
+                                        <img src="~/assets/img/icons/company-1.png" alt="Company Logo">
+                                    </div>
+                                    <div class="list-content col">
+                                        <h6 class="title">Web Designer / Developer</h6>
+                                        <ul class="meta">
+                                            <li><strong class="text-primary">Massimo Artemisis</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col">
+                                        <ul class="meta">
+                                            <li><strong>Location : United States</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col-auto order-sm-3">
+                                        <ul class="meta pr-3">
+                                            <li><i class="fa fa-heart-o"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-right col-auto order-sm-3 p-0">
+                                        <span class="button btn border-primary">FULL TIME </span>
+                                    </div>
+                                </a>
+                                <a href="job-single.html" class="job-data">
+                                    <div class="company-logo col-auto pl-0">
+                                        <img src="~/assets/img/icons/company-6.png" alt="Company Logo">
+                                    </div>
+                                    <div class="list-content col">
+                                        <h6 class="title">Web Designer / Developer</h6>
+                                        <ul class="meta">
+                                            <li><strong class="text-primary">Massimo Artemisis</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col">
+                                        <ul class="meta">
+                                            <li><strong>Location : United States</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col-auto order-sm-3">
+                                        <ul class="meta pr-3">
+                                            <li><i class="fa fa-heart-o"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-right col-auto order-sm-3 p-0">
+                                        <span class="button btn border-secondary">PART TIME </span>
+                                    </div>
+                                </a>
+                                <a href="job-single.html" class="job-data">
+                                    <div class="company-logo col-auto pl-0">
+                                        <img src="~/assets/img/icons/company-3.png" alt="Company Logo">
+                                    </div>
+                                    <div class="list-content col">
+                                        <h6 class="title">Web Designer / Developer</h6>
+                                        <ul class="meta">
+                                            <li><strong class="text-primary">Massimo Artemisis</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col">
+                                        <ul class="meta">
+                                            <li><strong>Location : United States</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col-auto order-sm-3">
+                                        <ul class="meta pr-3">
+                                            <li><i class="fa fa-heart-o"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-right col-auto order-sm-3 p-0">
+                                        <span class="button btn border-voi">FREELANCER </span>
+                                    </div>
+                                </a>
+                                <a href="job-single.html" class="job-data">
+                                    <div class="company-logo col-auto pl-0">
+                                        <img src="~/assets/img/icons/company-8.png" alt="Company Logo">
+                                    </div>
+                                    <div class="list-content col">
+                                        <h6 class="title">Web Designer / Developer</h6>
+                                        <ul class="meta">
+                                            <li><strong class="text-primary">Massimo Artemisis</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col">
+                                        <ul class="meta">
+                                            <li><strong>Location : United States</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col-auto order-sm-3">
+                                        <ul class="meta pr-3">
+                                            <li><i class="fa fa-heart-o"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-right col-auto order-sm-3 p-0">
+                                        <span class="button btn border-primary">FULL TIME </span>
+                                    </div>
+                                </a>
+                                <a href="job-single.html" class="job-data">
+                                    <div class="company-logo col-auto pl-0">
+                                        <img src="~/assets/img/icons/company-7.png" alt="Company Logo">
+                                    </div>
+                                    <div class="list-content col">
+                                        <h6 class="title">Web Designer / Developer</h6>
+                                        <ul class="meta">
+                                            <li><strong class="text-primary">Massimo Artemisis</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col">
+                                        <ul class="meta">
+                                            <li><strong>Location : United States</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col-auto order-sm-3">
+                                        <ul class="meta pr-3">
+                                            <li><i class="fa fa-heart-o"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-right col-auto order-sm-3 p-0">
+                                        <span class="button btn border-secondary">PART TIME </span>
+                                    </div>
+                                </a>
+                                <a href="job-single.html" class="job-data">
+                                    <div class="company-logo col-auto pl-0">
+                                        <img src="~/assets/img/icons/company-5.png" alt="Company Logo">
+                                    </div>
+                                    <div class="list-content col">
+                                        <h6 class="title">Web Designer / Developer</h6>
+                                        <ul class="meta">
+                                            <li><strong class="text-primary">Massimo Artemisis</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col">
+                                        <ul class="meta">
+                                            <li><strong>Location : United States</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-content col-auto order-sm-3">
+                                        <ul class="meta pr-3">
+                                            <li><i class="fa fa-heart-o"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-right col-auto order-sm-3 p-0">
+                                        <span class="button btn border-voi">FREELANCER </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <ul class="pagination pagination-center mt-5">
+                        <li class="page-item">
+                            <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+

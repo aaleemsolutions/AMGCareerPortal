@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from jobport.dreamguystech.com/template/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Dec 2021 07:17:33 GMT -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<title>Job Portal</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+<div class="main-wrapper">
+
+<header class="header fixed">
+<div class="container">
+<div class="row justify-content-between align-items-center">
+<div class="col-lg-2 logo-wrap">
+<div class="main-logo">
+<a href="index.html"><img src="assets/img/logo-light.png" alt="logo"></a>
+</div>
+</div>
+<div class="col-auto d-lg-none d-flex align-items-center">
+<button class="menu-toggle">
+<span></span>
+</button>
+</div>
+<nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
+<ul>
+<li><a href="index.html">Home</a>
+</li>
+<li><a href="#">Jobs</a>
+<ul class="sub-menu">
+<li><a href="job-list.html">Job List</a></li>
+<li><a href="job-single.html">Job Single</a></li>
+</ul>
+</li>
+<!--<li><a href="#">Employer</a>
+<ul class="sub-menu">
+<li><a href="company-list.html">Employer List</a></li>
+<li><a href="company-single.html">Employer Single</a></li>
+</ul>
+</li>-->
+<li><a href="#">Candidates</a>
+<ul class="sub-menu">
+<li><a href="candidates_list.html">Candidates List</a></li>
+<li><a href="candidates_single.html">Candidates Single</a></li>
+</ul>
+</li>
+<li class="active"><a href="#">Blog</a>
+<ul class="sub-menu">
+<li><a href="blog.html" class="active">Blog</a></li>
+<li><a href="blog-single.html">Blog Single</a></li>
+</ul>
+</li>
+<li><a href="contact.html">Contact Us</a></li>
+<li class="log-menu"><a href="create-job.html">+ Post a Job</a></li>
+</ul>
+</nav>
+<div class="col-auto menu-link order-lg-3">
+<a href="register.html" class="login-item"><i class="fa fa-user-plus"></i> Signup</a>
+<span class="login-item"> / </span>
+<a href="login.html" class="login-item"> Login</a>
+</div>
+
+</div>
+</div>
+</header>
+
+
+<div id="resmenu" class="resmenu-section">
+<button class="resmenu-close" data-target="#resmenu">&times;</button>
+<div class="resmenu-wrap">
+<div class="inner">
+ <div class="resmenu-user">
+<a href="index.html"><img src="assets/img/logo-dark.png" alt="logo"></a>
+</div>
+<div class="res-menu">
+<nav>
+<ul>
+<li>
+<a href="index.html">Home</a>
+</li>
+<li class="res-submenu">
+<span class="menu-expand"><i class="fa fa-angle-down"></i></span>
+<a href="#">Jobs</a>
+<ul class="sub-menu">
+<li><a href="job-list.html">Job List</a></li>
+<li><a href="job-single.html">Job Single</a></li>
+</ul>
+</li>
+<li class="res-submenu">
+<span class="menu-expand"><i class="fa fa-angle-down"></i></span>
+<a href="#">Employer</a>
+<ul class="sub-menu">
+<li><a href="company-list.html">Employer List</a></li>
+<li><a href="company-single.html">Employer Single</a></li>
+</ul>
+</li>
+<li class="res-submenu">
+<span class="menu-expand"><i class="fa fa-angle-down"></i></span>
+<a href="#">Candidates</a>
+<ul class="sub-menu">
+<li><a href="candidates_list.html">Candidates List</a></li>
+<li><a href="candidates_single.html">Candidates Single</a></li>
+</ul>
+</li>
+<li class="res-submenu">
+<span class="menu-expand"><i class="fa fa-angle-down"></i></span>
+<a href="#">Blog</a>
+<ul class="sub-menu">
+<li><a href="blog.html">Blog</a></li>
+<li><a href="blog-single.html">Blog Single</a></li>
+</ul>
+</li>
+<li><a href="contact.html">Contact us</a></li>
+<li><a href="register.html">Sign up</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="page-heading-section bg-parallax general">
+<div class="container">
+<div class="page-heading-content text-center">
+<h3 class="text-white">Blog</h3>
+</div>
+</div>
+</div>
+
+<div class="content">
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-3">
+
+<div class="widget">
+<div class="search_widget">
+<div class="field_search">
+<input type="text" placeholder="Search Keywords">
+<i class="fa fa-search"></i>
+</div>
+<div class="field_search">
+<input type="text" placeholder="All Locations">
+<i class="fa fa-map-marker"></i>
+</div>
+</div>
+<div class="clearfix"></div>
+<div class="widget border">
+<h3 class="sb-title mb-3">Categories</h3>
+<div class="specialism_widget" style="">
+<div class="simple-checkbox">
+<p>
+<a href="#"><i class="fa fa-angle-right pr-1"></i> Education</a>
+</p>
+<p>
+<a href="#"><i class="fa fa-angle-right pr-1"></i> Information</a>
+</p>
+<p>
+<a href="#"><i class="fa fa-angle-right pr-1"></i> Jobs</a>
+</p>
+ <p>
+<a href="#"><i class="fa fa-angle-right pr-1"></i> Learn</a>
+</p>
+<p class="mb-0">
+<a href="#"><i class="fa fa-angle-right pr-1"></i> Skill</a>
+</p>
+</div>
+</div>
+</div>
+<div class="widget border">
+<h3 class="sb-title mb-3">Recent Posts</h3>
+<div class="post_widget">
+<div class="mini-blog">
+<span><a href="#" title=""><img src="assets/img/blog/bl4.jpg" alt=""></a></span>
+<div class="mini-blog-content">
+<h3 class="title"><a href="#" title="">Canada adds 12,500 jobs</a></h3>
+<span>October 25, 2020</span>
+</div>
+</div>
+<div class="mini-blog">
+<span><a href="#" title=""><img src="assets/img/blog/bl3.jpg" alt=""></a></span>
+<div class="mini-blog-content">
+<h3 class="title"><a href="#" title="">How to “Woo” a Recruiter</a></h3>
+<span>October 25, 2020</span>
+</div>
+</div>
+<div class="mini-blog">
+<span><a href="#" title=""><img src="assets/img/blog/bl1.jpg" alt=""></a></span>
+<div class="mini-blog-content">
+<h3 class="title"><a href="#" title="">Hey Job Seeker</a></h3>
+<span>October 25, 2020</span>
+</div>
+</div>
+<div class="mini-blog mb-0">
+<span><a href="#" title=""><img src="assets/img/blog/bl5.jpg" alt=""></a></span>
+<div class="mini-blog-content">
+<h3 class="title"><a href="#" title="">It’s Time To Get Up & Hired</a></h3>
+<span>October 25, 2020</span>
+</div>
+</div>
+</div>
+</div>
+<div class="widget border mb-0">
+<h3 class="sb-title mb-3">Meta</h3>
+<div class="specialism_widget" style="">
+<div class="simple-checkbox">
+<p>
+<a href="#"><i class="fa fa-angle-right pr-1"></i> Log in</a>
+</p>
+<p>
+<a href="#"><i class="fa fa-angle-right pr-1"></i> Entries RSS</a>
+</p>
+<p>
+<a href="#"><i class="fa fa-angle-right pr-1"></i> Comments RSS</a>
+</p>
+<p class="mb-0">
+<a href="#"><i class="fa fa-angle-right pr-1"></i> WordPress.org</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="col-md-9">
+
+<div class="row">
+<div class="col-md-4 mb-4">
+<div class="blog-list">
+<div class="blog-thumb">
+<a href="blog-single.html"><img src="assets/img/blog/bl1.jpg" alt=""></a>
+</div>
+<div class="blog-cmt text-center">
+<a href="#" class="text-primary"><i>March 29, 2017 | 0 Comments</i></a>
+</div>
+<div class="post-detail">
+<a href="blog-single.html"><h3 class="title">Attract More Attention Sales And Profits</h3></a>
+<p class="mb-2 text-justify">A job is a regular activity performed in exchange becoming an Employer, volunteering job is a regular activity performed in exchange becoming an Employer</p>
+<a class="button text-primary" href="blog-single.html">Readmore</a>
+</div>
+</div>
+</div>
+<div class="col-md-4 mb-4">
+<div class="blog-list">
+<div class="blog-thumb">
+<a href="blog-single.html"><img src="assets/img/blog/bl4.jpg" alt=""></a>
+</div>
+<div class="blog-cmt text-center">
+<a href="#" class="text-primary"><i>March 20, 2018 | 0 Comments</i></a>
+</div>
+<div class="post-detail">
+<a href="blog-single.html"><h3 class="title">Digital Ocean Launches</h3></a>
+ <p class="mb-2 text-justify">Lorem is a regular activity performed in exchange becoming an Employer, volunteering job is a regular activity performed in exchange becoming an Employer, volunteering</p>
+<a class="button text-primary" href="blog-single.html">Readmore</a>
+</div>
+</div>
+</div>
+<div class="col-md-4 mb-4">
+<div class="blog-list mb-0">
+<div class="blog-thumb">
+<a href="blog-single.html"><img src="assets/img/blog/bl3.jpg" alt=""></a>
+</div>
+<div class="blog-cmt text-center">
+<a href="#" class="text-primary"><i>June 12, 2019 | 0 Comments</i></a>
+</div>
+<div class="post-detail">
+<a href="blog-single.html"><h3 class="title">Banner Stands To Increase Trade</h3></a>
+<p class="mb-2 text-justify">Spent several years working on sheep on Wall Street. Had moderate success investing in Yugos on Wall Street. Managed a small team buying and selling stick performed</p>
+<a class="button text-primary" href="blog-single.html">Readmore</a>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="blog-list">
+<div class="blog-thumb">
+<a href="blog-single.html"><img src="assets/img/blog/bl3.jpg" alt=""></a>
+</div>
+<div class="blog-cmt text-center">
+<a href="#" class="text-primary"><i>March 29, 2017 | 0 Comments</i></a>
+</div>
+<div class="post-detail">
+<a href="blog-single.html"><h3 class="title">Attract More Attention Sales And Profits</h3></a>
+<p class="mb-2 text-justify">A job is a regular activity performed in exchange becoming an Employer, volunteering job is a regular activity performed in exchange becoming an Employer</p>
+<a class="button text-primary" href="blog-single.html">Readmore</a>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="blog-list">
+<div class="blog-thumb">
+<a href="blog-single.html"><img src="assets/img/blog/bl2.jpg" alt=""></a>
+</div>
+<div class="blog-cmt text-center">
+<a href="#" class="text-primary"><i>March 20, 2018 | 0 Comments</i></a>
+</div>
+<div class="post-detail">
+<a href="blog-single.html"><h3 class="title">Digital Ocean Launches</h3></a>
+<p class="mb-2 text-justify">Lorem is a regular activity performed in exchange becoming an Employer, volunteering job is a regular activity performed in exchange becoming an Employer, volunteering</p>
+<a class="button text-primary" href="blog-single.html">Readmore</a>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="blog-list mb-0">
+<div class="blog-thumb">
+<a href="blog-single.html"> <img src="assets/img/blog/bl5.jpg" alt=""></a>
+</div>
+<div class="blog-cmt text-center">
+<a href="#" class="text-primary"><i>June 12, 2019 | 0 Comments</i></a>
+</div>
+<div class="post-detail">
+<a href="blog-single.html"><h3 class="title">Banner Stands To Increase Trade</h3></a>
+<p class="mb-2 text-justify">Spent several years working on sheep on Wall Street. Had moderate success investing in Yugos on Wall Street. Managed a small team buying and selling stick performed</p>
+<a class="button text-primary" href="blog-single.html">Readmore</a>
+</div>
+</div>
+</div>
+</div>
+
+
+<ul class="pagination pagination-center mt-5">
+<li class="page-item">
+<a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+</li>
+<li class="page-item active">
+<a class="page-link" href="#">1</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="#">2</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="#">3</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="#">4</a>
+</li>
+<li class="page-item">
+<a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<footer class="footer">
+
+<div class="footer-top">
+<div class="container">
+<div class="row">
+<div class="col-lg-3 col-md-6">
+
+<div class="footer-widget footer-about">
+<div class="footer-logo">
+<img src="assets/img/logo-light.png" alt="logo">
+</div>
+<div class="footer-about-content">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+</div>
+</div>
+
+</div>
+ <div class="col-lg-3 col-md-6">
+
+<div class="footer-widget footer-menu">
+<h2 class="footer-title">Quick links</h2>
+<ul>
+<li><a href="create-job.html" title="">Post New Job</a></li>
+<li><a href="job-list.html" title="">Jobs List</a></li>
+<li><a href="candidates_list.html" title="">Candidate List</a></li>
+<li><a href="company-list.html" title="">Employer List</a></li>
+<li><a href="category.html" title="">Browse Categories</a></li>
+</ul>
+</div>
+
+</div>
+<div class="col-lg-3 col-md-6">
+
+<div class="footer-widget footer-menu">
+<h2 class="footer-title">Trending Jobs</h2>
+<ul>
+<li><a href="job-list.html" title="">Designer</a></li>
+<li><a href="job-list.html" title="">UI & UX Expert</a></li>
+<li><a href="job-list.html" title="">Develpoer</a></li>
+<li><a href="job-list.html" title="">iOS Developer</a></li>
+<li><a href="job-list.html" title="">Front-End Developer</a></li>
+</ul>
+</div>
+
+</div>
+<div class="col-lg-3 col-md-6">
+
+<div class="footer-widget footer-menu">
+<h2 class="footer-title">Find Jobs</h2>
+<ul>
+<li><a href="job-list.html" title="">US Jobs</a></li>
+<li><a href="job-list.html" title="">Canada Jobs</a></li>
+<li><a href="job-list.html" title="">UK Jobs</a></li>
+<li><a href="job-list.html" title="">Emplois en </a></li>
+<li><a href="job-list.html"> FnceJobs in Deuts</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="footer-bottom">
+<div class="container">
+
+<div class="copyright">
+<div class="row">
+<div class="col-md-12 col-lg-12">
+<div class="copyright-text text-center">
+<p class="mb-0">© 2020 Job Portal. All rights reserved.</p>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</footer>
+
+</div>
+
+
+<script src="assets/js/jquery-3.4.1.min.js"></script>
+
+ <script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<script src="assets/js/main.js"></script>
+</body>
+
+<!-- Mirrored from jobport.dreamguystech.com/template/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Dec 2021 07:17:34 GMT -->
+</html>

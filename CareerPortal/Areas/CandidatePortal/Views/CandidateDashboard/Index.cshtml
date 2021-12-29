@@ -1,0 +1,665 @@
+﻿@model ViewModels.CandidateViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Plugin css for this page -->
+<link rel="stylesheet" href="~/CndDashboardAssets/vendors/quill/quill.snow.css">
+
+<link rel="stylesheet" href="~/CndDashboardAssets/vendors/simplemde/simplemde.min.css">
+
+
+<!-- End plugin css for this page -->
+<style>
+    #quillExample1 .ql-editor.ql-blank {
+        height: 200px;
+    }
+
+    .wizard > .content > .body {
+        float: left;
+        position: inherit;
+        width: 95%;
+        height: 95%;
+        padding: 2.5%;
+    }
+</style>
+<div class="row">
+
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+
+                @if (Model.EmailVerifyMessage == false)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        Dear Candidate! Your email address is not verify kindly check your email and verify OR if not received click on <a href="#" id="emailResendbtn">Resend.</a>
+                    </div>
+
+                }
+
+
+                <form id="CandidateWizardForm" enctype="multipart/form-data">
+                    <div>
+                        <h3>Personal Detail</h3>
+                        <section class="FormWizard">
+
+                            <br />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Photo</label>
+                                    <div id="the-basics">
+
+                                        @*@if (Model.CandidateInfo != null)
+                                        {*@
+                                            <input type="file" name="UserImage" id="UserImage" class="dropify" data-max-file-size="50M" data-show-remove="false" data-default-file="" data-allowed-file-extensions='["jpg", "png","JPEG"]' />
+
+                                       
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group row ">
+
+                                        <div class="col">
+                                            <label>First Name <span class="text-danger">*</span> </label>
+                                            <div id="the-basics">
+                                                @*<input class="typeahead" type="text" placeholder="First Name" required>*@
+
+                                                @Html.TextBoxFor(Model => Model.FirstName,
+                                     new { @class = "typeahead", placeholder = "First Name" })
+
+                                                <span class="text-danger" id="ErrorFirstname"></span>
+
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label>Last Name <span class="text-danger">*</span></label>
+                                            <div id="the-basics1">
+                                                @Html.TextBoxFor(Model => Model.LastName,
+                                new { @class = "typeahead", placeholder = "Last Name" })
+
+                                                <span class="text-danger" id="ErrorLastName"></span>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <label>Father/Husband's Name <span class="text-danger">*</span></label>
+                                            <div id="the-basics2">
+
+                                                @Html.TextBoxFor(Model => Model.FathersName,
+                              new { @class = "typeahead", placeholder = "Father/Husband's Name" })
+                                                <span class="text-danger" id="ErrorFathersName"></span>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row ">
+
+                                        <div class="col-md-4">
+                                            <label>CNIC <span class="text-danger">*</span></label>
+                                            <div id="the-basics">
+                                                @*<input class="typeahead" type="text" placeholder="CNIC" required>*@
+
+                                                @Html.TextBoxFor(Model => Model.CNIC,
+                              new { @class = "typeahead sa CNICInputMask", placeholder = "CNIC"})
+                                                <span class="text-danger" id="ErrorCNIC"></span>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label>Address <span class="text-danger">*</span></label>
+                                            <div id="bloodhound">
+                                                @*<input class="typeahead" type="text" placeholder="Address" required>*@
+                                                @Html.TextBoxFor(Model => Model.CandidateAddress,
+                              new { @class = "typeahead", placeholder = "Address" })
+                                                <span class="text-danger" id="ErrorCandidateAddress"></span>
+
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <br />
+                            <div class="col-md-12" style="height: 200px">
+
+                                <label for="exampleInputName1">Description</label>
+                                @*<textarea class="quill-container" id="quillExample1" name="candidateDes"></textarea>*@
+                                @*<input type="text" class="form-control quill-container" id="quillExample1"/>*@
+
+                                <div id="quillExample1" class="quill-container">
+
+                                    <br />
+
+                                </div>
+                            </div>
+
+
+                        </section>
+
+                        <h3>Qualification</h3>
+                        <section class="FormWizard">
+
+                            <div class="form-group row ">
+
+                                <div class="col">
+                                    @Html.HiddenFor(m => m.CndQualificationViewModel.id)
+
+                                    <label>Institute Name <span class="text-danger">*</span> </label>
+                                    <div id="the-basics">
+                                        @*<input class="form-control" type="text" placeholder="First Name" required>*@
+
+                                        @Html.TextBoxFor(Model => Model.CndQualificationViewModel.InstitutionName,
+                                      new { @class = "typeahead", placeholder = "Institue Name..." })
+
+                                        <span class="text-danger" id="ErrorInstitutionName"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label>Degree <span class="text-danger">*</span></label>
+                                    <div id="the-basics1">
+                                        @*<input class="typeahead" type="text" placeholder="First Name" required>*@
+
+                                        @*@Html.DropDownListFor(m => m.CndQualificationViewModel.DegreeId, new SelectList(ViewBag.DegreeDropDown, "Qualification_ID", "Qualification_Name", "Select Degree"), new { @class = " aaDropdownStyle" })*@
+                                        @Html.DropDownListFor(m => m.CndQualificationViewModel.DegreeId, new SelectList(ViewBag.DegreeDropDown, "Value", "Text"), new { @class = " aaDropdownStyle" })
+
+                                        <span class="text-danger" id="ErrorDegree"></span>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <label> Major/Specialization  <span class="text-danger">*</span></label>
+                                    <div id="the-basics2">
+                                        @*<input class="typeahead" type="text" placeholder="First Name" required>*@
+
+                                        @Html.TextBoxFor(Model => Model.CndQualificationViewModel.Specialization,
+                                      new { @class = "typeahead", placeholder = "Major/Specialization" })
+
+                                        <span class="text-danger" id="ErrorSpecialization"></span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group row ">
+
+                                <div class="col-md-4">
+                                    <label>From<span class="text-danger">*</span></label>
+                                    <div id="the-basics">
+                                        <div class="row">
+                                            <div class="  col-md-6">
+                                                <label>Month</label>
+                                                @Html.DropDownListFor(m => m.CndQualificationViewModel.DgrFrmMonth, new SelectList(ViewBag.MonthNameDropdown, "Value", "Text"), new { @class = " aaDropdownStyle" })
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Year</label>
+                                                @Html.DropDownListFor(m => m.CndQualificationViewModel.DgrFrmYear, new SelectList(ViewBag.YearDropdown, "Value", "Text"), new { @class = " aaDropdownStyle" })
+                                            </div>
+
+                                        </div>
+
+                                        <span class="text-danger" id="ErrorFromDate"></span>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label>To<span class="text-danger">*</span></label>
+                                    <div id="the-basics">
+                                        <div class="row">
+                                            <div class="  col-md-6">
+                                                <label>Month</label>
+                                                @Html.DropDownListFor(m => m.CndQualificationViewModel.DgrToMonth, new SelectList(ViewBag.MonthNameDropdown, "Value", "Text"), new { @class = "aaDropdownStyle" })
+
+                                                <label style="margin-top:10px">@Html.CheckBoxFor(m => m.CndQualificationViewModel.isOngoing) In Process</label>
+
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Year</label>
+                                                @Html.DropDownListFor(m => m.CndQualificationViewModel.DgrToYear, new SelectList(ViewBag.YearDropdown, "Value", "Text"), new { @class = " aaDropdownStyle" })
+                                            </div>
+
+                                        </div>
+
+                                        <span class="text-danger" id="ErrorToDate"></span>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label>&nbsp;</label>
+                                    <div id="the-basics">
+                                        <div class="row">
+                                            <div class="  col-md-6">
+                                                <label><span>Result Type <span class="text-danger">*</span></label>
+                                                @Html.DropDownListFor(m => m.CndQualificationViewModel.ResultType, new SelectList(ViewBag.GradeTypes, "Value", "Text", new SelectListItem { Text = "Select", Value = "0" }), new { @class = "  aaDropdownStyle" })
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>&nbsp;</label>
+                                                @Html.TextBoxFor(Model => Model.CndQualificationViewModel.ResultValue,
+                   new { @class = "typeahead", placeholder = "Result" })
+
+                                            </div>
+
+                                        </div>
+
+                                        <span class="text-danger" id="ErrorResultType"></span>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="column col-md-8">
+
+                                    </div>
+                                    <div class="col-md-4 ">
+
+
+
+
+                                        <button class="btn btn-primary pull-right float-right" style="float: right;margin-top: 20px;" id="btnSaveEducationData" type="button"> Save and add more</button>
+
+
+                                        <br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 container-fluid">
+                                        <div class="table-responsive">
+                                            <table id="order-listing" class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th> Qualification Id</th>
+                                                        <th> Institution Name </th>
+                                                        <th>Degree</th>
+                                                        <th>Major</th>
+                                                        <th>From</th>
+                                                        <th>To</th>
+
+                                                        <th>Result</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+
+
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+
+                        </section>
+                        <h3>Experince</h3>
+                        <section class="FormWizard">
+                            <div class="form-group row">
+
+                                <label style="margin-top:10px">@Html.CheckBoxFor(m => m.CndExperienceViewModel.FreshGraduate, new { @Id = "ChkCndNoExperience" }) Fresh Graduate with No Work Experience</label>
+                            </div>
+                            <div class="form-group row ">
+
+                                <div class="col">
+                                    @Html.HiddenFor(m => m.CndExperienceViewModel.id, new { @Id = "CndExperienceId" })
+
+                                    <label>Company Name <span class="text-danger">*</span> </label>
+                                    <div id="the-basics">
+                                        @*<input class="form-control" type="text" placeholder="First Name" required>*@
+
+                                        @Html.TextBoxFor(Model => Model.CndExperienceViewModel.CompanyName,
+                                      new { @class = "typeahead", placeholder = "Company Name....", @Id = "CndExperienceCmpName" })
+
+                                        <span class="text-danger" id="ErrorCndExperienceCmpName"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label>Designation <span class="text-danger">*</span></label>
+                                    <div id="the-basics1">
+
+                                        @Html.TextBoxFor(Model => Model.CndExperienceViewModel.DesignationName,
+                                     new { @class = "typeahead", placeholder = "Designation Name", @Id = "CndExperienceDesgination" })
+
+                                        <span class="text-danger" id="ErrorCndExperienceDesgination"></span>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <label> Location   <span class="text-danger">*</span></label>
+                                    <div id="the-basics2">
+                                        @*<input class="typeahead" type="text" placeholder="First Name" required>*@
+
+                                        @Html.TextBoxFor(Model => Model.CndExperienceViewModel.Locationname,
+                                      new { @class = "typeahead", placeholder = "Location", @Id = "CndExperienceLocation" })
+
+                                        <span class="text-danger" id="ErrorCndExperienceLocation"></span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group row ">
+
+                                <div class="col-md-3 col-sm-12">
+                                    <label>From<span class="text-danger">*</span></label>
+                                    <div id="the-basics">
+                                        <div class="row">
+                                            <div class=" col-sm-6">
+                                                <label>Month</label>
+                                                @Html.DropDownListFor(m => m.CndExperienceViewModel.FromMonth, new SelectList(ViewBag.MonthNameDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "CndExperienceFrmMonth" })
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label>Year</label>
+                                                @Html.DropDownListFor(m => m.CndExperienceViewModel.FromYear, new SelectList(ViewBag.YearDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "CndExperienceFrmYear" })
+                                            </div>
+
+                                        </div>
+
+                                        <span class="text-danger" id="ErrorCndExperienceFromDate"></span>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3 col-sm-12">
+                                    <label>To<span class="text-danger">*</span></label>
+                                    <div id="the-basics">
+                                        <div class="row">
+                                            <div class="  col-sm-6">
+                                                <label>Month</label>
+                                                @Html.DropDownListFor(m => m.CndExperienceViewModel.ToMonth, new SelectList(ViewBag.MonthNameDropdown, "Value", "Text"), new { @class = "aaDropdownStyle", @Id = "CndExperienceToMonth" })
+
+                                                <label style="margin-top:10px">@Html.CheckBoxFor(m => m.CndExperienceViewModel.IsPresent, new { @Id = "ChkCndExperiencePresent" }) Present</label>
+
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label>Year</label>
+                                                @Html.DropDownListFor(m => m.CndExperienceViewModel.ToYear, new SelectList(ViewBag.YearDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "CndExperienceToYear" })
+                                            </div>
+
+                                        </div>
+
+                                        <span class="text-danger" id="ErrorCndExperienceToDate"></span>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-12 col-md-6">
+                                    <label>&nbsp;</label>
+                                    <div id="the-basics">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>Current Salary<span class="text-danger">*</span></label>
+                                                @Html.EditorFor(Model => Model.CndExperienceViewModel.CurrentSalary,
+                                                          new { htmlAttributes = new { @class = "typeahead txtSalaryInputMask", placeholder = "Current Salary" } })
+
+                                                <span class="text-danger" id="ErrorCndExperienceSalary"></span>
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Reason For Leaving<span class="text-danger">*</span></label>
+                                                @Html.TextBoxFor(Model => Model.CndExperienceViewModel.ReasonForLeaving,
+                               new { @class = "typeahead", placeholder = "Reason for leaving" })
+
+
+                                                <span class="text-danger" id="ErrorCndExperienceLeaving"></span>
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12" style="height: 200px">
+
+                                    <label for="exampleInputName1">Job Duties<span class="text-danger">*</span></label>
+
+                                    <div id="JobDutiesEditor" class="quill-container">
+
+                                        <br />
+
+                                    </div>
+
+
+                                    <span class="text-danger" id="ErrorCndExperienceJobDuties"></span>
+
+                                </div>
+
+
+
+                                <div class="row" style="margin-top: 65px;">
+                                    <div class="column col-md-8">
+
+                                    </div>
+                                    <div class="col-md-4 ">
+
+                                        <button class="btn btn-primary pull-right float-right" style="float: right;margin-top: 20px;" id="btnSaveExperienceData" type="button"> Save and add more</button>
+                                        <br />
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12 container-fluid">
+                                        <div class="table-responsive">
+                                            <table id="CndExpDataTable" class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th> Experience Id</th>
+                                                        <th> Company</th>
+                                                        <th>Designation</th>
+                                                        <th>Location</th>
+                                                        <th>From</th>
+                                                        <th>To</th>
+                                                        <th>Reason of Leaving</th>
+                                                        <th>Current Salary</th>
+                                                        <th>Action</th>
+
+                                                    </tr>
+                                                </thead>
+
+
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="form-group row ">
+
+                            </div>
+
+                        </section>
+                        <h3>Terms And Conditions</h3>
+                        <section class="FormWizard">
+                            <h3>Finish</h3>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="checkbox" type="checkbox">
+                                    I agree with the Terms and Conditions.
+                                </label>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+    <script>
+
+        $(function () {
+
+           // $(":input").inputmask();
+
+            //$("#CNIC").attr("data-inputmask-alias", "(+99) 9999-9999")
+
+            
+
+
+            $('.dropify').dropify();
+
+            var test;
+
+      @if (Model.CandidateInfo!=null)
+      {
+          <text>
+            $("#quillExample1 .ql-editor").html("@Html.Raw(Model.CandidateInfo.CandidateDescription.ToString())");
+
+
+          @if (Model.CandidateInfo.User.UserImage!=null) {
+              <text>
+            test = 'data:image/jpeg;base64,@Model.CandidateInfo.User.UserImage.Replace(" &quot;","")';
+            </text>
+
+          }
+
+
+      </text>
+      }
+
+
+
+
+
+
+
+
+
+
+
+        function resetDropifyPreview(name, src, fname = '') {
+            let input = $('input[name="' + name + '"]');
+            let wrapper = input.closest('.dropify-wrapper');
+            let preview = wrapper.find('.dropify-preview');
+            let filename = wrapper.find('.dropify-filename-inner');
+            let render = wrapper.find('.dropify-render').html('');
+
+            input.val('').attr('title', fname);
+            wrapper.removeClass('has-error').addClass('has-preview');
+            filename.html(fname);
+
+            render.append($('<img />').attr('src', src).css('max-height', input.data('height') || ''));
+            preview.fadeIn();
+        }
+
+
+            if (test != null) {
+
+
+                resetDropifyPreview('UserImage', test , 'Profile');
+        }
+
+        });
+
+
+    </script>
+
+    @*<div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+                    @using (Html.BeginForm("Index", "CandidateDashboard", FormMethod.Post, new
+                    {
+                        enctype = "multipart/form-data"
+                    }))
+                    {
+
+                        <h4 class="card-title">User Profile</h4>
+
+                        <div style="margin:auto;">
+                            <div class="col-lg-4 grid-margin stretch-card" style="margin:auto;">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <input type="file" name="UserImage" class="dropify" data-default-file="@Url.Content("~/CndDashboardAssets/images/samples/1280x768/2.jpg")" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div>
+
+
+
+                            <br />
+                            <form class="forms-sample">
+
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Name</label>
+
+                                    @Html.TextBoxFor(m => m.CandidateName, new { @class = "form-control", id = "exampleInputName1", placeholder = "Name" })
+
+                                </div>
+                                <label for="exampleInputName1">Description</label>
+                                <div id="quillExample1" class="quill-container" styles="height: 200px">
+                                </div>
+                                <br />
+
+                                <button type="submit" class="btn btn-primary me-2">Submit</button>
+                                <button class="btn btn-light">Cancel</button>
+
+                            </form>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>*@
+
+</div>
+
+

@@ -1,0 +1,90 @@
+﻿
+@model ViewModels.UserloginViewModel
+@{
+    ViewBag.Title = "Login";
+
+}
+
+<div class="content gray-section">
+    <section>
+        <div class="container">
+            <div class="row all-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="">
+                        <div class="form-view">
+                            <h3 class="title mb-4">Log into your account</h3>
+
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+                            {
+
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Emailaddress, new { @class = "form-control", placeholder = "Email Address" ,@value="aleemksolutions@gmail.com"})
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    @*<input type="password"
+                class="form-control"
+                placeholder="Password" />*@
+                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "Password", placeholder = "Password", @value = "Test@123++" })
+                                </div>
+
+
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                                <br />
+
+                                <div class="form-group text-right pb-3">
+                                    <div class="custom-control custom-checkbox float-left">
+                                        @*<input type="checkbox"
+                    class="custom-control-input"
+                    id="customCheck1" />*@
+                                        @Html.EditorFor(m => m.Remembme, new { htmlAttributes = new { @class = "custom-control-input", id = "customCheck1" } })
+                                        <label class="custom-control-label" for="customCheck1">Remember me</label>
+
+                                    </div>
+                                    <a href="forgot.html"
+                                       class="text-primary float-right forgot"><u>Forgot Password?</u></a>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        LOGIN
+                                    </button>
+                                </div>
+                                <p class="text-center mb-4">OR LOGIN WITH</p>
+                                <div class="form-group log-option mb-0">
+                                    <a href="https://www.facebook.com/"
+                                       class="fb-icon mr-2"
+                                       target="_blank">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                    <a href="https://twitter.com/"
+                                       class="tw-icon mr-2"
+                                       target="_blank">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/"
+                                       class="in-icon"
+                                       target="_blank">
+                                        <i class="fa fa-linkedin"></i>
+                                    </a>
+                                </div>
+
+
+                            }
+                        </div>
+                        <div 1class="form-group text-center mt-3 m-0">
+                            <span class="text-secondary">
+                                <a href="@Url.Action("RegisterUser","Account")" class="text-primary">Register</a>
+                                an account
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+ 

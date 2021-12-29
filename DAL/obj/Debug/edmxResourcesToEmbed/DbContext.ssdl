@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CareerPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AllPositions">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobTitle" Type="varchar" MaxLength="500" />
+    <Property Name="JobLocation" Type="varchar" MaxLength="500" />
+    <Property Name="PostedDate" Type="datetime" />
+    <Property Name="JobTotalViews" Type="bigint" />
+    <Property Name="JobDescription" Type="nvarchar(max)" />
+    <Property Name="NoOfVacancy" Type="int" />
+    <Property Name="IsPositionOpen" Type="bit" />
+    <Property Name="EmployementType" Type="varchar" MaxLength="250" />
+    <Property Name="SalaryRange" Type="varchar" MaxLength="250" />
+    <Property Name="GenderSpecification" Type="int" />
+    <Property Name="MinExperinceYear" Type="int" />
+    <Property Name="LastDateOfJob" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="candidate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="CandidateName" Type="varchar" MaxLength="250" />
+    <Property Name="CandidateDescription" Type="varchar(max)" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="FirstName" Type="varchar" MaxLength="150" />
+    <Property Name="LastName" Type="varchar" MaxLength="150" />
+    <Property Name="FathersName" Type="varchar" MaxLength="150" />
+    <Property Name="CNIC" Type="varchar" MaxLength="20" />
+    <Property Name="CandidateAddress" Type="varchar" MaxLength="400" />
+  </EntityType>
+  <EntityType Name="CandidateExperince">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CandidateId" Type="int" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="500" />
+    <Property Name="DesignationName" Type="varchar" MaxLength="400" />
+    <Property Name="Locationname" Type="varchar(max)" />
+    <Property Name="FromMonth" Type="int" />
+    <Property Name="FromYear" Type="int" />
+    <Property Name="ToMonth" Type="int" />
+    <Property Name="ToYear" Type="int" />
+    <Property Name="IsPresent" Type="bit" />
+    <Property Name="ReasonForLeaving" Type="varchar(max)" />
+    <Property Name="InitialSalary" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="CurrentSalary" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="JobDuties" Type="nvarchar(max)" />
+    <Property Name="FreshGraduate" Type="bit" />
+  </EntityType>
+  <EntityType Name="CandidateQualification">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CandidateId" Type="int" />
+    <Property Name="InstitutionName" Type="varchar" MaxLength="1000" />
+    <Property Name="DegreeName" Type="varchar" MaxLength="100" />
+    <Property Name="DegreeId" Type="int" />
+    <Property Name="Specialization" Type="varchar" MaxLength="400" />
+    <Property Name="DgrFrmMonth" Type="int" />
+    <Property Name="DgrFrmYear" Type="int" />
+    <Property Name="DgrToMonth" Type="int" />
+    <Property Name="DgrToYear" Type="int" />
+    <Property Name="isOngoing" Type="bit" />
+    <Property Name="ResultTypeId" Type="int" />
+    <Property Name="ResultType" Type="varchar" MaxLength="100" />
+    <Property Name="ResultValue" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserEmail" Type="varchar" MaxLength="200" />
+    <Property Name="UserPassword" Type="varchar(max)" />
+    <Property Name="UserPhoneNo" Type="varchar" MaxLength="200" />
+    <Property Name="IsEmailVerify" Type="bit" />
+    <Property Name="isNewPassword" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="FullName" Type="varchar" MaxLength="100" />
+    <Property Name="CandidateCVPath" Type="varchar" MaxLength="500" />
+    <Property Name="EmailTokens" Type="varchar(max)" />
+    <Property Name="UserImage" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK__Candidate__Candi__17036CC0">
+    <End Role="candidate" Type="Self.candidate" Multiplicity="0..1" />
+    <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="candidate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateQualification">
+        <PropertyRef Name="CandidateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Candidate__Candi__29221CFB">
+    <End Role="candidate" Type="Self.candidate" Multiplicity="0..1" />
+    <End Role="CandidateExperince" Type="Self.CandidateExperince" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="candidate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateExperince">
+        <PropertyRef Name="CandidateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__candidate__UserI__6FE99F9F">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="candidate" Type="Self.candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="candidate">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="usp_getallDegree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="CareerPortalModelStoreContainer">
+    <EntitySet Name="AllPositions" EntityType="Self.AllPositions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="candidate" EntityType="Self.candidate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CandidateExperince" EntityType="Self.CandidateExperince" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Candidate__Candi__17036CC0" Association="Self.FK__Candidate__Candi__17036CC0">
+      <End Role="candidate" EntitySet="candidate" />
+      <End Role="CandidateQualification" EntitySet="CandidateQualification" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Candidate__Candi__29221CFB" Association="Self.FK__Candidate__Candi__29221CFB">
+      <End Role="candidate" EntitySet="candidate" />
+      <End Role="CandidateExperince" EntitySet="CandidateExperince" />
+    </AssociationSet>
+    <AssociationSet Name="FK__candidate__UserI__6FE99F9F" Association="Self.FK__candidate__UserI__6FE99F9F">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="candidate" EntitySet="candidate" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CareerPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserPassword" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="UserPhoneNo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="UserImage" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="IsEmailVerify" Type="Boolean" />
+    <Property Name="isNewPassword" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CandidateCVPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="EmailTokens" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="candidates" Relationship="CareerPortalModel.FK__candidate__UserI__6FE99F9F" FromRole="User" ToRole="candidate" />
+  </EntityType>
+  <EntityContainer Name="CareerPortalEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="candidates" EntityType="CareerPortalModel.candidate" />
+    <AssociationSet Name="FK__candidate__UserI__6FE99F9F" Association="CareerPortalModel.FK__candidate__UserI__6FE99F9F">
+      <End Role="User" EntitySet="Users" />
+      <End Role="candidate" EntitySet="candidates" />
+    </AssociationSet>
+    <FunctionImport Name="usp_getallDegree" ReturnType="Collection(CareerPortalModel.usp_getallDegree_Result)" />
+    <EntitySet Name="CandidateQualifications" EntityType="CareerPortalModel.CandidateQualification" />
+    <AssociationSet Name="FK__Candidate__Candi__17036CC0" Association="CareerPortalModel.FK__Candidate__Candi__17036CC0">
+      <End Role="candidate" EntitySet="candidates" />
+      <End Role="CandidateQualification" EntitySet="CandidateQualifications" />
+    </AssociationSet>
+    <EntitySet Name="CandidateExperinces" EntityType="CareerPortalModel.CandidateExperince" />
+    <AssociationSet Name="FK__Candidate__Candi__29221CFB" Association="CareerPortalModel.FK__Candidate__Candi__29221CFB">
+      <End Role="candidate" EntitySet="candidates" />
+      <End Role="CandidateExperince" EntitySet="CandidateExperinces" />
+    </AssociationSet>
+    <EntitySet Name="AllPositions" EntityType="CareerPortalModel.AllPosition" />
+  </EntityContainer>
+  <EntityType Name="candidate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CandidateName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CandidateDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__candidate__UserI__6FE99F9F" FromRole="candidate" ToRole="User" />
+    <Property Name="FirstName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="FathersName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="CNIC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CandidateAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CandidateQualifications" Relationship="CareerPortalModel.FK__Candidate__Candi__17036CC0" FromRole="candidate" ToRole="CandidateQualification" />
+    <NavigationProperty Name="CandidateExperinces" Relationship="CareerPortalModel.FK__Candidate__Candi__29221CFB" FromRole="candidate" ToRole="CandidateExperince" />
+  </EntityType>
+  <Association Name="FK__candidate__UserI__6FE99F9F">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.candidate" Role="candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="candidate">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="usp_getallDegree_Result">
+    <Property Type="Int32" Name="Qualification_ID" Nullable="false" />
+    <Property Type="String" Name="Qualification_Name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="CandidateQualification">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CandidateId" Type="Int32" />
+    <Property Name="InstitutionName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="DegreeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DegreeId" Type="Int32" />
+    <Property Name="Specialization" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="DgrFrmMonth" Type="Int32" />
+    <Property Name="DgrFrmYear" Type="Int32" />
+    <Property Name="DgrToMonth" Type="Int32" />
+    <Property Name="DgrToYear" Type="Int32" />
+    <Property Name="isOngoing" Type="Boolean" />
+    <Property Name="ResultTypeId" Type="Int32" />
+    <Property Name="ResultType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ResultValue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="candidate" Relationship="CareerPortalModel.FK__Candidate__Candi__17036CC0" FromRole="CandidateQualification" ToRole="candidate" />
+  </EntityType>
+  <Association Name="FK__Candidate__Candi__17036CC0">
+    <End Type="CareerPortalModel.candidate" Role="candidate" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.CandidateQualification" Role="CandidateQualification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="candidate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateQualification">
+        <PropertyRef Name="CandidateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CandidateExperince">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CandidateId" Type="Int32" />
+    <Property Name="CompanyName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="DesignationName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="Locationname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FromMonth" Type="Int32" />
+    <Property Name="FromYear" Type="Int32" />
+    <Property Name="ToMonth" Type="Int32" />
+    <Property Name="ToYear" Type="Int32" />
+    <Property Name="IsPresent" Type="Boolean" />
+    <Property Name="ReasonForLeaving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="InitialSalary" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CurrentSalary" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="JobDuties" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="candidate" Relationship="CareerPortalModel.FK__Candidate__Candi__29221CFB" FromRole="CandidateExperince" ToRole="candidate" />
+    <Property Name="FreshGraduate" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK__Candidate__Candi__29221CFB">
+    <End Type="CareerPortalModel.candidate" Role="candidate" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.CandidateExperince" Role="CandidateExperince" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="candidate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateExperince">
+        <PropertyRef Name="CandidateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AllPosition">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="JobLocation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PostedDate" Type="DateTime" Precision="3" />
+    <Property Name="JobTotalViews" Type="Int64" />
+    <Property Name="JobDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NoOfVacancy" Type="Int32" />
+    <Property Name="IsPositionOpen" Type="Boolean" />
+    <Property Name="EmployementType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="SalaryRange" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="GenderSpecification" Type="Int32" />
+    <Property Name="MinExperinceYear" Type="Int32" />
+    <Property Name="LastDateOfJob" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

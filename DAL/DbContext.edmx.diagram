@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b01d4db4a45444aba1f6924a1aec4e59" Name="Diagram1">
+        <EntityTypeShape EntityType="CareerPortalModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CareerPortalModel.candidate" Width="1.5" PointX="8" PointY="0.875" />
+        <AssociationConnector Association="CareerPortalModel.FK__candidate__UserI__6FE99F9F" />
+        <EntityTypeShape EntityType="CareerPortalModel.CandidateQualification" Width="1.5" PointX="3.125" PointY="3.25" />
+        <AssociationConnector Association="CareerPortalModel.FK__Candidate__Candi__17036CC0" />
+        <EntityTypeShape EntityType="CareerPortalModel.CandidateExperince" Width="1.5" PointX="10.25" PointY="7.25" />
+        <AssociationConnector Association="CareerPortalModel.FK__Candidate__Candi__29221CFB" />
+        <EntityTypeShape EntityType="CareerPortalModel.AllPosition" Width="1.5" PointX="0.75" PointY="5.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
