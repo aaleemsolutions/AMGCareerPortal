@@ -260,6 +260,7 @@
     <Content Include="assets\img\logo-dark1.png" />
     <Content Include="assets\img\logo-light.png" />
     <Content Include="assets\img\logo-light1.png" />
+    <Content Include="assets\img\noProfile.png" />
     <Content Include="assets\img\seekers.jpg" />
     <Content Include="assets\img\seekers1.jpg" />
     <Content Include="assets\js\bootstrap.min.js" />
@@ -340,6 +341,7 @@
     <Content Include="CndDashboardAssets\images\samples\300x300\7.jpg" />
     <Content Include="CndDashboardAssets\images\samples\300x300\8.jpg" />
     <Content Include="CndDashboardAssets\images\samples\300x300\9.jpg" />
+    <Content Include="CndDashboardAssets\images\smalllogo.png" />
     <Content Include="CndDashboardAssets\images\sprites\jsgrid-icons.png" />
     <Content Include="CndDashboardAssets\js\alerts.js" />
     <Content Include="CndDashboardAssets\js\avgrund.js" />

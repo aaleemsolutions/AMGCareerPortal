@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CareerPortalModelStoreContainer" CdmEntityContainer="CareerPortalEntities">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CareerPortalModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="EmailTokens" ColumnName="EmailTokens" />
+          <ScalarProperty Name="CandidateCVPath" ColumnName="CandidateCVPath" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserPhoneNo" ColumnName="UserPhoneNo" />
+          <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+          <ScalarProperty Name="IsEmailVerify" ColumnName="IsEmailVerify" />
+          <ScalarProperty Name="isNewPassword" ColumnName="isNewPassword" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="candidates">
+      <EntityTypeMapping TypeName="CareerPortalModel.candidate">
+        <MappingFragment StoreEntitySet="candidate">
+          <ScalarProperty Name="CandidateAddress" ColumnName="CandidateAddress" />
+          <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+          <ScalarProperty Name="FathersName" ColumnName="FathersName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CandidateDescription" ColumnName="CandidateDescription" />
+          <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_getallDegree" FunctionName="CareerPortalModel.Store.usp_getallDegree">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CareerPortalModel.usp_getallDegree_Result">
+          <ScalarProperty Name="Qualification_ID" ColumnName="Qualification_ID" />
+          <ScalarProperty Name="Qualification_Name" ColumnName="Qualification_Name" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="CandidateQualifications">
+      <EntityTypeMapping TypeName="CareerPortalModel.CandidateQualification">
+        <MappingFragment StoreEntitySet="CandidateQualification">
+          <ScalarProperty Name="ResultValue" ColumnName="ResultValue" />
+          <ScalarProperty Name="ResultType" ColumnName="ResultType" />
+          <ScalarProperty Name="ResultTypeId" ColumnName="ResultTypeId" />
+          <ScalarProperty Name="isOngoing" ColumnName="isOngoing" />
+          <ScalarProperty Name="DgrToYear" ColumnName="DgrToYear" />
+          <ScalarProperty Name="DgrToMonth" ColumnName="DgrToMonth" />
+          <ScalarProperty Name="DgrFrmYear" ColumnName="DgrFrmYear" />
+          <ScalarProperty Name="DgrFrmMonth" ColumnName="DgrFrmMonth" />
+          <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+          <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+          <ScalarProperty Name="DegreeName" ColumnName="DegreeName" />
+          <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CandidateExperinces">
+      <EntityTypeMapping TypeName="CareerPortalModel.CandidateExperince">
+        <MappingFragment StoreEntitySet="CandidateExperince">
+          <ScalarProperty Name="FreshGraduate" ColumnName="FreshGraduate" />
+          <ScalarProperty Name="JobDuties" ColumnName="JobDuties" />
+          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+          <ScalarProperty Name="InitialSalary" ColumnName="InitialSalary" />
+          <ScalarProperty Name="ReasonForLeaving" ColumnName="ReasonForLeaving" />
+          <ScalarProperty Name="IsPresent" ColumnName="IsPresent" />
+          <ScalarProperty Name="ToYear" ColumnName="ToYear" />
+          <ScalarProperty Name="ToMonth" ColumnName="ToMonth" />
+          <ScalarProperty Name="FromYear" ColumnName="FromYear" />
+          <ScalarProperty Name="FromMonth" ColumnName="FromMonth" />
+          <ScalarProperty Name="Locationname" ColumnName="Locationname" />
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AllPositions">
+      <EntityTypeMapping TypeName="CareerPortalModel.AllPosition">
+        <MappingFragment StoreEntitySet="AllPositions">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastDateOfJob" ColumnName="LastDateOfJob" />
+          <ScalarProperty Name="MinExperinceYear" ColumnName="MinExperinceYear" />
+          <ScalarProperty Name="GenderSpecification" ColumnName="GenderSpecification" />
+          <ScalarProperty Name="SalaryRange" ColumnName="SalaryRange" />
+          <ScalarProperty Name="EmployementType" ColumnName="EmployementType" />
+          <ScalarProperty Name="IsPositionOpen" ColumnName="IsPositionOpen" />
+          <ScalarProperty Name="NoOfVacancy" ColumnName="NoOfVacancy" />
+          <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+          <ScalarProperty Name="JobTotalViews" ColumnName="JobTotalViews" />
+          <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
+          <ScalarProperty Name="JobLocation" ColumnName="JobLocation" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

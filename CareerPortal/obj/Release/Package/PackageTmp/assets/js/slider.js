@@ -1,0 +1,5 @@
+$(document).ready(function($){"use strict";var $window=$(window);$window.on('scroll',function(){if($window.scrollTop()>350){$('.header').addClass('fixed');}else{$('.header').removeClass('fixed');}});$('.customer-logos').slick({slidesToShow:6,slidesToScroll:1,autoplay:true,autoplaySpeed:1500,arrows:false,dots:false,pauseOnHover:false,responsive:[{breakpoint:768,settings:{slidesToShow:4}},{breakpoint:520,settings:{slidesToShow:3}}]});var owl=$("#owl-clientslider");owl.owlCarousel({items:3,itemsDesktop:[1000,3],itemsDesktopSmall:[900,2],itemsTablet:[600,1],itemsMobile:[360,1]});$(".next").click(function(){owl.trigger('owl.next');})
+$(".prev").click(function(){owl.trigger('owl.prev');})
+$(".play").click(function(){owl.trigger('owl.play',1000);})
+$(".stop").click(function(){owl.trigger('owl.stop');})
+$('.brand-carousel').owlCarousel({loop:true,margin:10,autoplay:true,responsive:{0:{items:1},600:{items:3},1000:{items:5}}})});

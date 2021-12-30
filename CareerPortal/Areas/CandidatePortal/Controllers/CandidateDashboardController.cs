@@ -55,7 +55,6 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
         }
 
         public ActionResult Index()
-
         {
 
             var dbuser = RegUser.getUser(Username);

@@ -1,0 +1,94 @@
+﻿@model ViewModels.UserViewModel
+
+
+@{
+    ViewBag.Title = "RegisterUser";
+}
+
+
+<div class="content gray-section">
+    <section>
+        <div class="container">
+            <div class="row all-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="">
+                        <div class="form-view">
+                            <h3 class="title mb-4">Register your account</h3>
+                            @using (Html.BeginForm("RegisterUser", "Account", FormMethod.Post, new
+                            {
+                                enctype = "multipart/form-data"
+                            }))
+                            {
+
+
+
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", Placeholder = "Full name" })
+                                    @Html.ValidationMessageFor(model => model.FullName, null, new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.UserEmail, new { @class = "form-control", Placeholder = "Email address" })
+                                    @Html.ValidationMessageFor(model => model.UserEmail, null, new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(m => m.UserPassword, new { @class = "form-control", Placeholder = "Password" })
+                                    @Html.ValidationMessageFor(model => model.UserPassword, null, new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", Placeholder = "Confirm Password" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+
+                                    <input type="file" name="CVUpload" />
+                                    @Html.ValidationMessageFor(model => model.CVUpload, null, new { @class = "text-danger" })
+                                </div>
+
+
+
+                                @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+                                
+
+                                <div class="form-group mt-3">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        SIGN UP
+                                    </button>
+                                </div>
+
+                                @*<p class="text-center mb-4">OR REGISTER WITH</p>
+            <div class="form-group log-option mb-0">
+                <a href="https://www.facebook.com/"
+                   class="fb-icon mr-2"
+                   target="_blank">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/"
+                   class="tw-icon mr-2"
+                   target="_blank">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/"
+                   class="in-icon"
+                   target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </div>*@
+                            }
+                        </div>
+                        <div class="form-group text-center mt-3 m-0">
+                            <span class="text-secondary">
+                                Already have an account?<a href="@Url.Action("Login","Account")"
+                                                           class="text-primary">
+                                    Login
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

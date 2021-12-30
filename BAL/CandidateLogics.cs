@@ -35,6 +35,11 @@ namespace BAL
                 byte[] uploadedFile = new byte[Candidate.UserImage.InputStream.Length];
                 Candidate.UserImage.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
                 fileContent = Convert.ToBase64String(uploadedFile);
+                var userImg = userRegModule.getUser(System.Web.HttpContext.Current.Session["UserEmail"].ToString());
+                userImg.userinfo.UserImage = fileContent;
+
+                userRegModule.UpdateUser(userImg);
+
             }
       
             var candidateobj = new candidate
