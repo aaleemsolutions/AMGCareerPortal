@@ -35,6 +35,8 @@ namespace BAL
             return getDb;
         }
 
+
+
         public candidate getCandidateById(int UserId)
         {
             var getDb = dbcontext.candidates.Where(m => m.Id == UserId).FirstOrDefault();

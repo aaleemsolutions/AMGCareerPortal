@@ -1,4 +1,4 @@
-﻿function AskYesOrNo(title = "Are you sure?",msg =  "You won't be able to revert this!" ) {
+﻿function AskYesOrNo(title = "Are you sure?", msg = "You won't be able to revert this!") {
 
     swal({
         title: 'Are you sure?',
@@ -35,6 +35,11 @@ function ReloadAjaxTable() {
 function ReloadExperienceAjaxTable() {
     $('#CndExpDataTable').DataTable().ajax.reload();
 }
+
+function ReloadJobListTable() {
+    $('#JobListDataTable').DataTable().ajax.reload();
+}
+
 
 function validateCndQualification(CurrentformIndex) {
 
@@ -195,7 +200,7 @@ function validateCndExperience(CurrentformIndex) {
         var toMonth = $("#CndExperienceToMonth").val();
         var toYear = $("#CndExperienceToYear").val();
         var isprogress = $("#ChkCndExperiencePresent").is(':checked');
-        
+
 
         var CurrentSalary = $("#CndExperienceViewModel_CurrentSalary").val();
         var ReasonForLeaving = $("#CndExperienceViewModel_ReasonForLeaving").val();
@@ -299,7 +304,7 @@ function validateCndExperience(CurrentformIndex) {
             isvalid = true;
         }
 
-        
+
 
 
 
@@ -461,7 +466,7 @@ function ShowToaster(issuccess = 1, msg, heading) {
     } else {
         resetToastPosition();
         $.toast({
-            heading:heading,// 'Danger',
+            heading: heading,// 'Danger',
             text: msg,//'And these were just the basic demos! Scroll down to check further details on how to customize the output.',
             showHideTransition: 'slide',
             icon: 'error',
@@ -518,7 +523,7 @@ function UpdateQualification(isupdate, Qualificationid) {
                         $("#CndQualificationViewModel_ResultValue").removeAttr("disabled");
                     }
                     //$("#CndQualificationViewModel_isOngoing").val(data.data.IsOnGoing)
-                    
+
                     $("#btnSaveEducationData").html("Update Records")
 
                 }
@@ -576,10 +581,10 @@ function UpdateQualification(isupdate, Qualificationid) {
             }
         });
 
-  
 
-     
-      
+
+
+
 
     }
 
@@ -620,34 +625,34 @@ function UpdateExperince(isupdate, ExperienceId) {
 
                     $("#JobDutiesEditor .ql-editor").html(data.data.JobDuties);
 
-          
+
                     if (data.data.IsPresent == true) {
-                       
+
                         $("#CndExperienceToMonth").attr("disabled", "disabled");
                         $("#CndExperienceToYear").attr("disabled", "disabled");
-                        
+
 
 
                     } else {
-                        
+
 
 
                         $("#CndExperienceToMonth").removeAttr("disabled");
                         $("#CndExperienceToYear").removeAttr("disabled");
-                      
+
                     }
                     //$("#CndQualificationViewModel_isOngoing").val(data.data.IsOnGoing)
 
                     $("#btnSaveExperienceData").html("Update Records")
 
-                    
+
                 }
 
             }
         });
 
 
-     } else {
+    } else {
 
 
 
@@ -676,7 +681,7 @@ function UpdateExperince(isupdate, ExperienceId) {
                 }
             }
         }).then(function (result) {
-            
+
             if (result) {
                 $.ajax({
                     url: "/CandidatePortal/CandidateDashboard/DeleteCandidateExperince/",
@@ -700,7 +705,7 @@ function UpdateExperince(isupdate, ExperienceId) {
 
         });
 
-       
+
 
     }
 
@@ -753,7 +758,7 @@ function ResendVerifyEmail() {
 
 
             if (data == true) {
-                
+
                 ShowToaster(1, "Email has been re-send successfully.", "Email");
             } else {
                 ShowToaster(0, "Error while sending email.");
@@ -763,57 +768,221 @@ function ResendVerifyEmail() {
     });
 }
 
-
-
 function ShowJobDescription(JobId) {
-    
+
 
     var options = {
         "backdrop": "static",
         keyboard: true
     };
 
-        $.ajax({
-            url: "/CandidatePortal/Candidatejob/JObDetailPartial/",
-            type: "GET",
-            data: { "JobId": JobId },
-            success: function (data) {
+    $.ajax({
+        url: "/CandidatePortal/Candidatejob/JObDetailPartial/",
+        type: "GET",
+        data: { "JobId": JobId },
+        success: function (data) {
 
-                if (data != undefined && data != "") {
+            if (data != undefined && data != "") {
 
-                    $('#JobDescriptionModal').html(data);
-                    $('#staticBackdrop').modal(options);
-                    $('#staticBackdrop').modal('show');
-
-                }
-
-            },
-            error: function () {
-                alert("Content load failed.");
+                $('#JobDescriptionModal').html(data);
+                $('#staticBackdrop').modal(options);
+                $('#staticBackdrop').modal('show');
+              
             }
-        });
+
+        },
+        error: function () {
+            alert("Content load failed.");
+        }
+    });
 
 
 
 
 }
 
+function ApplyForJob(JobId,IsAppliedByCv) {
 
+    $.ajax({
+        url: "/CandidatePortal/Candidatejob/ApplyForJob",
+        type: "GET",
+        //processData: false,
+        //contentType: false,
+        data: {"JobId":JobId,"AppliedByCv":IsAppliedByCv},
+        success: function (data) {
+            
+            if (data.IsSuccess) {
+                ShowToaster(1, "Applied Successfully", "Applied!");
+                $('#staticBackdrop').modal('hide');
+            } else {
+                $(".ApplyJobError").html(data.msg)
+            }
+
+        },
+        complete: function (data) {
+
+        }
+    });
+
+
+}
+
+function addNewJob() {
+   
+
+    if (1==1) {
+ 
+
+        var getformvalue = $('#FormNewJob')[0];
+
+            var valdata = new FormData(getformvalue);
+
+
+        valdata.append("JobDescription", $("#RichTextJobDescription .ql-editor").html());
+            
+            
+
+            $.ajax({
+                url: "/Recruiter/AllJobs/CreateJobs",
+                type: "POST",
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: valdata,
+                success: function (data) {
+              
+
+
+                },
+                complete: function (data) {
+                   
+                }
+            });
+
+
+
+
+
+
+        } else {
+         
+        }
+
+    }
+
+function EditNewJob(JobId) {
+    if (1 == 1) {
+        $.ajax({
+            url: "/Recruiter/AllJobs/CreateJobs",
+            type: "GET",
+            data: { "Id": JobId },
+            success: function (data) {
+
+             
+            }
+        });
+    }  
+
+}
+
+
+function DeleteNewJob(JobId) {
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3f51b5',
+            cancelButtonColor: '#ff4081',
+            confirmButtonText: 'Great ',
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: false,
+                    visible: true,
+                    className: "btn btn-danger",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "OK",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-primary",
+                    closeModal: true
+                }
+            }
+        }).then(function (result) {
+            if (result) {
+
+                $.ajax({
+                    url: "/Recruiter/AllJobs/DeleteJob",
+                    type: "POST",
+                    data: { "JobId": JobId },
+                    success: function (data) {
+
+                        if (data == true) {
+                            ReloadJobListTable();
+
+                            ShowToaster(0, "Job deleted.", "Deleted!");
+
+                        } else {
+                            ShowToaster(0, "Error While deleting Records please contact I.T", "Error!");
+                        }
+
+                    }
+                });
+            }
+        });
+
+
+
+
+
+
+    
+
+}
+
+function wait(ms) {
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + ms) {
+        end = new Date().getTime();
+    }
+}
+
+function DownloadCandidateResume(filename, UserId) {
+    
+    if (UserId != undefined && UserId != "") {
+        location.href = "/CandidatePortal/Candidatejob/DownloadCandidateCv?filename=" + filename + "&UserId=" + UserId;
+    } else {
+        location.href = "/CandidatePortal/Candidatejob/DownloadCandidateCv?filename=" + filename ;
+    }
+    
+}
 
 $(document).ready(function () {
 
-    //$("#Emailaddress").val("abdul.aleem@artisticmilliners.com")
-    //$("#Password").val("Test@123++")
-
+    $("#Emailaddress").val("abdul.aleem@artisticmilliners.com");
+    $("#Password").val("Test@123++");
     $('.CNICInputMask').inputmask('99999-9999999-9', { "clearIncomplete": true });
 
-
+    
     $('.txtSalaryInputMask').inputmask({
         alias: 'numeric',
         allowMinus: false,
         digits: 2
         //max: 999.99
     });
+
+
+    $('.validatenumeric').inputmask({
+        
+        alias: 'numeric',
+        allowMinus: false,
+        rightAlign: false,
+    });
+
 
 
     //Checkbox No Experince
@@ -902,18 +1071,120 @@ $(document).ready(function () {
 
     //Qualification add more button
 
-    $("#btnSaveEducationData").click(function () {
+    $("#btnSaveEducationData").unbind().click(function () {
         addCandQualification(1, false);
         ReloadAjaxTable();
     });
- 
 
-
-    $(".JobDetail").click(function () {
-        
+    $(".JobDetail").unbind().click(function () {
+        debugger;
         ShowJobDescription($(this).attr("value"));
-        
+
     });
+
+    $("#btnApplyJob").unbind().click(function () {
+
+ 
+        var jobid = $("#JobIdentity").val();
+        var appliedbyCv  = $("input[type='radio'][name='AppliedByCv']:checked").val();
+        ApplyForJob(jobid, appliedbyCv);
+
+    });
+
+
+    var table = $('#JobListDataTable').DataTable({
+        "ajax": {
+            "url": "/Recruiter/AllJobs/GetJobsDataTable/",
+            "type": "POST",
+            "datatype": "json",
+            //"contentType": 'application/json'
+
+              "dataSrc": function (json) {
+                //Make your callback here.
+
+                 //ShowToaster(1, "Record Updated Successfully.", "Record Updated!");
+                return json.data;
+            }
+
+        },
+        "columnDefs":
+            [{
+                "targets": [1],
+                "visible": false,
+                "searchable": false
+            }
+            ],
+        "oLanguage": {
+            "sEmptyTable": "No Job List Found.."
+        },
+        "columns": [
+            {
+                "className": 'dt-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": ''
+            },
+            { "data": "JobId" },
+            { "data": "JobTitle" },
+            { "data": "JobLocation" },
+            { "data": "PostedDate" },
+            { "data": "NoOfVacancy" },
+            { "data": "EmployementType" },
+            { "data": "SalaryRange" },
+            { "data": "NoOfAppliedCnd" }
+            
+            , {
+//                "render": function (data, type, full, meta) { return '<a class="btn" type="" onClick="EditNewJob(' + full.JobId + ')"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/AllJobs/ViewJobCandidates/?JobId=' + full.JobId +'"  title="View Cabdidates" ><span class="ti-eye")></span></a> <a class="btn" type=""  href="/Recruiter/AllJobs/CreateJobs/'+full.JobId+'"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
+            }
+
+        ],
+        "order": [[3, 'desc']]
+    });
+
+     //Add event listener for opening and closing details
+    $('#JobListDataTable tbody').on('click', 'td.dt-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child(format(row.data())).show();
+            tr.addClass('shown');
+        }
+    });
+
+    function format(d) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+            '<tr>' +
+            '<td>Description:</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>' + d.JobDescription + '</td>' +
+
+            '</tr>' +
+            
+           
+            '</table>';
+    }
+
+    if (window.location.pathname.toString() == "/Recruiter/AllJobs") {
+        $("#AllListedJobs ul li:nth-child(2)").removeClass("active");
+        $("#AllListedJobs ul li:nth-child(3)").removeClass("active");
+    }
+    if (window.location.pathname.toString() == "/Recruiter/AllJobs/CreateJobs") {
+        
+        $("#AllListedJobs ul li:nth-child(3)").removeClass("active");
+    }
+    
+
+     
 
 
 });

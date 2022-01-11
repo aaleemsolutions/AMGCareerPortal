@@ -38,6 +38,14 @@ namespace BAL
         {
             throw new NotImplementedException();
         }
+        public List<User> GetAllUsers()
+        {
+
+            var dbuser = dbcontext.Users.ToList();
+
+            return dbuser;
+        }
+
 
         public User getUser(int UserId)
         {

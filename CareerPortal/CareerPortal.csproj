@@ -59,6 +59,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -124,12 +127,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\HelloWorldModule.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\CandidatePortal\CandidatePortalAreaRegistration.cs" />
     <Compile Include="Areas\CandidatePortal\Controllers\CandidateDashboardController.cs" />
     <Compile Include="Areas\CandidatePortal\Controllers\CandidatejobController.cs" />
+    <Compile Include="Areas\Recruiter\Controllers\AllJobsController.cs" />
+    <Compile Include="Areas\Recruiter\RecruiterAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -407,6 +413,8 @@
     <Content Include="CndDashboardAssets\js\typeahead.js" />
     <Content Include="CndDashboardAssets\js\wizard.js" />
     <Content Include="CndDashboardAssets\js\x-editable.js" />
+    <Content Include="CndDashboardAssets\SummerNote\summernote.min.css" />
+    <Content Include="CndDashboardAssets\SummerNote\summernote.min.js" />
     <Content Include="CndDashboardAssets\vendors\ace-builds\src-min\ace.js" />
     <Content Include="CndDashboardAssets\vendors\ace-builds\src-min\mode-javascript.js" />
     <Content Include="CndDashboardAssets\vendors\ace-builds\src-min\theme-chaos.js" />
@@ -603,6 +611,21 @@
     <Content Include="CndDashboardAssets\vendors\feather\fonts\feather-webfontd41d.eot" />
     <Content Include="Areas\CandidatePortal\Views\Candidatejob\Index.cshtml" />
     <Content Include="Areas\CandidatePortal\Views\Shared\_JobDetailPartial.cshtml" />
+    <Content Include="Areas\Recruiter\Views\web.config" />
+    <Content Include="Areas\Recruiter\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Recruiter\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Recruiter\Views\AllJobs\Index.cshtml" />
+    <Content Include="Areas\Recruiter\Views\AllJobs\CreateJobs.cshtml" />
+    <Content Include="CndDashboardAssets\SummerNote\font\summernote.eot" />
+    <Content Include="CndDashboardAssets\SummerNote\font\summernote.ttf" />
+    <Content Include="CndDashboardAssets\SummerNote\font\summernote.woff" />
+    <Content Include="CndDashboardAssets\SummerNote\font\summernote.woff2" />
+    <Content Include="CndDashboardAssets\vendors\ti-icons\fonts\themify.eot" />
+    <Content Include="CndDashboardAssets\vendors\ti-icons\fonts\themify.ttf" />
+    <Content Include="CndDashboardAssets\vendors\ti-icons\fonts\themify.woff" />
+    <Content Include="Areas\Recruiter\Views\AllJobs\ViewJobCandidates.cshtml" />
+    <Content Include="Areas\Recruiter\Views\AllJobs\CandidateProfile.cshtml" />
+    <Content Include="Areas\Recruiter\Views\AllJobs\CandidateList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Scripts\inputmask\inputmask.js" />
@@ -616,6 +639,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.13.0.js" />
     <Content Include="Scripts\jquery-ui-1.13.0.min.js" />
+    <Content Include="Scripts\jquery.inputmask.bundle.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -644,6 +668,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\CandidatePortal\Data\" />
+    <Folder Include="Areas\Recruiter\Data\" />
     <Folder Include="Models\" />
     <Folder Include="UploadedDocuments\UploadedCV\" />
   </ItemGroup>

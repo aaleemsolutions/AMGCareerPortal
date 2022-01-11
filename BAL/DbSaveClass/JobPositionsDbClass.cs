@@ -16,10 +16,10 @@ namespace BAL.CandidateDbSaveClass
         {
             dbcontext = new CareerPortalEntities();
         }
-        public bool AddPositions(AllPosition JPosition)
+        public bool AddPositions(AllPosition Applied)
         {
             
-            dbcontext.AllPositions.Add(JPosition);
+            dbcontext.AllPositions.Add(Applied);
             dbcontext.SaveChanges();
             return true;
 
@@ -27,13 +27,24 @@ namespace BAL.CandidateDbSaveClass
             
         }
 
-        public bool DeletePosition(AllPosition JPosition)
+        public bool DeletePosition(AllPosition Applied)
         {
-            dbcontext.AllPositions.Remove(JPosition);
+            dbcontext.AllPositions.Remove(Applied);
             dbcontext.SaveChanges();
             return true;
 
         }
+
+        public bool DeletePosition(int JobId)
+        {
+            var Jobpositions = dbcontext.AllPositions.Where(m=>m.JobId == JobId).FirstOrDefault();
+            dbcontext.AllPositions.Remove(Jobpositions);
+            dbcontext.SaveChanges();
+            return true;
+
+        }
+
+
 
         public List<AllPosition> GetAllPositions()
         {
@@ -43,16 +54,16 @@ namespace BAL.CandidateDbSaveClass
 
         }
 
-        public AllPosition GetPosition(int PositionId)
+        public AllPosition GetPosition(int Applied)
         {
-            var getpositions = dbcontext.AllPositions.Where(m=>m.JobId==PositionId).FirstOrDefault();
+            var getpositions = dbcontext.AllPositions.Where(m=>m.JobId== Applied).FirstOrDefault();
 
             return getpositions;
         }
 
-        public bool UpdatePosition(AllPosition JPosition)
+        public bool UpdatePosition(AllPosition Applied)
         {
-            dbcontext.Entry(JPosition).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.Entry(Applied).State = System.Data.Entity.EntityState.Modified;
             dbcontext.SaveChanges();
 
             return true;

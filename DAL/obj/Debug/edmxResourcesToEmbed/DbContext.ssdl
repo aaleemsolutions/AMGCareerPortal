@@ -19,6 +19,14 @@
     <Property Name="LastDateOfJob" Type="datetime" />
     <Property Name="CreatedBy" Type="int" />
     <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="DivisionId" Type="int" />
+    <Property Name="DivisionName" Type="varchar" MaxLength="250" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="DepartmentName" Type="varchar" MaxLength="250" />
+    <Property Name="DesignationId" Type="int" />
+    <Property Name="DesignationName" Type="varchar" MaxLength="250" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="candidate">
     <Key>
@@ -55,6 +63,16 @@
     <Property Name="JobDuties" Type="nvarchar(max)" />
     <Property Name="FreshGraduate" Type="bit" />
   </EntityType>
+  <EntityType Name="CandidateJobApply">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobId" Type="int" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="AppliedOn" Type="datetime" />
+    <Property Name="ApplyByCV" Type="bit" />
+  </EntityType>
   <EntityType Name="CandidateQualification">
     <Key>
       <PropertyRef Name="id" />
@@ -89,6 +107,8 @@
     <Property Name="CandidateCVPath" Type="varchar" MaxLength="500" />
     <Property Name="EmailTokens" Type="varchar(max)" />
     <Property Name="UserImage" Type="nvarchar(max)" />
+    <Property Name="CVUpdatedOn" Type="datetime" />
+    <Property Name="isCandidate" Type="bit" />
   </EntityType>
   <Association Name="FK__Candidate__Candi__17036CC0">
     <End Role="candidate" Type="Self.candidate" Multiplicity="0..1" />
@@ -114,6 +134,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Candidate__JobId__4F47C5E3">
+    <End Role="AllPositions" Type="Self.AllPositions" Multiplicity="0..1" />
+    <End Role="CandidateJobApply" Type="Self.CandidateJobApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AllPositions">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="CandidateJobApply">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Candidate__UserI__503BEA1C">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="CandidateJobApply" Type="Self.CandidateJobApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateJobApply">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__candidate__UserI__6FE99F9F">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="candidate" Type="Self.candidate" Multiplicity="*" />
@@ -131,6 +175,7 @@
     <EntitySet Name="AllPositions" EntityType="Self.AllPositions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="candidate" EntityType="Self.candidate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateExperince" EntityType="Self.CandidateExperince" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CandidateJobApply" EntityType="Self.CandidateJobApply" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Candidate__Candi__17036CC0" Association="Self.FK__Candidate__Candi__17036CC0">
@@ -140,6 +185,14 @@
     <AssociationSet Name="FK__Candidate__Candi__29221CFB" Association="Self.FK__Candidate__Candi__29221CFB">
       <End Role="candidate" EntitySet="candidate" />
       <End Role="CandidateExperince" EntitySet="CandidateExperince" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Candidate__JobId__4F47C5E3" Association="Self.FK__Candidate__JobId__4F47C5E3">
+      <End Role="AllPositions" EntitySet="AllPositions" />
+      <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Candidate__UserI__503BEA1C" Association="Self.FK__Candidate__UserI__503BEA1C">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
     </AssociationSet>
     <AssociationSet Name="FK__candidate__UserI__6FE99F9F" Association="Self.FK__candidate__UserI__6FE99F9F">
       <End Role="Users" EntitySet="Users" />

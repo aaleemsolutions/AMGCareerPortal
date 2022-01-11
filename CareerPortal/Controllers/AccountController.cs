@@ -100,7 +100,16 @@ namespace CareerPortal.Controllers
 
                     Session["UserId"] = checkUser.userinfo.Id;
                     Session["UserEmail"] = checkUser.userinfo.UserEmail;
-                   
+                    if (checkUser.userinfo.UserImage!=null)
+                    {
+                        Session["UserImage"] = checkUser.userinfo.UserImage.ToString();
+                    }
+                    else
+                    {
+                        Session["UserImage"] = "";
+                    }
+                    
+
 
                     string userData = checkUser.userinfo.Id.ToString();
                     var authTicket = new FormsAuthenticationTicket(
@@ -127,7 +136,16 @@ namespace CareerPortal.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "CandidateDashboard", new { area = "CandidatePortal" });
+                        if (checkUser.userinfo.isCandidate == true || checkUser.userinfo.isCandidate == null)
+                        {
+                            return RedirectToAction("Index", "CandidateDashboard", new { area = "CandidatePortal" });
+                        }
+                        else
+                        {
+                            return RedirectToAction("CreateJobs", "AllJobs", new { area = "Recruiter" });
+                        }
+
+                        
                     }
 
             

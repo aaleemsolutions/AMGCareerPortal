@@ -19522,7 +19522,7 @@ input:focus {
   border-color: transparent;
   outline: none;
 }
-
+/*
 @font-face {
   font-family: 'Nunito';
   src: url("https://www.bootstrapdash.com/demo/skydash/template/fonts/Nunito/Nunito-Light.eot");
@@ -19553,7 +19553,7 @@ input:focus {
   src: url("https://www.bootstrapdash.com/demo/skydash/template/fonts/Nunito/Nunito-Regular.eot?#iefix") format("embedded-opentype"), url("https://www.bootstrapdash.com/demo/skydash/template/fonts/Nunito/Nunito-Regular.woff2") format("woff2"), url("https://www.bootstrapdash.com/demo/skydash/template/fonts/Nunito/Nunito-Regular.woff") format("woff"), url("https://www.bootstrapdash.com/demo/skydash/template/fonts/Nunito/Nunito-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-}
+}*/
 
 .bg-twitter {
   background: #4747A1;

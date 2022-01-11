@@ -17,6 +17,18 @@
     });
   }
 
+
+
+    //if ($("#RichTextJobDescription").length) {
+    //    var quill = new Quill('#RichTextJobDescription', {
+          
+    //        placeholder: 'Compose an epic...',
+    //        theme: 'snow' // or 'bubble'
+    //    });
+    //}
+
+
+
     //Job Description
     if ($("#JobDutiesEditor").length) {
         var quill = new Quill('#JobDutiesEditor', {

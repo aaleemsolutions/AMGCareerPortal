@@ -1,0 +1,128 @@
+﻿@using BAL;
+@model ViewModels.JobPositionViewModels
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                @if (Model != null)
+                {
+                     
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-sm-flex flex-row flex-wrap text-center text-sm-left align-items-center">
+                                <img src="~/assets/img/icons/company-1.png" alt="Job Logo"  class="img-lg rounded" alt="profile" style="height: 95px; width: 95px; " >
+
+
+                                <div class="col-sm-10">
+                                    <h4 class="">@Model.JobTitle</h4>
+                                    <p class="text-muted mb-1">No of Post: @Model.NoOfVacancy - Min required Exp: @Model.MinExperinceYear</p>
+                                   
+                                    <p class="text-muted mb-1">Posted Date: @Model.PostedDate.Value.ToString("dd-MMM-yyyy hh:mm tt") - Salary Range: @Model.SalaryRange</p>
+                                 
+                                    <p class="text-success font-weight-bold">      <label class="badge badge-success">@Model.CandidateJobApplies.Count()</label> Candidate(s) Applied</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="border-top pt-3">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="pt-1 ps-0 text-center">
+                                            Candidate Name
+                                        </th>
+                                        <th class="pt-1 text-center">
+                                            Applied Date
+                                        </th>
+                                        <th class="pt-1 text-center">
+                                            Applied Channel
+                                        </th>
+                                        <th class="pt-1 text-center">
+                                            Action
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CandidateJobApplies)
+                                    {
+
+
+                                        <tr>
+                                            <td class="py-1 ps-0">
+                                                <div class="d-flex align-items-center">
+                                                    @if (item.User.UserImage != null)
+                                                    {
+                                                        if (item.User.UserImage.Length > 10)
+                                                        {
+                                                            <img src="data:image/jpeg;base64,@item.User.UserImage.ToString().Replace(" &quot;","")" alt="profile" style="height: 50px; width: 50px; " class="img-lg rounded-circle mb-3" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/assets/img/noProfile.png" alt="profile" style="height: 50px; width: 50px; " class="img-lg rounded-circle mb-3" />
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/assets/img/noProfile.png" alt="profile" style="height: 50px; width: 50px; " class="img-lg rounded-circle mb-3" />
+                                                    }
+
+                                                    <div class="ms-3">
+                                                        <p class="mb-0">@item.User.FullName</p>
+                                                        <p class="mb-0 text-muted text-small">Product Designer</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @item.AppliedOn.Value.ToString("dd-MMM-yyyy HH:mm tt")
+                                            </td>
+                                            <td class="text-center">
+                                                @if (item.ApplyByCV == false)
+                                                {
+                                                    <label class="badge badge-success">Profile</label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="badge badge-success">CV</label>
+                                                }
+
+                                            </td>
+                                            <td class="text-center">
+                                             
+                                                <a href="#" class="btn badge badge-success" onclick="DownloadCandidateResume('CV',@item.UserId.ToString())"><span class="ti-download"></span> Download CV</a>
+                                                <a class="btn badge badge-info" href="@Url.Action("CandidateProfile","AllJobs",new { area="Recruiter",UserId = item.UserId})">View Profile</a>
+                                                <button class="btn badge badge-primary">Shortlist Candidate</button>
+                                                <button class="btn badge badge-danger">Reject Candidate</button>
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                    @if (Model.CandidateJobApplies.Count == 0)
+                                    {
+                                        <tr>
+                                            <td colspan="4" class="text-center">No Candidates record found</td>
+                                        </tr>
+                                    }
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -55,6 +55,7 @@ namespace BAL
                     string filename = "CV_" + newusermodel.userinfo.FullName.ToString().Trim() + newusermodel.userinfo.Id.ToString() + "_" + DateTime.Now.ToString("ddMMyy_hhmm") + Path.GetExtension(user.CVUpload.FileName);
                     ImageSaving.savePostedFileIntoFolder(user.CVUpload, GlobalFields.UploadDocumentsPath, filename);
                     newusermodel.userinfo.CandidateCVPath = GlobalFields.UploadDocumentsPath + filename;
+                    newusermodel.userinfo.CVUpdatedOn = DateTime.Now;
                 }
                 
                 useradd.UpdateUser(newusermodel.userinfo);
@@ -109,6 +110,9 @@ namespace BAL
             return user;
         }
 
+        public List<User> GetAllUsers() {
+            return useradd.GetAllUsers();
+        }
         public UserViewModel  getUser(string emailAddress)
         {
             var userViewModel = new UserViewModel();

@@ -75,6 +75,16 @@ namespace BAL
             throw new NotImplementedException();
         }
 
+        public CandidateViewModel GetAllUsers()
+        {
+            var candidateviewModel = new CandidateViewModel();
+
+            candidateviewModel.UsersList = userRegModule.GetAllUsers();
+
+
+            return candidateviewModel;
+        }
+
         public CandidateViewModel getCandidate(int UserId)
         {
             var candidateviewModel = new CandidateViewModel();
@@ -92,7 +102,7 @@ namespace BAL
                 candidateviewModel.CandidateAddress = candidateviewModel.CandidateInfo.CandidateAddress;
                 candidateviewModel.CNIC = candidateviewModel.CandidateInfo.CNIC;
                 candidateviewModel.EmailVerifyMessage = candidateviewModel.CandidateInfo.User.IsEmailVerify.Value;
-
+                candidateviewModel.CandidateDescription = candidateviewModel.CandidateInfo.CandidateDescription;
 
 
 
@@ -105,6 +115,8 @@ namespace BAL
 
             return candidateviewModel;
         }
+
+    
         public int getCandidateId(int UserId)
         {
         

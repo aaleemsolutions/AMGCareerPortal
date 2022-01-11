@@ -46,6 +46,9 @@ namespace ViewModels
         public User UsersInfo { get; set; }
 
 
+        public List<User> UsersList { get; set; }
+
+
         public CndQualificationViewModel CndQualificationViewModel { get; set; }
 
         public CndExperienceViewModel CndExperienceViewModel { get; set; }

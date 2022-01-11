@@ -1,4 +1,6 @@
-﻿
+﻿@using BAL;
+@model ViewModels.JobPositionViewModels
+
 @{
     ViewBag.Title = "Index";
 }
@@ -7,7 +9,7 @@
 @Scripts.Render("~/bundles/modernizr")
 
 
-
+<link rel="stylesheet" href="~/CndDashboardAssets/vendors/jquery-file-upload/uploadfile.css">
 
 <div class="row col-md-12 card">
 
@@ -15,7 +17,7 @@
     <div class="content">
 
         <section>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="widget">
@@ -70,7 +72,7 @@
                     </div>
                     <div class="col-md-9">
                         <div class="job-data-toolbar">
-                            <p>98 Open Jobs</p>
+                            <p>@Model.ListAlljobs.Count() Open Jobs</p>
                             <p>
                                 Sort by
                                 <select class="form-control ml-2">
@@ -86,7 +88,55 @@
                             <div>
                                 <div class="job-data-wrap">
                                     @*<a href="#" type="button" class="job-data JobDetail" value="1221" data-toggle="modal" data-target="#staticBackdrop">*@
-                                    <a href="#" type="button" class="job-data JobDetail" value="1221" >
+
+
+                                    @foreach (var item in Model.ListAlljobs)
+                                    {
+                                        <a href="#" type="button" class="job-data JobDetail" value="@item.JobId">
+                                            <div class="company-logo col-auto pl-0">
+                                                <img src="~/assets/img/icons/company-1.png" alt="Company Logo">
+                                            </div>
+                                            <div class="list-content col">
+                                                <h6 class="title"> @item.JobTitle</h6>
+                                                <ul class="meta">
+                                                    <li><strong class="text-primary">Artistic Milliners</strong></li>
+                                                </ul>
+                                            </div>
+                                            <div class="list-content col">
+                                                <ul class="meta">
+                                                    <li><strong>Location : @item.JobLocation</strong></li>
+                                                </ul>
+                                            </div>
+                                            <div class="list-content col-auto order-sm-3">
+                                                <ul class="meta pr-3">
+                                                    <li><i class="fa fa-heart-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div class="text-right col-auto order-sm-3 p-0">
+                                                
+                                                @{
+                                                    var test = item.CandidateJobApplies.Where(m => m.UserId == GlobalUserInfo.UserId).Count();
+                                                   if (test>0)
+                                                    {
+
+
+                                                        <span class="button btn border-primary disabled" style="color: #000;">Already Applied</span>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="button btn border-primary">Apply Now. </span>
+
+                                                    }
+                                                }
+
+
+                                            </div>
+                                        </a>
+                                    }
+
+
+                                    @*<a href="#" type="button" class="job-data JobDetail" value="1221">
                                         <div class="company-logo col-auto pl-0">
                                             <img src="~/assets/img/icons/company-1.png" alt="Company Logo">
                                         </div>
@@ -109,8 +159,8 @@
                                         <div class="text-right col-auto order-sm-3 p-0">
                                             <span class="button btn border-primary">FULL TIME </span>
                                         </div>
-                                    </a>
-                                  
+                                    </a>*@
+
 
                                 </div>
                             </div>
@@ -143,11 +193,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                
             </div>
         </div>
     </div>
 </div>
 
 @Scripts.Render("~/bundles/ThemeOtherPagesJS")
+
 

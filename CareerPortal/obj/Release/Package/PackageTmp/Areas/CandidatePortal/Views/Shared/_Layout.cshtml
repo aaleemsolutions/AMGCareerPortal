@@ -11,25 +11,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Artistic Milliners - Candidate</title>
 
-    <link rel="stylesheet" href="~/CndDashboardAssets/vendors/feather/feather.css">
-    <link rel="stylesheet" href="~/CndDashboardAssets/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="~/CndDashboardAssets/vendors/css/vendor.bundle.base.css">
+    @*<link rel="stylesheet" href="~/CndDashboardAssets/vendors/feather/feather.css">
+        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/ti-icons/css/themify-icons.css">
+        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/css/vendor.bundle.base.css">
+        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/dropify/dropify.min.css">
+        <link rel="stylesheet" href="~/CndDashboardAssets/css/vertical-layout-light/style.css">
+        <link rel="shortcut icon" href="~/CndDashboardAssets/images/favicon.png" />
+        <link href="~/Content/CustomStyle.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/jquery-toast-plugin/jquery.toast.min.css">*@
+    @Styles.Render("~/bundles/CandidateThemesCSS")
 
-    <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="~/CndDashboardAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-    <!-- End plugin css for this page -->
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="~/CndDashboardAssets/vendors/dropify/dropify.min.css">
-    <link rel="stylesheet" href="~/CndDashboardAssets/css/vertical-layout-light/style.css">
-    <!-- endinject -->
-    <link rel="shortcut icon" href="~/CndDashboardAssets/images/favicon.png" />
 
-    <link href="~/Content/CustomStyle.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="~/CndDashboardAssets/vendors/jquery-toast-plugin/jquery.toast.min.css">
 
     <style>
         .wizard > .steps .current a {
@@ -127,6 +120,8 @@
                         </div>
                     </li>
                     <li class="nav-item nav-profile dropdown">
+                        <a href="@Url.Action("Index","AllJobs",new { area="Recruiter"})" type="button" class="btn btn-primary">Visit as a Recruiter</a>
+
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                             @*<img src="~/CndDashboardAssets/images/faces/face28.jpg" alt="profile" />*@
 
@@ -149,7 +144,6 @@
 
                         </a>
 
-                        </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                             <a class="dropdown-item">
                                 <i class="ti-settings text-primary"></i>
@@ -361,6 +355,8 @@
                             <span class="menu-title">Current Jobs</span>
                         </a>
                     </li>
+
+
                     @*<li class="nav-item">
                             <a class="nav-link" href="pages/widgets/widgets.html">
                                 <i class="icon-cog menu-icon"></i>
@@ -639,77 +635,44 @@
     <!-- End custom js for this page-->
     <!--Test-->
     <!-- container-scroller -->
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.inputmask.bundle.min.js"></script>
+        <script src="~/CndDashboardAssets/js/inputmask.js"></script>
+        <script src="~/Scripts/jquery-ui-1.13.0.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+        <script src="~/CndDashboardAssets/js/jquery.cookie.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+        <script src="~/CndDashboardAssets/vendors/js/vendor.bundle.base.js"></script>
+        <script src="~/CndDashboardAssets/vendors/dropify/dropify.min.js"></script>
+        <script src="~/CndDashboardAssets/vendors/jquery-steps/jquery.steps.min.js"></script>
+        <script src="~/CndDashboardAssets/vendors/jquery-validation/jquery.validate.min.js"></script>
+        <script src="~/CndDashboardAssets/js/off-canvas.js"></script>
+        <script src="~/CndDashboardAssets/js/hoverable-collapse.js"></script>
+        <script src="~/CndDashboardAssets/js/template.js"></script>
+        <script src="~/CndDashboardAssets/js/settings.js"></script>
+        <script src="~/CndDashboardAssets/js/todolist.js"></script>
+        <script src="~/CndDashboardAssets/vendors/inputmask/jquery.inputmask.bundle.js"></script>
+        <script src="~/CndDashboardAssets/js/wizard.js"></script>
+        <script src="~/CndDashboardAssets/js/dropify.js"></script>
+        <script src="~/CndDashboardAssets/vendors/tinymce/tinymce.min.js"></script>
+        <script src="~/CndDashboardAssets/vendors/quill/quill.min.js"></script>
+        <script src="~/CndDashboardAssets/vendors/simplemde/simplemde.min.js"></script>
+        <script src="~/CndDashboardAssets/js/editorDemo.js"></script>
+        <script src="~/CndDashboardAssets/vendors/datatables.net/jquery.dataTables.js"></script>
+        <script src="~/CndDashboardAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+        <script src="~/CndDashboardAssets/js/data-table.js"></script>
+        <script src="~/Scripts/Main.js"></script>
+        <script src="~/CndDashboardAssets/vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+        <script src="~/CndDashboardAssets/js/toastDemo.js"></script>
+        <script src="~/CndDashboardAssets/vendors/sweetalert/sweetalert.min.js"></script>
+        <script src="~/CndDashboardAssets/vendors/jquery.avgrund/jquery.avgrund.min.js"></script>
+        <script src="~/CndDashboardAssets/js/alerts.js"></script>
+        <script src="~/CndDashboardAssets/js/avgrund.js"></script>*@
 
+    @Scripts.Render("~/bundles/CandidateThemesJS")
 
-
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
-
-
-    <script src="~/CndDashboardAssets/js/inputmask.js"></script>
-    <script src="~/Scripts/jquery-ui-1.13.0.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
-    <script src="~/CndDashboardAssets/js/jquery.cookie.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-
-
-
-
-
-    <!-- plugins:js -->
-    <script src="~/CndDashboardAssets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page-->
-    <script src="~/CndDashboardAssets/vendors/dropify/dropify.min.js"></script>
-    <script src="~/CndDashboardAssets/vendors/jquery-steps/jquery.steps.min.js"></script>
-    <script src="~/CndDashboardAssets/vendors/jquery-validation/jquery.validate.min.js"></script>
-
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
-    <script src="~/CndDashboardAssets/js/off-canvas.js"></script>
-    <script src="~/CndDashboardAssets/js/hoverable-collapse.js"></script>
-    <script src="~/CndDashboardAssets/js/template.js"></script>
-    <script src="~/CndDashboardAssets/js/settings.js"></script>
-    <script src="~/CndDashboardAssets/js/todolist.js"></script>
-    <script src="~/CndDashboardAssets/vendors/inputmask/jquery.inputmask.bundle.js"></script>
-    <!-- endinject -->
-
-    <script src="~/CndDashboardAssets/js/wizard.js"></script>
-
-
-    <script src="~/CndDashboardAssets/js/dropify.js"></script>
-
-    <!-- plugin js for this page -->
-
-    <script src="~/CndDashboardAssets/vendors/tinymce/tinymce.min.js"></script>
-    <script src="~/CndDashboardAssets/vendors/quill/quill.min.js"></script>
-    <script src="~/CndDashboardAssets/vendors/simplemde/simplemde.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- Custom js for this page-->
-    <script src="~/CndDashboardAssets/js/editorDemo.js"></script>
-    <!-- End custom js for this page-->
-
-
-
-    <script src="~/CndDashboardAssets/vendors/datatables.net/jquery.dataTables.js"></script>
-    <script src="~/CndDashboardAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-
-    <script src="~/CndDashboardAssets/js/data-table.js"></script>
-    <script src="~/Scripts/Main.js"></script>
-
-    <script src="~/CndDashboardAssets/vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
-
-    <script src="~/CndDashboardAssets/js/toastDemo.js"></script>
-
-    <script src="~/CndDashboardAssets/vendors/sweetalert/sweetalert.min.js"></script>
-    <script src="~/CndDashboardAssets/vendors/jquery.avgrund/jquery.avgrund.min.js"></script>
-
-
-    <script src="~/CndDashboardAssets/js/alerts.js"></script>
-    <script src="~/CndDashboardAssets/js/avgrund.js"></script>
-
+    @RenderSection("scripts", required: false)
 
 </body>
 

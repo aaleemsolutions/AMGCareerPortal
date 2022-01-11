@@ -59,9 +59,16 @@
     <Compile Include="CandidateExperince.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="CandidateJobApply.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="CandidateQualification.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomModel\Category.cs" />
+    <Compile Include="CustomModel\Department.cs" />
+    <Compile Include="CustomModel\Designation.cs" />
+    <Compile Include="CustomModel\Division.cs" />
     <Compile Include="DbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

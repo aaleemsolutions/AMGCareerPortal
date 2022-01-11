@@ -14,6 +14,12 @@ namespace DAL
     
     public partial class AllPosition
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AllPosition()
+        {
+            this.CandidateJobApplies = new HashSet<CandidateJobApply>();
+        }
+    
         public int JobId { get; set; }
         public string JobTitle { get; set; }
         public string JobLocation { get; set; }
@@ -29,5 +35,16 @@ namespace DAL
         public Nullable<System.DateTime> LastDateOfJob { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<int> DivisionId { get; set; }
+        public string DivisionName { get; set; }
+        public Nullable<int> DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
+        public Nullable<int> DesignationId { get; set; }
+        public string DesignationName { get; set; }
+        public Nullable<int> CategoryId { get; set; }
+        public string CategoryName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CandidateJobApply> CandidateJobApplies { get; set; }
     }
 }

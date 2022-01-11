@@ -59,7 +59,7 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
 
             var dbuser = RegUser.getUser(Username);
 
-            var dbobj = candidateobj.getCandidate(UserId);
+            var dbobj = candidateobj.getCandidate(GlobalUserInfo.UserId);
             CandidateId = dbobj.CandidateId.HasValue==true?dbobj.CandidateId.Value:0;
             dbobj.EmailVerifyMessage = dbuser.userinfo.IsEmailVerify.Value;
        
@@ -82,7 +82,6 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
 
             var GetAllDegrees = new SelectList(getusrDetail.GetAllDegrees().ToList(), "Qualification_ID", "Qualification_Name").ToList();
             GetAllDegrees.Insert(0, (new SelectListItem { Text = "Select Degree", Value = "0" }));
-
             ViewBag.DegreeDropDown = GetAllDegrees;
             //ViewBag.DegreeDropDown = getusrDetail.GetAllDegrees().ToList();
 

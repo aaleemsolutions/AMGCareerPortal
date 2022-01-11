@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,14 +9,25 @@ namespace CareerPortal.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        JobAllPositions JobPos;
+        public HomeController()
         {
-            return View();
+            JobPos = new JobAllPositions();
+        }
+
+        public ActionResult Index()
+         {
+
+            var db = JobPos.GetAllPositionsInViewModel();
+
+            return View(db);
         }
 
         public ActionResult JobList()
         {
-            return View();
+            var db = JobPos.GetAllPositionsInViewModel();
+
+            return View(db);
         }
 
      

@@ -16,6 +16,9 @@
     <Property Name="CandidateCVPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="EmailTokens" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="candidates" Relationship="CareerPortalModel.FK__candidate__UserI__6FE99F9F" FromRole="User" ToRole="candidate" />
+    <NavigationProperty Name="CandidateJobApplies" Relationship="CareerPortalModel.FK__Candidate__UserI__503BEA1C" FromRole="User" ToRole="CandidateJobApply" />
+    <Property Name="CVUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="isCandidate" Type="Boolean" />
   </EntityType>
   <EntityContainer Name="CareerPortalEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
@@ -36,6 +39,15 @@
       <End Role="CandidateExperince" EntitySet="CandidateExperinces" />
     </AssociationSet>
     <EntitySet Name="AllPositions" EntityType="CareerPortalModel.AllPosition" />
+    <EntitySet Name="CandidateJobApplies" EntityType="CareerPortalModel.CandidateJobApply" />
+    <AssociationSet Name="FK__Candidate__JobId__4F47C5E3" Association="CareerPortalModel.FK__Candidate__JobId__4F47C5E3">
+      <End Role="AllPosition" EntitySet="AllPositions" />
+      <End Role="CandidateJobApply" EntitySet="CandidateJobApplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Candidate__UserI__503BEA1C" Association="CareerPortalModel.FK__Candidate__UserI__503BEA1C">
+      <End Role="User" EntitySet="Users" />
+      <End Role="CandidateJobApply" EntitySet="CandidateJobApplies" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="candidate">
     <Key>
@@ -156,5 +168,42 @@
     <Property Name="LastDateOfJob" Type="DateTime" Precision="3" />
     <Property Name="CreatedBy" Type="Int32" />
     <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CandidateJobApplies" Relationship="CareerPortalModel.FK__Candidate__JobId__4F47C5E3" FromRole="AllPosition" ToRole="CandidateJobApply" />
   </EntityType>
+  <EntityType Name="CandidateJobApply">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="AppliedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AllPosition" Relationship="CareerPortalModel.FK__Candidate__JobId__4F47C5E3" FromRole="CandidateJobApply" ToRole="AllPosition" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Candidate__UserI__503BEA1C" FromRole="CandidateJobApply" ToRole="User" />
+    <Property Name="ApplyByCV" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK__Candidate__JobId__4F47C5E3">
+    <End Type="CareerPortalModel.AllPosition" Role="AllPosition" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.CandidateJobApply" Role="CandidateJobApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AllPosition">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="CandidateJobApply">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Candidate__UserI__503BEA1C">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.CandidateJobApply" Role="CandidateJobApply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateJobApply">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

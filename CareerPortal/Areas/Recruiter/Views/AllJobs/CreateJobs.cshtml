@@ -1,0 +1,301 @@
+﻿
+@model ViewModels.JobPositionViewModels
+
+@{
+    ViewBag.Title = "CreateJob";
+}
+
+
+
+<link rel="stylesheet" href="~/CndDashboardAssets/vendors/simplemde/simplemde.min.css">
+
+
+
+
+
+<style>
+
+    .note-editable {
+        height: 200px;
+    }
+
+    .wizard > .content > .body {
+        float: left;
+        position: inherit;
+        width: 95%;
+        height: 95%;
+        padding: 2.5%;
+    }
+</style>
+
+@*<form id="FormNewJob">*@
+@using (Ajax.BeginForm("CreateJobs",
+    new { Controller = "AllJobs", area = "Recruiter" },
+     new AjaxOptions { OnFailure = "OnJobFailure", OnSuccess = "OnJobSubmit" }
+     ))
+{
+
+<div class="row">
+
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="form-group row " id="NewJobArea">
+                    <h3 style="text-decoration:underline">Create New Job</h3>
+
+                    @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+
+                    <div class="col">
+                        <label>Job Title <span class="text-danger">*</span> </label>
+                        <div id="the-basics">
+                            @Html.HiddenFor(m => m.JobId)
+
+                            @*<input class="typeahead" type="text" placeholder="First Name" required>*@
+
+
+
+                            @Html.TextBoxFor(Model => Model.JobTitle,
+                 new { @class = "typeahead", placeholder = "Job Title..." })
+
+                            @Html.ValidationMessageFor(m => m.JobTitle, null, new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label>No Of Vacancy <span class="text-danger">*</span></label>
+                        <div id="the-basics1">
+                            @Html.TextBoxFor(Model => Model.NoOfVacancy,
+            new { @class = "typeahead validatenumeric", placeholder = "No of Vacancy..." })
+
+                            @Html.ValidationMessageFor(m => m.NoOfVacancy, null, new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col">
+                        <label>Employeement Status <span class="text-danger">*</span></label>
+                        <div id="the-basics2">
+
+
+                            @Html.DropDownListFor(m => m.EmployementType, new SelectList(ViewBag.EmploymentType, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpEmpType" })
+
+
+                            @Html.ValidationMessageFor(m => m.EmployementType, null, new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="col">
+                        <label>Gender <span class="text-danger">*</span></label>
+                        <div id="the-basics2">
+                            @Html.DropDownListFor(m => m.GenderSpecification, new SelectList(ViewBag.GenderDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpGender" })
+
+                            @Html.ValidationMessageFor(m => m.GenderSpecification, null, new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="form-group row ">
+
+                    <div class="col-md-2">
+                        <label>Division </label>
+                        <div id="the-basics">
+                            @*<input class="typeahead" type="text" placeholder="CNIC" required>*@
+                            @Html.DropDownListFor(m => m.DivisionId, new SelectList(ViewBag.DivisionDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDivision" })
+
+
+                            @Html.ValidationMessageFor(m => m.DivisionId, null, new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Category </label>
+                        <div id="bloodhound">
+
+                            @Html.DropDownListFor(m => m.CategoryId, new SelectList(ViewBag.CategoryDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpCategory" })
+
+
+                            @Html.ValidationMessageFor(m => m.CategoryId, null, new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label>Department  </label>
+                        <div id="bloodhound">
+
+                            @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ViewBag.DepartmentDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDepart" })
+
+
+                            @Html.ValidationMessageFor(m => m.DepartmentId, null, new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label>Designation </label>
+                        <div id="bloodhound">
+                            @Html.DropDownListFor(m => m.DesignationId, new SelectList(ViewBag.DesignationDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDesig" })
+
+
+                            @Html.ValidationMessageFor(m => m.DesignationId, null, new { @class = "text-danger" })
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group row ">
+
+                    <div class="col-md-2">
+                        <label>Experince </label>
+                        <div id="the-basics">
+                            @*<input class="typeahead" type="text" placeholder="CNIC" required>*@
+
+                            @Html.TextBoxFor(Model => Model.MinExperinceYear,
+          new { @class = "typeahead sa  validatenumeric", placeholder = "Min Experience required" })
+
+                            @Html.ValidationMessageFor(m => m.MinExperinceYear, null, new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Job Location </label>
+                        <div id="bloodhound">
+
+                            @Html.TextBoxFor(Model => Model.JobLocation,
+          new { @class = "typeahead", placeholder = "Job Location" })
+
+
+                            @Html.ValidationMessageFor(m => m.JobLocation, null, new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <label>Salary  </label>
+                        <div id="bloodhound">
+
+                            @Html.TextBoxFor(Model => Model.SalaryRange,
+                                            new { @class = "typeahead", placeholder = "Salary" })
+
+                            @Html.ValidationMessageFor(m => m.SalaryRange, null, new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label>Applicatin Deadline </label>
+                        <div id="bloodhound">
+
+
+                            <div id="datepicker-popup" class="input-group date datepicker">
+                                @Html.TextBoxFor(Model => Model.LastDateOfJob,
+        new { @class = "typeahead", placeholder = "Last date to apply" })
+
+                                <span class="input-group-addon input-group-append border-left">
+                                    <span class="ti-calendar input-group-text"></span>
+                                </span>
+                            </div>
+
+                            @Html.ValidationMessageFor(m => m.LastDateOfJob, null, new { @class = "text-danger" })
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <br />
+                <div class="col-md-12" style="height: 200px">
+
+                    <label for="">Description</label>
+                    @*<textarea id="RichTextJobDescription" name="editordata"></textarea>*@
+                    @Html.TextAreaFor(m => m.JobDescription, new { @Id = "RichTextJobDescription", @rows = "50" })
+
+                    @Html.ValidationMessageFor(m => m.JobDescription, null, new { @class = "text-danger" })
+
+
+
+                </div>
+
+                <div class="row" style="margin-top:100px;">
+                    <div class="col-md-12 ">
+
+
+                        <button class="btn btn-primary pull-right float-right" style="float: right;margin-top: 20px;" id="btnSavenewjob" type="submit"> @(Model!=null ?Model.JobId != 0  ? "Update" : "Save":"Save") </button>
+
+                        <button class="btn btn-danger pull-right float-right" style="float: right; margin-top: 20px; margin-right: 5px;" id="btnSavenewjob" type="button"> Clear </button>
+
+                        <br />
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+}
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+<script>
+
+
+    $(document).ready(function () {
+        $('#RichTextJobDescription').summernote();
+    });
+    function OnJobSubmit(data) {
+
+        if (data.RedirectUrl) {
+            $("#form0")[0].reset()
+            $("#RichTextJobDescription").summernote('reset');
+            window.location.href = data.RedirectUrl;
+        }
+
+        
+        ShowToaster(1, "Job Created Successfully!", "Job Created!");
+        $("#form0")[0].reset();
+        $("#RichTextJobDescription").summernote('reset');
+    }
+
+
+    function OnJobFailure(data) {
+        ShowToaster(1, "Something wrong please inform to I.T Department!", "Error Occured");
+    }
+
+
+
+
+</script>
+
+

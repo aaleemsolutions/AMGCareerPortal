@@ -8,7 +8,7 @@ using System.Web;
  
 namespace BAL.Utilities
 {
-  static   class ImageSaving
+  public static   class ImageSaving
     {
 
     

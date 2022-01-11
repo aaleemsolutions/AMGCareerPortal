@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "CandidateList";
+}
+@using BAL;
+@model ViewModels.CandidateViewModel
+ 
+<div class="container-fluid">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+
+
+
+
+
+                <div class="border-top pt-3 table-sorter-wrapper col-lg-12 table-responsive ">
+                    <div class="table-responsive">
+                        <table  id="sortable-table-2" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="pt-1 ps-0 text-center sortStyle">
+                                        Candidate Name
+                                        <i class="ti-angle-down"></i>
+
+                                    </th>
+                                    <th class="pt-1 text-center sortStyle">
+                                        Is profile Complete
+                                        
+                                        <i class="ti-angle-down"></i>
+
+                                    </th>
+                                    <th class="pt-1 text-center sortStyle">
+                                        Is CV uploaded
+                                        <i class="ti-angle-down"></i>
+
+                                    </th>
+                                    <th class="pt-1 text-center sortStyle">
+                                        Total No of applied Post
+                                        <i class="ti-angle-down"></i>
+
+                                    </th>
+                                    <th class="pt-1 text-center sortStyle">
+                                        Created On
+                                        <i class="ti-angle-down"></i>
+
+                                    </th>
+                                    <th class="pt-1 text-center sortStyle">
+                                        Action
+                                        <i class="ti-angle-down"></i>
+
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.UsersList)
+                                {
+
+
+                                <tr>
+                                    <td class="py-1 ps-0">
+                                        <div class="d-flex align-items-center">
+                                            @if (item.UserImage != null)
+                                            {
+                                                if (item.UserImage.Length > 10)
+                                                {
+                                                    <img src="data:image/jpeg;base64,@item.UserImage.ToString().Replace(" &quot;","")" alt="profile" style="height: 50px; width: 50px; " class="img-lg rounded-circle mb-3" />
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/assets/img/noProfile.png" alt="profile" style="height: 50px; width: 50px; " class="img-lg rounded-circle mb-3" />
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                <img src="~/assets/img/noProfile.png" alt="profile" style="height: 50px; width: 50px; " class="img-lg rounded-circle mb-3" />
+                                            }
+
+                                            <div class="ms-3">
+                                                <p class="mb-0">@item.FullName</p>
+                                                <p class="mb-0 text-muted text-small">Product Designer</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (item.candidates.Count() != 0)
+                                        {
+                                            var experinceCount = item.candidates.FirstOrDefault().CandidateExperinces.Count();
+                                            @(experinceCount!=0 ? "Yes":"N/A");
+
+                                        }
+                                        else
+                                        {
+                                            <text>N/A</text>
+                                        }
+                                    </td>
+
+                                    <td class="text-center">
+                                        @(item.CandidateCVPath =="" || item.CandidateCVPath == null ? "NO" : "Yes")
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        @item.CandidateJobApplies.Count()
+                                    </td>
+                                    <td class="text-center">
+
+                                        @item.CreatedOn.Value.ToString("dd-MMM-yyyy HH:mm tt")
+                                    </td>
+                                    <td class="text-center">
+
+
+                                        <a class="btn badge badge-info" href="@Url.Action("CandidateProfile","AllJobs",new { area="Recruiter",UserId = item.Id})">View Profile</a>
+
+
+                                    </td>
+
+                                </tr>
+                                }
+
+                                @if (Model.UsersList.Count == 0)
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center">No Candidates record found</td>
+                                    </tr>
+                                }
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

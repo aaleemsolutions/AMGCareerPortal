@@ -4,6 +4,8 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="CareerPortalModel.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="isCandidate" ColumnName="isCandidate" />
+          <ScalarProperty Name="CVUpdatedOn" ColumnName="CVUpdatedOn" />
           <ScalarProperty Name="EmailTokens" ColumnName="EmailTokens" />
           <ScalarProperty Name="CandidateCVPath" ColumnName="CandidateCVPath" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -102,6 +104,17 @@
           <ScalarProperty Name="JobLocation" ColumnName="JobLocation" />
           <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
           <ScalarProperty Name="JobId" ColumnName="JobId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CandidateJobApplies">
+      <EntityTypeMapping TypeName="CareerPortalModel.CandidateJobApply">
+        <MappingFragment StoreEntitySet="CandidateJobApply">
+          <ScalarProperty Name="ApplyByCV" ColumnName="ApplyByCV" />
+          <ScalarProperty Name="AppliedOn" ColumnName="AppliedOn" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

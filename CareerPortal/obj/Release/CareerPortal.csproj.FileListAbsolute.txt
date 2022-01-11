@@ -89,3 +89,4 @@ F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\CareerPortal
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\CareerPortal\obj\Release\CareerPortal.csproj.CopyComplete
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\CareerPortal\obj\Release\CareerPortal.dll
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\CareerPortal\obj\Release\CareerPortal.pdb
+F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\CareerPortal\bin\System.Web.Cors.dll

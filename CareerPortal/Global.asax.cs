@@ -13,8 +13,16 @@ namespace CareerPortal
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
+
+         
+
+        }
         protected void Application_Start()
         {
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -25,11 +33,17 @@ namespace CareerPortal
             GlobalFields.UploadDocumentsPath = DocumentsUploaded;
 
 
+       
+
         }
 
 
         void Session_Start(object sender, EventArgs e)
         {
+
+            HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
+
+
             if (Session["UserId"] == null)
             {
                 FormsAuthentication.SignOut();

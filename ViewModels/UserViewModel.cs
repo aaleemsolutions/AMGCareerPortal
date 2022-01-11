@@ -35,7 +35,7 @@ namespace ViewModels
         public Nullable<bool> IsEmailVerify { get; set; }
         public Nullable<bool> isNewPassword { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
-
+        public Nullable<bool> isCandidate { get; set; }
         [Required]
         public string FullName { get; set; }
 
@@ -47,6 +47,7 @@ namespace ViewModels
         ///[Required (ErrorMessage = "CV Uploading is required")]
         
         public HttpPostedFileBase CVUpload { get; set; }
+        public Nullable<System.DateTime> CVUpdatedOn { get; set; }
         public string CVUploadPath { get; set; }
 
         public string EmailTokens { get; set; }

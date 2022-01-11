@@ -1,4 +1,7 @@
-(function($) {
+(function ($) {
+    var date = new Date();
+    date.setDate(date.getDate() - 1);
+
   'use strict';
   if ($("#timepicker-example").length) {
     $('#timepicker-example').datetimepicker({
@@ -9,9 +12,11 @@
     $('.color-picker').asColorPicker();
   }
   if ($("#datepicker-popup").length) {
-    $('#datepicker-popup').datepicker({
+      $('#datepicker-popup').datepicker({
+          format: "dd-MM-yyyy",
       enableOnReadonly: true,
-      todayHighlight: true,
+      //todayHighlight: true,
+        startDate: date
     });
   }
   if ($("#inline-datepicker").length) {

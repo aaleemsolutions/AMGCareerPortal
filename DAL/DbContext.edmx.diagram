@@ -13,6 +13,9 @@
         <EntityTypeShape EntityType="CareerPortalModel.CandidateExperince" Width="1.5" PointX="10.25" PointY="7.25" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__Candi__29221CFB" />
         <EntityTypeShape EntityType="CareerPortalModel.AllPosition" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="CareerPortalModel.CandidateJobApply" Width="1.5" PointX="7.25" PointY="5.375" />
+        <AssociationConnector Association="CareerPortalModel.FK__Candidate__JobId__4F47C5E3" />
+        <AssociationConnector Association="CareerPortalModel.FK__Candidate__UserI__503BEA1C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

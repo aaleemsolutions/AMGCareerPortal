@@ -5,8 +5,8 @@ F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\bin\Debu
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\bin\Debug\EntityFramework.SqlServer.dll
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\bin\Debug\EntityFramework.xml
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\bin\Debug\EntityFramework.SqlServer.xml
+F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\obj\Debug\DAL.csproj.CopyComplete
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\obj\Debug\DAL.dll
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\obj\Debug\DAL.pdb
-F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache

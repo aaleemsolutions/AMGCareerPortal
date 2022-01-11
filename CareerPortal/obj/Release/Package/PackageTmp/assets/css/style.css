@@ -533,6 +533,7 @@ body.resmenu-overlay:before {
 .res-menu .sub-menu li {
   padding: 0;
 }
+}
 .res-menu .sub-menu li a {
   font-size: 13px;
   text-transform: inherit;
@@ -617,22 +618,22 @@ body.resmenu-overlay:before {
 .search-sec select.form-control {
   border-radius: 40px;
 }
-.search-sec select.form-control,
-select.form-control {
-  line-height: 24px;
-  display: block;
-  width: 100%;
-  padding: 8px 15px;
-  padding-right: 40px;
-  background-color: #fff;
-  background-image: url(../img/icons/arrow-down.png);
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: auto;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
+    .search-sec select.form-control,
+    select.form-control {
+        line-height: 24px;
+        display: block;
+        width: 100%;
+        padding: 8px 15px;
+        padding-right: 40px;
+        background-color: #fff;
+        background-image: url(../assets/img/icons/arrow-down.png);
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: auto;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
 select::-ms-expand {
   display: none;
 }

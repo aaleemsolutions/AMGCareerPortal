@@ -32,6 +32,7 @@ namespace DAL
         public virtual DbSet<CandidateQualification> CandidateQualifications { get; set; }
         public virtual DbSet<CandidateExperince> CandidateExperinces { get; set; }
         public virtual DbSet<AllPosition> AllPositions { get; set; }
+        public virtual DbSet<CandidateJobApply> CandidateJobApplies { get; set; }
     
         public virtual ObjectResult<usp_getallDegree_Result> usp_getallDegree()
         {

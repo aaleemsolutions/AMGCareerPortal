@@ -18,6 +18,7 @@ namespace DAL
         public User()
         {
             this.candidates = new HashSet<candidate>();
+            this.CandidateJobApplies = new HashSet<CandidateJobApply>();
         }
     
         public int Id { get; set; }
@@ -31,8 +32,12 @@ namespace DAL
         public string FullName { get; set; }
         public string CandidateCVPath { get; set; }
         public string EmailTokens { get; set; }
+        public Nullable<System.DateTime> CVUpdatedOn { get; set; }
+        public Nullable<bool> isCandidate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<candidate> candidates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CandidateJobApply> CandidateJobApplies { get; set; }
     }
 }
