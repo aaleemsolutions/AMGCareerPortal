@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "echarts": "^5.2.2",
     "js-cookie": "^3.0.1"
   }
 }

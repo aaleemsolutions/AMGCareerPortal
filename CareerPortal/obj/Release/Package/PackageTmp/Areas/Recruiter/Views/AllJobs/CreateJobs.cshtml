@@ -33,14 +33,7 @@
     new { Controller = "AllJobs", area = "Recruiter" },
      new AjaxOptions { OnFailure = "OnJobFailure", OnSuccess = "OnJobSubmit" }
      ))
-
-
-
 {
-
-@*@using (Html.BeginForm("CreateJobs", "AllJobs", FormMethod.Post, new { @Id = "FormNewJob" }))
-    {*@
-
 
 <div class="row">
 
@@ -50,7 +43,7 @@
 
                 <div class="form-group row " id="NewJobArea">
                     <h3 style="text-decoration:underline">Create New Job</h3>
-                    
+
                     @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
 
                     <div class="col">
@@ -108,6 +101,63 @@
 
 
                 </div>
+                <div class="form-group row ">
+
+                    <div class="col-md-2">
+                        <label>Division </label>
+                        <div id="the-basics">
+                            @*<input class="typeahead" type="text" placeholder="CNIC" required>*@
+                            @Html.DropDownListFor(m => m.DivisionId, new SelectList(ViewBag.DivisionDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDivision" })
+
+                            @Html.HiddenFor(m => m.DivisionName, new { @id = "DivisionName" })
+                            @Html.ValidationMessageFor(m => m.DivisionId, null, new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Category </label>
+                        <div id="bloodhound">
+
+                            @Html.DropDownListFor(m => m.CategoryId, new SelectList(ViewBag.CategoryDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpCategory" })
+
+                            @Html.HiddenFor(m => m.CategoryName, new { @id = "CategoryName" })
+                            @Html.ValidationMessageFor(m => m.CategoryId, null, new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label>Department  </label>
+                        <div id="bloodhound">
+
+                            @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ViewBag.DepartmentDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDepart" })
+                            @Html.HiddenFor(m=>m.DepartmentName,new { @id = "DepartmentName"})
+
+                            @Html.ValidationMessageFor(m => m.DepartmentId, null, new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label>Designation </label>
+                        <div id="bloodhound">
+                            @Html.DropDownListFor(m => m.DesignationId, new SelectList(ViewBag.DesignationDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDesig" })
+                            @Html.HiddenFor(m => m.DesignationName, new { @id = "DesignationName" })
+
+                            @Html.ValidationMessageFor(m => m.DesignationId, null, new { @class = "text-danger" })
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="form-group row ">
 
                     <div class="col-md-2">
@@ -176,6 +226,7 @@
                 </div>
 
 
+
                 <br />
                 <div class="col-md-12" style="height: 200px">
 
@@ -206,6 +257,7 @@
         </div>
     </div>
 </div>
+
 }
 
 

@@ -19,6 +19,14 @@
     <Property Name="LastDateOfJob" Type="datetime" />
     <Property Name="CreatedBy" Type="int" />
     <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="DivisionId" Type="int" />
+    <Property Name="DivisionName" Type="varchar" MaxLength="250" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="DepartmentName" Type="varchar" MaxLength="250" />
+    <Property Name="DesignationId" Type="int" />
+    <Property Name="DesignationName" Type="varchar" MaxLength="250" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="candidate">
     <Key>

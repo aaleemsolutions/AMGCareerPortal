@@ -885,7 +885,6 @@ function EditNewJob(JobId) {
 
 }
 
-
 function DeleteNewJob(JobId) {
         swal({
             title: 'Are you sure?',
@@ -961,8 +960,370 @@ function DownloadCandidateResume(filename, UserId) {
     
 }
 
+
+function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
+    //var BarDBData = data;
+    var BarDBData = data;
+
+    //var BarDBData = JSON.parse('{"name":["ERP Developer","TEST"],"test":[5,10]}');
+ 
+    const result = {}
+    const arr = BarDBData;
+
+    arr.forEach(row => {
+        for (let i in row) {
+            if (result[i]) {
+                result[i].push(row[i])
+            } else {
+                result[i] = [row[i]]
+            }
+        }
+    })
+    console.log(result)
+
+    console.log(BarDBData);
+    
+    var chartDom = document.getElementById('BarChart');
+ 
+    var myChart = echarts.init(chartDom);
+
+    var option;
+
+    option = {
+        title: {
+            text: title,
+            subtext: subtext
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+   
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+               
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                // prettier-ignore
+                //data: ["ERP Developer", "Software Engineer"],
+                data: result.name,
+                axisLabel: { interval: 0, rotate: 30 }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+                
+            }
+        ],
+        dataZoom: [
+            {
+                show: true,
+                start: 04,
+                end: 100
+            },
+            {
+                type: 'inside',
+                start: 44,
+                end: 100
+            },
+            {
+                show: true,
+                yAxisIndex: 0,
+                filterMode: 'empty',
+                width: 30,
+                height: '80%',
+                showDataShadow: false,
+                left: '93%'
+            }
+        ],
+        series: [
+            {
+                name: result.name,
+                type: 'bar',
+                data: result.value ,
+                //data: [2.0, 4.9, 4, 9, 4],
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: '#83bff6' },
+                        { offset: 0.5, color: '#188df0' },
+                        { offset: 1, color: '#188df0' }
+                    ])
+                },
+                markPoint: {
+                    data: [
+                        { type: 'max', name: 'Max' },
+                        { type: 'min', name: 'Min' }
+                    ]
+                }
+  
+            }
+        ]
+    };
+
+    option && myChart.setOption(option);
+
+
+    myChart.on('click', function (params) {
+
+        swal({
+            title: params.name,
+            text: 'Do you want open ' + params.name + ' Records?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3f51b5',
+            cancelButtonColor: '#ff4081',
+            confirmButtonText: 'Great ',
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: false,
+                    visible: true,
+                    className: "btn btn-danger",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Yes",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-primary",
+                    closeModal: true
+                }
+            }
+        }).then(function (result) {
+            if (result) {
+
+                if (params.name == "Not assign") {
+                    location.href = "/Recruiter/AllJobs?search=" + encodeURIComponent("");
+                }
+                location.href = "/Recruiter/AllJobs?search=" + encodeURIComponent(params.name);
+            }
+        });
+
+    });
+
+}
+
+
+function loadJobBarAjaxdata(GetBarChartData) {
+
+    $.ajax({
+        url: "/Recruiter/AllJobs/GetBarChartData",
+        data: { "BarDataType": GetBarChartData },
+        dataType: 'json',
+        success: function (data) {
+            var json = data;
+            if (GetBarChartData.toUpperCase() == "Candidate".toUpperCase()) {
+                loadBarChart(data, "Candidate wise Jobs");
+            }  
+            else {
+                loadBarChart(data, "Open Jobs");
+            }
+
+        }
+    });
+}
+
+function loadPieChart(data, text = "Jobs Data Categories", subtext ="Artistic Milliners") {
+
+    var PieChartData = data;
+ 
+    var chartDom1 = document.getElementById('pieCharts');
+    var myChart1 = echarts.init(chartDom1);
+    var option;
+
+    option = {
+        title: {
+            text: text,
+            subtext: subtext,
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left'
+            
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: { show: true },
+                
+                magicType: {
+                    show: true,
+                    type: ['pie', 'funnel'],
+                    option: {
+                        funnel: {
+                            x: '25%',
+                            width: '50%',
+                            funnelAlign: 'center',
+                            max: 1548
+                        }
+                    }
+                },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        series: [
+            {
+                name: text,
+                type: 'pie',
+                radius: '50%',
+                //data: [
+                //    { value: 1048, name: 'Search Engine' },
+                //    { value: 735, name: 'Direct' },
+                //    { value: 580, name: 'Email' },
+                //    { value: 484, name: 'Union Ads' },
+                //    { value: 300, name: 'Video Ads' }
+                //],
+                data: PieChartData,
+                
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                        label: {
+                            show: true, position: 'center',
+                            formatter: function (params) {
+                                return params.value + '%\n'
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    };
+
+    option && myChart1.setOption(option);
+
+    myChart1.on('click', function (params) {
+
+        swal({
+            title: params.name,
+            text: 'Do you want open ' + params.name +' Records?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3f51b5',
+            cancelButtonColor: '#ff4081',
+            confirmButtonText: 'Great ',
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: false,
+                    visible: true,
+                    className: "btn btn-danger",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Yes",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-primary",
+                    closeModal: true
+                }
+            }
+        }).then(function (result) {
+            if (result) {
+
+                if (params.name == "Not assign") {
+                    location.href = "/Recruiter/AllJobs?search=" + encodeURIComponent("");
+                }
+                location.href = "/Recruiter/AllJobs?search=" + encodeURIComponent(params.name);
+            }
+        });
+        
+    });
+
+}
+
+function loadJobPieaAjaxdata(PieType) {
+    $.ajax({
+        url: "/Recruiter/AllJobs/GetJobPieCharts",
+        data: { "PieType": PieType},
+        success: function (data) {
+            
+            if (PieType.toUpperCase() == "Department".toUpperCase()) {
+                loadPieChart(data, "Department wise Jobs");
+            } else if (PieType.toUpperCase() == "Division".toUpperCase()) {
+                loadPieChart(data, "Division wise Jobs");
+            }
+            else if (PieType.toUpperCase() == "Category".toUpperCase()) {
+                loadPieChart(data, "Category wise Jobs");
+            }
+
+        }
+    });
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
+
+}
+
 $(document).ready(function () {
 
+    $("#DrpDepart").change(function () {
+
+        var drpvalue = $("#DrpDepart option:selected").text();;
+        $("#DepartmentName").val(drpvalue)
+  
+    });
+
+  
+
+    $("#DrpDesig").change(function () {
+
+        var drpvalue = $("#DrpDesig option:selected").text();;
+        $("#DesignationName").val(drpvalue)
+ 
+    });
+
+    $("#DrpDivision").change(function () {
+
+        var drpvalue = $("#DrpDivision option:selected").text();;
+        $("#DivisionName").val(drpvalue)
+        
+    });
+
+    $("#DrpCategory").change(function () {
+
+        var drpvalue = $("#DrpCategory option:selected").text();;
+        $("#CategoryName").val(drpvalue)
+      
+    });
+
+    $("#DrpPieType").change(function () {
+
+        var drpvalue = $("#DrpPieType").val();
+        loadJobPieaAjaxdata(drpvalue);
+
+    });
+
+
+    $("#DrpBarType").change(function () {
+
+        var drpvalue = $("#DrpBarType").val();
+        loadJobBarAjaxdata(drpvalue);
+
+    });
+
+   
     $("#Emailaddress").val("abdul.aleem@artisticmilliners.com");
     $("#Password").val("Test@123++");
     $('.CNICInputMask').inputmask('99999-9999999-9', { "clearIncomplete": true });
@@ -1091,8 +1452,11 @@ $(document).ready(function () {
 
     });
 
+ 
+
 
     var table = $('#JobListDataTable').DataTable({
+
         "ajax": {
             "url": "/Recruiter/AllJobs/GetJobsDataTable/",
             "type": "POST",
@@ -1109,7 +1473,7 @@ $(document).ready(function () {
         },
         "columnDefs":
             [{
-                "targets": [1],
+                "targets": [0],
                 "visible": false,
                 "searchable": false
             }
@@ -1117,29 +1481,47 @@ $(document).ready(function () {
         "oLanguage": {
             "sEmptyTable": "No Job List Found.."
         },
+   
         "columns": [
-            {
-                "className": 'dt-control',
-                "orderable": false,
-                "data": null,
-                "defaultContent": ''
-            },
+            //{
+            //    "className": 'dt-control',
+            //    "orderable": false,
+            //    "data": null,
+            //    "defaultContent": ''
+            //},
+             
             { "data": "JobId" },
+            {
+                //                "render": function (data, type, full, meta) { return '<a class="btn" type="" onClick="EditNewJob(' + full.JobId + ')"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/AllJobs/ViewJobCandidates/?JobId=' + full.JobId + '"  title="View Cabdidates" ><span class="ti-eye")></span></a> <a class="btn" type=""  href="/Recruiter/AllJobs/CreateJobs/' + full.JobId + '"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
+            },
             { "data": "JobTitle" },
             { "data": "JobLocation" },
+            
             { "data": "PostedDate" },
             { "data": "NoOfVacancy" },
             { "data": "EmployementType" },
             { "data": "SalaryRange" },
-            { "data": "NoOfAppliedCnd" }
+            { "data": "NoOfAppliedCnd" },
+            { "data": "Division" },
+            { "data": "Category" },
+            { "data": "Department" },
+            { "data": "Designation" }
+
             
-            , {
-//                "render": function (data, type, full, meta) { return '<a class="btn" type="" onClick="EditNewJob(' + full.JobId + ')"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
-                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/AllJobs/ViewJobCandidates/?JobId=' + full.JobId +'"  title="View Cabdidates" ><span class="ti-eye")></span></a> <a class="btn" type=""  href="/Recruiter/AllJobs/CreateJobs/'+full.JobId+'"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
-            }
+            
 
         ],
-        "order": [[3, 'desc']]
+        "order": [[3, 'desc']],
+        "initComplete": function () {
+            var searchparam = decodeURIComponent(getUrlVars()['search']);
+            
+            if (searchparam != "undefined" && undefined != "") {
+                
+                this.api().search(searchparam).draw();
+            }
+           
+        }
     });
 
      //Add event listener for opening and closing details
@@ -1175,12 +1557,13 @@ $(document).ready(function () {
     }
 
     if (window.location.pathname.toString() == "/Recruiter/AllJobs") {
-        $("#AllListedJobs ul li:nth-child(2)").removeClass("active");
+        $("#AllListedJobs ul li:nth-child(1)").removeClass("active");
         $("#AllListedJobs ul li:nth-child(3)").removeClass("active");
+        $("#AllListedJobs ul li:nth-child(4)").removeClass("active");
     }
     if (window.location.pathname.toString() == "/Recruiter/AllJobs/CreateJobs") {
         
-        $("#AllListedJobs ul li:nth-child(3)").removeClass("active");
+        $("#AllListedJobs ul li:nth-child(4)").removeClass("active");
     }
     
 

@@ -164,7 +164,7 @@ namespace CareerPortal
                ));
 
 
-            BundleTable.EnableOptimizations = true;
+           BundleTable.EnableOptimizations = true;
 
         }
     }

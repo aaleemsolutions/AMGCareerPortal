@@ -26,3 +26,4 @@ F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\obj\Rele
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\obj\Release\BAL.csproj.CopyComplete
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\obj\Release\BAL.dll
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\obj\Release\BAL.pdb
+F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\bin\Release\BAL.dll.config

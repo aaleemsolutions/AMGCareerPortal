@@ -47,7 +47,7 @@ namespace CareerPortal
             if (Session["UserId"] == null)
             {
                 FormsAuthentication.SignOut();
-                Response.Redirect("~/Account/Login");
+               // Response.Redirect("~/Account/Login");
             }
         }
 

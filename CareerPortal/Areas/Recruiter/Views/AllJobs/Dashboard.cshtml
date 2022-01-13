@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+
+<style>
+
+    #chart {
+        max-width: 650px;
+        margin: 35px auto;
+    }
+</style>
+
+<div class="card"  style="height: 100%">
+    <div class="card-body">
+        <div class="row" style="height: 100%">
+            <div class="col-md-6">
+                @*<div id="chart" style="height: 100%"></div>*@
+                <div id="bloodhound" style="margin-bottom:10px;">
+                    <label>Select Data Type</label>
+                    @Html.DropDownList("BarChartType", new SelectList(ViewBag.BarChartType, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpBarType" })
+
+
+
+
+                </div>
+
+                <div id="BarChart" style="height: 100%"></div>
+            </div>
+            <div class="col-md-6" style="height:100%">
+                
+                <div id="bloodhound" style="margin-bottom:10px;">
+                    <label>Select Data Type</label>
+                    @Html.DropDownList("PieChartType", new SelectList(ViewBag.PieCharType, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpPieType" })
+
+
+
+
+                </div>
+                <div id="pieCharts" style="height: 100%"></div>
+            </div>
+        </div>
+        
+
+
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+  
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        loadJobPieaAjaxdata("Department");
+        loadJobBarAjaxdata("JobWise");
+    });
+
+
+
+
+    //Pie Charts
+
+    //var echarts = require('echarts');
+     
+</script>

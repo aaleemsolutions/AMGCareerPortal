@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ViewModels;
 using BAL;
 using BAL.Ado.Net;
+using Newtonsoft.Json;
 
 namespace CareerPortal.Areas.Recruiter.Controllers
 {
@@ -23,7 +24,110 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             RegUser = new UserRegModule() ;
             AdoNet = new AdoNetFetch();
         }
+
+        public ActionResult Dashboard()
+        {
+            BindDashboardDropDown();
+
+            return View();
+        }
         // GET: Recruiter/AllJobs
+
+
+        public JsonResult GetJobPieCharts(string PieType = "Department")
+        {
+
+       
+
+            if (PieType.ToUpper()== "Category".ToUpper())
+            {
+                var GetAllJobs = (from t in jbPositions.GetAllPositionsInViewModel().ListAlljobs
+                                  group t by new { t.CategoryName, t.CategoryId } into g
+                                  select new
+                                  {
+                                      CategoryName = g.Key.CategoryName == null || g.Key.CategoryName == "" ? "Not assign" : g.Key.CategoryName,
+                                      CategoryCount = g.Count()
+                                  }).ToList();
+
+                var rest = GetAllJobs.Select(m => new { value = m.CategoryCount, name = m.CategoryName }).AsEnumerable();
+
+                return Json(rest, JsonRequestBehavior.AllowGet);
+            }else if (PieType.ToUpper() == "Division".ToUpper())
+            {
+                var GetAllJobs = (from t in jbPositions.GetAllPositionsInViewModel().ListAlljobs
+                                  group t by new { t.DivisionName, t.DivisionId } into g
+                                  select new
+                                  {
+                                      DivisionName = g.Key.DivisionName == null || g.Key.DivisionName == "" ? "Not assign" : g.Key.DivisionName,
+                                      DivisionCount = g.Count()
+                                  }).ToList();
+
+                var rest = GetAllJobs.Select(m => new { value = m.DivisionCount, name = m.DivisionName }).AsEnumerable();
+
+                return Json(rest, JsonRequestBehavior.AllowGet);
+            }
+            else 
+            {
+                var GetAllJobs = (from t in jbPositions.GetAllPositionsInViewModel().ListAlljobs
+                                  group t by new { t.DepartmentName, t.DepartmentId } into g
+                                  select new
+                                  {
+                                      DepartmentName = g.Key.DepartmentName == null || g.Key.DepartmentName == "" ? "Not assign" : g.Key.DepartmentName,
+                                      DepartmentCount = g.Count()
+                                  }).ToList();
+
+                var rest = GetAllJobs.Select(m => new { value = m.DepartmentCount, name = m.DepartmentName }).AsEnumerable();
+
+                return Json(rest, JsonRequestBehavior.AllowGet);
+
+            }
+
+
+        }
+
+        public JsonResult GetBarChartData(string BarDataType = "Department")
+        {
+
+
+
+            if (BarDataType.ToUpper() == "Candidate".ToUpper())
+            {
+                var GetAllJobs = (from t in candidateobj.GetAllUsers().UsersList
+                                  group t by new { t.FullName, t.CandidateJobApplies.Count } into g
+                                  select new
+                                  {
+                                      JobName = g.Key.FullName == null || g.Key.FullName == "" ? "Not assign" : g.Key.FullName,
+                                      JobCount = g.Key.Count
+                                  }).ToList();
+
+                var JsonData = GetAllJobs.Select(m => new { name = m.JobName, value = m.JobCount }).ToList();
+
+                return Json(JsonData, JsonRequestBehavior.AllowGet);
+            }
+           
+            else
+            {
+                var GetAllJobs = (from t in jbPositions.GetAllPositionsInViewModel().ListAlljobs
+                                  group t by new { t.JobTitle, t.JobId,t.CandidateJobApplies.Count } into g
+                                  select new
+                                  {
+                                      JobName = g.Key.JobTitle == null || g.Key.JobTitle == "" ? "Not assign" : g.Key.JobTitle,
+                                      JobCount = g.Key.Count
+                                  }).ToList();
+
+                var JsonData = GetAllJobs.Select(m => new { name = m.JobName,value = m.JobCount }).ToList();
+
+                return Json(JsonData, JsonRequestBehavior.AllowGet);
+
+            }
+
+
+        }
+        public class ChartValues
+        {
+            public string name { get; set; }
+            public string value { get; set; }
+        }
         public ActionResult Index()
         {
             return View();
@@ -119,6 +223,11 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                     JobId = m.JobId,
                     JobTitle = m.JobTitle,
                     JobLocation = m.JobLocation,
+                    Department = m.DepartmentName,
+                    Category = m.CategoryName,
+                    Division = m.DivisionName,
+                    Designation = m.DesignationName,
+
                     PostedDate = m.PostedDate.Value.ToString("dd-MMM-yyyy"),
                     NoOfVacancy = m.NoOfVacancy,
                     EmployementType = m.EmployementType,
@@ -224,6 +333,35 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
 
       
+
+
+
+
+        }
+
+        public void BindDashboardDropDown()
+        {
+        
+
+            var PieChartType = new List<SelectListItem>
+            {
+               
+                new SelectListItem { Text = "Department Wise", Value = "Department"},
+                new SelectListItem { Text = "Division Wise", Value = "Division" },
+                new SelectListItem { Text = "Category Wise", Value = "Category" }
+            };
+            ViewBag.PieCharType = PieChartType;
+
+
+
+
+            var BarChartType = new List<SelectListItem>
+            {
+
+                new SelectListItem { Text = "Job Wise", Value = "JobWise"},
+                new SelectListItem { Text = "Candidate Wise", Value = "Candidate" }
+            };
+            ViewBag.BarChartType = BarChartType;
 
 
 
