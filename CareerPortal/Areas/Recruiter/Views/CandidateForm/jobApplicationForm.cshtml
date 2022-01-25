@@ -1,0 +1,991 @@
+﻿@model ViewModels.JobApplicationViewModel
+
+@{
+    ViewBag.Title = "jobApplicationForm";
+}
+
+
+
+
+<div class="row">
+
+    <div class="col-12 grid-margin">
+        @using (Ajax.BeginForm("jobApplicationForm", new { Controller = "CandidateForm", area = "Recruiter" }, null))
+        {
+
+            <input type="submit" name="name" value="Submit" class="btn btn-primary" />
+
+
+            <!--        Personal Information-->
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        Personal Information
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group row " id="JobApplicationForm">
+
+                            <h3 style="text-decoration:underline"> Job Application Form</h3>
+
+                            @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+
+                            <div class="col">
+                                <label>Name <span class="text-danger">*</span> </label>
+                                <div id="the-basics">
+
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.CandidateName, new { @class = "typeahead", placeholder = "Candidate Name" })
+
+
+
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Fathers Name <span class="text-danger">*</span></label>
+                                <div id="the-basics1">
+                                    @*<input class="typeahead" type="text" placeholder="First Name" >*@
+
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.FathersName, new { @class = "typeahead", placeholder = "Father name" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="col">
+                                <label>Marital Status <span class="text-danger">*</span></label>
+                                <div id="the-basics2">
+
+
+                                    @Html.DropDownListFor(m => m.CandidateViewModel.MaritalStatus, new SelectList(ViewBag.MartialStatusDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDesig" })
+
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="col">
+                                <label>Date Of Birth <span class="text-danger">*</span></label>
+                                <div id="the-basics2">
+
+                                    <div id="dobDate" class="input-group date datepicker datepicker-popup">
+                                        @Html.TextBoxFor(Model => Model.CandidateViewModel.DOB,
+    new { @class = "typeahead", placeholder = "DOB" })
+
+                                        <span class="input-group-addon input-group-append border-left">
+                                            <span class="ti-calendar input-group-text"></span>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group row ">
+
+                            <div class="col-md-2">
+                                <label>Nationality </label>
+                                <div id="the-basics">
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.Nationality, new { @class = "typeahead", placeholder = "Nationality" })
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Religion </label>
+                                <div id="bloodhound">
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.Religion, new { @class = "typeahead", placeholder = "Religion" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label>CNIC No  </label>
+                                <div id="bloodhound">
+
+                                    @*<input class="typeahead" type="text" placeholder="First Name" >*@
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.CNIC, new { @class = "typeahead CNICInputMask", placeholder = "CNIC" })
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label>Expiry Date </label>
+                                <div id="bloodhound">
+
+                                    <div id="dobDate" class="input-group date datepicker ">
+                                        @Html.TextBoxFor(Model => Model.CandidateViewModel.ExpiryDate,
+    new { @class = "typeahead datepickerfuture", placeholder = "CNIC" })
+
+                                        <span class="input-group-addon input-group-append border-left">
+                                            <span class="ti-calendar input-group-text"></span>
+                                        </span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row ">
+
+                            <div class="col-md-2">
+                                <label>Contact No </label>
+                                <div id="the-basics">
+
+                                    @*<input class="typeahead" type="text" placeholder="First Name" >*@
+
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.ContactNo, new { @class = "typeahead", placeholder = "Contact" })
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Contact No Office </label>
+                                <div id="bloodhound">
+
+
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.ContactNoOffice, new { @class = "typeahead", placeholder = "Contact Office" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-2">
+                                <label>Mobile No  </label>
+                                <div id="bloodhound">
+
+
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.MobileNo, new { @class = "typeahead", placeholder = "Mobile No" })
+
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label>Email Address </label>
+                                <div id="bloodhound">
+
+
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.EmailAddress, new { @class = "typeahead", placeholder = "Email Address" })
+
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">Present Address</label>
+                                @Html.TextBoxFor(m => m.CandidateViewModel.PresentAddress, new { @class = "typeahead", placeholder = "Address" })
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Permanant Address</label>
+                                @Html.TextBoxFor(m => m.CandidateViewModel.CandidateAddress, new { @class = "typeahead", placeholder = "Address" })
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!--        Personal Information-->
+            <!-- Academic/Professional Qualification-->
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        Academic/Professional Qualification
+                    </div>
+                    <div class="card-body">
+
+                        @*<form id="SaveEducationdata" enctype="multipart/form-data">*@
+                        @*@Html.Partial("~/Areas/Recruiter/Views/Shared/_Education.cshtml", Model.CandidateViewModel)*@
+                        @*</form>*@
+
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- Academic/Professional Qualification-->
+            <!-- Roficiency of Languages-->
+            <div class="card">
+                <div class="card-header">
+                    Roficiency of Languages
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-responsive" border="1">
+                            <thead class="text-center">
+                                <tr>
+                                    <th class="pt-1 ps-0 text-center" rowspan="2">
+                                        Language
+                                    </th>
+
+                                    @foreach (var item in Model.LanguageMapings.Select(m => new { ScoreType = m.LangScoreType }).OrderBy(m => m.ScoreType.TypeName).Distinct())
+                                    {
+
+                                        var col = Model.LanguageMapings.Select(m => new
+                                        {
+                                            Score = m.LanguageScore,
+                                            ScoreType = m.LangScoreType
+                                        }).Distinct().Count();
+
+                                        var ScoreType = Model.LanguageMapings.Select(m => new { ScoreType = m.ScoreTypeId }).Distinct().Count();
+
+                                        var colspanvalue = col / ScoreType;
+
+                                        <text>
+                                            <th colspan="@colspanvalue" style="border-right-width: 2px !important; border-left-width: 2px !important;">@item.ScoreType.TypeName</th>
+                                        </text>
+
+
+
+                                    }
+
+
+                                </tr>
+                                <tr>
+
+                                    @foreach (var item in Model.LanguageMapings.Select(m => new { Score = m.LanguageScore, ScoreType = m.LangScoreType }).Distinct().OrderBy(m => m.ScoreType.TypeName))
+                                    {
+                                        var test = Model.LanguageMapings.Select(m => new { Score = m.LanguageScore, ScoreType = m.LangScoreType }).Distinct();
+
+                                        <th style="border-left-width: 1px;">@item.Score.ScoreName</th>
+                                    }
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @{
+                                    int lcount = 0;
+                                    foreach (var item in Model.LanguageMapings.Select(m => m.Language).Distinct())
+                                    {
+
+                                        <tr class="text-center">
+
+                                            <td  style="padding: 0px;">
+                                                <span>
+                                                    @item.LanguageName
+                                                    @if (item.isTextboxOpen == true)
+                                                    {
+                                                       
+                                                        var textboxname = "radiobutton[" + lcount + "].name";
+                                                        <input type="text" value="" class="typeahead" style="max-width: 150px; margin: auto; margin-top: 10px;margin-bottom:10px;"/>
+
+                                                    }
+                                                </span>
+                                            </td>
+                                            @foreach (var item1 in Model.LanguageMapings.Where(m => m.langgId == item.Id).Select(m => new { langid = m.langgId, scoreTypeId = m.ScoreTypeId, ScoreType = m.LangScoreType }).OrderBy(m => m.ScoreType.TypeName).Distinct())
+                                            {
+
+                                                var count = Model.LanguageMapings.Where(m => m.langgId == item1.langid).Distinct().Count();
+
+                                                foreach (var item2 in Model.LanguageMapings.Where(m => m.langgId == item1.langid).OrderBy(m => m.LangScoreType.TypeName).Select(m => new { ScoreTypeId = m.ScoreId, ScoreName = m.LanguageScore.ScoreName }).Distinct())
+                                                {
+
+
+                                                    var modeltest = Model.LanguageMapings.Where(m => m.langgId == item1.langid).GroupBy(m => m.langgId).OrderBy(m => m.LangScoreType.TypeName).Select(m => new { ScoreTypeId = m.ScoreId, ScoreName = m.LanguageScore.ScoreName }).Distinct();
+
+
+
+
+                                                    var radioName = "radiobutton[" + lcount + "].Answer";
+
+                                                    var MapId = Model.LanguageMapings.Where(m => m.langgId == item1.langid && m.ScoreTypeId == item1.scoreTypeId && m.ScoreId == item2.ScoreTypeId).Select(m => m.Id).FirstOrDefault();
+
+
+                                                    <td style="border-left-width: 1px;">
+                                                        @*@Html.RadioButton(radioName,MapId,false,new { @ = "" })*@
+
+                                                        @if (Model.candLang.Where(m => m.LangMapId == MapId).Count() > 0)
+                                                        {
+                                                            <input type="radio" name="@radioName" value="@MapId" required checked="checked" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="radio" name="@radioName" value="@MapId" required />
+                                                        }
+
+
+                                                    </td>
+                                                }
+                                                lcount = lcount + 1;
+
+
+                                            }
+
+
+                                        </tr>
+                                    }
+
+                                }
+
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- Roficiency of Languages-->
+
+            <!--Previous Employement Start-->
+            <div class="card">
+                <div class="card-header">
+                    Professional Information
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">
+                            Preset/Most Recent Employement
+                        </div>
+                        <div class="card-body border">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <label>Company Name & Address </label>
+                                    <div id="bloodhound">
+                                        <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                    </div>
+
+                                    <label>Present / Most Recent Position </label>
+                                    <div id="bloodhound">
+                                        <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                    </div>
+
+                                    <div>
+                                        <label>Position (at the time of joining) </label>
+                                        <div id="bloodhound">
+                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        </div>
+                                        <label>Date of joining (dd-mm-yyyy)</label>
+                                        <div id="bloodhound">
+                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <h4>Salary & Benifits</h4>
+
+                                        <div class="col-md-4  ">
+                                            <label>Gross Salary</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4  ">
+                                            <label>Gratuity</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4  ">
+                                            <label>Bonus/Incentive</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4  ">
+                                            <label>Leave Encashment</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4  ">
+                                            <label>Fuel Allowance</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4  ">
+                                            <label>Vehicle</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4  ">
+                                            <label>Others</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Previous Employement Start-->
+                    <div class="card">
+                        <div class="card-header">
+                            Previous Employement (Last Employment First) other than Above
+                        </div>
+                        <div class="card-body border">
+
+                            @*<form id="SaveExperiencedata" enctype="multipart/form-data">*@
+
+                            @*@Html.Partial("~/Areas/Recruiter/Views/Shared/_Experience.cshtml", Model.CandidateViewModel)*@
+                            @*</form>*@
+
+                        </div>
+                    </div>
+                    <!--Previous Employement End-->
+
+
+                </div>
+            </div>
+            <!--Previous Employement End-->
+
+            <!--General Information Start-->
+            <div class="card">
+                <div class="card-header">
+                    General Information
+                </div>
+                <div class="card-body border">
+                    <div class="row">
+
+                        <p>Do you have any relate/freind working ar Artistic Milliners Pvt Ltd?</p>
+                        <p><input type="radio" name="ChkFrndatAM" /> Yes <input type="radio" name="ChkFrndatAM" /> No </p>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label>Name </label>
+                            </div>
+                            <div class="col-md-3">
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label>Relation </label>
+                            </div>
+                            <div class="col-md-3">
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <label>Department </label>
+                            </div>
+                            <div class="col-md-3">
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label>Name </label>
+                            </div>
+                            <div class="col-md-3">
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label>Relation </label>
+                            </div>
+                            <div class="col-md-3">
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <label>Department </label>
+                            </div>
+                            <div class="col-md-3">
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                    <hr />
+                    <div class="row">
+
+                        <p>Have you have previously worked at Artistic Milliners Pvt Ltd?</p>
+                        <p><input type="radio" name="ChkWorkAtAM" /> Yes <input type="radio" name="ChkWorkAtAM" /> No </p>
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div id="bloodhound">
+                                    Position
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                Department
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-2">
+                                Unit
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-2">
+                                From
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                To
+                                <div id="bloodhound">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr />
+
+                    <div class="row">
+                        <p><strong>Reference(Specify reference detail below other than your relatives)</strong></p>
+                        <div class="col-md-6">
+                            <div class="row">
+
+
+                                <div class="col-md-4  ">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Relationship</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Address</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Contact No</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="row">
+
+
+                                <div class="col-md-4  ">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Relationship</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Address</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Contact No</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="bloodhound">
+                                <p><strong>Health</strong> (Mention any disablity, serius illness or operation, which you had )</p>
+                                <input class="typeahead" type="text" placeholder="Company Name & Address">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!--General Information End-->
+            <!--Other Detail Start-->
+            <div class="card">
+                <div class="card-header">
+                    Previous Employement (Last Employment First) other than Above
+                </div>
+                <div class="card-body border">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label>Passport No:  </label>
+                            <div id="bloodhound">
+
+                                <input class="typeahead" type="text" placeholder="First Name">
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Expiry Date  </label>
+                            <div id="bloodhound">
+
+                                <input class="typeahead" type="text" placeholder="First Name">
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label>Driving License No:  </label>
+                            <div id="bloodhound">
+
+                                <input class="typeahead" type="text" placeholder="First Name">
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label>Expiry Date:  </label>
+                            <div id="bloodhound">
+
+                                <input class="typeahead" type="text" placeholder="First Name">
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>NTN No: </label>
+                            <div id="bloodhound">
+
+                                <input class="typeahead" type="text" placeholder="First Name">
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>EOBI No</label>
+                            <div id="bloodhound">
+
+                                <input class="typeahead" type="text" placeholder="First Name">
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label>Gender  </label>
+                            <div id="bloodhound">
+
+                                <input class="typeahead" type="text" placeholder="First Name">
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label>Blood Group:  </label>
+                            <div id="bloodhound">
+
+                                <input class="typeahead" type="text" placeholder="First Name">
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <hr />
+                    <p><strong>Details of Dependants: (i.e Parents, spouse &Aacute; Kids etc.)</strong></p>
+                    <div class="table-responsive">
+                        <table class="table table-responsive" border="1">
+                            <thead>
+                                <tr>
+                                    <th class="pt-1 ps-0 text-center">
+                                        Name
+                                    </th>
+                                    <th class="pt-1 text-center">
+                                        Date Of Birth
+                                    </th>
+                                    <th class="pt-1 text-center">
+                                        CNIC No / Birth Certificate
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Abdul Aleem</td>
+                                    <td>11 mar 2001</td>
+                                    <td>42501-1897956-3</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>Muhammad Zain</td>
+                                    <td>11 mar 1998</td>
+                                    <td>42501-1897956-3</td>
+                                </tr>
+
+
+
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <!--Other Detail End-->
+            <!--Declaration Start-->
+            <div class="card">
+                <div class="card-header">
+                    Declarations
+                </div>
+                <div class="card-body border">
+                    <div class="row">
+                        <p>
+                            I hereby declare that the information given in this application is true and correct to the best of my knowledge and belief. In case any information given in this application proves to be false or incorrect, I shall be responsible for the consequences
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <!--DeclarationEnd-->
+            <!--To be Filled by HR Start-->
+            <div class="card">
+                <div class="card-header">
+                    To be Filled by HR (For Official Use Only)
+                </div>
+                <div class="card-body border">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="row">
+
+
+                                <div class="col-md-4  ">
+                                    <label>Date fof Appointment</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Grade</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Department</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label> Emp Code</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Car Allowance</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+
+
+                                <div class="col-md-4  ">
+                                    <label>Designation</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Division</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Unit</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Taxable Salary</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4  ">
+                                    <label>Car/Bike</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--To be Filled by HR End-->
+        }
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+<script>
+
+
+    $(document).ready(function () {
+        $('.RichTextJobDescription').summernote();
+    });
+
+
+
+
+
+
+
+
+
+</script>
+
+

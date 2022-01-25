@@ -103,7 +103,20 @@ namespace BAL
                 candidateviewModel.CNIC = candidateviewModel.CandidateInfo.CNIC;
                 candidateviewModel.EmailVerifyMessage = candidateviewModel.CandidateInfo.User.IsEmailVerify.Value;
                 candidateviewModel.CandidateDescription = candidateviewModel.CandidateInfo.CandidateDescription;
+                candidateviewModel.CandidateName = candidateviewModel.CandidateInfo.CandidateName==null || candidateviewModel.CandidateInfo.CandidateName == ""?candidateviewModel.CandidateInfo.FirstName +" " + candidateviewModel.CandidateInfo.LastName : candidateviewModel.CandidateInfo.CandidateName;
+                candidateviewModel.ContactNo = candidateviewModel.CandidateInfo.ContactNo;
 
+                candidateviewModel.ContactNoOffice = candidateviewModel.CandidateInfo.ContactNoOffice;
+
+                candidateviewModel.DOB = candidateviewModel.CandidateInfo.DOB;
+                candidateviewModel.EmailAddress = candidateviewModel.CandidateInfo.EmailAddress;
+                candidateviewModel.ExpiryDate = candidateviewModel.CandidateInfo.ExpiryDate;
+                candidateviewModel.MaritalStatus = candidateviewModel.CandidateInfo.MaritalStatus;
+
+                candidateviewModel.Religion = candidateviewModel.CandidateInfo.Religion;
+                candidateviewModel.MobileNo = candidateviewModel.CandidateInfo.MobileNo;
+                candidateviewModel.PresentAddress = candidateviewModel.CandidateInfo.PresentAddress;
+                
 
 
 

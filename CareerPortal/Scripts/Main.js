@@ -40,7 +40,6 @@ function ReloadJobListTable() {
     $('#JobListDataTable').DataTable().ajax.reload();
 }
 
-
 function validateCndQualification(CurrentformIndex) {
 
 
@@ -326,12 +325,18 @@ function addCandQualification(currentIndex, isNextButton = true) {
         if (validateCndQualification(currentIndex)) {
             $("#btnSaveEducationData").attr("disabled", "disabled")
             var getformvalue = $('#CandidateWizardForm')[0];
+            if (getformvalue == undefined) {
+                
+               getformvalue = $('#SaveEducationdata')[0];
+            }
+            console.log(getformvalue);
+
 
             var valdata = new FormData(getformvalue);
 
             //to get alert popup   
-            var fileUpload = $("#UserImage").get(0);
-            var files = fileUpload.files;
+            //var fileUpload = $("#UserImage").get(0);
+            //var files = fileUpload.files;
 
             valdata.append("CandidateDescription", $("#quillExample1 .ql-editor").html());
             valdata.append("FormWizardSteps", currentIndex);
@@ -393,6 +398,11 @@ function addCandExperience(currentIndex, isNextButton = true) {
 
             var getformvalue = $('#CandidateWizardForm')[0];
 
+            if (getformvalue == undefined) {
+
+                getformvalue = $('#SaveExperiencedata')[0];
+            }
+           
             var valdata = new FormData(getformvalue);
 
 
@@ -418,7 +428,7 @@ function addCandExperience(currentIndex, isNextButton = true) {
                         $("#btnSaveExperienceData").html("Save and add more")
 
                         ShowToaster(1, "Experince have been updated..", "Experience");
-
+                        $(".RichTextJobDescription").summernote('reset');
 
                     }
 
@@ -624,6 +634,10 @@ function UpdateExperince(isupdate, ExperienceId) {
                     $("#ChkCndNoExperience").prop("checked", data.data.FreshGraduate);
 
                     $("#JobDutiesEditor .ql-editor").html(data.data.JobDuties);
+
+                    
+                    $("#JobDutiesDescription").summernote("code", data.data.JobDuties);
+                  
 
 
                     if (data.data.IsPresent == true) {
@@ -960,7 +974,6 @@ function DownloadCandidateResume(filename, UserId) {
     
 }
 
-
 function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
     //var BarDBData = data;
     var BarDBData = data;
@@ -1110,7 +1123,6 @@ function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
     });
 
 }
-
 
 function loadJobBarAjaxdata(GetBarChartData) {
 
@@ -1285,8 +1297,6 @@ $(document).ready(function () {
   
     });
 
-  
-
     $("#DrpDesig").change(function () {
 
         var drpvalue = $("#DrpDesig option:selected").text();;
@@ -1315,19 +1325,16 @@ $(document).ready(function () {
 
     });
 
-
     $("#DrpBarType").change(function () {
 
         var drpvalue = $("#DrpBarType").val();
         loadJobBarAjaxdata(drpvalue);
 
     });
-
    
     $("#Emailaddress").val("abdul.aleem@artisticmilliners.com");
     $("#Password").val("Test@123++");
     $('.CNICInputMask').inputmask('99999-9999999-9', { "clearIncomplete": true });
-
     
     $('.txtSalaryInputMask').inputmask({
         alias: 'numeric',
@@ -1343,8 +1350,6 @@ $(document).ready(function () {
         allowMinus: false,
         rightAlign: false,
     });
-
-
 
     //Checkbox No Experince
     $("#ChkCndNoExperience").change(function () {
@@ -1400,13 +1405,11 @@ $(document).ready(function () {
         }
     });
 
-
     //Experince Save add more button
     $("#btnSaveExperienceData").click(function () {
         addCandExperience(2, false);
         ReloadExperienceAjaxTable();
     });
-
 
     //Checkbox Qualification On going
     $("#CndQualificationViewModel_isOngoing").change(function () {
@@ -1427,8 +1430,6 @@ $(document).ready(function () {
             $("#CndQualificationViewModel_ResultValue").removeAttr("disabled");
         }
     });
-
-
 
     //Qualification add more button
 
@@ -1451,9 +1452,6 @@ $(document).ready(function () {
         ApplyForJob(jobid, appliedbyCv);
 
     });
-
- 
-
 
     var table = $('#JobListDataTable').DataTable({
 
@@ -1555,6 +1553,89 @@ $(document).ready(function () {
            
             '</table>';
     }
+
+
+    //CV Bank List
+
+
+    var table = $('#CvCandidateList').DataTable({
+        stateSave: true,
+        "pageLength": 100,
+        "lengthMenu": [[10, 25, 50,100,500, -1], [10, 25, 50,100,500, "All"]],
+        "ajax": {
+            "url": "/Recruiter/cvBank/GetCVCandidate/",
+            "type": "POST",
+            "datatype": "json",
+            //"contentType": 'application/json'
+
+            "dataSrc": function (json) {
+                //Make your callback here.
+
+                //ShowToaster(1, "Record Updated Successfully.", "Record Updated!");
+                return json.data;
+            }
+
+        },
+        "columnDefs":
+            [{
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
+            ],
+        "oLanguage": {
+            "sEmptyTable": "No List Found.."
+        },
+
+        "columns": [
+            //{
+            //    "className": 'dt-control',
+            //    "orderable": false,
+            //    "data": null,
+            //    "defaultContent": ''
+            //},
+
+            { "data": "CVID" },
+            {
+                //                "render": function (data, type, full, meta) { return '<a class="btn" type="" onClick="EditNewJob(' + full.JobId + ')"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="self" href="/Recruiter/cvBank/CvDetail/?CvId=' + full.CVID + '"  title="View Candidates" ><span class="ti-eye")></span></a>   '; }
+            },
+            { "data": "CandidateName" },
+            { "data": "FatherHusbandName" },
+            { "data": "DepartmentName" },
+            { "data": "DesignationName" },
+            { "data": "CategoryName" },
+            { "data": "Gender" },
+            { "data": "MaritalStatus" },
+            { "data": "CNIC" },
+            { "data": "CNICExpire" },
+            { "data": "DOB" },
+            { "data": "Mobile" },
+            { "data": "Email" },
+            { "data": "CurrentAddress" },
+            { "data": "LastUpdateDate" }
+            
+
+
+
+
+        ],
+        "order": [[3, 'desc']],
+        "initComplete": function () {
+            var searchparam = decodeURIComponent(getUrlVars()['search']);
+
+            if (searchparam != "undefined" && undefined != "") {
+
+                this.api().search(searchparam).draw();
+            }
+
+        }
+    });
+
+    $('#CvCandidateList tbody').on('click', 'tr', function () {
+        $('#CvCandidateList tbody > tr').removeClass('focusedRow');
+        $(this).addClass('focusedRow');
+    });
 
     if (window.location.pathname.toString() == "/Recruiter/AllJobs") {
         $("#AllListedJobs ul li:nth-child(1)").removeClass("active");

@@ -73,9 +73,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binders\DefaultModelBinder.cs" />
+    <Compile Include="Binders\IPropertyBinder.cs" />
+    <Compile Include="Binders\PropertyBinderAttribute.cs" />
+    <Compile Include="Binders\RadioBinders.cs" />
     <Compile Include="CandidateViewModel.cs" />
     <Compile Include="CndExperienceViewModel.cs" />
     <Compile Include="CndQualificationViewModel.cs" />
+    <Compile Include="CvDetailViewModel.cs" />
+    <Compile Include="JobApplicationViewModel.cs" />
     <Compile Include="JobApplyViewModels.cs" />
     <Compile Include="JobPositionViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

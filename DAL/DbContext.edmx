@@ -47,6 +47,17 @@
           <Property Name="FathersName" Type="varchar" MaxLength="150" />
           <Property Name="CNIC" Type="varchar" MaxLength="20" />
           <Property Name="CandidateAddress" Type="varchar" MaxLength="400" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="250" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="250" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="250" />
+          <Property Name="Religion" Type="nvarchar" MaxLength="250" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="25" />
+          <Property Name="ContactNoOffice" Type="varchar" MaxLength="25" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="25" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="250" />
+          <Property Name="PresentAddress" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CandidateExperince">
           <Key>
@@ -78,6 +89,14 @@
           <Property Name="AppliedOn" Type="datetime" />
           <Property Name="ApplyByCV" Type="bit" />
         </EntityType>
+        <EntityType Name="CandidateLang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LangMapId" Type="int" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
         <EntityType Name="CandidateQualification">
           <Key>
             <PropertyRef Name="id" />
@@ -96,6 +115,42 @@
           <Property Name="ResultTypeId" Type="int" />
           <Property Name="ResultType" Type="varchar" MaxLength="100" />
           <Property Name="ResultValue" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LangScoreType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="LanguageMaping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="langgId" Type="int" />
+          <Property Name="ScoreTypeId" Type="int" />
+          <Property Name="ScoreId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LanguageName" Type="varchar" MaxLength="250" />
+          <Property Name="isRequired" Type="bit" />
+          <Property Name="isTextboxOpen" Type="bit" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="LanguageScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScoreName" Type="varchar" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -151,6 +206,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Candidate__LangM__1B9317B3">
+          <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="0..1" />
+          <End Role="CandidateLang" Type="Self.CandidateLang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LanguageMaping">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateLang">
+              <PropertyRef Name="LangMapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidate__UserI__1C873BEC">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="CandidateLang" Type="Self.CandidateLang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateLang">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Candidate__UserI__503BEA1C">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="CandidateJobApply" Type="Self.CandidateJobApply" Multiplicity="*" />
@@ -175,13 +254,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__LanguageM__langg__04AFB25B">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+          <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LanguageMaping">
+              <PropertyRef Name="langgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LanguageM__Score__05A3D694">
+          <End Role="LangScoreType" Type="Self.LangScoreType" Multiplicity="0..1" />
+          <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LangScoreType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LanguageMaping">
+              <PropertyRef Name="ScoreTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LanguageM__Score__0697FACD">
+          <End Role="LanguageScore" Type="Self.LanguageScore" Multiplicity="0..1" />
+          <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LanguageScore">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LanguageMaping">
+              <PropertyRef Name="ScoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="usp_getallDegree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CareerPortalModelStoreContainer">
           <EntitySet Name="AllPositions" EntityType="Self.AllPositions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="candidate" EntityType="Self.candidate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateExperince" EntityType="Self.CandidateExperince" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateJobApply" EntityType="Self.CandidateJobApply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateLang" EntityType="Self.CandidateLang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LangScoreType" EntityType="Self.LangScoreType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguageMaping" EntityType="Self.LanguageMaping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguageScore" EntityType="Self.LanguageScore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Candidate__Candi__17036CC0" Association="Self.FK__Candidate__Candi__17036CC0">
             <End Role="candidate" EntitySet="candidate" />
@@ -195,6 +315,14 @@
             <End Role="AllPositions" EntitySet="AllPositions" />
             <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
           </AssociationSet>
+          <AssociationSet Name="FK__Candidate__LangM__1B9317B3" Association="Self.FK__Candidate__LangM__1B9317B3">
+            <End Role="LanguageMaping" EntitySet="LanguageMaping" />
+            <End Role="CandidateLang" EntitySet="CandidateLang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidate__UserI__1C873BEC" Association="Self.FK__Candidate__UserI__1C873BEC">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CandidateLang" EntitySet="CandidateLang" />
+          </AssociationSet>
           <AssociationSet Name="FK__Candidate__UserI__503BEA1C" Association="Self.FK__Candidate__UserI__503BEA1C">
             <End Role="Users" EntitySet="Users" />
             <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
@@ -202,6 +330,18 @@
           <AssociationSet Name="FK__candidate__UserI__6FE99F9F" Association="Self.FK__candidate__UserI__6FE99F9F">
             <End Role="Users" EntitySet="Users" />
             <End Role="candidate" EntitySet="candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LanguageM__langg__04AFB25B" Association="Self.FK__LanguageM__langg__04AFB25B">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="LanguageMaping" EntitySet="LanguageMaping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LanguageM__Score__05A3D694" Association="Self.FK__LanguageM__Score__05A3D694">
+            <End Role="LangScoreType" EntitySet="LangScoreType" />
+            <End Role="LanguageMaping" EntitySet="LanguageMaping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LanguageM__Score__0697FACD" Association="Self.FK__LanguageM__Score__0697FACD">
+            <End Role="LanguageScore" EntitySet="LanguageScore" />
+            <End Role="LanguageMaping" EntitySet="LanguageMaping" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -227,6 +367,7 @@
           <NavigationProperty Name="CandidateJobApplies" Relationship="CareerPortalModel.FK__Candidate__UserI__503BEA1C" FromRole="User" ToRole="CandidateJobApply" />
           <Property Name="CVUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="isCandidate" Type="Boolean" />
+          <NavigationProperty Name="CandidateLangs" Relationship="CareerPortalModel.FK__Candidate__UserI__1C873BEC" FromRole="User" ToRole="CandidateLang" />
         </EntityType>
         <EntityContainer Name="CareerPortalEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -256,6 +397,31 @@
             <End Role="User" EntitySet="Users" />
             <End Role="CandidateJobApply" EntitySet="CandidateJobApplies" />
           </AssociationSet>
+          <EntitySet Name="LangScoreTypes" EntityType="CareerPortalModel.LangScoreType" />
+          <EntitySet Name="LanguageMapings" EntityType="CareerPortalModel.LanguageMaping" />
+          <EntitySet Name="Languages" EntityType="CareerPortalModel.Language" />
+          <EntitySet Name="LanguageScores" EntityType="CareerPortalModel.LanguageScore" />
+          <AssociationSet Name="FK__LanguageM__Score__05A3D694" Association="CareerPortalModel.FK__LanguageM__Score__05A3D694">
+            <End Role="LangScoreType" EntitySet="LangScoreTypes" />
+            <End Role="LanguageMaping" EntitySet="LanguageMapings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LanguageM__langg__04AFB25B" Association="CareerPortalModel.FK__LanguageM__langg__04AFB25B">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="LanguageMaping" EntitySet="LanguageMapings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LanguageM__Score__0697FACD" Association="CareerPortalModel.FK__LanguageM__Score__0697FACD">
+            <End Role="LanguageScore" EntitySet="LanguageScores" />
+            <End Role="LanguageMaping" EntitySet="LanguageMapings" />
+          </AssociationSet>
+          <EntitySet Name="CandidateLangs" EntityType="CareerPortalModel.CandidateLang" />
+          <AssociationSet Name="FK__Candidate__LangM__1B9317B3" Association="CareerPortalModel.FK__Candidate__LangM__1B9317B3">
+            <End Role="LanguageMaping" EntitySet="LanguageMapings" />
+            <End Role="CandidateLang" EntitySet="CandidateLangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidate__UserI__1C873BEC" Association="CareerPortalModel.FK__Candidate__UserI__1C873BEC">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CandidateLang" EntitySet="CandidateLangs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="candidate">
           <Key>
@@ -274,6 +440,17 @@
           <Property Name="CandidateAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CandidateQualifications" Relationship="CareerPortalModel.FK__Candidate__Candi__17036CC0" FromRole="candidate" ToRole="CandidateQualification" />
           <NavigationProperty Name="CandidateExperinces" Relationship="CareerPortalModel.FK__Candidate__Candi__29221CFB" FromRole="candidate" ToRole="CandidateExperince" />
+          <Property Name="FatherName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Nationality" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Religion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="ContactNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNoOffice" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PresentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__candidate__UserI__6FE99F9F">
           <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
@@ -422,6 +599,119 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LangScoreType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="LanguageMapings" Relationship="CareerPortalModel.FK__LanguageM__Score__05A3D694" FromRole="LangScoreType" ToRole="LanguageMaping" />
+        </EntityType>
+        <EntityType Name="LanguageMaping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="langgId" Type="Int32" />
+          <Property Name="ScoreTypeId" Type="Int32" />
+          <Property Name="ScoreId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="LangScoreType" Relationship="CareerPortalModel.FK__LanguageM__Score__05A3D694" FromRole="LanguageMaping" ToRole="LangScoreType" />
+          <NavigationProperty Name="Language" Relationship="CareerPortalModel.FK__LanguageM__langg__04AFB25B" FromRole="LanguageMaping" ToRole="Language" />
+          <NavigationProperty Name="LanguageScore" Relationship="CareerPortalModel.FK__LanguageM__Score__0697FACD" FromRole="LanguageMaping" ToRole="LanguageScore" />
+          <NavigationProperty Name="CandidateLangs" Relationship="CareerPortalModel.FK__Candidate__LangM__1B9317B3" FromRole="LanguageMaping" ToRole="CandidateLang" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="isRequired" Type="Boolean" />
+          <Property Name="isTextboxOpen" Type="Boolean" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="LanguageMapings" Relationship="CareerPortalModel.FK__LanguageM__langg__04AFB25B" FromRole="Language" ToRole="LanguageMaping" />
+        </EntityType>
+        <EntityType Name="LanguageScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScoreName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="LanguageMapings" Relationship="CareerPortalModel.FK__LanguageM__Score__0697FACD" FromRole="LanguageScore" ToRole="LanguageMaping" />
+        </EntityType>
+        <Association Name="FK__LanguageM__Score__05A3D694">
+          <End Type="CareerPortalModel.LangScoreType" Role="LangScoreType" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.LanguageMaping" Role="LanguageMaping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LangScoreType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LanguageMaping">
+              <PropertyRef Name="ScoreTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LanguageM__langg__04AFB25B">
+          <End Type="CareerPortalModel.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.LanguageMaping" Role="LanguageMaping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LanguageMaping">
+              <PropertyRef Name="langgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LanguageM__Score__0697FACD">
+          <End Type="CareerPortalModel.LanguageScore" Role="LanguageScore" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.LanguageMaping" Role="LanguageMaping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LanguageScore">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LanguageMaping">
+              <PropertyRef Name="ScoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CandidateLang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LangMapId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="LanguageMaping" Relationship="CareerPortalModel.FK__Candidate__LangM__1B9317B3" FromRole="CandidateLang" ToRole="LanguageMaping" />
+          <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Candidate__UserI__1C873BEC" FromRole="CandidateLang" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Candidate__LangM__1B9317B3">
+          <End Type="CareerPortalModel.LanguageMaping" Role="LanguageMaping" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.CandidateLang" Role="CandidateLang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LanguageMaping">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateLang">
+              <PropertyRef Name="LangMapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidate__UserI__1C873BEC">
+          <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.CandidateLang" Role="CandidateLang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateLang">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -450,6 +740,17 @@
           <EntitySetMapping Name="candidates">
             <EntityTypeMapping TypeName="CareerPortalModel.candidate">
               <MappingFragment StoreEntitySet="candidate">
+                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="ContactNoOffice" ColumnName="ContactNoOffice" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
                 <ScalarProperty Name="CandidateAddress" ColumnName="CandidateAddress" />
                 <ScalarProperty Name="CNIC" ColumnName="CNIC" />
                 <ScalarProperty Name="FathersName" ColumnName="FathersName" />
@@ -549,6 +850,55 @@
                 <ScalarProperty Name="AppliedOn" ColumnName="AppliedOn" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LangScoreTypes">
+            <EntityTypeMapping TypeName="CareerPortalModel.LangScoreType">
+              <MappingFragment StoreEntitySet="LangScoreType">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguageMapings">
+            <EntityTypeMapping TypeName="CareerPortalModel.LanguageMaping">
+              <MappingFragment StoreEntitySet="LanguageMaping">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ScoreId" ColumnName="ScoreId" />
+                <ScalarProperty Name="ScoreTypeId" ColumnName="ScoreTypeId" />
+                <ScalarProperty Name="langgId" ColumnName="langgId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="CareerPortalModel.Language">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="isTextboxOpen" ColumnName="isTextboxOpen" />
+                <ScalarProperty Name="isRequired" ColumnName="isRequired" />
+                <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguageScores">
+            <EntityTypeMapping TypeName="CareerPortalModel.LanguageScore">
+              <MappingFragment StoreEntitySet="LanguageScore">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateLangs">
+            <EntityTypeMapping TypeName="CareerPortalModel.CandidateLang">
+              <MappingFragment StoreEntitySet="CandidateLang">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LangMapId" ColumnName="LangMapId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

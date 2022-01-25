@@ -31,6 +31,17 @@ namespace DAL
         public string FathersName { get; set; }
         public string CNIC { get; set; }
         public string CandidateAddress { get; set; }
+        public string FatherName { get; set; }
+        public string MaritalStatus { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public string Nationality { get; set; }
+        public string Religion { get; set; }
+        public Nullable<System.DateTime> ExpiryDate { get; set; }
+        public string ContactNo { get; set; }
+        public string ContactNoOffice { get; set; }
+        public string MobileNo { get; set; }
+        public string EmailAddress { get; set; }
+        public string PresentAddress { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -27,3 +27,5 @@ F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\obj\Debu
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\obj\Debug\BAL.dll
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\obj\Debug\BAL.pdb
 F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\bin\Debug\BAL.dll.config
+F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\bin\Debug\System.Web.Helpers.dll
+F:\AbdulAleem\MyWorkingFolder\WebProjects\CareerPortal\CareerPortal\BAL\bin\Debug\System.Web.Helpers.xml

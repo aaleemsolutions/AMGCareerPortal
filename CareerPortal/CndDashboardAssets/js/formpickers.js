@@ -19,6 +19,25 @@
         startDate: date
     });
   }
+
+    if ($("#dobDate").length) {
+        $('#dobDate').datepicker({
+            format: "dd-MM-yyyy",
+            enableOnReadonly: true,
+            //todayHighlight: true,
+            endDate : date
+        });
+    }
+
+    if ($(".datepickerfuture").length) {
+        $('.datepickerfuture').datepicker({
+            format: "dd-MM-yyyy",
+            enableOnReadonly: true,
+            //todayHighlight: true,
+            startDate: date
+        });
+    }
+
   if ($("#inline-datepicker").length) {
     $('#inline-datepicker').datepicker({
       enableOnReadonly: true,

@@ -234,7 +234,6 @@ namespace CareerPortal.Controllers
 
         public JsonResult UsernameExists(string UserEmail)
         {
-
             var test = RegUser.IsUserExist(UserEmail);
             if (test !=null)
             {

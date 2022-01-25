@@ -19,6 +19,7 @@ namespace DAL
         {
             this.candidates = new HashSet<candidate>();
             this.CandidateJobApplies = new HashSet<CandidateJobApply>();
+            this.CandidateLangs = new HashSet<CandidateLang>();
         }
     
         public int Id { get; set; }
@@ -39,5 +40,7 @@ namespace DAL
         public virtual ICollection<candidate> candidates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateJobApply> CandidateJobApplies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CandidateLang> CandidateLangs { get; set; }
     }
 }

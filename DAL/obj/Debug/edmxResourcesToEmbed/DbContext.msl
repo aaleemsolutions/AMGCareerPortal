@@ -23,6 +23,17 @@
     <EntitySetMapping Name="candidates">
       <EntityTypeMapping TypeName="CareerPortalModel.candidate">
         <MappingFragment StoreEntitySet="candidate">
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="ContactNoOffice" ColumnName="ContactNoOffice" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
           <ScalarProperty Name="CandidateAddress" ColumnName="CandidateAddress" />
           <ScalarProperty Name="CNIC" ColumnName="CNIC" />
           <ScalarProperty Name="FathersName" ColumnName="FathersName" />
@@ -122,6 +133,55 @@
           <ScalarProperty Name="AppliedOn" ColumnName="AppliedOn" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LangScoreTypes">
+      <EntityTypeMapping TypeName="CareerPortalModel.LangScoreType">
+        <MappingFragment StoreEntitySet="LangScoreType">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LanguageMapings">
+      <EntityTypeMapping TypeName="CareerPortalModel.LanguageMaping">
+        <MappingFragment StoreEntitySet="LanguageMaping">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ScoreId" ColumnName="ScoreId" />
+          <ScalarProperty Name="ScoreTypeId" ColumnName="ScoreTypeId" />
+          <ScalarProperty Name="langgId" ColumnName="langgId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="CareerPortalModel.Language">
+        <MappingFragment StoreEntitySet="Languages">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isTextboxOpen" ColumnName="isTextboxOpen" />
+          <ScalarProperty Name="isRequired" ColumnName="isRequired" />
+          <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LanguageScores">
+      <EntityTypeMapping TypeName="CareerPortalModel.LanguageScore">
+        <MappingFragment StoreEntitySet="LanguageScore">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CandidateLangs">
+      <EntityTypeMapping TypeName="CareerPortalModel.CandidateLang">
+        <MappingFragment StoreEntitySet="CandidateLang">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LangMapId" ColumnName="LangMapId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

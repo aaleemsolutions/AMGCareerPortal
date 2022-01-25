@@ -13,9 +13,19 @@
         <EntityTypeShape EntityType="CareerPortalModel.CandidateExperince" Width="1.5" PointX="10.25" PointY="7.25" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__Candi__29221CFB" />
         <EntityTypeShape EntityType="CareerPortalModel.AllPosition" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="CareerPortalModel.CandidateJobApply" Width="1.5" PointX="7.25" PointY="5.375" />
+        <EntityTypeShape EntityType="CareerPortalModel.CandidateJobApply" Width="1.5" PointX="5.5" PointY="5.375" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__JobId__4F47C5E3" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__UserI__503BEA1C" />
+        <EntityTypeShape EntityType="CareerPortalModel.LangScoreType" Width="1.5" PointX="10.375" PointY="1.5" />
+        <EntityTypeShape EntityType="CareerPortalModel.LanguageMaping" Width="1.5" PointX="12.625" PointY="1" />
+        <EntityTypeShape EntityType="CareerPortalModel.Language" Width="1.5" PointX="10.375" PointY="4.25" />
+        <EntityTypeShape EntityType="CareerPortalModel.LanguageScore" Width="1.5" PointX="10.375" PointY="12.125" />
+        <AssociationConnector Association="CareerPortalModel.FK__LanguageM__Score__05A3D694" />
+        <AssociationConnector Association="CareerPortalModel.FK__LanguageM__langg__04AFB25B" />
+        <AssociationConnector Association="CareerPortalModel.FK__LanguageM__Score__0697FACD" />
+        <EntityTypeShape EntityType="CareerPortalModel.CandidateLang" Width="1.5" PointX="14.875" PointY="4.75" />
+        <AssociationConnector Association="CareerPortalModel.FK__Candidate__LangM__1B9317B3" />
+        <AssociationConnector Association="CareerPortalModel.FK__Candidate__UserI__1C873BEC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

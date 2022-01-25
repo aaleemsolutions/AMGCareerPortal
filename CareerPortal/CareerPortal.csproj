@@ -135,6 +135,8 @@
     <Compile Include="Areas\CandidatePortal\Controllers\CandidateDashboardController.cs" />
     <Compile Include="Areas\CandidatePortal\Controllers\CandidatejobController.cs" />
     <Compile Include="Areas\Recruiter\Controllers\AllJobsController.cs" />
+    <Compile Include="Areas\Recruiter\Controllers\CandidateFormController.cs" />
+    <Compile Include="Areas\Recruiter\Controllers\cvBankController.cs" />
     <Compile Include="Areas\Recruiter\RecruiterAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -670,6 +672,12 @@
     <Content Include="assets\echartsassets\dist\locales\ua.json" />
     <Content Include="assets\echartsassets\dist\locales\zh-cn.json" />
     <Content Include="Areas\Recruiter\Views\AllJobs\Dashboard.cshtml" />
+    <Content Include="Areas\Recruiter\Views\cvBank\Index.cshtml" />
+    <Content Include="Areas\Recruiter\Views\cvBank\CvDetail.cshtml" />
+    <Content Include="Areas\Recruiter\Views\CandidateForm\Index.cshtml" />
+    <Content Include="Areas\Recruiter\Views\CandidateForm\jobApplicationForm.cshtml" />
+    <Content Include="Areas\Recruiter\Views\Shared\_Education.cshtml" />
+    <Content Include="Areas\Recruiter\Views\Shared\_Experience.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Scripts\inputmask\inputmask.js" />

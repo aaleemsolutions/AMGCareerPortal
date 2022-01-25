@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using BAL.Binders;
 using DAL;
+using ViewModels.Binders;
+
 
 
 namespace ViewModels
@@ -57,7 +60,9 @@ namespace ViewModels
 
         public List<AllPosition> ListAlljobs { get; set; }
 
- 
+
+
+
     }
 
 

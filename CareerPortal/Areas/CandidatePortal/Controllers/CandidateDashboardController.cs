@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using System.Web.Security;
 using ViewModels;
 
-using System.Web;
 
 namespace CareerPortal.Areas.CandidatePortal.Controllers
 {
@@ -57,10 +56,11 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
         public ActionResult Index()
         {
 
-            var dbuser = RegUser.getUser(Username);
+            var dbuser = RegUser.getUser(GlobalUserInfo.UserName);
 
             var dbobj = candidateobj.getCandidate(GlobalUserInfo.UserId);
             CandidateId = dbobj.CandidateId.HasValue==true?dbobj.CandidateId.Value:0;
+
             dbobj.EmailVerifyMessage = dbuser.userinfo.IsEmailVerify.Value;
        
 
@@ -279,7 +279,7 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
             };
 
        
-
+            
 
 
             return Json(new { data = cndQualification }, JsonRequestBehavior.AllowGet);
@@ -406,7 +406,7 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
                        });
             }
         }
-        private SelectList GradeTypes()
+        public SelectList GradeTypes()
         {
             List<SelectListItem> _list = new List<SelectListItem>();
             _list.Insert(0, new SelectListItem() { Value = "0", Text = "Select Grade" });

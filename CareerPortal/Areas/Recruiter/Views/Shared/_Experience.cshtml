@@ -1,0 +1,191 @@
+﻿@model ViewModels.CandidateViewModel
+
+
+<div class="form-group row">
+
+    <label style="margin-top:10px">@Html.CheckBoxFor(m => m.CndExperienceViewModel.FreshGraduate, new { @Id = "ChkCndNoExperience" }) Fresh Graduate with No Work Experience</label>
+</div>
+<div class="form-group row ">
+
+    <div class="col">
+        @Html.HiddenFor(m => m.CndExperienceViewModel.id, new { @Id = "CndExperienceId" })
+
+        <label>Company Name <span class="text-danger">*</span> </label>
+        <div id="the-basics">
+            @*<input class="form-control" type="text" placeholder="First Name" required>*@
+
+            @Html.TextBoxFor(Model => Model.CndExperienceViewModel.CompanyName,
+          new { @class = "typeahead", placeholder = "Company Name....", @Id = "CndExperienceCmpName" })
+
+            <span class="text-danger" id="ErrorCndExperienceCmpName"></span>
+
+        </div>
+    </div>
+    <div class="col">
+        <label>Designation <span class="text-danger">*</span></label>
+        <div id="the-basics1">
+
+            @Html.TextBoxFor(Model => Model.CndExperienceViewModel.DesignationName,
+         new { @class = "typeahead", placeholder = "Designation Name", @Id = "CndExperienceDesgination" })
+
+            <span class="text-danger" id="ErrorCndExperienceDesgination"></span>
+
+
+        </div>
+    </div>
+
+    <div class="col">
+        <label> Location   <span class="text-danger">*</span></label>
+        <div id="the-basics2">
+            @*<input class="typeahead" type="text" placeholder="First Name" required>*@
+
+            @Html.TextBoxFor(Model => Model.CndExperienceViewModel.Locationname,
+          new { @class = "typeahead", placeholder = "Location", @Id = "CndExperienceLocation" })
+
+            <span class="text-danger" id="ErrorCndExperienceLocation"></span>
+
+        </div>
+    </div>
+
+</div>
+<div class="form-group row ">
+
+    <div class="col-md-3 col-sm-12">
+        <label>From<span class="text-danger">*</span></label>
+        <div id="the-basics">
+            <div class="row">
+                <div class=" col-sm-6">
+                    <label>Month</label>
+                    @Html.DropDownListFor(m => m.CndExperienceViewModel.FromMonth, new SelectList(ViewBag.MonthNameDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "CndExperienceFrmMonth" })
+                </div>
+
+                <div class="col-sm-6">
+                    <label>Year</label>
+                    @Html.DropDownListFor(m => m.CndExperienceViewModel.FromYear, new SelectList(ViewBag.YearDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "CndExperienceFrmYear" })
+                </div>
+
+            </div>
+
+            <span class="text-danger" id="ErrorCndExperienceFromDate"></span>
+
+
+        </div>
+    </div>
+
+
+    <div class="col-md-3 col-sm-12">
+        <label>To<span class="text-danger">*</span></label>
+        <div id="the-basics">
+            <div class="row">
+                <div class="  col-sm-6">
+                    <label>Month</label>
+                    @Html.DropDownListFor(m => m.CndExperienceViewModel.ToMonth, new SelectList(ViewBag.MonthNameDropdown, "Value", "Text"), new { @class = "aaDropdownStyle", @Id = "CndExperienceToMonth" })
+
+                    <label style="margin-top:10px">@Html.CheckBoxFor(m => m.CndExperienceViewModel.IsPresent, new { @Id = "ChkCndExperiencePresent" }) Present</label>
+
+                </div>
+
+                <div class="col-sm-6">
+                    <label>Year</label>
+                    @Html.DropDownListFor(m => m.CndExperienceViewModel.ToYear, new SelectList(ViewBag.YearDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "CndExperienceToYear" })
+                </div>
+
+            </div>
+
+            <span class="text-danger" id="ErrorCndExperienceToDate"></span>
+
+
+        </div>
+    </div>
+
+
+    <div class="col-sm-12 col-md-6">
+        <label>&nbsp;</label>
+        <div id="the-basics">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Current Salary<span class="text-danger">*</span></label>
+                    @Html.EditorFor(Model => Model.CndExperienceViewModel.CurrentSalary,
+                              new { htmlAttributes = new { @class = "typeahead txtSalaryInputMask", placeholder = "Current Salary" } })
+
+                    <span class="text-danger" id="ErrorCndExperienceSalary"></span>
+
+                </div>
+                <div class="col-sm-6">
+                    <label>Reason For Leaving<span class="text-danger">*</span></label>
+                    @Html.TextBoxFor(Model => Model.CndExperienceViewModel.ReasonForLeaving,
+   new { @class = "typeahead", placeholder = "Reason for leaving" })
+
+
+                    <span class="text-danger" id="ErrorCndExperienceLeaving"></span>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <div class="col-md-12" >
+
+        <label for="exampleInputName1">Job Duties<span class="text-danger">*</span></label>
+        @Html.TextAreaFor(m=>m.JobDutiesDescription, new { @class = "RichTextJobDescription", rows="50" })
+ 
+
+
+        <span class="text-danger" id="ErrorCndExperienceJobDuties"></span>
+
+    </div>
+
+
+
+    <div class="row" style="margin-top: 65px;">
+        <div class="column col-md-8">
+
+        </div>
+        <div class="col-md-4 ">
+
+            <button class="btn btn-primary pull-right float-right" style="float: right;margin-top: 20px;" id="btnSaveExperienceData" type="button"> Save and add more</button>
+            <br />
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12 container-fluid">
+            <div class="table-responsive">
+                <table id="CndExpDataTable" class="table">
+                    <thead>
+                        <tr>
+                            <th> Experience Id</th>
+                            <th> Company</th>
+                            <th>Designation</th>
+                            <th>Location</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Reason of Leaving</th>
+                            <th>Current Salary</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<div class="form-group row ">
+
+</div>

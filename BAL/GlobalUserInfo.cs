@@ -12,7 +12,11 @@ namespace BAL
     {
         public static string UserName
         {
-            get{ return HttpContext.Current.Session["UserEmail"].ToString(); }
+            get{ return
+     
+                    HttpContext.Current.Session["UserEmail"].ToString(); 
+
+            }
         }
         public static int UserId
         {

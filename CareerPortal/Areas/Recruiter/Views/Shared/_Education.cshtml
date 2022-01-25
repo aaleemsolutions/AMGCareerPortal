@@ -1,0 +1,171 @@
+﻿
+@model ViewModels.CandidateViewModel
+
+
+
+
+
+<div class="form-group row ">
+
+    <div class="col">
+        @Html.HiddenFor(m => m.CndQualificationViewModel.id)
+
+        <label>Institute Name <span class="text-danger">*</span> </label>
+        <div id="the-basics">
+            @*<input class="form-control" type="text" placeholder="First Name" required>*@
+
+            @Html.TextBoxFor(Model => Model.CndQualificationViewModel.InstitutionName,
+          new { @class = "typeahead", placeholder = "Institue Name..." })
+
+            <span class="text-danger" id="ErrorInstitutionName"></span>
+
+        </div>
+    </div>
+    <div class="col">
+        <label>Degree <span class="text-danger">*</span></label>
+        <div id="the-basics1">
+            @*<input class="typeahead" type="text" placeholder="First Name" required>*@
+
+            @*@Html.DropDownListFor(m => m.CndQualificationViewModel.DegreeId, new SelectList(ViewBag.DegreeDropDown, "Qualification_ID", "Qualification_Name", "Select Degree"), new { @class = " aaDropdownStyle" })*@
+            @Html.DropDownListFor(m => m.CndQualificationViewModel.DegreeId, new SelectList(ViewBag.DegreeDropDown, "Value", "Text"), new { @class = " aaDropdownStyle" })
+
+            <span class="text-danger" id="ErrorDegree"></span>
+
+
+        </div>
+    </div>
+
+    <div class="col">
+        <label> Major/Specialization  <span class="text-danger">*</span></label>
+        <div id="the-basics2">
+            @*<input class="typeahead" type="text" placeholder="First Name" required>*@
+
+            @Html.TextBoxFor(Model => Model.CndQualificationViewModel.Specialization,
+          new { @class = "typeahead", placeholder = "Major/Specialization" })
+
+            <span class="text-danger" id="ErrorSpecialization"></span>
+
+        </div>
+    </div>
+
+</div>
+<div class="form-group row ">
+
+    <div class="col-md-4">
+        <label>From<span class="text-danger">*</span></label>
+        <div id="the-basics">
+            <div class="row">
+                <div class="  col-md-6">
+                    <label>Month</label>
+                    @Html.DropDownListFor(m => m.CndQualificationViewModel.DgrFrmMonth, new SelectList(ViewBag.MonthNameDropdown, "Value", "Text"), new { @class = " aaDropdownStyle" })
+                </div>
+
+                <div class="col-md-6">
+                    <label>Year</label>
+                    @Html.DropDownListFor(m => m.CndQualificationViewModel.DgrFrmYear, new SelectList(ViewBag.YearDropdown, "Value", "Text"), new { @class = " aaDropdownStyle" })
+                </div>
+
+            </div>
+
+            <span class="text-danger" id="ErrorFromDate"></span>
+
+
+        </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <label>To<span class="text-danger">*</span></label>
+        <div id="the-basics">
+            <div class="row">
+                <div class="  col-md-6">
+                    <label>Month</label>
+                    @Html.DropDownListFor(m => m.CndQualificationViewModel.DgrToMonth, new SelectList(ViewBag.MonthNameDropdown, "Value", "Text"), new { @class = "aaDropdownStyle" })
+
+                    <label style="margin-top:10px">@Html.CheckBoxFor(m => m.CndQualificationViewModel.isOngoing) In Process</label>
+
+                </div>
+
+                <div class="col-md-6">
+                    <label>Year</label>
+                    @Html.DropDownListFor(m => m.CndQualificationViewModel.DgrToYear, new SelectList(ViewBag.YearDropdown, "Value", "Text"), new { @class = " aaDropdownStyle" })
+                </div>
+
+            </div>
+
+            <span class="text-danger" id="ErrorToDate"></span>
+
+
+        </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <label>&nbsp;</label>
+        <div id="the-basics">
+            <div class="row">
+                <div class="  col-md-6">
+                    <label><span>Result Type <span class="text-danger">*</span></label>
+                    @Html.DropDownListFor(m => m.CndQualificationViewModel.ResultType, new SelectList(ViewBag.GradeTypes, "Value", "Text", new SelectListItem { Text = "Select", Value = "0" }), new { @class = "  aaDropdownStyle" })
+                </div>
+
+                <div class="col-md-6">
+                    <label>&nbsp;</label>
+                    @Html.TextBoxFor(Model => Model.CndQualificationViewModel.ResultValue,
+new { @class = "typeahead", placeholder = "Result" })
+
+                </div>
+
+            </div>
+
+            <span class="text-danger" id="ErrorResultType"></span>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column col-md-8">
+
+        </div>
+        <div class="col-md-4 ">
+
+
+
+
+            <button class="btn btn-primary pull-right float-right" style="float: right;margin-top: 20px;" id="btnSaveEducationData" type="button"> Save and add more</button>
+
+
+            <br />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 container-fluid">
+            <div class="table-responsive">
+                <table id="order-listing" class="table">
+                    <thead>
+                        <tr>
+                            <th> Qualification Id</th>
+                            <th> Institution Name </th>
+                            <th>Degree</th>
+                            <th>Major</th>
+                            <th>From</th>
+                            <th>To</th>
+
+                            <th>Result</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

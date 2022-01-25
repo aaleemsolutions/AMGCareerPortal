@@ -960,18 +960,12 @@ function DownloadCandidateResume(filename, UserId) {
     
 }
 
-
 function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
     //var BarDBData = data;
     var BarDBData = data;
-    
-    
 
     //var BarDBData = JSON.parse('{"name":["ERP Developer","TEST"],"test":[5,10]}');
-  
-
  
-
     const result = {}
     const arr = BarDBData;
 
@@ -986,14 +980,7 @@ function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
     })
     console.log(result)
 
-   
- 
-
     console.log(BarDBData);
-    
-    
-  
-
     
     var chartDom = document.getElementById('BarChart');
  
@@ -1122,7 +1109,6 @@ function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
     });
 
 }
-
 
 function loadJobBarAjaxdata(GetBarChartData) {
 
@@ -1279,9 +1265,6 @@ function loadJobPieaAjaxdata(PieType) {
     });
 }
 
-
-
-
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
@@ -1290,9 +1273,6 @@ function getUrlVars() {
     return vars;
 
 }
-
-
-
 
 $(document).ready(function () {
 

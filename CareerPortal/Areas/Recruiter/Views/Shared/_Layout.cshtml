@@ -13,20 +13,9 @@
 
 
     @Styles.Render("~/bundles/RecruiterThemesCSS")
-    @*<link rel="stylesheet" href="~/CndDashboardAssets/vendors/feather/feather.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/ti-icons/css/themify-icons.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/css/vendor.bundle.base.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/dropify/dropify.min.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="~/CndDashboardAssets/css/vertical-layout-light/style.css" crossorigin="anonymous">
-        <link rel="shortcut icon" href="~/CndDashboardAssets/images/favicon.png" />
-        <link href="~/Content/CustomStyle.css" rel="stylesheet" />
-        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/jquery-toast-plugin/jquery.toast.min.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="~/CndDashboardAssets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" crossorigin="anonymous">
-        <link href="~/CndDashboardAssets/SummerNote/summernote.min.css" rel="stylesheet" />*@
-
+ 
 </head>
-<body class="sidebar-mini sidebar-icon-only">
+<body class="sidebar-mini">
     <div class="container-scroller">
 
         <!-- partial:partials/_navbar.html -->
@@ -337,7 +326,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                    <li class="nav-item ">
                         <a class="nav-link" href="@Url.Action("Index","AllJobs",new { area="Recruiter"})">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">JobsList</span>
@@ -357,6 +346,22 @@
                         <a class="nav-link" href="@Url.Action("CandidateList","AllJobs",new { area="Recruiter"})">
                             <i class="icon-search menu-icon"></i>
                             <span class="menu-title"> Candidates</span>
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="@Url.Action("Index","cvBank",new { area="Recruiter"})">
+                            <i class="icon-search menu-icon"></i>
+                            <span class="menu-title"> Cv Bank</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="@Url.Action("jobApplicationForm","CandidateForm",new { area="Recruiter"})">
+                            <i class="icon-search menu-icon"></i>
+                            <span class="menu-title"> Job Application Form</span>
                         </a>
                     </li>
 
