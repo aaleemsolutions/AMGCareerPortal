@@ -41,16 +41,16 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         public ActionResult jobApplicationForm()
         {
             BindDropdowns();
-            var test = langmodel.Getdata();
+            var JobApplicationmodel = langmodel.Getdata();
 
             var dbuser = RegUser.getUser(GlobalUserInfo.UserName);
 
-            var dbobj = candidateobj.getCandidate(GlobalUserInfo.UserId);
+            var CandidateModel = candidateobj.getCandidate(GlobalUserInfo.UserId);
 
-            dbobj.EmailVerifyMessage = dbuser.userinfo.IsEmailVerify.Value;
+            CandidateModel.EmailVerifyMessage = dbuser.userinfo.IsEmailVerify.Value;
 
             //test.CandidateViewModel = new CandidateViewModel();
-            test.CandidateViewModel = dbobj;
+            JobApplicationmodel.CandidateViewModel = CandidateModel;
 
 
 
@@ -58,17 +58,16 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
 
 
-            return View(test);
+            return View(JobApplicationmodel);
         }
 
         [HttpPost]
         
         public ActionResult jobApplicationForm(JobApplicationViewModel model,List<RadioButtonAnswer> radiobutton) 
-        
         {
             BindDropdowns();
 
-            var test1 = HttpContext.Request.Form["radiobutton[English0].Answer"];
+            var test1            = HttpContext.Request.Form["radiobutton[English0].Answer"];
 
             var test = langmodel.Getdata();
 
@@ -77,7 +76,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             var radio = radiobutton;
 
 
-            if (model.CandidateViewModel.CandidateId==0)
+            if (model.CandidateViewModel.CandidateInfo.Id==0)
             {
                 var candmodel = candidateobj.AddCandidate(model.CandidateViewModel);
                 List<CandidateLang> candidateLangs = new List<CandidateLang>();
@@ -88,17 +87,20 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             else
             {
 
+
+                var candmodel = candidateobj.UpdateCandidate(model.CandidateViewModel);
                 cndLang.DeleteByUserId(GlobalUserInfo.UserId);
 
                 List<CandidateLang> candidateLangs = new List<CandidateLang>();
-                candidateLangs = radiobutton.Select(m => new CandidateLang { LangMapId = m.Answer, UserId = GlobalUserInfo.UserId }).ToList();
+                candidateLangs = radiobutton.Select(m => new CandidateLang { LangMapId = m.Answer,LangValue = m.name, UserId = GlobalUserInfo.UserId }).ToList();
                 cndLang.AddData(candidateLangs);
 
 
                 //var candmodel = candidateobj.UpdateCandidate(model.CandidateViewModel);
             }
-         
 
+            var dbobj = candidateobj.getCandidate(GlobalUserInfo.UserId);
+            test.CandidateViewModel = dbobj;
             return View(test);
         
         }
@@ -132,6 +134,30 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             ViewBag.MartialStatusDropDown = MartialStatus;
 
 
+
+            var Gender = new List<SelectListItem>
+            {
+               new SelectListItem { Text = "Select ", Value = "Select"},
+                new SelectListItem { Text = "Male", Value = "Male"},
+                new SelectListItem { Text = "Female", Value = "Female" },
+                new SelectListItem { Text = "Other", Value = "Other" }
+
+            };
+            ViewBag.GenderDropDown = Gender;
+
+
+
+            var Dependants = new List<SelectListItem>
+            {
+               new SelectListItem { Text = "Select ", Value = ""},
+                new SelectListItem { Text = "Parents", Value = "Male"},
+                new SelectListItem { Text = "Spouse", Value = "Female" },
+                new SelectListItem { Text = "Kids", Value = "Other" }
+
+            };
+            ViewBag.DependantsDropDown = Dependants;
+
+
             //var EmploymentTypeDropDown = new List<SelectListItem>
             //{
             //   new SelectListItem { Text = "Select ", Value = "Select"},
@@ -145,7 +171,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             //var GetAllDivision = new SelectList(AdoNet.GetAllDivision(), "DivisionID", "DivisionName").ToList();
             //GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "Select" }));
             //ViewBag.DivisionDropDown = GetAllDivision;
- 
+
 
 
         }

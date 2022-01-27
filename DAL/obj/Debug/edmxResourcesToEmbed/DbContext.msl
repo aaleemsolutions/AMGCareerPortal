@@ -23,6 +23,17 @@
     <EntitySetMapping Name="candidates">
       <EntityTypeMapping TypeName="CareerPortalModel.candidate">
         <MappingFragment StoreEntitySet="candidate">
+          <ScalarProperty Name="Bloodgroup" ColumnName="Bloodgroup" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="EOBI" ColumnName="EOBI" />
+          <ScalarProperty Name="NtnNo" ColumnName="NtnNo" />
+          <ScalarProperty Name="DrlExpiryDate" ColumnName="DrlExpiryDate" />
+          <ScalarProperty Name="DrivingLicenseNo" ColumnName="DrivingLicenseNo" />
+          <ScalarProperty Name="PasExpiryDate" ColumnName="PasExpiryDate" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="HealthIssue" ColumnName="HealthIssue" />
+          <ScalarProperty Name="PreviouslyWork" ColumnName="PreviouslyWork" />
+          <ScalarProperty Name="IsRelateFreindWorking" ColumnName="IsRelateFreindWorking" />
           <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
           <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
@@ -180,8 +191,80 @@
     <EntitySetMapping Name="CandidateLangs">
       <EntityTypeMapping TypeName="CareerPortalModel.CandidateLang">
         <MappingFragment StoreEntitySet="CandidateLang">
+          <ScalarProperty Name="LangValue" ColumnName="LangValue" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="LangMapId" ColumnName="LangMapId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cand_AMPreviousWork">
+      <EntityTypeMapping TypeName="CareerPortalModel.Cand_AMPreviousWork">
+        <MappingFragment StoreEntitySet="Cand_AMPreviousWork">
+          <ScalarProperty Name="Todate" ColumnName="Todate" />
+          <ScalarProperty Name="Fromdate" ColumnName="Fromdate" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cand_Dependants">
+      <EntityTypeMapping TypeName="CareerPortalModel.Cand_Dependants">
+        <MappingFragment StoreEntitySet="Cand_Dependants">
+          <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Dependantname" ColumnName="Dependantname" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cand_JobFilledByHr">
+      <EntityTypeMapping TypeName="CareerPortalModel.Cand_JobFilledByHr">
+        <MappingFragment StoreEntitySet="Cand_JobFilledByHr">
+          <ScalarProperty Name="CarBike" ColumnName="CarBike" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Division" ColumnName="Division" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="CarAllow" ColumnName="CarAllow" />
+          <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cand_RelateFreindWorking">
+      <EntityTypeMapping TypeName="CareerPortalModel.Cand_RelateFreindWorking">
+        <MappingFragment StoreEntitySet="Cand_RelateFreindWorking">
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Relation" ColumnName="Relation" />
+          <ScalarProperty Name="RefereeName" ColumnName="RefereeName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MoseRecentEmployements">
+      <EntityTypeMapping TypeName="CareerPortalModel.MoseRecentEmployement">
+        <MappingFragment StoreEntitySet="MoseRecentEmployement">
+          <ScalarProperty Name="Other" ColumnName="Other" />
+          <ScalarProperty Name="Vehicle" ColumnName="Vehicle" />
+          <ScalarProperty Name="FuelAllowance" ColumnName="FuelAllowance" />
+          <ScalarProperty Name="LeaveEncashment" ColumnName="LeaveEncashment" />
+          <ScalarProperty Name="BonusIncentive" ColumnName="BonusIncentive" />
+          <ScalarProperty Name="Gratuity" ColumnName="Gratuity" />
+          <ScalarProperty Name="GrossSalary" ColumnName="GrossSalary" />
+          <ScalarProperty Name="DateOfJoining" ColumnName="DateOfJoining" />
+          <ScalarProperty Name="StartingPosition" ColumnName="StartingPosition" />
+          <ScalarProperty Name="PresentRecentPosition" ColumnName="PresentRecentPosition" />
+          <ScalarProperty Name="CompanyNameAddress" ColumnName="CompanyNameAddress" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

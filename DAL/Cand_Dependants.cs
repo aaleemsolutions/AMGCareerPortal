@@ -12,14 +12,14 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class CandidateLang
+    public partial class Cand_Dependants
     {
         public int Id { get; set; }
-        public Nullable<int> LangMapId { get; set; }
         public Nullable<int> UserId { get; set; }
-        public string LangValue { get; set; }
+        public string Dependantname { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public string CNIC { get; set; }
     
-        public virtual LanguageMaping LanguageMaping { get; set; }
         public virtual User User { get; set; }
     }
 }

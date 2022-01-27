@@ -42,6 +42,17 @@ namespace DAL
         public string MobileNo { get; set; }
         public string EmailAddress { get; set; }
         public string PresentAddress { get; set; }
+        public Nullable<bool> IsRelateFreindWorking { get; set; }
+        public Nullable<bool> PreviouslyWork { get; set; }
+        public string HealthIssue { get; set; }
+        public string PassportNo { get; set; }
+        public Nullable<System.DateTime> PasExpiryDate { get; set; }
+        public string DrivingLicenseNo { get; set; }
+        public Nullable<System.DateTime> DrlExpiryDate { get; set; }
+        public string NtnNo { get; set; }
+        public string EOBI { get; set; }
+        public string Gender { get; set; }
+        public string Bloodgroup { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

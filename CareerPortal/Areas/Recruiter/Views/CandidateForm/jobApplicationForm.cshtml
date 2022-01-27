@@ -10,8 +10,10 @@
 <div class="row">
 
     <div class="col-12 grid-margin">
-        @using (Ajax.BeginForm("jobApplicationForm", new { Controller = "CandidateForm", area = "Recruiter" }, null))
+        @using (Ajax.BeginForm("jobApplicationForm", new { Controller = "CandidateForm", area = "Recruiter" }, null,new { @enctype = "multipart/form-data" }))
         {
+            @Html.HiddenFor(m => m.CandidateViewModel.CandidateInfo.Id);
+            @Html.ValidationSummary();
 
             <input type="submit" name="name" value="Submit" class="btn btn-primary" />
 
@@ -204,6 +206,7 @@
                     </div>
                 </div>
             </div>
+
             <!--        Personal Information-->
             <!-- Academic/Professional Qualification-->
             <div class="row">
@@ -212,10 +215,11 @@
                         Academic/Professional Qualification
                     </div>
                     <div class="card-body">
+ 
+                            @Html.Partial("~/Areas/Recruiter/Views/Shared/_Education.cshtml", Model.CandidateViewModel)
+              
 
-                        @*<form id="SaveEducationdata" enctype="multipart/form-data">*@
-                        @*@Html.Partial("~/Areas/Recruiter/Views/Shared/_Education.cshtml", Model.CandidateViewModel)*@
-                        @*</form>*@
+
 
 
 
@@ -249,6 +253,7 @@
 
                                         var ScoreType = Model.LanguageMapings.Select(m => new { ScoreType = m.ScoreTypeId }).Distinct().Count();
 
+
                                         var colspanvalue = col / ScoreType;
 
                                         <text>
@@ -280,17 +285,22 @@
                                     int lcount = 0;
                                     foreach (var item in Model.LanguageMapings.Select(m => m.Language).Distinct())
                                     {
-
                                         <tr class="text-center">
 
-                                            <td  style="padding: 0px;">
+                                            <td style="padding: 0px;">
                                                 <span>
                                                     @item.LanguageName
                                                     @if (item.isTextboxOpen == true)
-                                                    {
-                                                       
-                                                        var textboxname = "radiobutton[" + lcount + "].name";
-                                                        <input type="text" value="" class="typeahead" style="max-width: 150px; margin: auto; margin-top: 10px;margin-bottom:10px;"/>
+                                                            {
+
+
+                                                                var textboxname = "radiobutton[" + lcount + "].name";
+
+                                                                var testboxvalue = Model.candLang.Where(m => m.LanguageMaping.langgId == item.Id).FirstOrDefault();
+
+                                                                var value = testboxvalue != null ? testboxvalue.LangValue : "";
+
+                                                        <input type="text" value="@value" name="@textboxname" class="typeahead" style="max-width: 150px; margin: auto; margin-top: 10px;margin-bottom:10px;" required />
 
                                                     }
                                                 </span>
@@ -300,11 +310,10 @@
 
                                                 var count = Model.LanguageMapings.Where(m => m.langgId == item1.langid).Distinct().Count();
 
-                                                foreach (var item2 in Model.LanguageMapings.Where(m => m.langgId == item1.langid).OrderBy(m => m.LangScoreType.TypeName).Select(m => new { ScoreTypeId = m.ScoreId, ScoreName = m.LanguageScore.ScoreName }).Distinct())
+                                                foreach (var item2 in Model.LanguageMapings.Where(m => m.langgId == item1.langid && m.ScoreTypeId == item1.scoreTypeId).OrderBy(m => m.LangScoreType.TypeName).Select(m => new { ScoreTypeId = m.ScoreId, ScoreName = m.LanguageScore.ScoreName }).Distinct())
                                                 {
 
 
-                                                    var modeltest = Model.LanguageMapings.Where(m => m.langgId == item1.langid).GroupBy(m => m.langgId).OrderBy(m => m.LangScoreType.TypeName).Select(m => new { ScoreTypeId = m.ScoreId, ScoreName = m.LanguageScore.ScoreName }).Distinct();
 
 
 
@@ -315,7 +324,8 @@
 
 
                                                     <td style="border-left-width: 1px;">
-                                                        @*@Html.RadioButton(radioName,MapId,false,new { @ = "" })*@
+ 
+
 
                                                         @if (Model.candLang.Where(m => m.LangMapId == MapId).Count() > 0)
                                                         {
@@ -367,21 +377,24 @@
 
                                     <label>Company Name & Address </label>
                                     <div id="bloodhound">
-                                        <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        @Html.TextBoxFor(m=>m.MostRecentEmployment.CompanyNameAddress,new {@class="typeahead", placeholder = "Company Name & Address" })
+                                        
                                     </div>
 
                                     <label>Present / Most Recent Position </label>
                                     <div id="bloodhound">
-                                        <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                        @Html.TextBoxFor(m => m.MostRecentEmployment.PresentRecentPosition, new { @class = "typeahead", placeholder = "Present / Most Recent Position " })
                                     </div>
 
                                     <div>
                                         <label>Position (at the time of joining) </label>
                                         <div id="bloodhound">
+                                            @Html.TextBoxFor(m => m.MostRecentEmployment.StartingPosition, new { @class = "typeahead", placeholder = "Position (at the time of joining)  " })
                                             <input class="typeahead" type="text" placeholder="Company Name & Address">
                                         </div>
                                         <label>Date of joining (dd-mm-yyyy)</label>
                                         <div id="bloodhound">
+                                            
                                             <input class="typeahead" type="text" placeholder="Company Name & Address">
                                         </div>
                                     </div>
@@ -395,7 +408,7 @@
                                             <label>Gross Salary</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                            @Html.TextBoxFor(m => m.MostRecentEmployment.GrossSalary, new { @class = "typeahead", placeholder = "Gross Salary " })
                                         </div>
                                     </div>
                                     <div class="row">
@@ -403,7 +416,7 @@
                                             <label>Gratuity</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                            @Html.TextBoxFor(m => m.MostRecentEmployment.Gratuity, new { @class = "typeahead", placeholder = "Gratuity " })
                                         </div>
                                     </div>
                                     <div class="row">
@@ -411,7 +424,7 @@
                                             <label>Bonus/Incentive</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                            @Html.TextBoxFor(m => m.MostRecentEmployment.BonusIncentive, new { @class = "typeahead", placeholder = "Bonus/Incentive" })
                                         </div>
                                     </div>
                                     <div class="row">
@@ -419,7 +432,8 @@
                                             <label>Leave Encashment</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                            @Html.TextBoxFor(m => m.MostRecentEmployment.LeaveEncashment, new { @class = "typeahead", placeholder = "Leave Encashment" })
+                                            
                                         </div>
                                     </div>
                                     <div class="row">
@@ -427,7 +441,8 @@
                                             <label>Fuel Allowance</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                            @*<input class="typeahead" type="text" placeholder="Company Name & Address">*@
+                                            @Html.TextBoxFor(m => m.MostRecentEmployment.FuelAllowance, new { @class = "typeahead", placeholder = "Fuel Allowance" })
                                         </div>
                                     </div>
                                     <div class="row">
@@ -435,7 +450,8 @@
                                             <label>Vehicle</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                            
+                                            @Html.TextBoxFor(m => m.MostRecentEmployment.Vehicle, new { @class = "typeahead", placeholder = "Vehicle" })
                                         </div>
                                     </div>
                                     <div class="row">
@@ -443,7 +459,7 @@
                                             <label>Others</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                            @Html.TextBoxFor(m => m.MostRecentEmployment.Other, new { @class = "typeahead", placeholder = "Other" })
                                         </div>
 
                                     </div>
@@ -463,7 +479,7 @@
 
                             @*<form id="SaveExperiencedata" enctype="multipart/form-data">*@
 
-                            @*@Html.Partial("~/Areas/Recruiter/Views/Shared/_Experience.cshtml", Model.CandidateViewModel)*@
+                            @Html.Partial("~/Areas/Recruiter/Views/Shared/_Experience.cshtml", Model.CandidateViewModel)
                             @*</form>*@
 
                         </div>
@@ -484,71 +500,52 @@
                     <div class="row">
 
                         <p>Do you have any relate/freind working ar Artistic Milliners Pvt Ltd?</p>
-                        <p><input type="radio" name="ChkFrndatAM" /> Yes <input type="radio" name="ChkFrndatAM" /> No </p>
+                        <p>
+                            @Html.RadioButtonFor(m => m.CandidateViewModel.IsRelateFreindWorking, true) Yes
+                            @Html.RadioButtonFor(m => m.CandidateViewModel.IsRelateFreindWorking, false,new { @checked="checked"}) NO
+                            @*<input type="radio" name="ChkFrndatAM" /> Yes <input type="radio" name="ChkFrndatAM" /> No*@
+
+                        </p>
 
                         <div class="row">
-                            <div class="col-md-1">
-                                <label>Name </label>
-                            </div>
-                            <div class="col-md-3">
-                                <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                            @for (int ii = 0; ii < 2; ii++)
+                            {
+                                <div class="col-md-1">
+                                    <label>Name </label>
                                 </div>
-                            </div>
-                            <div class="col-md-1">
-                                <label>Relation </label>
-                            </div>
-                            <div class="col-md-3">
-                                <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                <div class="col-md-3">
+                                    <div id="bloodhound">
+                                        
+                                        @Html.TextBoxFor(m => m.Cand_RelateFreindWorking.RefereeName, new { @class = "typeahead", placeholder = "Name" })
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="col-md-1">
+                                    <label>Relation </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div id="bloodhound">
+                                        @Html.TextBoxFor(m => m.Cand_RelateFreindWorking.Relation, new { @class = "typeahead", placeholder = "Relation" })
+                                    </div>
+                                </div>
 
-                            <div class="col-md-1">
-                                <label>Department </label>
-                            </div>
-                            <div class="col-md-3">
-                                <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                <div class="col-md-1">
+                                    <label>Department </label>
                                 </div>
-                            </div>
+                                <div class="col-md-3">
+                                    <div id="bloodhound">
+                                        @Html.TextBoxFor(m => m.Cand_RelateFreindWorking.Department, new { @class = "typeahead", placeholder = "Department" })
+                                    </div>
+                                </div>
 
+
+                            }
 
 
 
                         </div>
 
 
-                        <div class="row">
-                            <div class="col-md-1">
-                                <label>Name </label>
-                            </div>
-                            <div class="col-md-3">
-                                <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <label>Relation </label>
-                            </div>
-                            <div class="col-md-3">
-                                <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
-                                </div>
-                            </div>
-
-                            <div class="col-md-1">
-                                <label>Department </label>
-                            </div>
-                            <div class="col-md-3">
-                                <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
-                                </div>
-                            </div>
-
-
-
-                        </div>
+                      
 
 
                     </div>
@@ -556,21 +553,25 @@
                     <div class="row">
 
                         <p>Have you have previously worked at Artistic Milliners Pvt Ltd?</p>
-                        <p><input type="radio" name="ChkWorkAtAM" /> Yes <input type="radio" name="ChkWorkAtAM" /> No </p>
+
+                        <p>
+                            @Html.RadioButtonFor(m => m.CandidateViewModel.PreviouslyWork, true) Yes
+                            @Html.RadioButtonFor(m => m.CandidateViewModel.PreviouslyWork, false, new { @checked = "checked" }) NO
+                        </p>
 
                         <div class="row">
 
                             <div class="col-md-3">
                                 <div id="bloodhound">
                                     Position
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                    @Html.TextBoxFor(m => m.Cand_AMPreviousWork.PositionName, new { @class = "typeahead", placeholder = "Position" })
                                 </div>
                             </div>
 
                             <div class="col-md-3">
                                 Department
                                 <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                    @Html.TextBoxFor(m => m.Cand_AMPreviousWork.Department, new { @class = "typeahead", placeholder = "Department" })
                                 </div>
                             </div>
 
@@ -578,7 +579,7 @@
                             <div class="col-md-2">
                                 Unit
                                 <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                    @Html.TextBoxFor(m => m.Cand_AMPreviousWork.Unit, new { @class = "typeahead", placeholder = "Unit" })
                                 </div>
                             </div>
 
@@ -586,14 +587,14 @@
                             <div class="col-md-2">
                                 From
                                 <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                    @Html.TextBoxFor(m => m.Cand_AMPreviousWork.Fromdate, new { @class = "typeahead", placeholder = "Fromdate" })
                                 </div>
                             </div>
 
                             <div class="col-md-2">
                                 To
                                 <div id="bloodhound">
-                                    <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                    @Html.TextBoxFor(m => m.Cand_AMPreviousWork.Todate, new { @class = "typeahead", placeholder = "Todate" })
                                 </div>
                             </div>
 
@@ -615,6 +616,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                    
                                 </div>
                             </div>
                             <div class="row">
@@ -692,7 +694,7 @@
                         <div class="col-md-12">
                             <div id="bloodhound">
                                 <p><strong>Health</strong> (Mention any disablity, serius illness or operation, which you had )</p>
-                                <input class="typeahead" type="text" placeholder="Company Name & Address">
+                                @Html.TextBoxFor(m => m.CandidateViewModel.HealthIssue, new { @class = "typeahead", placeholder = "HealthIssue" })
                             </div>
                         </div>
                     </div>
@@ -715,7 +717,7 @@
 
                                 <input class="typeahead" type="text" placeholder="First Name">
 
-
+                                @Html.TextBoxFor(m => m.CandidateViewModel.PassportNo, new { @class = "typeahead", placeholder = "PassportNo" })
                             </div>
                         </div>
 
@@ -723,8 +725,7 @@
                             <label>Expiry Date  </label>
                             <div id="bloodhound">
 
-                                <input class="typeahead" type="text" placeholder="First Name">
-
+                                @Html.TextBoxFor(m => m.CandidateViewModel.PasExpiryDate, new { @class = "typeahead", placeholder = "Expiry Date" })
 
                             </div>
                         </div>
@@ -734,7 +735,7 @@
                             <label>Driving License No:  </label>
                             <div id="bloodhound">
 
-                                <input class="typeahead" type="text" placeholder="First Name">
+                                @Html.TextBoxFor(m => m.CandidateViewModel.DrivingLicenseNo, new { @class = "typeahead", placeholder = "Driving License No" })
 
 
                             </div>
@@ -744,8 +745,12 @@
                         <div class="col-md-3">
                             <label>Expiry Date:  </label>
                             <div id="bloodhound">
+                        
 
-                                <input class="typeahead" type="text" placeholder="First Name">
+                                    @Html.TextBoxFor(m => m.CandidateViewModel.DrlExpiryDate, new { @class = "typeahead", placeholder = "Driving Expiry Date" })
+
+
+                          
 
 
                             </div>
@@ -755,8 +760,7 @@
                             <label>NTN No: </label>
                             <div id="bloodhound">
 
-                                <input class="typeahead" type="text" placeholder="First Name">
-
+                                @Html.TextBoxFor(m => m.CandidateViewModel.NtnNo, new { @class = "typeahead", placeholder = "NTN No" })
 
                             </div>
                         </div>
@@ -765,7 +769,7 @@
                             <label>EOBI No</label>
                             <div id="bloodhound">
 
-                                <input class="typeahead" type="text" placeholder="First Name">
+                                @Html.TextBoxFor(m => m.CandidateViewModel.EOBI, new { @class = "typeahead", placeholder = "EOBI No" })
 
 
                             </div>
@@ -777,6 +781,7 @@
                             <div id="bloodhound">
 
                                 <input class="typeahead" type="text" placeholder="First Name">
+                                @Html.DropDownListFor(m => m.CandidateViewModel.Gender, new SelectList(ViewBag.GenderDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "" })
 
 
                             </div>
@@ -786,8 +791,7 @@
                         <div class="col-md-3">
                             <label>Blood Group:  </label>
                             <div id="bloodhound">
-
-                                <input class="typeahead" type="text" placeholder="First Name">
+                                @Html.TextBoxFor(m => m.CandidateViewModel.Bloodgroup, new { @class = "typeahead", placeholder = "Blood Group" })
 
 
                             </div>
@@ -799,7 +803,7 @@
                     <hr />
                     <p><strong>Details of Dependants: (i.e Parents, spouse &Aacute; Kids etc.)</strong></p>
                     <div class="table-responsive">
-                        <table class="table table-responsive" border="1">
+                        <table class="table table-responsive" border="1" id="tableDependants">
                             <thead>
                                 <tr>
                                     <th class="pt-1 ps-0 text-center">
@@ -811,23 +815,60 @@
                                     <th class="pt-1 text-center">
                                         CNIC No / Birth Certificate
                                     </th>
+                                    <th class="pt-1 text-center">
+                                        Type
+                                    </th>
+
+                                    <th class="pt-1 text-center">
+                                        Action
+                                    </th>
+
 
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Abdul Aleem</td>
-                                    <td>11 mar 2001</td>
-                                    <td>42501-1897956-3</td>
+                                @{
+                                    int i = 0;
+                                    do
+                                    {
+                                       //var fieldName = "Cand_Dependants[" + i + "]." + Model.Cand_Dependants.Select(m=>m.CNIC);
+                                        var FieldDependantName = "Cand_Dependants[" + i + "].Dependantname";
+                                        var FieldCNICName = "Cand_Dependants[" + i + "].CNIC";
+                                        var FieldDOBName = "Cand_Dependants[" + i + "].DOB";
+                                        <tr class="text-center tr_clone">
+                                            <td><input type="text" name="@FieldDependantName" value="" class="form-control" /></td>
+                                            <td>
 
-                                </tr>
+                                                @*div class="input-group date datepicker">*@
 
-                                <tr>
-                                    <td>Muhammad Zain</td>
-                                    <td>11 mar 1998</td>
-                                    <td>42501-1897956-3</td>
-                                </tr>
+                                                    <input type="date" name="@FieldDOBName" value="" class="form-control " />
+
+
+                                          
+                                                @*</div>*@
+
+                                            </td>
+                                            <td>
+                                            <input type="text" name="@FieldCNICName" value="" class="form-control CNICInputMask " />
+                                            </td>
+                                            <td>
+                                                @Html.DropDownList("DependantType", new SelectList(ViewBag.DependantsDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "" })
+                                            </td>
+
+                                            <td class="tblDplAction">
+                                                <button type="button" class="btn btn-sm btn-primary addDynamicRow">Add Row</button>
+                                                @*<button type="button" class="btn btn-sm btn-danger removeDynamicRow">Delete Row</button>*@
+                                            </td>
+
+                                        </tr>
+                                        i++;
+
+                                    } while (i < (Model.Cand_Dependants==null ? 0 : Model.Cand_Dependants.Count));
+                                }
+
+
+                           
 
 
 

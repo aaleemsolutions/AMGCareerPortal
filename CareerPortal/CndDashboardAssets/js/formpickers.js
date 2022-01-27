@@ -1,3 +1,16 @@
+function loadDatepickers() {
+    var date = new Date();
+    $('.pastdate').each(function () {
+        alert("this")
+        $(this).datepicker({
+            format: "dd-MM-yyyy",
+            enableOnReadonly: true,
+            //todayHighlight: true,
+            endDate: date
+        });
+    });
+}
+
 (function ($) {
     var date = new Date();
     date.setDate(date.getDate() - 1);
@@ -20,6 +33,19 @@
     });
   }
 
+  
+
+    if ($(".datepicker").length) {
+        $('.datepicker').datepicker({
+            format: "dd-MM-yyyy",
+            enableOnReadonly: true
+            //todayHighlight: true
+        });
+    }
+
+   
+ 
+ 
     if ($("#dobDate").length) {
         $('#dobDate').datepicker({
             format: "dd-MM-yyyy",

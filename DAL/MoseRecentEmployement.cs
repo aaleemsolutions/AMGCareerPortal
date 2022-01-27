@@ -12,14 +12,22 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class CandidateLang
+    public partial class MoseRecentEmployement
     {
         public int Id { get; set; }
-        public Nullable<int> LangMapId { get; set; }
         public Nullable<int> UserId { get; set; }
-        public string LangValue { get; set; }
+        public string CompanyNameAddress { get; set; }
+        public string PresentRecentPosition { get; set; }
+        public string StartingPosition { get; set; }
+        public Nullable<System.DateTime> DateOfJoining { get; set; }
+        public Nullable<decimal> GrossSalary { get; set; }
+        public string Gratuity { get; set; }
+        public string BonusIncentive { get; set; }
+        public string LeaveEncashment { get; set; }
+        public string FuelAllowance { get; set; }
+        public string Vehicle { get; set; }
+        public string Other { get; set; }
     
-        public virtual LanguageMaping LanguageMaping { get; set; }
         public virtual User User { get; set; }
     }
 }

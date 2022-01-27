@@ -33,7 +33,6 @@ namespace CareerPortal
             GlobalFields.UploadDocumentsPath = DocumentsUploaded;
 
 
-       
 
         }
 
@@ -50,7 +49,17 @@ namespace CareerPortal
                // Response.Redirect("~/Account/Login");
             }
         }
+        protected void Application_Error()
+        {
 
+            if (Session["UserEmail"] == null)
+            {
+                FormsAuthentication.SignOut();
+                Response.Redirect("~/Home/Index");
+                // Response.Redirect("~/Account/Login");
+            }
+            //log an exception
+        }
 
         //protected void Application_AcquireRequestState(Object sender, EventArgs e)
         //{

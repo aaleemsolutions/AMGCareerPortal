@@ -323,11 +323,12 @@ function addCandQualification(currentIndex, isNextButton = true) {
     } else {
 
         if (validateCndQualification(currentIndex)) {
+            debugger;
             $("#btnSaveEducationData").attr("disabled", "disabled")
             var getformvalue = $('#CandidateWizardForm')[0];
             if (getformvalue == undefined) {
                 
-               getformvalue = $('#SaveEducationdata')[0];
+                getformvalue = $('#form0')[0];
             }
             console.log(getformvalue);
 
@@ -400,7 +401,7 @@ function addCandExperience(currentIndex, isNextButton = true) {
 
             if (getformvalue == undefined) {
 
-                getformvalue = $('#SaveExperiencedata')[0];
+                getformvalue = $('#form0')[0];
             }
            
             var valdata = new FormData(getformvalue);
@@ -408,7 +409,7 @@ function addCandExperience(currentIndex, isNextButton = true) {
 
             valdata.append("JobDutiesDescription", $("#JobDutiesEditor .ql-editor").html());
             valdata.append("FormWizardSteps", currentIndex);
-
+            
 
             $.ajax({
                 url: "/CandidatePortal/CandidateDashboard/",
@@ -1648,7 +1649,54 @@ $(document).ready(function () {
     }
     
 
+    var tableDependants = $('#tableDependants')[0];
+
+    $(tableDependants).delegate('.addDynamicRow', 'click', function () {
+        var thisRow = $(this).closest('tr')[0];
+        var newRow = $(thisRow).clone(true);
+        newRow.insertAfter(thisRow).find('input:text').val('').find('input:date').val('');
+
+        
+        $('input[name^="Cand_Dependants"]').each(function () {
+            var currenrow = $('#tableDependants tbody tr').length-1;
+            var oldname = $(this).attr('name');
+            //var newname = $(this).attr('name').replace('[0]', '[' + currenrow + ']');
+            var newname = oldname.substr(0, oldname.indexOf('[') + 1) + currenrow + oldname.substr(oldname.indexOf(']'), oldname.length);
+            //alert($(this).attr('name'));
+            $(newRow).find('input[name="'+$(this).attr('name')+'"]').attr('name', newname)
+            //            alert($(this).attr('name'));
+ 
+            
+
+        });
+
+        if ($(thisRow).find('.tblDplAction').find('.removeDynamicRow').length == 0) {
+            $(newRow).find('.tblDplAction').append('<button type="button" class="btn btn-sm btn-danger removeDynamicRow">Delete Row</button>');
+        }
+
+
+        //$('.pastdate').datepicker({
+        //    format: "dd-MM-yyyy",
+        //    enableOnReadonly: true,
+        //    //todayHighlight: true,
+        //    endDate: date
+        //});
+        //loadDatepickers();
+            
      
+
+        //var newRow = '<tr> <td><input type="text" name="name" value="Abdul Aleem" class="form - control"></td>< td ><input type="text" name="name" value="10 / 10 / 2021" class="form - control"></td><td><input type="text" name="name" value="Parent" class="form - control"></td><td> <select id="" class=" aaDropdownStyle" name="DependantType"><option value="">Select </option><option value="Male">Parents</option><option value="Female">Spouse</option><option value="Other">Kids</option></select> </td><td class="tblDplAction"> <button type="button" class="btn btn - sm btn - primary addDynamicRow">Add Row</button> </td></tr>'
+        //tableDependants.append($(newRow));
+
+
+    });
+
+    //tblDplAction
+    
+    $(tableDependants).delegate('.removeDynamicRow', 'click', function () {
+        var thisRow = $(this).closest('tr').remove();
+   
+    });
 
 
 });

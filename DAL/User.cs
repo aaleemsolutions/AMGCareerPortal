@@ -20,6 +20,11 @@ namespace DAL
             this.candidates = new HashSet<candidate>();
             this.CandidateJobApplies = new HashSet<CandidateJobApply>();
             this.CandidateLangs = new HashSet<CandidateLang>();
+            this.Cand_AMPreviousWork = new HashSet<Cand_AMPreviousWork>();
+            this.Cand_Dependants = new HashSet<Cand_Dependants>();
+            this.Cand_JobFilledByHr = new HashSet<Cand_JobFilledByHr>();
+            this.Cand_RelateFreindWorking = new HashSet<Cand_RelateFreindWorking>();
+            this.MoseRecentEmployements = new HashSet<MoseRecentEmployement>();
         }
     
         public int Id { get; set; }
@@ -42,5 +47,15 @@ namespace DAL
         public virtual ICollection<CandidateJobApply> CandidateJobApplies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateLang> CandidateLangs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cand_AMPreviousWork> Cand_AMPreviousWork { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cand_Dependants> Cand_Dependants { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cand_JobFilledByHr> Cand_JobFilledByHr { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cand_RelateFreindWorking> Cand_RelateFreindWorking { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MoseRecentEmployement> MoseRecentEmployements { get; set; }
     }
 }

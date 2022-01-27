@@ -38,6 +38,11 @@ namespace DAL
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<LanguageScore> LanguageScores { get; set; }
         public virtual DbSet<CandidateLang> CandidateLangs { get; set; }
+        public virtual DbSet<Cand_AMPreviousWork> Cand_AMPreviousWork { get; set; }
+        public virtual DbSet<Cand_Dependants> Cand_Dependants { get; set; }
+        public virtual DbSet<Cand_JobFilledByHr> Cand_JobFilledByHr { get; set; }
+        public virtual DbSet<Cand_RelateFreindWorking> Cand_RelateFreindWorking { get; set; }
+        public virtual DbSet<MoseRecentEmployement> MoseRecentEmployements { get; set; }
     
         public virtual ObjectResult<usp_getallDegree_Result> usp_getallDegree()
         {

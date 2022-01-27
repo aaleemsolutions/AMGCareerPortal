@@ -7,12 +7,21 @@
       <Diagram DiagramId="b01d4db4a45444aba1f6924a1aec4e59" Name="Diagram1">
         <EntityTypeShape EntityType="CareerPortalModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CareerPortalModel.candidate" Width="1.5" PointX="8" PointY="0.875" />
-        <AssociationConnector Association="CareerPortalModel.FK__candidate__UserI__6FE99F9F" />
-        <EntityTypeShape EntityType="CareerPortalModel.CandidateQualification" Width="1.5" PointX="3.125" PointY="3.25" />
+        <AssociationConnector Association="CareerPortalModel.FK__candidate__UserI__6FE99F9F" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="5.807109375" />
+          <ConnectorPoint PointX="2.876175" PointY="18.156309407552079" />
+          <ConnectorPoint PointX="2.876175" PointY="3.229166666666667" />
+          <ConnectorPoint PointX="4.1475" PointY="3.229166666666667" />
+          <ConnectorPoint PointX="4.1475" PointY="2.9895833333333335" />
+          <ConnectorPoint PointX="6.1025" PointY="2.9895833333333335" />
+          <ConnectorPoint PointX="6.1025" PointY="19.185544433593748" />
+          <ConnectorPoint PointX="8" PointY="8.6243294270833335" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="CareerPortalModel.CandidateQualification" Width="1.5" PointX="3" PointY="4.375" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__Candi__17036CC0" />
         <EntityTypeShape EntityType="CareerPortalModel.CandidateExperince" Width="1.5" PointX="10.25" PointY="7.25" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__Candi__29221CFB" />
-        <EntityTypeShape EntityType="CareerPortalModel.AllPosition" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="CareerPortalModel.AllPosition" Width="1.5" PointX="0.5" PointY="6.75" />
         <EntityTypeShape EntityType="CareerPortalModel.CandidateJobApply" Width="1.5" PointX="5.5" PointY="5.375" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__JobId__4F47C5E3" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__UserI__503BEA1C" />
@@ -26,6 +35,16 @@
         <EntityTypeShape EntityType="CareerPortalModel.CandidateLang" Width="1.5" PointX="14.875" PointY="4.75" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__LangM__1B9317B3" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__UserI__1C873BEC" />
+        <EntityTypeShape EntityType="CareerPortalModel.Cand_AMPreviousWork" Width="1.5" PointX="3" PointY="14.75" />
+        <EntityTypeShape EntityType="CareerPortalModel.Cand_Dependants" Width="1.5" PointX="3" PointY="22.125" />
+        <EntityTypeShape EntityType="CareerPortalModel.Cand_JobFilledByHr" Width="1.5" PointX="3" PointY="18" />
+        <EntityTypeShape EntityType="CareerPortalModel.Cand_RelateFreindWorking" Width="1.5" PointX="3" PointY="11.75" />
+        <EntityTypeShape EntityType="CareerPortalModel.MoseRecentEmployement" Width="1.5" PointX="3" PointY="25" />
+        <AssociationConnector Association="CareerPortalModel.FK__Cand_AMPr__UserI__2704CA5F" />
+        <AssociationConnector Association="CareerPortalModel.FK__Cand_Depe__UserI__29E1370A" />
+        <AssociationConnector Association="CareerPortalModel.FK__Cand_JobF__UserI__2CBDA3B5" />
+        <AssociationConnector Association="CareerPortalModel.FK__Cand_Rela__UserI__2334397B" />
+        <AssociationConnector Association="CareerPortalModel.FK__MoseRecen__UserI__1F63A897" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -63,7 +63,6 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
 
             dbobj.EmailVerifyMessage = dbuser.userinfo.IsEmailVerify.Value;
        
-
             if (dbobj.CandidateInfo!=null)
             {
                 if (dbobj.CandidateInfo.User != null)
@@ -78,7 +77,6 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
                 Session["UserImage"] = dbobj.UserDbImagebase64;
             }
            
-
 
             var GetAllDegrees = new SelectList(getusrDetail.GetAllDegrees().ToList(), "Qualification_ID", "Qualification_Name").ToList();
             GetAllDegrees.Insert(0, (new SelectListItem { Text = "Select Degree", Value = "0" }));
@@ -102,7 +100,7 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
 
         [HttpPost]
         [ActionName("Index")]
-        public JsonResult CandidateDashboard(CandidateViewModel candidateViewModel, string FormWizardSteps,string DegreeName)
+        public JsonResult CandidateDashboard(CandidateViewModel candidateViewModel, string FormWizardSteps,string DegreeName, CndQualificationViewModel cndQualificationViewModel,CndExperienceViewModel CndExperienceViewModel,string JobDutiesDescription)
         {
             bool formvalidate = false;
 
@@ -114,11 +112,7 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
                 CandidateId = CheckCandidateId.CandidateInfo!=null? CheckCandidateId.CandidateInfo.Id:0;
 
                 if (FormWizardSteps == "0")
-
                 {
-     
-
-
                     if (CheckCandidateId.CandidateInfo != null)
                     {
                         candidateViewModel.CandidateInfo = CheckCandidateId.CandidateInfo;
@@ -132,8 +126,15 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
                 }
                 else if (FormWizardSteps == "1")
                 {
+                    if (cndQualificationViewModel != null && candidateViewModel.CndQualificationViewModel == null)
+                    {
+
+                        candidateViewModel.CndQualificationViewModel = cndQualificationViewModel;
+
+                    }
                     if (candidateViewModel.CndQualificationViewModel.id!=0)
                     {
+                       
                         candidateViewModel.CndQualificationViewModel.CandidateId = CandidateId;
                         candidateViewModel.CndQualificationViewModel.DegreeName = DegreeName;
                         candidateobj.UpdateCandidateQualification(candidateViewModel);
@@ -154,11 +155,26 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
                 }
                 else if (FormWizardSteps == "2")
                 {
+                    if (CndExperienceViewModel != null && candidateViewModel.CndExperienceViewModel == null)
+                    {
 
+                        candidateViewModel.CndExperienceViewModel = CndExperienceViewModel;
+                        
+                    }
                     if (candidateViewModel.CndExperienceViewModel.id != 0)
                     {
                         candidateViewModel.CndExperienceViewModel.CandidateId = CandidateId;
-                        candidateViewModel.CndExperienceViewModel.JobDuties = candidateViewModel.JobDutiesDescription;
+
+                        if (candidateViewModel.JobDutiesDescription==null && JobDutiesDescription!=null)
+                        {
+                            candidateViewModel.CndExperienceViewModel.JobDuties = JobDutiesDescription;
+
+                        }
+                        else
+                        {
+                            candidateViewModel.CndExperienceViewModel.JobDuties = candidateViewModel.JobDutiesDescription;
+                        }
+                        
                         candidateobj.UpdateCandidateExperince(candidateViewModel);
 
                     }
@@ -388,9 +404,6 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
 
 
         }
-
-
-
         public IEnumerable<SelectListItem> GetMonthsName
         {
             get

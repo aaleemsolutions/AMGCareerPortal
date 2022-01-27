@@ -559,7 +559,7 @@
       @if (Model.CandidateInfo!=null)
       {
           <text>
-            $("#quillExample1 .ql-editor").html("@Html.Raw(Model.CandidateInfo.CandidateDescription.ToString())");
+            $("#quillExample1 .ql-editor").html("@Html.Raw(Model.CandidateInfo.CandidateDescription==null?"": Model.CandidateInfo.CandidateDescription)");
 
 
           @if (Model.CandidateInfo.User.UserImage!=null) {

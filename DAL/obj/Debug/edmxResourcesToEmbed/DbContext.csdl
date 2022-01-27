@@ -20,6 +20,11 @@
     <Property Name="CVUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="isCandidate" Type="Boolean" />
     <NavigationProperty Name="CandidateLangs" Relationship="CareerPortalModel.FK__Candidate__UserI__1C873BEC" FromRole="User" ToRole="CandidateLang" />
+    <NavigationProperty Name="Cand_AMPreviousWork" Relationship="CareerPortalModel.FK__Cand_AMPr__UserI__2704CA5F" FromRole="User" ToRole="Cand_AMPreviousWork" />
+    <NavigationProperty Name="Cand_Dependants" Relationship="CareerPortalModel.FK__Cand_Depe__UserI__29E1370A" FromRole="User" ToRole="Cand_Dependants" />
+    <NavigationProperty Name="Cand_JobFilledByHr" Relationship="CareerPortalModel.FK__Cand_JobF__UserI__2CBDA3B5" FromRole="User" ToRole="Cand_JobFilledByHr" />
+    <NavigationProperty Name="Cand_RelateFreindWorking" Relationship="CareerPortalModel.FK__Cand_Rela__UserI__2334397B" FromRole="User" ToRole="Cand_RelateFreindWorking" />
+    <NavigationProperty Name="MoseRecentEmployements" Relationship="CareerPortalModel.FK__MoseRecen__UserI__1F63A897" FromRole="User" ToRole="MoseRecentEmployement" />
   </EntityType>
   <EntityContainer Name="CareerPortalEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
@@ -74,6 +79,31 @@
       <End Role="User" EntitySet="Users" />
       <End Role="CandidateLang" EntitySet="CandidateLangs" />
     </AssociationSet>
+    <EntitySet Name="Cand_AMPreviousWork" EntityType="CareerPortalModel.Cand_AMPreviousWork" />
+    <EntitySet Name="Cand_Dependants" EntityType="CareerPortalModel.Cand_Dependants" />
+    <EntitySet Name="Cand_JobFilledByHr" EntityType="CareerPortalModel.Cand_JobFilledByHr" />
+    <EntitySet Name="Cand_RelateFreindWorking" EntityType="CareerPortalModel.Cand_RelateFreindWorking" />
+    <EntitySet Name="MoseRecentEmployements" EntityType="CareerPortalModel.MoseRecentEmployement" />
+    <AssociationSet Name="FK__Cand_AMPr__UserI__2704CA5F" Association="CareerPortalModel.FK__Cand_AMPr__UserI__2704CA5F">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Cand_AMPreviousWork" EntitySet="Cand_AMPreviousWork" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cand_Depe__UserI__29E1370A" Association="CareerPortalModel.FK__Cand_Depe__UserI__29E1370A">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Cand_Dependants" EntitySet="Cand_Dependants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cand_JobF__UserI__2CBDA3B5" Association="CareerPortalModel.FK__Cand_JobF__UserI__2CBDA3B5">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Cand_JobFilledByHr" EntitySet="Cand_JobFilledByHr" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cand_Rela__UserI__2334397B" Association="CareerPortalModel.FK__Cand_Rela__UserI__2334397B">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Cand_RelateFreindWorking" EntitySet="Cand_RelateFreindWorking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MoseRecen__UserI__1F63A897" Association="CareerPortalModel.FK__MoseRecen__UserI__1F63A897">
+      <End Role="User" EntitySet="Users" />
+      <End Role="MoseRecentEmployement" EntitySet="MoseRecentEmployements" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="candidate">
     <Key>
@@ -103,6 +133,17 @@
     <Property Name="MobileNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="EmailAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="PresentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsRelateFreindWorking" Type="Boolean" />
+    <Property Name="PreviouslyWork" Type="Boolean" />
+    <Property Name="HealthIssue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PassportNo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="PasExpiryDate" Type="DateTime" Precision="3" />
+    <Property Name="DrivingLicenseNo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DrlExpiryDate" Type="DateTime" Precision="3" />
+    <Property Name="NtnNo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="EOBI" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Bloodgroup" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__candidate__UserI__6FE99F9F">
     <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
@@ -339,6 +380,7 @@
     <Property Name="UserId" Type="Int32" />
     <NavigationProperty Name="LanguageMaping" Relationship="CareerPortalModel.FK__Candidate__LangM__1B9317B3" FromRole="CandidateLang" ToRole="LanguageMaping" />
     <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Candidate__UserI__1C873BEC" FromRole="CandidateLang" ToRole="User" />
+    <Property Name="LangValue" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__Candidate__LangM__1B9317B3">
     <End Type="CareerPortalModel.LanguageMaping" Role="LanguageMaping" Multiplicity="0..1" />
@@ -360,6 +402,137 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CandidateLang">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Cand_AMPreviousWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="PositionName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Department" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Unit" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Fromdate" Type="DateTime" Precision="3" />
+    <Property Name="Todate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Cand_AMPr__UserI__2704CA5F" FromRole="Cand_AMPreviousWork" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Cand_Dependants">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Dependantname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="CNIC" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Cand_Depe__UserI__29E1370A" FromRole="Cand_Dependants" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Cand_JobFilledByHr">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="DOJ" Type="DateTime" Precision="3" />
+    <Property Name="Grade" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Department" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="EmpCode" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CarAllow" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Designation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Division" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Unit" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CarBike" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Cand_JobF__UserI__2CBDA3B5" FromRole="Cand_JobFilledByHr" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Cand_RelateFreindWorking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="RefereeName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Relation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Department" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Cand_Rela__UserI__2334397B" FromRole="Cand_RelateFreindWorking" ToRole="User" />
+  </EntityType>
+  <EntityType Name="MoseRecentEmployement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CompanyNameAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PresentRecentPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="StartingPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfJoining" Type="DateTime" Precision="3" />
+    <Property Name="GrossSalary" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Gratuity" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="BonusIncentive" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="LeaveEncashment" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="FuelAllowance" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Vehicle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__MoseRecen__UserI__1F63A897" FromRole="MoseRecentEmployement" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__Cand_AMPr__UserI__2704CA5F">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.Cand_AMPreviousWork" Role="Cand_AMPreviousWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cand_AMPreviousWork">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cand_Depe__UserI__29E1370A">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.Cand_Dependants" Role="Cand_Dependants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cand_Dependants">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cand_JobF__UserI__2CBDA3B5">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.Cand_JobFilledByHr" Role="Cand_JobFilledByHr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cand_JobFilledByHr">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cand_Rela__UserI__2334397B">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.Cand_RelateFreindWorking" Role="Cand_RelateFreindWorking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cand_RelateFreindWorking">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MoseRecen__UserI__1F63A897">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.MoseRecentEmployement" Role="MoseRecentEmployement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MoseRecentEmployement">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>

@@ -39,19 +39,29 @@ namespace ViewModels
         public string CNIC { get; set; }
         [Required]
         public string CandidateAddress { get; set; }
-
-
         public string MaritalStatus { get; set; }
+        [DisplayFormat(DataFormatString = "{dd-MMM-yyyy}")]
         public Nullable<System.DateTime> DOB { get; set; }
         public string Nationality { get; set; }
         public string Religion { get; set; }
+        [DisplayFormat(DataFormatString = "{dd-MMM-yyyy}")]
         public Nullable<System.DateTime> ExpiryDate { get; set; }
         public string ContactNo { get; set; }
         public string ContactNoOffice { get; set; }
         public string MobileNo { get; set; }
         public string EmailAddress { get; set; }
         public string PresentAddress { get; set; }
-
+        public Nullable<bool> IsRelateFreindWorking { get; set; }
+        public Nullable<bool> PreviouslyWork { get; set; }
+        public string HealthIssue { get; set; }
+        public string PassportNo { get; set; }
+        public Nullable<System.DateTime> PasExpiryDate { get; set; }
+        public string DrivingLicenseNo { get; set; }
+        public Nullable<System.DateTime> DrlExpiryDate { get; set; }
+        public string NtnNo { get; set; }
+        public string EOBI { get; set; }
+        public string Gender { get; set; }
+        public string Bloodgroup { get; set; }
 
         public candidate CandidateInfo{ get; set; }
 
