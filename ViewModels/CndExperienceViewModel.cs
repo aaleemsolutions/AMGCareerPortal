@@ -27,7 +27,7 @@ namespace ViewModels
         public bool FreshGraduate { get; set; } = false;
         public string ReasonForLeaving { get; set; } = "";
         public decimal InitialSalary { get; set; } = 0;
-        public decimal CurrentSalary { get; set; } = 0;
+        public decimal? CurrentSalary { get; set; } = 0;
         [AllowHtml]
         public string JobDuties { get; set; } = "";
 

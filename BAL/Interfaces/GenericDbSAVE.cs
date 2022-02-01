@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace BAL.Interfaces
 {
-    interface GenericDbSAVE<T>
+    interface GenericDbSAVE<T> where T : class 
 
     {
-        T GetRecordsById(int CndExpId);
+        T GetRecordsById(int Id);
         List<T> GetAllRecord();
-        T AddRecords(T candExpId);
-        int UpdateRecords(T candExpId);
+        T AddRecords(T AddRecordModel);
+        int UpdateRecords(T UpdateModel);
 
-        int DeleteRecords(T CndExpId);
+        int DeleteRecords(T Id);
 
+        void UpdateRecordsLists(List<T> UpdateModel);
+        void AddRecordsLists(List<T> UpdateModel);
+        void Save();
     }
 }

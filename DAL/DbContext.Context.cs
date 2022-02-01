@@ -43,6 +43,7 @@ namespace DAL
         public virtual DbSet<Cand_JobFilledByHr> Cand_JobFilledByHr { get; set; }
         public virtual DbSet<Cand_RelateFreindWorking> Cand_RelateFreindWorking { get; set; }
         public virtual DbSet<MoseRecentEmployement> MoseRecentEmployements { get; set; }
+        public virtual DbSet<Cand_ProfessionalReferences> Cand_ProfessionalReferences { get; set; }
     
         public virtual ObjectResult<usp_getallDegree_Result> usp_getallDegree()
         {

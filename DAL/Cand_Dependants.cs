@@ -19,6 +19,7 @@ namespace DAL
         public string Dependantname { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string CNIC { get; set; }
+        public string RelationType { get; set; }
     
         public virtual User User { get; set; }
     }

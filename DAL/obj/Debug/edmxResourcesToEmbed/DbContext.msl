@@ -214,6 +214,7 @@
     <EntitySetMapping Name="Cand_Dependants">
       <EntityTypeMapping TypeName="CareerPortalModel.Cand_Dependants">
         <MappingFragment StoreEntitySet="Cand_Dependants">
+          <ScalarProperty Name="RelationType" ColumnName="RelationType" />
           <ScalarProperty Name="CNIC" ColumnName="CNIC" />
           <ScalarProperty Name="DOB" ColumnName="DOB" />
           <ScalarProperty Name="Dependantname" ColumnName="Dependantname" />
@@ -225,6 +226,7 @@
     <EntitySetMapping Name="Cand_JobFilledByHr">
       <EntityTypeMapping TypeName="CareerPortalModel.Cand_JobFilledByHr">
         <MappingFragment StoreEntitySet="Cand_JobFilledByHr">
+          <ScalarProperty Name="taxableSalary" ColumnName="taxableSalary" />
           <ScalarProperty Name="CarBike" ColumnName="CarBike" />
           <ScalarProperty Name="Unit" ColumnName="Unit" />
           <ScalarProperty Name="Division" ColumnName="Division" />
@@ -264,6 +266,18 @@
           <ScalarProperty Name="StartingPosition" ColumnName="StartingPosition" />
           <ScalarProperty Name="PresentRecentPosition" ColumnName="PresentRecentPosition" />
           <ScalarProperty Name="CompanyNameAddress" ColumnName="CompanyNameAddress" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cand_ProfessionalReferences">
+      <EntityTypeMapping TypeName="CareerPortalModel.Cand_ProfessionalReferences">
+        <MappingFragment StoreEntitySet="Cand_ProfessionalReferences">
+          <ScalarProperty Name="RefContact" ColumnName="RefContact" />
+          <ScalarProperty Name="RefAddress" ColumnName="RefAddress" />
+          <ScalarProperty Name="RefRelation" ColumnName="RefRelation" />
+          <ScalarProperty Name="Refname" ColumnName="Refname" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

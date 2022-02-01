@@ -1,15 +1,15 @@
-function loadDatepickers() {
-    var date = new Date();
-    $('.pastdate').each(function () {
-        alert("this")
-        $(this).datepicker({
-            format: "dd-MM-yyyy",
-            enableOnReadonly: true,
-            //todayHighlight: true,
-            endDate: date
-        });
-    });
-}
+////function loadDatepickers() {
+////    var date = new Date();
+////    $('.pastdate').each(function () {
+        
+////        $(this).datepicker({
+////            format: "dd-M-yyyy",
+////            //enableOnReadonly: true,
+////            //todayHighlight: true,
+////            endDate: date
+////        });
+////    });
+////}
 
 (function ($) {
     var date = new Date();
@@ -26,19 +26,30 @@ function loadDatepickers() {
   }
   if ($("#datepicker-popup").length) {
       $('#datepicker-popup').datepicker({
-          format: "dd-MM-yyyy",
+          format: "dd-M-yyyy",
       enableOnReadonly: true,
       //todayHighlight: true,
-        startDate: date
+          startDate: date,
+          autoclose: true
     });
   }
 
-  
+    $('.pastdate').each(function () {
+
+        $(this).datepicker({
+            format: "dd-M-yyyy",
+            //enableOnReadonly: true,
+            //todayHighlight: true,
+            endDate: date,
+            autoclose: true
+        });
+    });
 
     if ($(".datepicker").length) {
         $('.datepicker').datepicker({
-            format: "dd-MM-yyyy",
-            enableOnReadonly: true
+            format: "dd-M-yyyy",
+            autoclose: true
+            //enableOnReadonly: true
             //todayHighlight: true
         });
     }
@@ -48,19 +59,21 @@ function loadDatepickers() {
  
     if ($("#dobDate").length) {
         $('#dobDate').datepicker({
-            format: "dd-MM-yyyy",
-            enableOnReadonly: true,
+            format: "dd-M-yyyy",
+            //enableOnReadonly: true,
             //todayHighlight: true,
-            endDate : date
+            endDate: date,
+            autoclose: true
         });
     }
 
     if ($(".datepickerfuture").length) {
         $('.datepickerfuture').datepicker({
-            format: "dd-MM-yyyy",
+            format: "dd-M-yyyy",
             enableOnReadonly: true,
             //todayHighlight: true,
-            startDate: date
+            startDate: date,
+            autoclose: true
         });
     }
 

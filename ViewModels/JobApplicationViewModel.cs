@@ -39,9 +39,10 @@ namespace ViewModels
 
         public ICollection<Cand_JobFilledByHr> Cand_JobFilledByHr { get; set; }
 
-        public Cand_RelateFreindWorking Cand_RelateFreindWorking { get; set; }
+        public List<Cand_RelateFreindWorking> Cand_RelateFreindWorking { get; set; }
 
         public List<CandidateLang> candLang { get; set; }
+        public List<Cand_ProfessionalReferences> Cand_ProfessionalReferences { get; set; }
 
     }
     public class RadioButtonAnswer

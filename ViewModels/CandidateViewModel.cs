@@ -40,11 +40,13 @@ namespace ViewModels
         [Required]
         public string CandidateAddress { get; set; }
         public string MaritalStatus { get; set; }
-        [DisplayFormat(DataFormatString = "{dd-MMM-yyyy}")]
-        public Nullable<System.DateTime> DOB { get; set; }
+
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
+        [DataType(DataType.Date)]
+        public Nullable<DateTime> DOB { get; set; }
         public string Nationality { get; set; }
         public string Religion { get; set; }
-        [DisplayFormat(DataFormatString = "{dd-MMM-yyyy}")]
+        
         public Nullable<System.DateTime> ExpiryDate { get; set; }
         public string ContactNo { get; set; }
         public string ContactNoOffice { get; set; }

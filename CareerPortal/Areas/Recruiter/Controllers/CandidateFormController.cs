@@ -20,9 +20,14 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         UserRegModule RegUser;
         AdoNetFetch AdoNet;
         GetUserDetails getusrDetail;
-
         CandidateLangDbSave cndLang;
+        Cand_freindWorking cand_FreindWorking;
+        PreivousWorkAtAM Cand_AMPreviousWork;
+        DependantsTestClass DependantsTestClass;
+        MostRecentEmployementClass MostRecentEmployementClass;
+        Cand_ProReferenceClass Cand_ProReferenceClass;
 
+        
         public CandidateFormController()
         {
             langmodel = new LanguagesModel();
@@ -31,9 +36,15 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             AdoNet = new AdoNetFetch();
             getusrDetail = new GetUserDetails();
             cndLang = new CandidateLangDbSave();
+            cand_FreindWorking = new Cand_freindWorking();
+            Cand_AMPreviousWork = new PreivousWorkAtAM();
+            DependantsTestClass = new DependantsTestClass();
+            MostRecentEmployementClass = new MostRecentEmployementClass();
+            Cand_ProReferenceClass = new Cand_ProReferenceClass();
         }
         public ActionResult Index()
         {
+
             return View();
         }
 
@@ -53,9 +64,16 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             JobApplicationmodel.CandidateViewModel = CandidateModel;
 
 
+            JobApplicationmodel.Cand_RelateFreindWorking = cand_FreindWorking.GetList(GlobalUserInfo.UserId);
+            JobApplicationmodel.Cand_AMPreviousWork = Cand_AMPreviousWork.GetByid(GlobalUserInfo.UserId);
+            JobApplicationmodel.Cand_Dependants = DependantsTestClass.GetList(GlobalUserInfo.UserId);
+            JobApplicationmodel.MostRecentEmployment = MostRecentEmployementClass.GetById(GlobalUserInfo.UserId);
+           JobApplicationmodel.Cand_ProfessionalReferences = Cand_ProReferenceClass.GetList(GlobalUserInfo.UserId);
+            if (JobApplicationmodel.Cand_ProfessionalReferences.Count == 0)
+            {
+                JobApplicationmodel.Cand_ProfessionalReferences = null;
 
-
-
+            }
 
 
             return View(JobApplicationmodel);
@@ -95,8 +113,14 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 candidateLangs = radiobutton.Select(m => new CandidateLang { LangMapId = m.Answer,LangValue = m.name, UserId = GlobalUserInfo.UserId }).ToList();
                 cndLang.AddData(candidateLangs);
 
+                //Freinds Relate Working
+                cand_FreindWorking.AddListReocord(model.Cand_RelateFreindWorking);
 
-                //var candmodel = candidateobj.UpdateCandidate(model.CandidateViewModel);
+                Cand_AMPreviousWork.AddData(model.Cand_AMPreviousWork);
+                DependantsTestClass.AddForeach(model.Cand_Dependants);
+                MostRecentEmployementClass.AddDatabool(model.MostRecentEmployment);
+                Cand_ProReferenceClass.AddForeach(model.Cand_ProfessionalReferences);
+
             }
 
             var dbobj = candidateobj.getCandidate(GlobalUserInfo.UserId);
@@ -105,6 +129,30 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         
         }
 
+        public JsonResult DeleteCand_Dependants(int Dependand_Id)
+        {
+
+
+            try
+            {
+
+                DependantsTestClass.DeleteById(Dependand_Id);
+                
+                return Json(true, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+
+
+                return Json(false, JsonRequestBehavior.AllowGet);
+
+            }
+
+
+
+
+        }
         public void BindDropdowns()
         {
 
@@ -149,10 +197,10 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
             var Dependants = new List<SelectListItem>
             {
-               new SelectListItem { Text = "Select ", Value = ""},
-                new SelectListItem { Text = "Parents", Value = "Male"},
-                new SelectListItem { Text = "Spouse", Value = "Female" },
-                new SelectListItem { Text = "Kids", Value = "Other" }
+               new SelectListItem { Text = "Select ", Value = "Select"},
+                new SelectListItem { Text = "Parents", Value = "Parents"},
+                new SelectListItem { Text = "Spouse", Value = "Spouse" },
+                new SelectListItem { Text = "Kids", Value = "Kids" }
 
             };
             ViewBag.DependantsDropDown = Dependants;

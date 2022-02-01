@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,35 +9,89 @@ using DAL;
 
 namespace BAL.AbstractClasses
 {
-    abstract class DbSaveClass<T> : GenericDbSAVE<T>
+    public class DbSaveClass<T> : GenericDbSAVE<T> where T : class
 
     {
-        CareerPortalEntities dbcontext;
+        private CareerPortalEntities _context;
+        private DbSet<T> table = null;
         public DbSaveClass()
         {
-            dbcontext = new CareerPortalEntities();
-        }
-        public T AddRecords(T candExpId)
-        {  
-            throw new NotImplementedException();
+            this._context = new CareerPortalEntities();
+            table = _context.Set<T>();
+            //dbcontext = new CareerPortalEntities();
         }
 
-        public int DeleteRecords(T CndExpId)
+        public T AddRecords(T AddRecordModel)
+        {
+            return table.Add(AddRecordModel);
+            
+        }
+
+        public int DeleteRecords(object Id)
+        {
+            T Existing = table.Find(Id);
+            table.Remove(Existing);
+            return 1;
+            
+        }
+        public void DeleteRecords(T model)
+        {
+       
+            table.Remove(model);
+         
+
+        }
+        public void DeleteRange(List<T> model)
+        {
+
+            table.RemoveRange(model);
+
+
+        }
+
+
+        public void Dispose()
         {
             throw new NotImplementedException();
         }
 
         public List<T> GetAllRecord()
         {
-            throw new NotImplementedException();
+            return table.ToList();
         }
 
-        public T GetRecordsById(int CndExpId)
+        public T GetRecordsById(int Id)
         {
-            throw new NotImplementedException();
+            return table.Find(Id);
         }
 
-        public int UpdateRecords(T candExpId)
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
+        public int UpdateRecords(T UpdateModel)
+        {
+            //dbcontext.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            //table.Attach(UpdateModel);
+            //_context.Entry(UpdateModel).State = EntityState.Modified;
+            _context.Entry(UpdateModel).State = System.Data.Entity.EntityState.Modified;
+            return 1;
+        }
+
+        public void UpdateRecordsLists(List<T> UpdateModel)
+        {
+            table.AddRange(UpdateModel);
+            _context.Entry(UpdateModel).State = EntityState.Modified;
+            
+        }
+        public void AddRecordsLists(List<T> UpdateModel)
+        {
+            table.AddRange(UpdateModel);
+            
+
+        }
+        int GenericDbSAVE<T>.DeleteRecords(T Id)
         {
             throw new NotImplementedException();
         }

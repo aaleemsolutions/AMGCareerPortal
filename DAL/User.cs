@@ -25,6 +25,7 @@ namespace DAL
             this.Cand_JobFilledByHr = new HashSet<Cand_JobFilledByHr>();
             this.Cand_RelateFreindWorking = new HashSet<Cand_RelateFreindWorking>();
             this.MoseRecentEmployements = new HashSet<MoseRecentEmployement>();
+            this.Cand_ProfessionalReferences = new HashSet<Cand_ProfessionalReferences>();
         }
     
         public int Id { get; set; }
@@ -57,5 +58,7 @@ namespace DAL
         public virtual ICollection<Cand_RelateFreindWorking> Cand_RelateFreindWorking { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MoseRecentEmployement> MoseRecentEmployements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cand_ProfessionalReferences> Cand_ProfessionalReferences { get; set; }
     }
 }

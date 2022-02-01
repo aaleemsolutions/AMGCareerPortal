@@ -12,20 +12,14 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Cand_JobFilledByHr
+    public partial class Cand_ProfessionalReferences
     {
         public int Id { get; set; }
         public Nullable<int> UserId { get; set; }
-        public Nullable<System.DateTime> DOJ { get; set; }
-        public string Grade { get; set; }
-        public string Department { get; set; }
-        public string EmpCode { get; set; }
-        public string CarAllow { get; set; }
-        public string Designation { get; set; }
-        public string Division { get; set; }
-        public string Unit { get; set; }
-        public string CarBike { get; set; }
-        public string taxableSalary { get; set; }
+        public string Refname { get; set; }
+        public string RefRelation { get; set; }
+        public string RefAddress { get; set; }
+        public string RefContact { get; set; }
     
         public virtual User User { get; set; }
     }
