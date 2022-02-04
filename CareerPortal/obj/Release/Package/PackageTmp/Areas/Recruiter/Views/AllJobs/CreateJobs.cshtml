@@ -207,7 +207,7 @@
                         <div id="bloodhound">
 
 
-                            <div id="datepicker-popup" class="input-group date datepicker">
+                            <div id="datepicker-popup" class="input-group date datepicker datepicker-popup">
                                 @Html.TextBoxFor(Model => Model.LastDateOfJob,
         new { @class = "typeahead", placeholder = "Last date to apply" })
 
@@ -232,7 +232,7 @@
 
                     <label for="">Description</label>
                     @*<textarea id="RichTextJobDescription" name="editordata"></textarea>*@
-                    @Html.TextAreaFor(m => m.JobDescription, new { @Id = "RichTextJobDescription", @rows = "50" })
+                    @Html.TextAreaFor(m => m.JobDescription, new { @class = "RichTextJobDescription", @rows = "50" })
 
                     @Html.ValidationMessageFor(m => m.JobDescription, null, new { @class = "text-danger" })
 
@@ -272,20 +272,20 @@
 
 
     $(document).ready(function () {
-        $('#RichTextJobDescription').summernote();
+        $('.RichTextJobDescription').summernote();
     });
     function OnJobSubmit(data) {
 
         if (data.RedirectUrl) {
             $("#form0")[0].reset()
-            $("#RichTextJobDescription").summernote('reset');
+            $(".RichTextJobDescription").summernote('reset');
             window.location.href = data.RedirectUrl;
         }
 
         
         ShowToaster(1, "Job Created Successfully!", "Job Created!");
         $("#form0")[0].reset();
-        $("#RichTextJobDescription").summernote('reset');
+        $(".RichTextJobDescription").summernote('reset');
     }
 
 

@@ -35,16 +35,16 @@
                     <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
                         <ul>
                             <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")"><a href="@Url.Action("Index","Home",null)">Home</a></li>
-                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "JobList" ? "active" : "")"> 
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "JobList" ? "active" : "")">
                                 <a href="@Url.Action("JobList","Home",null)">Jobs</a>
 
                             </li>
                             <!--<li><a href="#">Employer</a>
-    <ul class="sub-menu">
-    <li><a href="company-list.html">Employer List</a></li>
-    <li><a href="company-single.html">Employer Single</a></li>
-    </ul>
-    </li>-->
+                        <ul class="sub-menu">
+                        <li><a href="company-list.html">Employer List</a></li>
+                        <li><a href="company-single.html">Employer Single</a></li>
+                        </ul>
+                        </li>-->
                             @*<li>
                                 <a href="#">Candidates</a>
                                 <ul class="sub-menu">
@@ -55,11 +55,11 @@
                                 </ul>
                             </li>*@
                             <!--<li><a href="#">Blog</a>
-    <ul class="sub-menu">
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="blog-single.html">Blog Single</a></li>
-    </ul>
-    </li>-->
+                        <ul class="sub-menu">
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="blog-single.html">Blog Single</a></li>
+                        </ul>
+                        </li>-->
                             @*<li><a href="contact.html">Contact Us</a></li>
                             <li class="log-menu">
                                 <a href="create-job.html">+ Post a Job</a>
@@ -142,11 +142,10 @@
                 </div>
             </div>
         </div>
-
         <div class="page-heading-section bg-parallax general">
             <div class="container">
                 <div class="page-heading-content text-center">
-                    <h3 class="text-white">Jobs List</h3>
+                    <h3 class="text-white">    @ViewBag.Title </h3>
                 </div>
             </div>
         </div>

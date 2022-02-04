@@ -78,6 +78,7 @@
     <Compile Include="Binders\PropertyBinderAttribute.cs" />
     <Compile Include="Binders\RadioBinders.cs" />
     <Compile Include="CandidateViewModel.cs" />
+    <Compile Include="CandShortListViewModel.cs" />
     <Compile Include="CndExperienceViewModel.cs" />
     <Compile Include="CndQualificationViewModel.cs" />
     <Compile Include="CvDetailViewModel.cs" />

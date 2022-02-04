@@ -107,6 +107,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="HrShortlisting.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="LangScoreType.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
@@ -123,6 +126,9 @@
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimingSlot.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>

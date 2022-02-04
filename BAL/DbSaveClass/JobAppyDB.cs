@@ -37,6 +37,13 @@ namespace BAL.DbSaveClass
 
             return getpositions;
         }
+        public CandidateJobApply GetJobApplied(int JobId,int UserId)
+        {
+            var getpositions = dbcontext.CandidateJobApplies.Where(m => m.JobId == JobId && m.UserId == UserId).FirstOrDefault();
+
+            return getpositions;
+        }
+
 
         public bool UpdateApplyJob(CandidateJobApply JPosition)
         {

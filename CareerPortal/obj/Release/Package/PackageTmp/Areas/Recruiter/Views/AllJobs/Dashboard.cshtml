@@ -14,68 +14,16 @@
 </style>
 
 <div class="card"  style="height: 100%">
-    <div class="card-body">
-
-
-
-        @*<div class="row">
-         
-            <div class="col-md-12 grid-margin transparent">
-                <div class="row">
-                    <div class="col-md-3 mb-4 stretch-card transparent">
-                        <div class="card card-tale">
-                            <div class="card-body">
-                                <p class="mb-4">Today’s Bookings</p>
-                                <p class="fs-30 mb-2">4006</p>
-                                <p>10.00% (30 days)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4 stretch-card transparent">
-                        <div class="card card-dark-blue">
-                            <div class="card-body">
-                                <p class="mb-4">Total Bookings</p>
-                                <p class="fs-30 mb-2">61344</p>
-                                <p>22.00% (30 days)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4 stretch-card transparent">
-                        <div class="card card-light-blue">
-                            <div class="card-body">
-                                <p class="mb-4">Number of Meetings</p>
-                                <p class="fs-30 mb-2">34040</p>
-                                <p>2.00% (30 days)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4 stretch-card transparent">
-                        <div class="card card-light-danger">
-                            <div class="card-body">
-                                <p class="mb-4">Number of Clients</p>
-                                <p class="fs-30 mb-2">47033</p>
-                                <p>0.22% (30 days)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-          
-            </div>
-        </div>*@
-
+    <div class="card-body" style="height: 100%">
         <div class="row" style="height: 100%">
             <div class="col-md-12">
                 <h3 class="text-center"><strong>Recruiter Dashboard</strong></h3>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" style="height: 100%"> 
                 @*<div id="chart" style="height: 100%"></div>*@
                 <div id="bloodhound" style="margin-bottom:10px;">
                     <label>Select Data Type</label>
                     @Html.DropDownList("BarChartType", new SelectList(ViewBag.BarChartType, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpBarType" })
-
-
-
 
                 </div>
 
@@ -86,18 +34,11 @@
                 <div id="bloodhound" style="margin-bottom:10px;">
                     <label>Select Data Type</label>
                     @Html.DropDownList("PieChartType", new SelectList(ViewBag.PieCharType, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpPieType" })
-
-
-
-
                 </div>
                 <div id="pieCharts" style="height: 100%"></div>
             </div>
         </div>
 
-
-
-    </div>
 </div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
   
@@ -109,11 +50,4 @@
         loadJobBarAjaxdata("JobWise");
     });
 
-
-
-
-    //Pie Charts
-
-    //var echarts = require('echarts');
-     
 </script>

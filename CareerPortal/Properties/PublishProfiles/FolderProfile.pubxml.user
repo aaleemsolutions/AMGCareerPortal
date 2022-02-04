@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>F:\AbdulAleem\MyWorkingFolder\WebProjects\PublishedWebsites\CareerPortal</_PublishTargetUrl>
-    <History>True|2022-01-14T10:43:51.7154371Z;True|2022-01-11T16:51:21.6133301+05:00;True|2022-01-08T12:33:12.3276845+05:00;True|2022-01-07T10:15:45.0644978+05:00;False|2022-01-07T10:15:12.8891438+05:00;True|2022-01-06T17:11:21.9763632+05:00;False|2022-01-06T17:10:38.0066356+05:00;True|2022-01-06T15:33:45.4816120+05:00;False|2022-01-06T15:32:55.6254893+05:00;False|2021-12-30T11:33:33.9528930+05:00;False|2021-12-30T11:33:08.1686369+05:00;True|2021-12-29T15:48:45.9739946+05:00;</History>
+    <History>True|2022-02-04T12:34:32.8938517Z;True|2022-02-04T16:19:36.7571710+05:00;True|2022-02-03T14:18:03.5928671+05:00;True|2022-01-14T15:43:51.7154371+05:00;True|2022-01-11T16:51:21.6133301+05:00;True|2022-01-08T12:33:12.3276845+05:00;True|2022-01-07T10:15:45.0644978+05:00;False|2022-01-07T10:15:12.8891438+05:00;True|2022-01-06T17:11:21.9763632+05:00;False|2022-01-06T17:10:38.0066356+05:00;True|2022-01-06T15:33:45.4816120+05:00;False|2022-01-06T15:32:55.6254893+05:00;False|2021-12-30T11:33:33.9528930+05:00;False|2021-12-30T11:33:08.1686369+05:00;True|2021-12-29T15:48:45.9739946+05:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Code/HelloWorldModule.cs">
@@ -240,7 +240,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/17/2021 15:27:33</publishTime>
     </File>
     <File Include="Areas/CandidatePortal/Views/CandidateDashboard/Index.cshtml">
-      <publishTime>01/14/2022 15:24:09</publishTime>
+      <publishTime>02/04/2022 11:35:51</publishTime>
     </File>
     <File Include="Areas/CandidatePortal/Views/Candidatejob/Index.cshtml">
       <publishTime>01/06/2022 12:38:15</publishTime>
@@ -249,7 +249,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/05/2022 12:32:15</publishTime>
     </File>
     <File Include="Areas/CandidatePortal/Views/Shared/_Layout.cshtml">
-      <publishTime>01/13/2022 11:45:52</publishTime>
+      <publishTime>02/04/2022 10:41:32</publishTime>
     </File>
     <File Include="Areas/CandidatePortal/Views/web.config">
       <publishTime>01/06/2022 16:13:45</publishTime>
@@ -261,22 +261,43 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/08/2022 12:54:40</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/AllJobs/CandidateProfile.cshtml">
-      <publishTime>01/08/2022 12:20:26</publishTime>
+      <publishTime>02/04/2022 17:32:12</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/AllJobs/CreateJobs.cshtml">
-      <publishTime>01/12/2022 11:26:42</publishTime>
+      <publishTime>01/24/2022 11:56:05</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/AllJobs/Dashboard.cshtml">
-      <publishTime>01/14/2022 15:42:04</publishTime>
+      <publishTime>01/14/2022 17:37:39</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/AllJobs/Index.cshtml">
       <publishTime>01/12/2022 15:16:24</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/AllJobs/ViewJobCandidates.cshtml">
-      <publishTime>01/08/2022 11:00:18</publishTime>
+      <publishTime>02/03/2022 11:50:16</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/CandidateForm/Index.cshtml">
+      <publishTime>01/20/2022 15:11:01</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/CandidateForm/jobApplicationForm.cshtml">
+      <publishTime>02/04/2022 17:30:35</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/cvBank/CvDetail.cshtml">
+      <publishTime>01/20/2022 15:08:34</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/cvBank/Index.cshtml">
+      <publishTime>01/17/2022 15:45:24</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/Shared/_Education.cshtml">
+      <publishTime>01/24/2022 10:21:14</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/Shared/_Experience.cshtml">
+      <publishTime>02/04/2022 11:33:34</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/Shared/_Layout.cshtml">
-      <publishTime>01/13/2022 11:24:07</publishTime>
+      <publishTime>02/04/2022 15:58:26</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/Shared/_ShortlistCandidate.cshtml">
+      <publishTime>02/02/2022 17:56:28</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/web.config">
       <publishTime>01/06/2022 16:06:13</publishTime>
@@ -294,7 +315,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/08/2021 12:17:35</publishTime>
     </File>
     <File Include="assets/css/style.css">
-      <publishTime>01/07/2022 10:14:17</publishTime>
+      <publishTime>02/01/2022 15:59:24</publishTime>
     </File>
     <File Include="assets/echartsassets/dist/apexcharts.amd.js">
       <publishTime>01/11/2022 17:43:00</publishTime>
@@ -600,28 +621,28 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/BAL.dll">
-      <publishTime>01/14/2022 15:43:35</publishTime>
+      <publishTime>02/04/2022 16:19:19</publishTime>
     </File>
     <File Include="bin/BAL.dll.config">
       <publishTime>01/08/2022 16:30:15</publishTime>
     </File>
     <File Include="bin/BAL.pdb">
-      <publishTime>01/14/2022 15:43:35</publishTime>
+      <publishTime>02/04/2022 16:19:19</publishTime>
     </File>
     <File Include="bin/CareerPortal.dll">
-      <publishTime>01/14/2022 15:43:36</publishTime>
+      <publishTime>02/04/2022 17:34:09</publishTime>
     </File>
     <File Include="bin/CareerPortal.pdb">
-      <publishTime>01/14/2022 15:43:36</publishTime>
+      <publishTime>02/04/2022 17:34:09</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>01/11/2022 16:51:07</publishTime>
+      <publishTime>02/03/2022 14:17:16</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
       <publishTime>12/16/2021 16:22:14</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>01/11/2022 16:51:07</publishTime>
+      <publishTime>02/03/2022 14:17:16</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -810,19 +831,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/ViewModels.dll">
-      <publishTime>01/14/2022 15:43:33</publishTime>
+      <publishTime>02/04/2022 16:19:17</publishTime>
     </File>
     <File Include="bin/ViewModels.dll.config">
       <publishTime>12/18/2021 14:53:42</publishTime>
     </File>
     <File Include="bin/ViewModels.pdb">
-      <publishTime>01/14/2022 15:43:33</publishTime>
+      <publishTime>02/04/2022 16:19:17</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
     </File>
     <File Include="CndDashboardAssets/css/vertical-layout-light/style.css">
-      <publishTime>01/06/2022 17:02:36</publishTime>
+      <publishTime>01/20/2022 15:44:26</publishTime>
     </File>
     <File Include="CndDashboardAssets/images/auth/lockscreen-bg.jpg">
       <publishTime>12/16/2021 18:05:05</publishTime>
@@ -1116,7 +1137,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/16/2021 18:05:07</publishTime>
     </File>
     <File Include="CndDashboardAssets/js/formpickers.js">
-      <publishTime>01/04/2022 14:27:36</publishTime>
+      <publishTime>02/02/2022 09:36:37</publishTime>
     </File>
     <File Include="CndDashboardAssets/js/google-charts.js">
       <publishTime>12/16/2021 18:05:07</publishTime>
@@ -1686,10 +1707,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/09/2021 15:56:14</publishTime>
     </File>
     <File Include="Content/CustomStyle.css">
-      <publishTime>12/20/2021 17:14:55</publishTime>
+      <publishTime>02/03/2022 12:42:59</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>12/09/2021 15:56:10</publishTime>
+      <publishTime>02/01/2022 15:57:45</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>12/18/2021 13:18:25</publishTime>
@@ -1902,13 +1923,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/16/2021 12:44:12</publishTime>
     </File>
     <File Include="Scripts/Main.js">
-      <publishTime>01/13/2022 15:37:35</publishTime>
+      <publishTime>02/04/2022 11:37:30</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
       <publishTime>12/09/2021 15:56:17</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>12/29/2021 15:20:12</publishTime>
+      <publishTime>02/03/2022 12:23:53</publishTime>
     </File>
     <File Include="Views/Account/RegisterUser.cshtml">
       <publishTime>12/29/2021 15:22:15</publishTime>
@@ -1923,7 +1944,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/09/2021 15:56:10</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/06/2022 14:25:55</publishTime>
+      <publishTime>02/03/2022 12:24:06</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutHome.cshtml">
       <publishTime>01/06/2022 14:25:41</publishTime>
@@ -1935,7 +1956,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/09/2021 15:56:10</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/11/2022 16:51:13</publishTime>
+      <publishTime>02/03/2022 14:17:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

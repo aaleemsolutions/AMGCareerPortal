@@ -152,3 +152,8 @@
         transform: rotate(360deg);
     }
 }
+
+.datepicker.datepicker-dropdown .datepicker-days td.disabled {
+    background: #d3d3d34a;
+    color: red !important;
+}

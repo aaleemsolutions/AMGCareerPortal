@@ -184,6 +184,23 @@
     <Property Name="ResultType" Type="varchar" MaxLength="100" />
     <Property Name="ResultValue" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="HrShortlisting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobId" Type="int" />
+    <Property Name="CandApplyId" Type="int" />
+    <Property Name="InterviewDate" Type="date" />
+    <Property Name="SlotId" Type="int" />
+    <Property Name="IsSendJobForm" Type="bit" />
+    <Property Name="IsEmailSend" Type="bit" />
+    <Property Name="IsInterviewComfirmed" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
   <EntityType Name="LangScoreType">
     <Key>
       <PropertyRef Name="Id" />
@@ -237,6 +254,18 @@
     <Property Name="FuelAllowance" Type="varchar" MaxLength="250" />
     <Property Name="Vehicle" Type="varchar" MaxLength="250" />
     <Property Name="Other" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TimingSlots">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" />
+    <Property Name="EndTime" Type="time" Precision="7" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="UpdateDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -400,6 +429,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__HrShortli__CandA__5B78929E">
+    <End Role="CandidateJobApply" Type="Self.CandidateJobApply" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CandidateJobApply">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="CandApplyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__Creat__603D47BB">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__JobId__5A846E65">
+    <End Role="AllPositions" Type="Self.AllPositions" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AllPositions">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__SlotI__5C6CB6D7">
+    <End Role="TimingSlots" Type="Self.TimingSlots" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TimingSlots">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="SlotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__LanguageM__langg__04AFB25B">
     <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
     <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="*" />
@@ -448,6 +525,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__TimingSlo__Creat__55BFB948">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="TimingSlots" Type="Self.TimingSlots" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimingSlots">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="usp_getallDegree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="CareerPortalModelStoreContainer">
     <EntitySet Name="AllPositions" EntityType="Self.AllPositions" Schema="dbo" store:Type="Tables" />
@@ -461,11 +550,13 @@
     <EntitySet Name="CandidateJobApply" EntityType="Self.CandidateJobApply" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateLang" EntityType="Self.CandidateLang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HrShortlisting" EntityType="Self.HrShortlisting" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LangScoreType" EntityType="Self.LangScoreType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LanguageMaping" EntityType="Self.LanguageMaping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LanguageScore" EntityType="Self.LanguageScore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MoseRecentEmployement" EntityType="Self.MoseRecentEmployement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TimingSlots" EntityType="Self.TimingSlots" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Cand_AMPr__UserI__2704CA5F" Association="Self.FK__Cand_AMPr__UserI__2704CA5F">
       <End Role="Users" EntitySet="Users" />
@@ -515,6 +606,22 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="candidate" EntitySet="candidate" />
     </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__CandA__5B78929E" Association="Self.FK__HrShortli__CandA__5B78929E">
+      <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__Creat__603D47BB" Association="Self.FK__HrShortli__Creat__603D47BB">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__JobId__5A846E65" Association="Self.FK__HrShortli__JobId__5A846E65">
+      <End Role="AllPositions" EntitySet="AllPositions" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__SlotI__5C6CB6D7" Association="Self.FK__HrShortli__SlotI__5C6CB6D7">
+      <End Role="TimingSlots" EntitySet="TimingSlots" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
     <AssociationSet Name="FK__LanguageM__langg__04AFB25B" Association="Self.FK__LanguageM__langg__04AFB25B">
       <End Role="Languages" EntitySet="Languages" />
       <End Role="LanguageMaping" EntitySet="LanguageMaping" />
@@ -530,6 +637,10 @@
     <AssociationSet Name="FK__MoseRecen__UserI__1F63A897" Association="Self.FK__MoseRecen__UserI__1F63A897">
       <End Role="Users" EntitySet="Users" />
       <End Role="MoseRecentEmployement" EntitySet="MoseRecentEmployement" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TimingSlo__Creat__55BFB948" Association="Self.FK__TimingSlo__Creat__55BFB948">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TimingSlots" EntitySet="TimingSlots" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

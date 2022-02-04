@@ -14,6 +14,12 @@ namespace DAL
     
     public partial class CandidateJobApply
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CandidateJobApply()
+        {
+            this.HrShortlistings = new HashSet<HrShortlisting>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> JobId { get; set; }
         public Nullable<int> UserId { get; set; }
@@ -22,5 +28,7 @@ namespace DAL
     
         public virtual AllPosition AllPosition { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
     }
 }

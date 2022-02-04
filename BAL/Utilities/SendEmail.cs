@@ -31,6 +31,12 @@ namespace BAL.Utilities
 
         }
 
+        public static string CallForInterviewEmailBody(string fullname, string UnitName,string Intrdatetime,string officeaddress,string regards,string url="",bool IsJobForm = false ) {
+            string messagebody = "<p style=margin-right:0;margin-left:0;font-size:15px;font-family:Calibri,sans-serif;margin-top:0;margin-bottom:8pt;line-height:107%>Hi&nbsp;<strong>"+ fullname + "</strong>,</p><p style=margin-right:0;margin-left:0;font-size:15px;font-family:Calibri,sans-serif;margin-top:0;margin-bottom:8pt;line-height:107%>As discussed, Your interview has been schedule at "+Intrdatetime+", Our office address is<strong>&nbsp;" + officeaddress+ "</strong>. When you arrive, check in at the front desk. The security guard will give you a temporary elevator pass but please wear whatever you&rsquo;re most comfortable in.</p>"+(IsJobForm == true? "<p style='margin-right:0; margin-left:0; font-size:15px; font-family:Calibri,sans-serif; margin-top:0; margin-bottom:8pt; line-height:107%' >Kindly fill job application form at below link before interview.</p><p style='margin-right:0; margin-left:0; font - size:15px; font - family:Calibri,sans - serif; margin - top:0; margin - bottom:8pt; line - height:107 %; ' class='richtextJobButton'><a href='"+ url + "' class='btn btn-primary'>Job Application Form</a></p>" : "")+"<p style=margin-right:0;margin-left:0;font-size:15px;font-family:Calibri,sans-serif;margin-top:0;margin-bottom:8pt;line-height:107%>Best Regards,</p><p style=margin-right:0;margin-left:0;font-size:15px;font-family:Calibri,sans-serif;margin-top:0;margin-bottom:8pt;line-height:107%><strong>"+regards+"</strong></p>";
+
+            return messagebody;
+        }
+
 
 
         public static void Email(string htmlString, string subject, string TOAdress = "",string CCAddress = "", string BCCAddress = "")

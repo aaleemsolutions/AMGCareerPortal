@@ -402,12 +402,14 @@ function addCandExperience(currentIndex, isNextButton = true) {
             if (getformvalue == undefined) {
 
                 getformvalue = $('#form0')[0];
+
             }
 
             var valdata = new FormData(getformvalue);
 
 
-            valdata.append("JobDutiesDescription", $("#JobDutiesEditor .ql-editor").html());
+            valdata.append("JobDutiesDescription", $("#JobDutiesDescription").val());
+            
             valdata.append("FormWizardSteps", currentIndex);
 
 
@@ -634,10 +636,10 @@ function UpdateExperince(isupdate, ExperienceId) {
                     $("#ChkCndExperiencePresent").prop("checked", data.data.IsPresent);
                     $("#ChkCndNoExperience").prop("checked", data.data.FreshGraduate);
 
-                    $("#JobDutiesEditor .ql-editor").html(data.data.JobDuties);
+                    /*$("#JobDutiesEditor .ql-editor").html(data.data.JobDuties);*/
 
-
-                    $("#JobDutiesDescription").summernote("code", data.data.JobDuties);
+                    console.log(data.data);
+                    $("#CndExperienceViewModel_JobDuties").summernote("code", data.data.JobDuties);
 
 
 
@@ -816,6 +818,48 @@ function ShowJobDescription(JobId) {
 
 }
 
+function ShowShortListModal(JobId,CandId) {
+    
+
+    var options = {
+        "backdrop": "static",
+        keyboard: true
+    };
+
+    $.ajax({
+        url: "/Recruiter/Shortlisting/Shortlist_Cand/",
+        type: "GET",
+        data: { "JobApplyId": JobId, "CandId": CandId },
+        success: function (data) {
+
+            if (data != undefined && data != "") {
+
+                $('#ShortlistModalBody').html(data);
+                $('#ShortlistModalParent').modal(options);
+                $('#ShortlistModalParent').modal('show');
+
+
+
+
+            }
+
+        }, beforeSend: function () {
+            $("#PostLoader").show();
+
+        }, complete: function () {
+     
+            $("#PostLoader").hide();
+        },
+        error: function () {
+            alert("Content load failed.");
+        }
+    });
+
+
+
+
+}
+
 function ApplyForJob(JobId, IsAppliedByCv) {
 
     $.ajax({
@@ -866,6 +910,104 @@ function addNewJob() {
             data: valdata,
             success: function (data) {
 
+
+
+            },
+            complete: function (data) {
+
+            }
+        });
+
+
+
+
+
+
+    } else {
+
+    }
+
+}
+
+
+function validateShortListForm() {
+
+
+    var isvalid = true;
+
+  
+
+
+
+    var InterviewDate = $("#InterviewDate").val();
+    var InterviewTiming = $("#InterviewTiming").val();
+    var IsEmailSend = $("#isEmailSend").is('checked');
+    var isJobFormSend = $("#isJobFormSend").is('checked');
+    var ShortListId = $("#ShortListId").val();
+
+    if (isNaN(InterviewDate) == false || InterviewDate == "") {
+        $(".ErrorSH_InterviewDate").html("Interview date is required")
+        isvalid = false;
+        return isvalid;
+    } else {
+        $(".ErrorSH_InterviewDate").html("")
+        isvalid = true;
+    }
+    if (InterviewTiming < 1 || InterviewTiming < 1) {
+        $(".ErrorSH_InterviewTiming").html("Please select slots")
+        isvalid = false;
+
+        return isvalid;
+
+    } else {
+        $(".ErrorSH_InterviewTiming").html("")
+        isvalid = true;
+    }
+ 
+    if (ShortListId>0) {
+        ShowToaster(0, "Selectedt candidate already shortlist", "Already Shortlist");
+        isvalid = false;
+
+        return isvalid;
+
+    } 
+   
+
+ 
+
+ 
+    return isvalid;
+}
+
+function ShortlistCandidate() {
+
+
+    if (1 == 1) {
+
+
+        var getformvalue = $('#CandShortListCand')[0];
+
+        var valdata = new FormData(getformvalue);
+
+         
+
+
+
+        $.ajax({
+            url: "/Recruiter/Shortlisting/Shortlist_Cand",
+            type: "POST",
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            data: valdata,
+            success: function (data) {
+                if (data.status == true) {
+                    ShowToaster(1, "Candidate Shortlist Successfully ", "Shortlist Successfully");
+                    $('#ShortlistModalParent').modal('hide');
+                } else {
+                    ShowToaster(0, data.message, "Error");
+                    $('#ShortlistModalParent').modal('hide');
+                }
 
 
             },
@@ -1520,6 +1662,22 @@ $(document).ready(function () {
         }
     });
 
+    $("#isJobFormSend").change(function () {
+        if (this.checked) {
+
+
+            $(".richtextJobButton").show()
+
+
+        } else {
+            $(".richtextJobButton").hide()
+
+        }
+    });
+
+
+    
+
     //Experince Save add more button
     $("#btnSaveExperienceData").click(function () {
         addCandExperience(2, false);
@@ -1553,6 +1711,8 @@ $(document).ready(function () {
         ReloadAjaxTable();
     });
 
+
+    
     $(".JobDetail").unbind().click(function () {
         debugger;
         ShowJobDescription($(this).attr("value"));
@@ -1789,24 +1949,13 @@ $(document).ready(function () {
             $(newRow).find('.tblDplAction').append('<button type="button" class="btn btn-sm btn-danger removeDynamicRow">Delete Row</button>');
         }
 
-
+        $(newRow).find('.pastdate').val('');
         $(newRow).find('.pastdate').datepicker({
-            autoclose: true,
-            format: "dd-MM-yyyy",
+      
+            format: "dd-M-yyyy"
         });
 
-        //$('.pastdate').datepicker({
-        //    format: "dd-MM-yyyy",
-        //    enableOnReadonly: true,
-        //    //todayHighlight: true,
-        //    endDate: date
-        //});
-        
 
-
-
-        //var newRow = '<tr> <td><input type="text" name="name" value="Abdul Aleem" class="form - control"></td>< td ><input type="text" name="name" value="10 / 10 / 2021" class="form - control"></td><td><input type="text" name="name" value="Parent" class="form - control"></td><td> <select id="" class=" aaDropdownStyle" name="DependantType"><option value="">Select </option><option value="Male">Parents</option><option value="Female">Spouse</option><option value="Other">Kids</option></select> </td><td class="tblDplAction"> <button type="button" class="btn btn - sm btn - primary addDynamicRow">Add Row</button> </td></tr>'
-        //tableDependants.append($(newRow));
 
 
     });
@@ -1823,4 +1972,19 @@ $(document).ready(function () {
     });
 
 
+    $(".ShortlistCandidate").unbind().click(function () {
+     
+        ShowShortListModal($(this).attr("value"), $(this).closest('td').find('.CandUserId').val());
+
+    });
+
+
+
+    $("#btnSubmitShortlistCand").unbind().click(function () {
+        if (validateShortListForm()) {
+            ShortlistCandidate(1, false);
+
+        }        
+      
+    });
 });

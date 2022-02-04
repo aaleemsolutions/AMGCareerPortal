@@ -61,6 +61,15 @@ namespace BAL
 
             return candidateJobApply;
         }
+        public JobApplyViewModels GetJobApplied(int AppliedId,int CandId)
+
+        {
+            var jobApplied = jobApplyDb.GetJobApplied(AppliedId, CandId);
+            JobApplyViewModels candidateJobApply = new JobApplyViewModels();
+            candidateJobApply.CndJobApply = jobApplied;
+
+            return candidateJobApply;
+        }
 
         public List<JobApplyViewModels> GetJobApplied()
         {

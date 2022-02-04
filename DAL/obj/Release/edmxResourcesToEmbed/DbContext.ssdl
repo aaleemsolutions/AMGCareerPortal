@@ -28,6 +28,67 @@
     <Property Name="CategoryId" Type="int" />
     <Property Name="CategoryName" Type="varchar" MaxLength="250" />
   </EntityType>
+  <EntityType Name="Cand_AMPreviousWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="PositionName" Type="varchar" MaxLength="250" />
+    <Property Name="Department" Type="varchar" MaxLength="250" />
+    <Property Name="Unit" Type="varchar" MaxLength="250" />
+    <Property Name="Fromdate" Type="datetime" />
+    <Property Name="Todate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Cand_Dependants">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Dependantname" Type="varchar" MaxLength="250" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="CNIC" Type="varchar" MaxLength="250" />
+    <Property Name="RelationType" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Cand_JobFilledByHr">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="DOJ" Type="datetime" />
+    <Property Name="Grade" Type="varchar" MaxLength="250" />
+    <Property Name="Department" Type="varchar" MaxLength="250" />
+    <Property Name="EmpCode" Type="varchar" MaxLength="250" />
+    <Property Name="CarAllow" Type="varchar" MaxLength="250" />
+    <Property Name="Designation" Type="varchar" MaxLength="250" />
+    <Property Name="Division" Type="varchar" MaxLength="250" />
+    <Property Name="Unit" Type="varchar" MaxLength="250" />
+    <Property Name="CarBike" Type="varchar" MaxLength="250" />
+    <Property Name="taxableSalary" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Cand_ProfessionalReferences">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Refname" Type="varchar" MaxLength="250" />
+    <Property Name="RefRelation" Type="varchar" MaxLength="250" />
+    <Property Name="RefAddress" Type="varchar" MaxLength="250" />
+    <Property Name="RefContact" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Cand_RelateFreindWorking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="RefereeName" Type="varchar" MaxLength="250" />
+    <Property Name="Relation" Type="varchar" MaxLength="250" />
+    <Property Name="Department" Type="varchar" MaxLength="250" />
+  </EntityType>
   <EntityType Name="candidate">
     <Key>
       <PropertyRef Name="Id" />
@@ -42,6 +103,28 @@
     <Property Name="FathersName" Type="varchar" MaxLength="150" />
     <Property Name="CNIC" Type="varchar" MaxLength="20" />
     <Property Name="CandidateAddress" Type="varchar" MaxLength="400" />
+    <Property Name="FatherName" Type="nvarchar" MaxLength="250" />
+    <Property Name="MaritalStatus" Type="nvarchar" MaxLength="250" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="250" />
+    <Property Name="Religion" Type="nvarchar" MaxLength="250" />
+    <Property Name="ExpiryDate" Type="datetime" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="25" />
+    <Property Name="ContactNoOffice" Type="varchar" MaxLength="25" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="25" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="250" />
+    <Property Name="PresentAddress" Type="nvarchar(max)" />
+    <Property Name="IsRelateFreindWorking" Type="bit" />
+    <Property Name="PreviouslyWork" Type="bit" />
+    <Property Name="HealthIssue" Type="varchar(max)" />
+    <Property Name="PassportNo" Type="varchar" MaxLength="250" />
+    <Property Name="PasExpiryDate" Type="datetime" />
+    <Property Name="DrivingLicenseNo" Type="varchar" MaxLength="250" />
+    <Property Name="DrlExpiryDate" Type="datetime" />
+    <Property Name="NtnNo" Type="varchar" MaxLength="250" />
+    <Property Name="EOBI" Type="varchar" MaxLength="250" />
+    <Property Name="Gender" Type="varchar" MaxLength="250" />
+    <Property Name="Bloodgroup" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="CandidateExperince">
     <Key>
@@ -73,6 +156,15 @@
     <Property Name="AppliedOn" Type="datetime" />
     <Property Name="ApplyByCV" Type="bit" />
   </EntityType>
+  <EntityType Name="CandidateLang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LangMapId" Type="int" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="LangValue" Type="varchar" MaxLength="250" />
+  </EntityType>
   <EntityType Name="CandidateQualification">
     <Key>
       <PropertyRef Name="id" />
@@ -92,6 +184,89 @@
     <Property Name="ResultType" Type="varchar" MaxLength="100" />
     <Property Name="ResultValue" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="HrShortlisting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobId" Type="int" />
+    <Property Name="CandApplyId" Type="int" />
+    <Property Name="InterviewDate" Type="date" />
+    <Property Name="SlotId" Type="int" />
+    <Property Name="IsSendJobForm" Type="bit" />
+    <Property Name="IsEmailSend" Type="bit" />
+    <Property Name="IsInterviewComfirmed" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="LangScoreType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="LanguageMaping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="langgId" Type="int" />
+    <Property Name="ScoreTypeId" Type="int" />
+    <Property Name="ScoreId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LanguageName" Type="varchar" MaxLength="250" />
+    <Property Name="isRequired" Type="bit" />
+    <Property Name="isTextboxOpen" Type="bit" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="LanguageScore">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ScoreName" Type="varchar" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="MoseRecentEmployement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="CompanyNameAddress" Type="varchar(max)" />
+    <Property Name="PresentRecentPosition" Type="varchar(max)" />
+    <Property Name="StartingPosition" Type="varchar(max)" />
+    <Property Name="DateOfJoining" Type="datetime" />
+    <Property Name="GrossSalary" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Gratuity" Type="varchar" MaxLength="250" />
+    <Property Name="BonusIncentive" Type="varchar" MaxLength="250" />
+    <Property Name="LeaveEncashment" Type="varchar" MaxLength="250" />
+    <Property Name="FuelAllowance" Type="varchar" MaxLength="250" />
+    <Property Name="Vehicle" Type="varchar" MaxLength="250" />
+    <Property Name="Other" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TimingSlots">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" />
+    <Property Name="EndTime" Type="time" Precision="7" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="Id" />
@@ -110,6 +285,66 @@
     <Property Name="CVUpdatedOn" Type="datetime" />
     <Property Name="isCandidate" Type="bit" />
   </EntityType>
+  <Association Name="FK__Cand_AMPr__UserI__2704CA5F">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Cand_AMPreviousWork" Type="Self.Cand_AMPreviousWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cand_AMPreviousWork">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cand_Depe__UserI__29E1370A">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Cand_Dependants" Type="Self.Cand_Dependants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cand_Dependants">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cand_JobF__UserI__2CBDA3B5">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Cand_JobFilledByHr" Type="Self.Cand_JobFilledByHr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cand_JobFilledByHr">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cand_Prof__UserI__40C49C62">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Cand_ProfessionalReferences" Type="Self.Cand_ProfessionalReferences" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cand_ProfessionalReferences">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cand_Rela__UserI__2334397B">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Cand_RelateFreindWorking" Type="Self.Cand_RelateFreindWorking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cand_RelateFreindWorking">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Candidate__Candi__17036CC0">
     <End Role="candidate" Type="Self.candidate" Multiplicity="0..1" />
     <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
@@ -146,6 +381,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Candidate__LangM__1B9317B3">
+    <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="0..1" />
+    <End Role="CandidateLang" Type="Self.CandidateLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LanguageMaping">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateLang">
+        <PropertyRef Name="LangMapId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Candidate__UserI__1C873BEC">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="CandidateLang" Type="Self.CandidateLang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateLang">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Candidate__UserI__503BEA1C">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="CandidateJobApply" Type="Self.CandidateJobApply" Multiplicity="*" />
@@ -170,14 +429,155 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__HrShortli__CandA__5B78929E">
+    <End Role="CandidateJobApply" Type="Self.CandidateJobApply" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CandidateJobApply">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="CandApplyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__Creat__603D47BB">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__JobId__5A846E65">
+    <End Role="AllPositions" Type="Self.AllPositions" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AllPositions">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__SlotI__5C6CB6D7">
+    <End Role="TimingSlots" Type="Self.TimingSlots" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TimingSlots">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="SlotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LanguageM__langg__04AFB25B">
+    <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+    <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LanguageMaping">
+        <PropertyRef Name="langgId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LanguageM__Score__05A3D694">
+    <End Role="LangScoreType" Type="Self.LangScoreType" Multiplicity="0..1" />
+    <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LangScoreType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LanguageMaping">
+        <PropertyRef Name="ScoreTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LanguageM__Score__0697FACD">
+    <End Role="LanguageScore" Type="Self.LanguageScore" Multiplicity="0..1" />
+    <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LanguageScore">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LanguageMaping">
+        <PropertyRef Name="ScoreId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MoseRecen__UserI__1F63A897">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="MoseRecentEmployement" Type="Self.MoseRecentEmployement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MoseRecentEmployement">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TimingSlo__Creat__55BFB948">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="TimingSlots" Type="Self.TimingSlots" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimingSlots">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="usp_getallDegree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="CareerPortalModelStoreContainer">
     <EntitySet Name="AllPositions" EntityType="Self.AllPositions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cand_AMPreviousWork" EntityType="Self.Cand_AMPreviousWork" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cand_Dependants" EntityType="Self.Cand_Dependants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cand_JobFilledByHr" EntityType="Self.Cand_JobFilledByHr" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cand_ProfessionalReferences" EntityType="Self.Cand_ProfessionalReferences" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cand_RelateFreindWorking" EntityType="Self.Cand_RelateFreindWorking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="candidate" EntityType="Self.candidate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateExperince" EntityType="Self.CandidateExperince" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateJobApply" EntityType="Self.CandidateJobApply" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CandidateLang" EntityType="Self.CandidateLang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HrShortlisting" EntityType="Self.HrShortlisting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LangScoreType" EntityType="Self.LangScoreType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LanguageMaping" EntityType="Self.LanguageMaping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LanguageScore" EntityType="Self.LanguageScore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MoseRecentEmployement" EntityType="Self.MoseRecentEmployement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TimingSlots" EntityType="Self.TimingSlots" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Cand_AMPr__UserI__2704CA5F" Association="Self.FK__Cand_AMPr__UserI__2704CA5F">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Cand_AMPreviousWork" EntitySet="Cand_AMPreviousWork" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cand_Depe__UserI__29E1370A" Association="Self.FK__Cand_Depe__UserI__29E1370A">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Cand_Dependants" EntitySet="Cand_Dependants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cand_JobF__UserI__2CBDA3B5" Association="Self.FK__Cand_JobF__UserI__2CBDA3B5">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Cand_JobFilledByHr" EntitySet="Cand_JobFilledByHr" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cand_Prof__UserI__40C49C62" Association="Self.FK__Cand_Prof__UserI__40C49C62">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Cand_ProfessionalReferences" EntitySet="Cand_ProfessionalReferences" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cand_Rela__UserI__2334397B" Association="Self.FK__Cand_Rela__UserI__2334397B">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Cand_RelateFreindWorking" EntitySet="Cand_RelateFreindWorking" />
+    </AssociationSet>
     <AssociationSet Name="FK__Candidate__Candi__17036CC0" Association="Self.FK__Candidate__Candi__17036CC0">
       <End Role="candidate" EntitySet="candidate" />
       <End Role="CandidateQualification" EntitySet="CandidateQualification" />
@@ -190,6 +590,14 @@
       <End Role="AllPositions" EntitySet="AllPositions" />
       <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
     </AssociationSet>
+    <AssociationSet Name="FK__Candidate__LangM__1B9317B3" Association="Self.FK__Candidate__LangM__1B9317B3">
+      <End Role="LanguageMaping" EntitySet="LanguageMaping" />
+      <End Role="CandidateLang" EntitySet="CandidateLang" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Candidate__UserI__1C873BEC" Association="Self.FK__Candidate__UserI__1C873BEC">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="CandidateLang" EntitySet="CandidateLang" />
+    </AssociationSet>
     <AssociationSet Name="FK__Candidate__UserI__503BEA1C" Association="Self.FK__Candidate__UserI__503BEA1C">
       <End Role="Users" EntitySet="Users" />
       <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
@@ -197,6 +605,42 @@
     <AssociationSet Name="FK__candidate__UserI__6FE99F9F" Association="Self.FK__candidate__UserI__6FE99F9F">
       <End Role="Users" EntitySet="Users" />
       <End Role="candidate" EntitySet="candidate" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__CandA__5B78929E" Association="Self.FK__HrShortli__CandA__5B78929E">
+      <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__Creat__603D47BB" Association="Self.FK__HrShortli__Creat__603D47BB">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__JobId__5A846E65" Association="Self.FK__HrShortli__JobId__5A846E65">
+      <End Role="AllPositions" EntitySet="AllPositions" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__SlotI__5C6CB6D7" Association="Self.FK__HrShortli__SlotI__5C6CB6D7">
+      <End Role="TimingSlots" EntitySet="TimingSlots" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LanguageM__langg__04AFB25B" Association="Self.FK__LanguageM__langg__04AFB25B">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="LanguageMaping" EntitySet="LanguageMaping" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LanguageM__Score__05A3D694" Association="Self.FK__LanguageM__Score__05A3D694">
+      <End Role="LangScoreType" EntitySet="LangScoreType" />
+      <End Role="LanguageMaping" EntitySet="LanguageMaping" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LanguageM__Score__0697FACD" Association="Self.FK__LanguageM__Score__0697FACD">
+      <End Role="LanguageScore" EntitySet="LanguageScore" />
+      <End Role="LanguageMaping" EntitySet="LanguageMaping" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MoseRecen__UserI__1F63A897" Association="Self.FK__MoseRecen__UserI__1F63A897">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="MoseRecentEmployement" EntitySet="MoseRecentEmployement" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TimingSlo__Creat__55BFB948" Association="Self.FK__TimingSlo__Creat__55BFB948">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TimingSlots" EntitySet="TimingSlots" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

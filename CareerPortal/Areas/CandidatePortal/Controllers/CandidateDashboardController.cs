@@ -49,7 +49,27 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
                 
             }
 
-         
+            var dbobj = candidateobj.getCandidate(GlobalUserInfo.UserId);
+
+            if (dbobj.UsersInfo!=null)
+            {
+                if (dbobj.UsersInfo.CandidateJobApplies.Where(m => m.HrShortlistings.Count > 0).Count() > 0)
+                {
+                    GlobalUserInfo.JobApplicationOpen = true;
+
+
+                }
+                if (dbobj.UsersInfo != null)
+                {
+                    GlobalUserInfo.EmailAddress = dbobj.UsersInfo.UserEmail;
+                    GlobalUserInfo.FullName = dbobj.UsersInfo.FullName;
+
+
+                }
+            }
+        
+
+
 
         }
 
@@ -94,13 +114,14 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
 
             ViewBag.GradeTypes = GradeTypes().ToList();
 
+
             return View(dbobj);
         }
 
 
         [HttpPost]
         [ActionName("Index")]
-        public JsonResult CandidateDashboard(CandidateViewModel candidateViewModel, string FormWizardSteps,string DegreeName, CndQualificationViewModel cndQualificationViewModel,CndExperienceViewModel CndExperienceViewModel,string JobDutiesDescription)
+        public JsonResult CandidateDashboard(CandidateViewModel candidateViewModel , string FormWizardSteps ,string DegreeName , CndQualificationViewModel cndQualificationViewModel ,CndExperienceViewModel CndExperienceViewModel )
         {
             bool formvalidate = false;
 
@@ -165,14 +186,19 @@ namespace CareerPortal.Areas.CandidatePortal.Controllers
                     {
                         candidateViewModel.CndExperienceViewModel.CandidateId = CandidateId;
 
-                        if (candidateViewModel.JobDutiesDescription==null && JobDutiesDescription!=null)
+                        //if (candidateViewModel.JobDutiesDescription==null && JobDutiesDescription!=null)
+                        //{
+                        //    candidateViewModel.CndExperienceViewModel.JobDuties = JobDutiesDescription;
+
+                        //}
+                        if (candidateViewModel.JobDutiesDescription == null )
                         {
-                            candidateViewModel.CndExperienceViewModel.JobDuties = JobDutiesDescription;
+//                            candidateViewModel.CndExperienceViewModel.JobDuties = candidateViewModel.JobDutiesDescription;
 
                         }
                         else
                         {
-                            candidateViewModel.CndExperienceViewModel.JobDuties = candidateViewModel.JobDutiesDescription;
+                           // candidateViewModel.CndExperienceViewModel.JobDuties = candidateViewModel.JobDutiesDescription;
                         }
                         
                         candidateobj.UpdateCandidateExperince(candidateViewModel);

@@ -12,6 +12,7 @@ using DAL;
 
 namespace CareerPortal.Areas.Recruiter.Controllers
 {
+    [Authorize]
     public class CandidateFormController : Controller
     {
 
@@ -69,13 +70,26 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             JobApplicationmodel.Cand_Dependants = DependantsTestClass.GetList(GlobalUserInfo.UserId);
             JobApplicationmodel.MostRecentEmployment = MostRecentEmployementClass.GetById(GlobalUserInfo.UserId);
            JobApplicationmodel.Cand_ProfessionalReferences = Cand_ProReferenceClass.GetList(GlobalUserInfo.UserId);
+
             if (JobApplicationmodel.Cand_ProfessionalReferences.Count == 0)
             {
                 JobApplicationmodel.Cand_ProfessionalReferences = null;
 
             }
+            if (JobApplicationmodel.Cand_Dependants.Count == 0)
+            {
+                JobApplicationmodel.Cand_Dependants = null;
+
+            }
+           
+                    if (JobApplicationmodel.Cand_RelateFreindWorking.Count == 0)
+            {
+                JobApplicationmodel.Cand_RelateFreindWorking = null;
+
+            }
 
 
+           
             return View(JobApplicationmodel);
         }
 
@@ -97,20 +111,10 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             if (model.CandidateViewModel.CandidateInfo.Id==0)
             {
                 var candmodel = candidateobj.AddCandidate(model.CandidateViewModel);
-                List<CandidateLang> candidateLangs = new List<CandidateLang>();
-                candidateLangs = radiobutton.Select(m => new CandidateLang { LangMapId = m.Answer, UserId = GlobalUserInfo.UserId }).ToList();
-                cndLang.AddData(candidateLangs);
-
-            }
-            else
-            {
-
-
-                var candmodel = candidateobj.UpdateCandidate(model.CandidateViewModel);
                 cndLang.DeleteByUserId(GlobalUserInfo.UserId);
 
                 List<CandidateLang> candidateLangs = new List<CandidateLang>();
-                candidateLangs = radiobutton.Select(m => new CandidateLang { LangMapId = m.Answer,LangValue = m.name, UserId = GlobalUserInfo.UserId }).ToList();
+                candidateLangs = radiobutton.Select(m => new CandidateLang { LangMapId = m.Answer, LangValue = m.name, UserId = GlobalUserInfo.UserId }).ToList();
                 cndLang.AddData(candidateLangs);
 
                 //Freinds Relate Working
@@ -120,6 +124,34 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 DependantsTestClass.AddForeach(model.Cand_Dependants);
                 MostRecentEmployementClass.AddDatabool(model.MostRecentEmployment);
                 Cand_ProReferenceClass.AddForeach(model.Cand_ProfessionalReferences);
+
+            }
+            else
+            {
+
+
+                var candmodel = candidateobj.UpdateCandidate(model.CandidateViewModel);
+                cndLang.DeleteByUserId(GlobalUserInfo.UserId);
+
+                if (radiobutton!=null)
+                {
+                    List<CandidateLang> candidateLangs = new List<CandidateLang>();
+                    candidateLangs = radiobutton.Select(m => new CandidateLang { LangMapId = m.Answer, LangValue = m.name, UserId = GlobalUserInfo.UserId }).ToList();
+                    cndLang.AddData(candidateLangs);
+                }
+           
+
+                //Freinds Relate Working
+                cand_FreindWorking.AddListReocord(model.Cand_RelateFreindWorking);
+
+                if(model.Cand_AMPreviousWork!=null)
+                    Cand_AMPreviousWork.AddData(model.Cand_AMPreviousWork);
+                if (model.Cand_Dependants != null)
+                    DependantsTestClass.AddForeach(model.Cand_Dependants);
+                if (model.MostRecentEmployment != null)
+                    MostRecentEmployementClass.AddDatabool(model.MostRecentEmployment);
+                if (model.Cand_ProfessionalReferences != null)
+                    Cand_ProReferenceClass.AddForeach(model.Cand_ProfessionalReferences);
 
             }
 

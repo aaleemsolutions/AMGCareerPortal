@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 
 namespace CareerPortal.Areas.Recruiter.Controllers
 {
+    [Authorize]
     public class AllJobsController : Controller
     {
         JobAllPositions jbPositions;
@@ -157,35 +158,27 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
             if (ModelState.IsValid)
             {
-                if (model.JobId!=0)
+                if (model.JobId != 0)
                 {
                     jbPositions.UpdatePosition(model);
                     ModelState.Clear();
-
                     //return RedirectToAction("Index");
-
                     return Json(new { RedirectUrl = Url.Action("Index") });
                 }
                 else
                 {
                     jbPositions.AddPositions(model);
                     model = new JobPositionViewModels();
-
                     return View();
                     //ModelState.Clear();
+
                 }
-
-                
-
-    
             }
             else
             {
                 return View(model);
-
             }
 
- 
         }
         public JsonResult DeleteJob(int JobId)
         {
@@ -268,6 +261,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         }
 
 
+     
         public ActionResult CandidateProfile(int UserId = 0)
         {
             var dbobj = new CandidateViewModel();

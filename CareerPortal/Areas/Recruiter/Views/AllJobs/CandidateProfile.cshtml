@@ -22,12 +22,17 @@
 
                             @if (Model.CandidateInfo != null)
                             {
-                                if (Model.CandidateInfo.User.UserImage.Length > 10)
+                                if (Model.CandidateInfo.User.UserImage != null)
                                 {
-                                    <img src="data:image/jpeg;base64,@Model.CandidateInfo.User.UserImage.ToString().Replace(" &quot;","")" alt="profile" style="height: 92px; width: 92px;" class="img-lg rounded-circle mb-3" />
-                                }
-                                else
-                                {
+                                    if (Model.CandidateInfo.User.UserImage.Length > 10)
+                                    {
+                                        <img src="data:image/jpeg;base64,@Model.CandidateInfo.User.UserImage.ToString().Replace(" &quot;","")" alt="profile" style="height: 92px; width: 92px;" class="img-lg rounded-circle mb-3" />
+                                    }
+                                    else
+                                    {
+
+
+                                    }
                                     <img src="~/assets/img/noProfile.png" alt="profile" style="height: 92px; width: 92px; " class="img-lg rounded-circle mb-3" />
                                 }
 
@@ -41,12 +46,13 @@
                                 <div class="d-flex align-items-center">
 
 
+
                                 </div>
                             </div>
                             @*<p class="w-75 mx-auto mb-3">
-                                    Bureau Oberhaeuser is a design bureau focused on Information- and
-                                    Interface Design.
-                                </p>*@
+            Bureau Oberhaeuser is a design bureau focused on Information- and
+            Interface Design.
+        </p>*@
                             <div class="d-flex justify-content-center">
                                 @*<button class="btn btn-sm btn-success me-1">Download Profile <span class="ti-download"></span> </button>*@
 

@@ -1,0 +1,281 @@
+﻿@using BAL.Utilities;
+@model DAL.CustomModel.CvMain
+
+@{
+    ViewBag.Title = "Cv Detail";
+}
+<!-- partial -->
+<style>
+    .nav-pills.nav-pills-custom .nav-link.active {
+        background: #1C2F8C;
+        color: #ffffff;
+    }
+</style>
+<a href="@Url.Action("Index","cvBank",new { area="Recruiter"})" style="text-decoration:none;color:#000"><span class="ti-arrow-left"> Back</span></a>
+<div class="container-fluid row">
+    <div class="col-12">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="border-bottom text-center pb-4">
+
+
+                            <div class="mb-3">
+                                <h3>@Model.CandidateName  </h3>
+
+                                <h5>@Model.DesignationName -  @Model.DepartmentName</h5>
+                                <div class="d-flex align-items-center">
+
+
+                                </div>
+                            </div>
+                            @*<p class="w-75 mx-auto mb-3">
+                                    Bureau Oberhaeuser is a design bureau focused on Information- and
+                                    Interface Design.
+                                </p>*@
+
+
+                            <div class="row">
+                                <div class="py-12">
+
+                                    <p class="clearfix">
+                                        <span class="float-left">
+                                            Phone
+                                        </span>
+                                        <span class="float-right text-muted">
+                                            @Model.Mobile
+                                        </span>
+                                    </p>
+                                    <p class="clearfix">
+                                        <span class="float-left">
+                                            Mail
+                                        </span>
+                                        <span class="float-right text-muted">
+                                            @Model.Email
+                                        </span>
+                                    </p>
+                                    <p class="clearfix">
+                                        <span class="float-left">
+                                            Gender
+                                        </span>
+                                        <span class="float-right text-muted">
+                                            @Model.Gender
+                                        </span>
+                                        -
+                                        <span class="float-left">
+                                            Marital Status
+                                        </span>
+                                        <span class="float-right text-muted">
+                                            @Model.MaritalStatus
+                                        </span>
+                                    </p>
+                                
+
+                                    <p class="clearfix">
+                                        <span class="float-left">
+                                            Address
+                                        </span>
+                                        <span class="float-right text-muted">
+                                            @Model.CurrentAddress
+                                        </span>
+                                    </p>
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                @*<button class="btn btn-sm btn-success me-1">Download Profile <span class="ti-download"></span> </button>*@
+
+                                <button class="btn btn-sm btn-primary me-1">Download CV <span class="ti-download"></span>  </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="py-4">
+
+                            <h4 class="card-title">Skills</h4>
+
+
+
+                            <ul class="bullet-line-list">
+                                @if (Model.CvSkills != null)
+                                {
+                                    foreach (var item in Model.CvSkills)
+                                    {
+                                        <li>
+                                            <h5><strong>@item.Field</strong></h5>
+                                            <p>@item.SkillDesc</p>
+
+
+                                        </li>
+
+                                    }
+                                }
+                                @if (Model.CvSkills.Count == 0)
+                                {
+                                    <li>No Record Found</li>
+                                }
+
+
+                            </ul>
+                        </div>
+                        @*<button class="btn btn-primary btn-block mb-2">Preview</button>*@
+                    </div>
+                    <div class="col-lg-8">
+
+                        <div class="col-md-10 mx-auto">
+                            <ul class="nav nav-pills nav-pills-custom" id="pills-tab-custom" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-home-tab-custom" data-bs-toggle="pill" href="#pills-health" role="tab" aria-controls="pills-home" aria-selected="true">
+                                        Profile
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-profile-tab-custom" data-bs-toggle="pill" href="#CandidateDocuments" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                        Job Applied
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content tab-content-custom-pill" id="pills-tabContent-custom">
+                                <div class="tab-pane fade show active" id="pills-health" role="tabpanel" aria-labelledby="pills-home-tab-custom">
+
+
+                                    <div class="profile-feed border-bottom">
+                                        <br />
+                                        <h4 class="card-title">Education</h4>
+
+
+
+                                        <ul class="bullet-line-list">
+                                            @if (Model.CvQualifications.Count != 0)
+                                            {
+                                                foreach (var item in Model.CvQualifications)
+                                                {
+                                                    <li>
+                                                        <h5><strong>@item.Degree</strong></h5>
+                                                        <p>@item.Qualification_Name - @item.Institute</p>
+                                                        <p class="text-muted mb-4">
+                                                            <i class="ti-time"> </i>
+                                                            @{
+                                                                var FromYear = item.StartDate.Year == 1900 ? "" : item.StartDate.ToString("dd-MMM-yyyy");
+                                                                var ToYear = item.EndDate.Year == 1900 ? "" : item.EndDate.ToString("dd-MMM-yyyy");
+                                                                <text>
+                                                                    @FromYear  -  @ToYear
+                                                                </text>
+
+
+
+                                                            }
+                                                        </p>
+
+                                                    </li>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li>No Record Found</li>
+
+                                            }
+
+
+                                        </ul>
+
+
+
+                                        <br />
+                                        <h4 class="card-title">Experience</h4>
+
+
+
+                                        <ul class="bullet-line-list">
+                                            @if (Model.CvExperiences != null)
+                                            {
+                                                foreach (var item in Model.CvExperiences)
+                                                {
+                                                    <li>
+                                                        <h5><strong>@item.Company - @item.Designation</strong></h5>
+
+                                                        <p class="text-muted mb-4">
+                                                            <i class="ti-time"> </i>
+                                                            @{
+                                                                var FromYear = item.StartDate.Year == 1900 ? "" : item.StartDate.ToString("dd-MMM-yyyy");
+                                                                var ToYear = item.EndDate.Year == 1900 ? "Present" : item.EndDate.ToString("dd-MMM-yyyy");
+                                                                <text>
+                                                                    @FromYear  -  @ToYear @item.JobDuration
+                                                                </text>
+
+
+
+                                                            }
+                                                        </p>
+
+                                                    </li>
+
+                                                }
+
+                                                foreach (var item in Model.CvInternships)
+                                                {
+                                                    <li>
+                                                        <h5><strong>Internship: @item.Department - @item.Company</strong></h5>
+
+                                                        <p class="text-muted mb-4">
+                                                            <i class="ti-time"> </i>
+                                                            @{
+                                                                var FromYear = item.StartDate.Year == 1900 ? "" : item.StartDate.ToString("dd-MMM-yyyy");
+                                                                var ToYear = item.EndDate.Year == 1900 ? "Present" : item.EndDate.ToString("dd-MMM-yyyy");
+                                                                <text>
+                                                                    @FromYear  -  @ToYear @item.Duration
+                                                                </text>
+
+
+
+                                                            }
+                                                        </p>
+
+                                                    </li>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li>No Record Found</li>
+
+                                            }
+
+                                            @if (Model.CvExperiences.Count == 0 && Model.CvInternships.Count == 0)
+                                            {
+                                                <li>No Record Found</li>
+                                            }
+
+                                        </ul>
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class="tab-pane fade show active" id="CandidateDocuments" role="tabpanel" aria-labelledby="pills-home-tab-custom">
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

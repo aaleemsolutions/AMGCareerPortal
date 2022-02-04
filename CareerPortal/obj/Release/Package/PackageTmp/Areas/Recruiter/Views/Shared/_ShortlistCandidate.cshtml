@@ -1,0 +1,128 @@
+﻿@model ViewModels.CandShortListViewModel
+
+
+<div class="container">
+    <div class="row">
+        @Html.HiddenFor(m => m.HrShortlisting.Id, new { @id = "ShortListId" })
+        @Html.HiddenFor(m => m.jobApplyViewModels.CndJobApply.JobId)
+        @Html.HiddenFor(m => m.jobApplyViewModels.CndJobApply.Id)
+        @Html.HiddenFor(m => m.jobApplyViewModels.User.Id)
+        @Html.HiddenFor(m => m.jobApplyViewModels.CndJobApply.User.UserEmail)
+       
+
+        <div class="col-md-2 col-sm-4">
+            <label>Candidate Name <span class="text-danger">*</span> </label>
+            <div id="the-basics">
+
+                @Html.TextBoxFor(m => m.jobApplyViewModels.CndJobApply.User.FullName, new { @class = "typeahead validateTextOnly", placeholder = "Candidate Name", @readonly = "true" })
+
+
+
+
+
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-4">
+            <label>Job Title <span class="text-danger">*</span></label>
+            <div id="the-basics1">
+                @*<input class="typeahead" type="text" placeholder="First Name" >*@
+
+
+                @Html.TextBoxFor(m => m.jobApplyViewModels.CndJobApply.AllPosition.JobTitle, new { @class = "typeahead validateTextOnly", @readonly = "true", placeholder = "Job Applied" })
+
+                <span class="ErrorSH_JobTitle text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4">
+            <label>Interview Date <span class="text-danger">*</span></label>
+            <div id="bloodhound">
+
+                <div id="dobDate" class="input-group date datepickerfuture ">
+                    @Html.TextBoxFor(Model => Model.HrShortlisting.InterviewDate, "{0:dd-MMM-yyyy}",
+new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder = "Interview Date" })
+
+                    <span class="input-group-addon input-group-append border-left">
+                        <span class="ti-calendar input-group-text"></span>
+                    </span>
+                </div>
+
+                <span class="ErrorSH_InterviewDate text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-4">
+            <label>Interview Timings <span class="text-danger">*</span></label>
+            <div id="the-basics1">
+                @*<input class="typeahead" type="text" placeholder="First Name" >*@
+                @Html.DropDownListFor(m => m.HrShortlisting.SlotId, new SelectList(ViewBag.TimingsSlotsDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "InterviewTiming" })
+
+                <span class="ErrorSH_InterviewTiming text-danger"></span>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label> &nbsp;<span class="text-danger">*</span></label>
+            <div id="the-basics1">
+                <label>@Html.CheckBoxFor(m => m.IsEmailSend, new { @id = "isEmailSend" }) Send Email</label>
+                <label>@Html.CheckBoxFor(m => m.IsSendJobForm, new { @id = "isJobFormSend" }) Send JobFrom</label>
+
+                <span class="ErrorSH_CheckboxError text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" id="EmailTemplateShortlist" style="margin-top:10px;">
+        <div class="accordion accordion-solid-header" id="accordion-4" role="tablist">
+            <div class="card">
+                <div class="card-header" role="tab" id="heading-10">
+                    <h6 class="mb-0">
+                        <a data-bs-toggle="collapse" href="#collapse-10" aria-expanded="false" aria-controls="collapse-10">
+                            Email Template
+                        </a>
+                    </h6>
+                </div>
+                <div id="collapse-10" class="collapse " role="tabpanel" aria-labelledby="heading-10" data-parent="#accordion-4">
+                    <div class="card-body">
+                        <div class="row">
+                            @Html.TextAreaFor(m => m.ShortListEmailBody, new { @class = "RichEmailBody", @rows = "100" })
+                             
+                            @Html.ValidationMessageFor(m => m.ShortListEmailBody, null, new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        
+        $('.RichEmailBody').summernote({
+            height: 200
+        });
+
+        if ($("#ShortListId").val() > 0) {
+            $("#btnSubmitShortlistCand").attr("disabled", "disabled")
+            $("#btnSubmitShortlistCand").text("Already Shortlist")
+        } else {
+            $("#btnSubmitShortlistCand").removeAttr("disabled")
+            $("#btnSubmitShortlistCand").text("Call for interview")
+        }
+        var date = new Date();
+        date.setDate(date.getDate() - 1);
+        if ($(".datepickerfuture").length) {
+            $('.datepickerfuture').datepicker({
+                format: "dd-M-yyyy",
+                enableOnReadonly: true,
+                //todayHighlight: true,
+                startDate: date,
+                autoclose: true
+            });
+        }
+    });
+
+
+</script>

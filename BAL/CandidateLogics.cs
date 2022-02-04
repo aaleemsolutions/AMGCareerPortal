@@ -26,14 +26,14 @@ namespace BAL
 
         }
 
-        public CandidateViewModel AddCandidate(CandidateViewModel Candidate)
+        public CandidateViewModel AddCandidate(CandidateViewModel CandidateUpd)
         {
             string fileContent = "";
             bool formvalidate = false;
-            if (Candidate.UserImage!=null)
+            if (CandidateUpd.UserImage != null)
             {
-                byte[] uploadedFile = new byte[Candidate.UserImage.InputStream.Length];
-                Candidate.UserImage.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+                byte[] uploadedFile = new byte[CandidateUpd.UserImage.InputStream.Length];
+                CandidateUpd.UserImage.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
                 fileContent = Convert.ToBase64String(uploadedFile);
                 var userImg = userRegModule.getUser(System.Web.HttpContext.Current.Session["UserEmail"].ToString());
                 userImg.userinfo.UserImage = fileContent;
@@ -41,28 +41,191 @@ namespace BAL
                 userRegModule.UpdateUser(userImg);
 
             }
-      
-            var candidateobj = new candidate
-            {
-                CandidateAddress = Candidate.CandidateAddress,
-                CandidateName = Candidate.CandidateName,
-                CandidateDescription = Candidate.CandidateDescription,
-                CNIC = Candidate.CNIC,
-                FathersName = Candidate.FathersName,
-                FirstName = Candidate.FirstName,
-                LastName = Candidate.LastName,
-                UserId = Convert.ToInt32(System.Web.HttpContext.Current.Session["UserId"].ToString()
-                
-                )
-                
-            };
 
-            
+
+
+            var prevobj = new candidate();
+            prevobj = candidateGeneric.getCandidate(GlobalUserInfo.UserId);
+            var candidateobj = new candidate();
+
+            if (prevobj != null)
+            {
+                candidateobj.Id = CandidateUpd.CandidateInfo.Id;
+            }
+
+
+
+
+
+
+            if (CandidateUpd.CandidateAddress != null)
+            {
+                candidateobj.CandidateAddress = CandidateUpd.CandidateAddress;
+            }
+            else
+            {
+                candidateobj.CandidateAddress = prevobj.CandidateAddress;
+            }
+
+            if (CandidateUpd.CandidateName != null)
+            {
+                candidateobj.CandidateName = CandidateUpd.CandidateName;
+            }
+
+
+            if (CandidateUpd.CandidateDescription != null)
+            {
+                candidateobj.CandidateDescription = CandidateUpd.CandidateDescription;
+            }
+
+            if (CandidateUpd.CNIC != null)
+            {
+                candidateobj.CNIC = CandidateUpd.CNIC;
+            }
+
+            if (CandidateUpd.FathersName != null)
+            {
+                candidateobj.FathersName = CandidateUpd.FathersName;
+            }
+
+            if (CandidateUpd.FirstName != null)
+            {
+                candidateobj.FirstName = CandidateUpd.FirstName;
+            }
+
+            if (CandidateUpd.LastName != null)
+            {
+                candidateobj.LastName = CandidateUpd.LastName;
+            }
+
+            if (CandidateUpd.ContactNo != null)
+            {
+                candidateobj.ContactNo = CandidateUpd.ContactNo;
+            }
+
+            if (CandidateUpd.ContactNoOffice != null)
+            {
+                candidateobj.ContactNoOffice = CandidateUpd.ContactNoOffice;
+            }
+
+            if (CandidateUpd.DOB != null)
+            {
+                candidateobj.DOB = CandidateUpd.DOB;
+            }
+
+            if (CandidateUpd.EmailAddress != null)
+            {
+                candidateobj.EmailAddress = CandidateUpd.EmailAddress;
+            }
+
+            if (CandidateUpd.MaritalStatus != null)
+            {
+                candidateobj.MaritalStatus = CandidateUpd.MaritalStatus;
+            }
+
+            if (CandidateUpd.Nationality != null)
+            {
+                candidateobj.Nationality = CandidateUpd.Nationality;
+            }
+
+            if (CandidateUpd.PresentAddress != null)
+            {
+                candidateobj.PresentAddress = CandidateUpd.PresentAddress;
+            }
+
+            if (CandidateUpd.ExpiryDate != null)
+            {
+                candidateobj.ExpiryDate = CandidateUpd.ExpiryDate;
+            }
+
+            if (CandidateUpd.Religion != null)
+            {
+                candidateobj.Religion = CandidateUpd.Religion;
+            }
+
+            if (CandidateUpd.FathersName != null)
+            {
+                candidateobj.FatherName = CandidateUpd.FathersName;
+            }
+
+            if (CandidateUpd.MobileNo != null)
+            {
+                candidateobj.MobileNo = CandidateUpd.MobileNo;
+            }
+
+            if (CandidateUpd.PreviouslyWork != null)
+            {
+                candidateobj.PreviouslyWork = CandidateUpd.PreviouslyWork;
+            }
+
+            if (CandidateUpd.IsRelateFreindWorking != null)
+            {
+                candidateobj.IsRelateFreindWorking = CandidateUpd.IsRelateFreindWorking;
+            }
+
+            if (CandidateUpd.HealthIssue != null)
+            {
+                candidateobj.HealthIssue = CandidateUpd.HealthIssue;
+            }
+
+
+            if (CandidateUpd.PassportNo != null)
+            {
+                candidateobj.PassportNo = CandidateUpd.PassportNo;
+            }
+            if (CandidateUpd.PasExpiryDate != null)
+            {
+                candidateobj.PasExpiryDate = CandidateUpd.PasExpiryDate;
+            }
+       
+
+            if (CandidateUpd.DrivingLicenseNo != null)
+            {
+                candidateobj.DrivingLicenseNo = CandidateUpd.DrivingLicenseNo;
+            }
+       
+
+            if (CandidateUpd.ExpiryDate != null)
+            {
+                candidateobj.ExpiryDate = CandidateUpd.ExpiryDate;
+            }
+   
+
+            if (CandidateUpd.NtnNo != null)
+            {
+                candidateobj.NtnNo = CandidateUpd.NtnNo;
+            }
+       
+
+            if (CandidateUpd.EOBI != null)
+            {
+                candidateobj.EOBI = CandidateUpd.EOBI;
+            }
+        
+            if (CandidateUpd.Gender != null)
+            {
+                candidateobj.Gender = CandidateUpd.Gender;
+            }
+     
+            if (CandidateUpd.Bloodgroup != null)
+            {
+                candidateobj.Bloodgroup = CandidateUpd.Bloodgroup;
+            }
+      
+
+            if (CandidateUpd.DrlExpiryDate != null)
+            {
+                candidateobj.DrlExpiryDate = CandidateUpd.DrlExpiryDate;
+            }
+       
+            candidateobj.UserId = Convert.ToInt32(System.Web.HttpContext.Current.Session["UserId"].ToString());
+
+
 
             candidateGeneric.AddCandidate(candidateobj);
 
 
-            return Candidate;
+            return CandidateUpd;
         }
 
         public int DeleteCandidate(CandidateViewModel Candidate)
@@ -89,43 +252,48 @@ namespace BAL
         {
             var candidateviewModel = new CandidateViewModel();
 
-            candidateviewModel.CandidateInfo =  candidateGeneric.getCandidate(UserId);
+            candidateviewModel.CandidateInfo = candidateGeneric.getCandidate(UserId);
 
             candidateviewModel.UsersInfo = userRegModule.getUser(UserId).userinfo;
 
 
-            if (candidateviewModel.CandidateInfo!=null)
+            if (candidateviewModel.CandidateInfo != null)
             {
                 if (candidateviewModel.CandidateInfo.FirstName != null)
                 {
                     candidateviewModel.FirstName = candidateviewModel.CandidateInfo.FirstName;
                 }
-                if (candidateviewModel.CandidateInfo.LastName!=null)
+                if (candidateviewModel.CandidateInfo.LastName != null)
                 {
                     candidateviewModel.LastName = candidateviewModel.CandidateInfo.LastName;
                 }
 
-                if (candidateviewModel.CandidateInfo.FathersName!=null)
+                if (candidateviewModel.CandidateInfo.FathersName != null)
                 {
                     candidateviewModel.FathersName = candidateviewModel.CandidateInfo.FathersName;
                 }
 
-                if (candidateviewModel.CandidateInfo.CandidateAddress !=null)
+                if (candidateviewModel.CandidateInfo.CandidateAddress != null)
                 {
                     candidateviewModel.CandidateAddress = candidateviewModel.CandidateInfo.CandidateAddress;
                 }
 
-                if (candidateviewModel.CandidateInfo.CNIC!=null)
+                if (candidateviewModel.CandidateInfo.CNIC != null)
                 {
                     candidateviewModel.CNIC = candidateviewModel.CandidateInfo.CNIC;
                 }
 
-                if (candidateviewModel.CandidateInfo.User.IsEmailVerify!=null)
+                if (candidateviewModel.CandidateInfo.User!=null)
                 {
-                    candidateviewModel.EmailVerifyMessage = candidateviewModel.CandidateInfo.User.IsEmailVerify.Value;
-                }
+                    if (candidateviewModel.CandidateInfo.User.IsEmailVerify != null)
+                    {
+                        candidateviewModel.EmailVerifyMessage = candidateviewModel.CandidateInfo.User.IsEmailVerify.Value;
+                    }
 
-                if (candidateviewModel.CandidateInfo.CandidateDescription !=null)
+                }
+              
+
+                if (candidateviewModel.CandidateInfo.CandidateDescription != null)
                 {
                     candidateviewModel.CandidateDescription = candidateviewModel.CandidateInfo.CandidateDescription;
                 }
@@ -201,7 +369,7 @@ namespace BAL
                 {
                     candidateviewModel.HealthIssue = candidateviewModel.CandidateInfo.HealthIssue;
                 }
-             
+
                 candidateviewModel.PassportNo = candidateviewModel.CandidateInfo.PassportNo;
                 candidateviewModel.PasExpiryDate = candidateviewModel.CandidateInfo.PasExpiryDate;
                 candidateviewModel.DrivingLicenseNo = candidateviewModel.CandidateInfo.DrivingLicenseNo;
@@ -210,12 +378,12 @@ namespace BAL
                 candidateviewModel.EOBI = candidateviewModel.CandidateInfo.EOBI;
                 candidateviewModel.Gender = candidateviewModel.CandidateInfo.Gender;
                 candidateviewModel.Bloodgroup = candidateviewModel.CandidateInfo.Bloodgroup;
-                
-                if (candidateviewModel.CndQualificationViewModel==null)
+
+                if (candidateviewModel.CndQualificationViewModel == null)
                 {
                     candidateviewModel.CndQualificationViewModel = new CndQualificationViewModel();
                 }
-             
+
 
 
 
@@ -246,6 +414,17 @@ namespace BAL
 
 
             }
+            else
+            {
+
+                if (candidateviewModel!=null && candidateviewModel.UsersInfo!=null)
+                {
+                    candidateviewModel.EmailAddress = candidateviewModel.UsersInfo.UserEmail;
+                    candidateviewModel.CandidateName = candidateviewModel.UsersInfo.FullName;
+
+                }
+
+            }
 
 
 
@@ -254,14 +433,14 @@ namespace BAL
             return candidateviewModel;
         }
 
-    
+
         public int getCandidateId(int UserId)
         {
-        
+
 
             var candidateId = candidateGeneric.getCandidate(UserId).Id;
 
- 
+
 
             return candidateId;
         }
@@ -269,7 +448,7 @@ namespace BAL
         public CandidateViewModel UpdateCandidate(CandidateViewModel CandidateUpd)
         {
             string fileContent = "";
-            bool formvalidate = false;
+            //            bool formvalidate = false;
             if (CandidateUpd.UserImage != null)
             {
                 byte[] uploadedFile = new byte[CandidateUpd.UserImage.InputStream.Length];
@@ -282,11 +461,11 @@ namespace BAL
                 userRegModule.UpdateUser(userImg);
 
             }
-            var userId = System.Web.HttpContext.Current.Session["UserId"].ToString();
+
 
 
             var prevobj = new candidate();
-            prevobj = candidateGeneric.getCandidate(Convert.ToInt32(userId));
+            prevobj = candidateGeneric.getCandidate(Convert.ToInt32(GlobalUserInfo.UserId));
 
             var candidateobj = new candidate();
 
@@ -295,7 +474,7 @@ namespace BAL
 
 
 
-            if (CandidateUpd.CandidateAddress!=null)
+            if (CandidateUpd.CandidateAddress != null)
             {
                 candidateobj.CandidateAddress = CandidateUpd.CandidateAddress;
             }
@@ -508,7 +687,7 @@ namespace BAL
             }
             else
             {
-                candidateobj.HealthIssue = prevobj.HealthIssue;
+                candidateobj.ExpiryDate = prevobj.ExpiryDate;
             }
 
             if (CandidateUpd.NtnNo != null)
@@ -555,23 +734,24 @@ namespace BAL
             }
             candidateobj.UserId = Convert.ToInt32(System.Web.HttpContext.Current.Session["UserId"].ToString());
 
- 
+
 
             var getcandidate = new CandidateViewModel();
             getcandidate.CandidateInfo = candidateGeneric.UpdateCandidate(candidateobj);
 
             return getcandidate;
 
-            
+
         }
 
 
 
         //Candidate Qualification
-       public  CandidateViewModel AddCandidateQualification(CandidateViewModel cndViewModel)
+        public CandidateViewModel AddCandidateQualification(CandidateViewModel cndViewModel)
         {
 
-            var candQualification = new CandidateQualification() {
+            var candQualification = new CandidateQualification()
+            {
                 CandidateId = cndViewModel.CndQualificationViewModel.CandidateId,
                 DegreeId = cndViewModel.CndQualificationViewModel.DegreeId,
                 DegreeName = cndViewModel.CndQualificationViewModel.DegreeName,
@@ -584,15 +764,15 @@ namespace BAL
                 ResultType = cndViewModel.CndQualificationViewModel.ResultType,
                 ResultValue = cndViewModel.CndQualificationViewModel.ResultValue,
                 Specialization = cndViewModel.CndQualificationViewModel.Specialization
-            
-            }; 
-                  
+
+            };
+
             cndQualification.AddCandidateQualification(candQualification);
 
             return cndViewModel;
         }
 
-        public int DeleteCandidateQualification( int CandidateID)
+        public int DeleteCandidateQualification(int CandidateID)
         {
 
 
@@ -644,11 +824,11 @@ namespace BAL
 
 
         /// END
-    
- 
-        
+
+
+
         //Candidate Experince
-       public CandidateViewModel AddCandidateExperince(CandidateViewModel cndViewModel)
+        public CandidateViewModel AddCandidateExperince(CandidateViewModel cndViewModel)
         {
 
             var candidateExperince = new CandidateExperince()
@@ -660,7 +840,7 @@ namespace BAL
                 FreshGraduate = cndViewModel.CndExperienceViewModel.FreshGraduate,
                 FromMonth = cndViewModel.CndExperienceViewModel.FromMonth,
                 FromYear = cndViewModel.CndExperienceViewModel.FromYear,
-                 InitialSalary = cndViewModel.CndExperienceViewModel.InitialSalary,
+                InitialSalary = cndViewModel.CndExperienceViewModel.InitialSalary,
                 IsPresent = cndViewModel.CndExperienceViewModel.IsPresent,
                 JobDuties = cndViewModel.CndExperienceViewModel.JobDuties,
                 Locationname = cndViewModel.CndExperienceViewModel.Locationname,
@@ -679,7 +859,7 @@ namespace BAL
         public int DeleteCandidateExperince(int CandidateID)
         {
 
-             
+
             CndExperince.DeleteCandidateExp(CandidateID);
 
             return CandidateID;

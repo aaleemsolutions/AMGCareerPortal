@@ -24,7 +24,12 @@ namespace BAL
         }
 
 
-  
+        public static bool JobApplicationOpen
+        {get;set;} = false;
+
+        public static string FullName{ get; set; }
+        public static string  EmailAddress{ get; set; }
+
 
 
     }

@@ -18,6 +18,7 @@ namespace DAL
         public AllPosition()
         {
             this.CandidateJobApplies = new HashSet<CandidateJobApply>();
+            this.HrShortlistings = new HashSet<HrShortlisting>();
         }
     
         public int JobId { get; set; }
@@ -46,5 +47,7 @@ namespace DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateJobApply> CandidateJobApplies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
     }
 }

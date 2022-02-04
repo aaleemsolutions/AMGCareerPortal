@@ -26,6 +26,8 @@
     <NavigationProperty Name="Cand_RelateFreindWorking" Relationship="CareerPortalModel.FK__Cand_Rela__UserI__2334397B" FromRole="User" ToRole="Cand_RelateFreindWorking" />
     <NavigationProperty Name="MoseRecentEmployements" Relationship="CareerPortalModel.FK__MoseRecen__UserI__1F63A897" FromRole="User" ToRole="MoseRecentEmployement" />
     <NavigationProperty Name="Cand_ProfessionalReferences" Relationship="CareerPortalModel.FK__Cand_Prof__UserI__40C49C62" FromRole="User" ToRole="Cand_ProfessionalReferences" />
+    <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__Creat__603D47BB" FromRole="User" ToRole="HrShortlisting" />
+    <NavigationProperty Name="TimingSlots" Relationship="CareerPortalModel.FK__TimingSlo__Creat__55BFB948" FromRole="User" ToRole="TimingSlot" />
   </EntityType>
   <EntityContainer Name="CareerPortalEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
@@ -109,6 +111,28 @@
     <AssociationSet Name="FK__Cand_Prof__UserI__40C49C62" Association="CareerPortalModel.FK__Cand_Prof__UserI__40C49C62">
       <End Role="User" EntitySet="Users" />
       <End Role="Cand_ProfessionalReferences" EntitySet="Cand_ProfessionalReferences" />
+    </AssociationSet>
+    <EntitySet Name="HrShortlistings" EntityType="CareerPortalModel.HrShortlisting" />
+    <EntitySet Name="TimingSlots" EntityType="CareerPortalModel.TimingSlot" />
+    <AssociationSet Name="FK__HrShortli__JobId__5A846E65" Association="CareerPortalModel.FK__HrShortli__JobId__5A846E65">
+      <End Role="AllPosition" EntitySet="AllPositions" />
+      <End Role="HrShortlisting" EntitySet="HrShortlistings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__CandA__5B78929E" Association="CareerPortalModel.FK__HrShortli__CandA__5B78929E">
+      <End Role="CandidateJobApply" EntitySet="CandidateJobApplies" />
+      <End Role="HrShortlisting" EntitySet="HrShortlistings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__Creat__603D47BB" Association="CareerPortalModel.FK__HrShortli__Creat__603D47BB">
+      <End Role="User" EntitySet="Users" />
+      <End Role="HrShortlisting" EntitySet="HrShortlistings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__SlotI__5C6CB6D7" Association="CareerPortalModel.FK__HrShortli__SlotI__5C6CB6D7">
+      <End Role="TimingSlot" EntitySet="TimingSlots" />
+      <End Role="HrShortlisting" EntitySet="HrShortlistings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TimingSlo__Creat__55BFB948" Association="CareerPortalModel.FK__TimingSlo__Creat__55BFB948">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TimingSlot" EntitySet="TimingSlots" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="candidate">
@@ -261,6 +285,7 @@
     <Property Name="DesignationName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="CategoryId" Type="Int32" />
     <Property Name="CategoryName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__JobId__5A846E65" FromRole="AllPosition" ToRole="HrShortlisting" />
   </EntityType>
   <EntityType Name="CandidateJobApply">
     <Key>
@@ -273,6 +298,7 @@
     <NavigationProperty Name="AllPosition" Relationship="CareerPortalModel.FK__Candidate__JobId__4F47C5E3" FromRole="CandidateJobApply" ToRole="AllPosition" />
     <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Candidate__UserI__503BEA1C" FromRole="CandidateJobApply" ToRole="User" />
     <Property Name="ApplyByCV" Type="Boolean" />
+    <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__CandA__5B78929E" FromRole="CandidateJobApply" ToRole="HrShortlisting" />
   </EntityType>
   <Association Name="FK__Candidate__JobId__4F47C5E3">
     <End Type="CareerPortalModel.AllPosition" Role="AllPosition" Multiplicity="0..1" />
@@ -566,6 +592,101 @@
       </Principal>
       <Dependent Role="Cand_ProfessionalReferences">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HrShortlisting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int32" />
+    <Property Name="CandApplyId" Type="Int32" />
+    <Property Name="InterviewDate" Type="DateTime" Precision="0" />
+    <Property Name="SlotId" Type="Int32" />
+    <Property Name="IsSendJobForm" Type="Boolean" />
+    <Property Name="IsEmailSend" Type="Boolean" />
+    <Property Name="IsInterviewComfirmed" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="AllPosition" Relationship="CareerPortalModel.FK__HrShortli__JobId__5A846E65" FromRole="HrShortlisting" ToRole="AllPosition" />
+    <NavigationProperty Name="CandidateJobApply" Relationship="CareerPortalModel.FK__HrShortli__CandA__5B78929E" FromRole="HrShortlisting" ToRole="CandidateJobApply" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__HrShortli__Creat__603D47BB" FromRole="HrShortlisting" ToRole="User" />
+    <NavigationProperty Name="TimingSlot" Relationship="CareerPortalModel.FK__HrShortli__SlotI__5C6CB6D7" FromRole="HrShortlisting" ToRole="TimingSlot" />
+  </EntityType>
+  <EntityType Name="TimingSlot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__SlotI__5C6CB6D7" FromRole="TimingSlot" ToRole="HrShortlisting" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__TimingSlo__Creat__55BFB948" FromRole="TimingSlot" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__HrShortli__JobId__5A846E65">
+    <End Type="CareerPortalModel.AllPosition" Role="AllPosition" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.HrShortlisting" Role="HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AllPosition">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__CandA__5B78929E">
+    <End Type="CareerPortalModel.CandidateJobApply" Role="CandidateJobApply" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.HrShortlisting" Role="HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CandidateJobApply">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="CandApplyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__Creat__603D47BB">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.HrShortlisting" Role="HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__SlotI__5C6CB6D7">
+    <End Type="CareerPortalModel.TimingSlot" Role="TimingSlot" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.HrShortlisting" Role="HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TimingSlot">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="SlotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TimingSlo__Creat__55BFB948">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.TimingSlot" Role="TimingSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimingSlot">
+        <PropertyRef Name="CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

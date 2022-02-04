@@ -40,7 +40,6 @@ function ReloadJobListTable() {
     $('#JobListDataTable').DataTable().ajax.reload();
 }
 
-
 function validateCndQualification(CurrentformIndex) {
 
 
@@ -324,14 +323,21 @@ function addCandQualification(currentIndex, isNextButton = true) {
     } else {
 
         if (validateCndQualification(currentIndex)) {
+            debugger;
             $("#btnSaveEducationData").attr("disabled", "disabled")
             var getformvalue = $('#CandidateWizardForm')[0];
+            if (getformvalue == undefined) {
+
+                getformvalue = $('#form0')[0];
+            }
+            console.log(getformvalue);
+
 
             var valdata = new FormData(getformvalue);
 
             //to get alert popup   
-            var fileUpload = $("#UserImage").get(0);
-            var files = fileUpload.files;
+            //var fileUpload = $("#UserImage").get(0);
+            //var files = fileUpload.files;
 
             valdata.append("CandidateDescription", $("#quillExample1 .ql-editor").html());
             valdata.append("FormWizardSteps", currentIndex);
@@ -393,10 +399,17 @@ function addCandExperience(currentIndex, isNextButton = true) {
 
             var getformvalue = $('#CandidateWizardForm')[0];
 
+            if (getformvalue == undefined) {
+
+                getformvalue = $('#form0')[0];
+
+            }
+
             var valdata = new FormData(getformvalue);
 
 
-            valdata.append("JobDutiesDescription", $("#JobDutiesEditor .ql-editor").html());
+            valdata.append("JobDutiesDescription", $("#JobDutiesDescription").val());
+            
             valdata.append("FormWizardSteps", currentIndex);
 
 
@@ -418,7 +431,7 @@ function addCandExperience(currentIndex, isNextButton = true) {
                         $("#btnSaveExperienceData").html("Save and add more")
 
                         ShowToaster(1, "Experince have been updated..", "Experience");
-
+                        $(".RichTextJobDescription").summernote('reset');
 
                     }
 
@@ -623,7 +636,11 @@ function UpdateExperince(isupdate, ExperienceId) {
                     $("#ChkCndExperiencePresent").prop("checked", data.data.IsPresent);
                     $("#ChkCndNoExperience").prop("checked", data.data.FreshGraduate);
 
-                    $("#JobDutiesEditor .ql-editor").html(data.data.JobDuties);
+                    /*$("#JobDutiesEditor .ql-editor").html(data.data.JobDuties);*/
+
+                    console.log(data.data);
+                    $("#CndExperienceViewModel_JobDuties").summernote("code", data.data.JobDuties);
+
 
 
                     if (data.data.IsPresent == true) {
@@ -787,7 +804,7 @@ function ShowJobDescription(JobId) {
                 $('#JobDescriptionModal').html(data);
                 $('#staticBackdrop').modal(options);
                 $('#staticBackdrop').modal('show');
-              
+
             }
 
         },
@@ -801,16 +818,58 @@ function ShowJobDescription(JobId) {
 
 }
 
-function ApplyForJob(JobId,IsAppliedByCv) {
+function ShowShortListModal(JobId,CandId) {
+    
+
+    var options = {
+        "backdrop": "static",
+        keyboard: true
+    };
+
+    $.ajax({
+        url: "/Recruiter/Shortlisting/Shortlist_Cand/",
+        type: "GET",
+        data: { "JobApplyId": JobId, "CandId": CandId },
+        success: function (data) {
+
+            if (data != undefined && data != "") {
+
+                $('#ShortlistModalBody').html(data);
+                $('#ShortlistModalParent').modal(options);
+                $('#ShortlistModalParent').modal('show');
+
+
+
+
+            }
+
+        }, beforeSend: function () {
+            $("#PostLoader").show();
+
+        }, complete: function () {
+     
+            $("#PostLoader").hide();
+        },
+        error: function () {
+            alert("Content load failed.");
+        }
+    });
+
+
+
+
+}
+
+function ApplyForJob(JobId, IsAppliedByCv) {
 
     $.ajax({
         url: "/CandidatePortal/Candidatejob/ApplyForJob",
         type: "GET",
         //processData: false,
         //contentType: false,
-        data: {"JobId":JobId,"AppliedByCv":IsAppliedByCv},
+        data: { "JobId": JobId, "AppliedByCv": IsAppliedByCv },
         success: function (data) {
-            
+
             if (data.IsSuccess) {
                 ShowToaster(1, "Applied Successfully", "Applied!");
                 $('#staticBackdrop').modal('hide');
@@ -828,47 +887,145 @@ function ApplyForJob(JobId,IsAppliedByCv) {
 }
 
 function addNewJob() {
-   
 
-    if (1==1) {
- 
+
+    if (1 == 1) {
+
 
         var getformvalue = $('#FormNewJob')[0];
 
-            var valdata = new FormData(getformvalue);
+        var valdata = new FormData(getformvalue);
 
 
         valdata.append("JobDescription", $("#RichTextJobDescription .ql-editor").html());
-            
-            
-
-            $.ajax({
-                url: "/Recruiter/AllJobs/CreateJobs",
-                type: "POST",
-                dataType: 'json',
-                processData: false,
-                contentType: false,
-                data: valdata,
-                success: function (data) {
-              
 
 
-                },
-                complete: function (data) {
-                   
-                }
-            });
+
+        $.ajax({
+            url: "/Recruiter/AllJobs/CreateJobs",
+            type: "POST",
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            data: valdata,
+            success: function (data) {
 
 
+
+            },
+            complete: function (data) {
+
+            }
+        });
 
 
 
 
-        } else {
-         
-        }
+
+
+    } else {
 
     }
+
+}
+
+
+function validateShortListForm() {
+
+
+    var isvalid = true;
+
+  
+
+
+
+    var InterviewDate = $("#InterviewDate").val();
+    var InterviewTiming = $("#InterviewTiming").val();
+    var IsEmailSend = $("#isEmailSend").is('checked');
+    var isJobFormSend = $("#isJobFormSend").is('checked');
+    var ShortListId = $("#ShortListId").val();
+
+    if (isNaN(InterviewDate) == false || InterviewDate == "") {
+        $(".ErrorSH_InterviewDate").html("Interview date is required")
+        isvalid = false;
+        return isvalid;
+    } else {
+        $(".ErrorSH_InterviewDate").html("")
+        isvalid = true;
+    }
+    if (InterviewTiming < 1 || InterviewTiming < 1) {
+        $(".ErrorSH_InterviewTiming").html("Please select slots")
+        isvalid = false;
+
+        return isvalid;
+
+    } else {
+        $(".ErrorSH_InterviewTiming").html("")
+        isvalid = true;
+    }
+ 
+    if (ShortListId>0) {
+        ShowToaster(0, "Selectedt candidate already shortlist", "Already Shortlist");
+        isvalid = false;
+
+        return isvalid;
+
+    } 
+   
+
+ 
+
+ 
+    return isvalid;
+}
+
+function ShortlistCandidate() {
+
+
+    if (1 == 1) {
+
+
+        var getformvalue = $('#CandShortListCand')[0];
+
+        var valdata = new FormData(getformvalue);
+
+         
+
+
+
+        $.ajax({
+            url: "/Recruiter/Shortlisting/Shortlist_Cand",
+            type: "POST",
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            data: valdata,
+            success: function (data) {
+                if (data.status == true) {
+                    ShowToaster(1, "Candidate Shortlist Successfully ", "Shortlist Successfully");
+                    $('#ShortlistModalParent').modal('hide');
+                } else {
+                    ShowToaster(0, data.message, "Error");
+                    $('#ShortlistModalParent').modal('hide');
+                }
+
+
+            },
+            complete: function (data) {
+
+            }
+        });
+
+
+
+
+
+
+    } else {
+
+    }
+
+}
 
 function EditNewJob(JobId) {
     if (1 == 1) {
@@ -878,69 +1035,70 @@ function EditNewJob(JobId) {
             data: { "Id": JobId },
             success: function (data) {
 
-             
+
             }
         });
-    }  
+    }
 
 }
 
 function DeleteNewJob(JobId) {
-        swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3f51b5',
-            cancelButtonColor: '#ff4081',
-            confirmButtonText: 'Great ',
-            buttons: {
-                cancel: {
-                    text: "Cancel",
-                    value: false,
-                    visible: true,
-                    className: "btn btn-danger",
-                    closeModal: true,
-                },
-                confirm: {
-                    text: "OK",
-                    value: true,
-                    visible: true,
-                    className: "btn btn-primary",
-                    closeModal: true
-                }
+    swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3f51b5',
+        cancelButtonColor: '#ff4081',
+        confirmButtonText: 'Great ',
+        buttons: {
+            cancel: {
+                text: "Cancel",
+                value: false,
+                visible: true,
+                className: "btn btn-danger",
+                closeModal: true,
+            },
+            confirm: {
+                text: "OK",
+                value: true,
+                visible: true,
+                className: "btn btn-primary",
+                closeModal: true
             }
-        }).then(function (result) {
-            if (result) {
+        }
+    }).then(function (result) {
+        if (result) {
 
-                $.ajax({
-                    url: "/Recruiter/AllJobs/DeleteJob",
-                    type: "POST",
-                    data: { "JobId": JobId },
-                    success: function (data) {
+            $.ajax({
+                url: "/Recruiter/AllJobs/DeleteJob",
+                type: "POST",
+                data: { "JobId": JobId },
+                success: function (data) {
 
-                        if (data == true) {
-                            ReloadJobListTable();
+                    if (data == true) {
+                        ReloadJobListTable();
 
-                            ShowToaster(0, "Job deleted.", "Deleted!");
+                        ShowToaster(0, "Job deleted.", "Deleted!");
 
-                        } else {
-                            ShowToaster(0, "Error While deleting Records please contact I.T", "Error!");
-                        }
-
+                    } else {
+                        ShowToaster(0, "Error While deleting Records please contact I.T", "Error!");
                     }
-                });
-            }
-        });
+
+                }
+            });
+        }
+    });
 
 
 
 
 
 
-    
+
 
 }
+
 
 function wait(ms) {
     var start = new Date().getTime();
@@ -951,21 +1109,21 @@ function wait(ms) {
 }
 
 function DownloadCandidateResume(filename, UserId) {
-    
+
     if (UserId != undefined && UserId != "") {
         location.href = "/CandidatePortal/Candidatejob/DownloadCandidateCv?filename=" + filename + "&UserId=" + UserId;
     } else {
-        location.href = "/CandidatePortal/Candidatejob/DownloadCandidateCv?filename=" + filename ;
+        location.href = "/CandidatePortal/Candidatejob/DownloadCandidateCv?filename=" + filename;
     }
-    
+
 }
 
-function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
+function loadBarChart(data, title = "JobData", subtext = "Artistic Milliners") {
     //var BarDBData = data;
     var BarDBData = data;
 
     //var BarDBData = JSON.parse('{"name":["ERP Developer","TEST"],"test":[5,10]}');
- 
+
     const result = {}
     const arr = BarDBData;
 
@@ -981,9 +1139,9 @@ function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
     console.log(result)
 
     console.log(BarDBData);
-    
+
     var chartDom = document.getElementById('BarChart');
- 
+
     var myChart = echarts.init(chartDom);
 
     var option;
@@ -996,13 +1154,13 @@ function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
         tooltip: {
             trigger: 'axis'
         },
-   
+
         toolbox: {
             show: true,
             feature: {
                 dataView: { show: true, readOnly: false },
                 magicType: { show: true, type: ['line', 'bar'] },
-               
+
                 saveAsImage: { show: true }
             }
         },
@@ -1019,7 +1177,7 @@ function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
         yAxis: [
             {
                 type: 'value'
-                
+
             }
         ],
         dataZoom: [
@@ -1047,7 +1205,7 @@ function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
             {
                 name: result.name,
                 type: 'bar',
-                data: result.value ,
+                data: result.value,
                 //data: [2.0, 4.9, 4, 9, 4],
                 itemStyle: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -1062,7 +1220,7 @@ function loadBarChart(data,title = "JobData",subtext = "Artistic Milliners") {
                         { type: 'min', name: 'Min' }
                     ]
                 }
-  
+
             }
         ]
     };
@@ -1120,7 +1278,7 @@ function loadJobBarAjaxdata(GetBarChartData) {
             var json = data;
             if (GetBarChartData.toUpperCase() == "Candidate".toUpperCase()) {
                 loadBarChart(data, "Candidate wise Jobs");
-            }  
+            }
             else {
                 loadBarChart(data, "Open Jobs");
             }
@@ -1129,10 +1287,10 @@ function loadJobBarAjaxdata(GetBarChartData) {
     });
 }
 
-function loadPieChart(data, text = "Jobs Data Categories", subtext ="Artistic Milliners") {
+function loadPieChart(data, text = "Jobs Data Categories", subtext = "Artistic Milliners") {
 
     var PieChartData = data;
- 
+
     var chartDom1 = document.getElementById('pieCharts');
     var myChart1 = echarts.init(chartDom1);
     var option;
@@ -1150,13 +1308,13 @@ function loadPieChart(data, text = "Jobs Data Categories", subtext ="Artistic Mi
         legend: {
             orient: 'vertical',
             left: 'left'
-            
+
         },
         toolbox: {
             show: true,
             feature: {
                 mark: { show: true },
-                
+
                 magicType: {
                     show: true,
                     type: ['pie', 'funnel'],
@@ -1186,7 +1344,7 @@ function loadPieChart(data, text = "Jobs Data Categories", subtext ="Artistic Mi
                 //    { value: 300, name: 'Video Ads' }
                 //],
                 data: PieChartData,
-                
+
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
@@ -1210,7 +1368,7 @@ function loadPieChart(data, text = "Jobs Data Categories", subtext ="Artistic Mi
 
         swal({
             title: params.name,
-            text: 'Do you want open ' + params.name +' Records?',
+            text: 'Do you want open ' + params.name + ' Records?',
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3f51b5',
@@ -1241,7 +1399,7 @@ function loadPieChart(data, text = "Jobs Data Categories", subtext ="Artistic Mi
                 location.href = "/Recruiter/AllJobs?search=" + encodeURIComponent(params.name);
             }
         });
-        
+
     });
 
 }
@@ -1249,9 +1407,9 @@ function loadPieChart(data, text = "Jobs Data Categories", subtext ="Artistic Mi
 function loadJobPieaAjaxdata(PieType) {
     $.ajax({
         url: "/Recruiter/AllJobs/GetJobPieCharts",
-        data: { "PieType": PieType},
+        data: { "PieType": PieType },
         success: function (data) {
-            
+
             if (PieType.toUpperCase() == "Department".toUpperCase()) {
                 loadPieChart(data, "Department wise Jobs");
             } else if (PieType.toUpperCase() == "Division".toUpperCase()) {
@@ -1274,36 +1432,106 @@ function getUrlVars() {
 
 }
 
+
+
+function DeleteCand_Dependants(Id, row) {
+    if (Id != 0)
+
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3f51b5',
+            cancelButtonColor: '#ff4081',
+            confirmButtonText: 'Great ',
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: false,
+                    visible: true,
+                    className: "btn btn-danger",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "OK",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-primary",
+                    closeModal: true
+                }
+            }
+        }).then(function (result) {
+            if (result) {
+                if (Id != 0) {
+                    $.ajax({
+                        url: "/Recruiter/CandidateForm/DeleteCand_Dependants",
+                        type: "POST",
+                        data: { "Dependand_Id": Id },
+                        success: function (data) {
+
+                            if (data == true) {
+
+                                ShowToaster(0, "Dependant Deleted.", "Deleted!");
+                                $(row).remove();
+
+                            } else {
+                                ShowToaster(0, "Error While deleting Records please contact I.T", "Error!");
+                            }
+
+                        }
+                    });
+                } else {
+                    $(row).remove();
+                }
+
+            }
+        });
+    else
+        $(row).remove();
+
+
+
+
+
+
+
+
+
+}
+
+
+function UnMaskingInput() {
+}
+
 $(document).ready(function () {
 
     $("#DrpDepart").change(function () {
 
         var drpvalue = $("#DrpDepart option:selected").text();;
         $("#DepartmentName").val(drpvalue)
-  
-    });
 
-  
+    });
 
     $("#DrpDesig").change(function () {
 
         var drpvalue = $("#DrpDesig option:selected").text();;
         $("#DesignationName").val(drpvalue)
- 
+
     });
 
     $("#DrpDivision").change(function () {
 
         var drpvalue = $("#DrpDivision option:selected").text();;
         $("#DivisionName").val(drpvalue)
-        
+
     });
 
     $("#DrpCategory").change(function () {
 
         var drpvalue = $("#DrpCategory option:selected").text();;
         $("#CategoryName").val(drpvalue)
-      
+
     });
 
     $("#DrpPieType").change(function () {
@@ -1313,7 +1541,6 @@ $(document).ready(function () {
 
     });
 
-
     $("#DrpBarType").change(function () {
 
         var drpvalue = $("#DrpBarType").val();
@@ -1321,17 +1548,30 @@ $(document).ready(function () {
 
     });
 
-   
     $("#Emailaddress").val("abdul.aleem@artisticmilliners.com");
     $("#Password").val("Test@123++");
+
     $('.CNICInputMask').inputmask('99999-9999999-9', { "clearIncomplete": true });
 
-    
+    $('.MobileNoMask').inputmask('9999-9999999', { "clearIncomplete": true });
+
+    $('.validateTextOnly').inputmask({
+
+        //alias: 'text',
+        regex: "^[a-zA-Z ]*$"
+        
+    });
+    //'€ 999.999.999,99', { numericInput: true }
     $('.txtSalaryInputMask').inputmask({
-        alias: 'numeric',
-        allowMinus: false,
-        digits: 2
-        //max: 999.99
+
+        rightAlign: false,
+        'alias': 'decimal',
+        'groupSeparator': ',',
+        'autoGroup': true,
+        'digits': 0,
+        'digitsOptional': false,
+        'placeholder': '0.00',
+        autoUnmask: true
     });
 
 
@@ -1340,9 +1580,33 @@ $(document).ready(function () {
         alias: 'numeric',
         allowMinus: false,
         rightAlign: false,
+
     });
 
 
+
+    $('.validateCurrency').inputmask({
+
+        //alias: 'numeric',
+        //allowMinus: false,
+        rightAlign: false,
+        'alias': 'decimal',
+        'groupSeparator': ',',
+        'autoGroup': true,
+        'digits': 0,
+        'digitsOptional': false,
+        'placeholder': '0.00',
+        autoUnmask: true
+
+    });
+
+    $('.validateemail').inputmask({
+
+        alias: 'email',
+        "clearIncomplete": true,
+        autoUnmask: true
+        
+    });
 
     //Checkbox No Experince
     $("#ChkCndNoExperience").change(function () {
@@ -1398,13 +1662,27 @@ $(document).ready(function () {
         }
     });
 
+    $("#isJobFormSend").change(function () {
+        if (this.checked) {
+
+
+            $(".richtextJobButton").show()
+
+
+        } else {
+            $(".richtextJobButton").hide()
+
+        }
+    });
+
+
+    
 
     //Experince Save add more button
     $("#btnSaveExperienceData").click(function () {
         addCandExperience(2, false);
         ReloadExperienceAjaxTable();
     });
-
 
     //Checkbox Qualification On going
     $("#CndQualificationViewModel_isOngoing").change(function () {
@@ -1426,8 +1704,6 @@ $(document).ready(function () {
         }
     });
 
-
-
     //Qualification add more button
 
     $("#btnSaveEducationData").unbind().click(function () {
@@ -1435,6 +1711,8 @@ $(document).ready(function () {
         ReloadAjaxTable();
     });
 
+
+    
     $(".JobDetail").unbind().click(function () {
         debugger;
         ShowJobDescription($(this).attr("value"));
@@ -1443,15 +1721,12 @@ $(document).ready(function () {
 
     $("#btnApplyJob").unbind().click(function () {
 
- 
+
         var jobid = $("#JobIdentity").val();
-        var appliedbyCv  = $("input[type='radio'][name='AppliedByCv']:checked").val();
+        var appliedbyCv = $("input[type='radio'][name='AppliedByCv']:checked").val();
         ApplyForJob(jobid, appliedbyCv);
 
     });
-
- 
-
 
     var table = $('#JobListDataTable').DataTable({
 
@@ -1461,10 +1736,10 @@ $(document).ready(function () {
             "datatype": "json",
             //"contentType": 'application/json'
 
-              "dataSrc": function (json) {
+            "dataSrc": function (json) {
                 //Make your callback here.
 
-                 //ShowToaster(1, "Record Updated Successfully.", "Record Updated!");
+                //ShowToaster(1, "Record Updated Successfully.", "Record Updated!");
                 return json.data;
             }
 
@@ -1479,7 +1754,7 @@ $(document).ready(function () {
         "oLanguage": {
             "sEmptyTable": "No Job List Found.."
         },
-   
+
         "columns": [
             //{
             //    "className": 'dt-control',
@@ -1487,7 +1762,7 @@ $(document).ready(function () {
             //    "data": null,
             //    "defaultContent": ''
             //},
-             
+
             { "data": "JobId" },
             {
                 //                "render": function (data, type, full, meta) { return '<a class="btn" type="" onClick="EditNewJob(' + full.JobId + ')"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
@@ -1495,7 +1770,7 @@ $(document).ready(function () {
             },
             { "data": "JobTitle" },
             { "data": "JobLocation" },
-            
+
             { "data": "PostedDate" },
             { "data": "NoOfVacancy" },
             { "data": "EmployementType" },
@@ -1506,23 +1781,23 @@ $(document).ready(function () {
             { "data": "Department" },
             { "data": "Designation" }
 
-            
-            
+
+
 
         ],
         "order": [[3, 'desc']],
         "initComplete": function () {
             var searchparam = decodeURIComponent(getUrlVars()['search']);
-            
+
             if (searchparam != "undefined" && undefined != "") {
-                
+
                 this.api().search(searchparam).draw();
             }
-           
+
         }
     });
 
-     //Add event listener for opening and closing details
+    //Add event listener for opening and closing details
     $('#JobListDataTable tbody').on('click', 'td.dt-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
@@ -1549,10 +1824,93 @@ $(document).ready(function () {
             '<td>' + d.JobDescription + '</td>' +
 
             '</tr>' +
-            
-           
+
+
             '</table>';
     }
+
+
+    //CV Bank List
+
+
+    var table = $('#CvCandidateList').DataTable({
+        stateSave: true,
+        "pageLength": 100,
+        "lengthMenu": [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, "All"]],
+        "ajax": {
+            "url": "/Recruiter/cvBank/GetCVCandidate/",
+            "type": "POST",
+            "datatype": "json",
+            //"contentType": 'application/json'
+
+            "dataSrc": function (json) {
+                //Make your callback here.
+
+                //ShowToaster(1, "Record Updated Successfully.", "Record Updated!");
+                return json.data;
+            }
+
+        },
+        "columnDefs":
+            [{
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
+            ],
+        "oLanguage": {
+            "sEmptyTable": "No List Found.."
+        },
+
+        "columns": [
+            //{
+            //    "className": 'dt-control',
+            //    "orderable": false,
+            //    "data": null,
+            //    "defaultContent": ''
+            //},
+
+            { "data": "CVID" },
+            {
+                //                "render": function (data, type, full, meta) { return '<a class="btn" type="" onClick="EditNewJob(' + full.JobId + ')"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="self" href="/Recruiter/cvBank/CvDetail/?CvId=' + full.CVID + '"  title="View Candidates" ><span class="ti-eye")></span></a>   '; }
+            },
+            { "data": "CandidateName" },
+            { "data": "FatherHusbandName" },
+            { "data": "DepartmentName" },
+            { "data": "DesignationName" },
+            { "data": "CategoryName" },
+            { "data": "Gender" },
+            { "data": "MaritalStatus" },
+            { "data": "CNIC" },
+            { "data": "CNICExpire" },
+            { "data": "DOB" },
+            { "data": "Mobile" },
+            { "data": "Email" },
+            { "data": "CurrentAddress" },
+            { "data": "LastUpdateDate" }
+
+
+
+
+
+        ],
+        "order": [[3, 'desc']],
+        "initComplete": function () {
+            var searchparam = decodeURIComponent(getUrlVars()['search']);
+
+            if (searchparam != "undefined" && undefined != "") {
+
+                this.api().search(searchparam).draw();
+            }
+
+        }
+    });
+
+    $('#CvCandidateList tbody').on('click', 'tr', function () {
+        $('#CvCandidateList tbody > tr').removeClass('focusedRow');
+        $(this).addClass('focusedRow');
+    });
 
     if (window.location.pathname.toString() == "/Recruiter/AllJobs") {
         $("#AllListedJobs ul li:nth-child(1)").removeClass("active");
@@ -1560,12 +1918,73 @@ $(document).ready(function () {
         $("#AllListedJobs ul li:nth-child(4)").removeClass("active");
     }
     if (window.location.pathname.toString() == "/Recruiter/AllJobs/CreateJobs") {
-        
+
         $("#AllListedJobs ul li:nth-child(4)").removeClass("active");
     }
-    
 
+
+    var tableDependants = $('#tableDependants')[0];
+
+    $(tableDependants).delegate('.addDynamicRow', 'click', function () {
+        var thisRow = $(this).closest('tr')[0];
+        var newRow = $(thisRow).clone(true);
+        $(newRow).find('input:hidden').val('0')
+        newRow.insertAfter(thisRow).find('input:text').val('').find('input:date').val('');
+
+
+        $('input[name^="Cand_Dependants"]').each(function () {
+            var currenrow = $('#tableDependants tbody tr').length - 1;
+            var oldname = $(this).attr('name');
+            //var newname = $(this).attr('name').replace('[0]', '[' + currenrow + ']');
+            var newname = oldname.substr(0, oldname.indexOf('[') + 1) + currenrow + oldname.substr(oldname.indexOf(']'), oldname.length);
+            //alert($(this).attr('name'));
+            $(newRow).find('input[name="' + $(this).attr('name') + '"]').attr('name', newname)
+            //            alert($(this).attr('name'));
+
+
+
+        });
+
+        if ($(thisRow).find('.tblDplAction').find('.removeDynamicRow').length == 0) {
+            $(newRow).find('.tblDplAction').append('<button type="button" class="btn btn-sm btn-danger removeDynamicRow">Delete Row</button>');
+        }
+
+        $(newRow).find('.pastdate').val('');
+        $(newRow).find('.pastdate').datepicker({
+      
+            format: "dd-M-yyyy"
+        });
+
+
+
+
+    });
+
+    //tblDplAction
+
+    $(tableDependants).delegate('.removeDynamicRow', 'click', function () {
+
+        var dependantId = $(this).closest('tr').find('input[name$="Id"]').val();
+
+        DeleteCand_Dependants(dependantId, $(this).closest('tr'));
+
+
+    });
+
+
+    $(".ShortlistCandidate").unbind().click(function () {
      
+        ShowShortListModal($(this).attr("value"), $(this).closest('td').find('.CandUserId').val());
+
+    });
 
 
+
+    $("#btnSubmitShortlistCand").unbind().click(function () {
+        if (validateShortListForm()) {
+            ShortlistCandidate(1, false);
+
+        }        
+      
+    });
 });

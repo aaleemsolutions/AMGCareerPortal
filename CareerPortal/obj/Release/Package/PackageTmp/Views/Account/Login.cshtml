@@ -1,9 +1,12 @@
 ﻿
 @model ViewModels.UserloginViewModel
+
 @{
     ViewBag.Title = "Login";
 
 }
+
+
 
 <div class="content gray-section">
     <section>
@@ -18,15 +21,15 @@
                             {
 
                                 <div class="form-group">
-                                    @Html.TextBoxFor(m => m.Emailaddress, new { @class = "form-control", placeholder = "Email Address" ,@value="aleemksolutions@gmail.com"})
+                                    @Html.TextBoxFor(m => m.Emailaddress, new { @class = "form-control", placeholder = "Email Address", @value = "aleemksolutions@gmail.com" })
 
                                 </div>
 
                                 <div class="form-group">
 
                                     @*<input type="password"
-                class="form-control"
-                placeholder="Password" />*@
+                                        class="form-control"
+                                        placeholder="Password" />*@
                                     @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "Password", placeholder = "Password", @value = "Test@123++" })
                                 </div>
 
@@ -38,8 +41,8 @@
                                 <div class="form-group text-right pb-3">
                                     <div class="custom-control custom-checkbox float-left">
                                         @*<input type="checkbox"
-                    class="custom-control-input"
-                    id="customCheck1" />*@
+                                            class="custom-control-input"
+                                            id="customCheck1" />*@
                                         @Html.EditorFor(m => m.Remembme, new { htmlAttributes = new { @class = "custom-control-input", id = "customCheck1" } })
                                         <label class="custom-control-label" for="customCheck1">Remember me</label>
 
@@ -87,4 +90,3 @@
     </section>
 </div>
 
- 

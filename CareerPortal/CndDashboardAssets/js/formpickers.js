@@ -33,17 +33,15 @@
           autoclose: true
     });
   }
-
-    $('.pastdate').each(function () {
-
-        $(this).datepicker({
+ 
+        $('.pastdate').datepicker({
             format: "dd-M-yyyy",
             //enableOnReadonly: true,
             //todayHighlight: true,
             endDate: date,
             autoclose: true
         });
-    });
+ 
 
     if ($(".datepicker").length) {
         $('.datepicker').datepicker({

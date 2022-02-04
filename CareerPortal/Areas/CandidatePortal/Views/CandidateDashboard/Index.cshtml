@@ -51,15 +51,15 @@
                                     <div id="the-basics">
 
                                         @*@if (Model.CandidateInfo != null)
-                                        {*@
-                                            <input type="file" name="UserImage" id="UserImage" class="dropify" data-max-file-size="50M" data-show-remove="false" data-default-file="" data-allowed-file-extensions='["jpg", "png","JPEG"]' />
+                                            {*@
+                                        <input type="file" name="UserImage" id="UserImage" class="dropify" data-max-file-size="50M" data-show-remove="false" data-default-file="" data-allowed-file-extensions='["jpg", "png","JPEG"]' />
                                         @*}
-                                        else
-                                        {
-                                            <input type="file" name="UserImage" id="UserImage" class="dropify" data-max-file-size="50M" data-show-remove="false" data-default-file="../assets/img/noProfile.png" data-allowed-file-extensions='["jpg", "png","JPEG"]' />
+                                            else
+                                            {
+                                                <input type="file" name="UserImage" id="UserImage" class="dropify" data-max-file-size="50M" data-show-remove="false" data-default-file="../assets/img/noProfile.png" data-allowed-file-extensions='["jpg", "png","JPEG"]' />
 
-                                        }*@
-                                    
+                                            }*@
+
 
 
                                     </div>
@@ -111,7 +111,7 @@
                                                 @*<input class="typeahead" type="text" placeholder="CNIC" required>*@
 
                                                 @Html.TextBoxFor(Model => Model.CNIC,
-                              new { @class = "typeahead sa CNICInputMask", placeholder = "CNIC"})
+                              new { @class = "typeahead sa CNICInputMask", placeholder = "CNIC" })
                                                 <span class="text-danger" id="ErrorCNIC"></span>
 
 
@@ -458,12 +458,14 @@
                                 <div class="col-md-12" style="height: 200px">
 
                                     <label for="exampleInputName1">Job Duties<span class="text-danger">*</span></label>
+                                    @Html.TextAreaFor(m => m.CndExperienceViewModel.JobDuties, new { @class = "RichTextJobDescription", rows = "50" })
 
-                                    <div id="JobDutiesEditor" class="quill-container">
 
-                                        <br />
+                                    @*<div id="JobDutiesEditor" class="quill-container">
 
-                                    </div>
+                                            <br />
+
+                                        </div>*@
 
 
                                     <span class="text-danger" id="ErrorCndExperienceJobDuties"></span>
@@ -522,15 +524,15 @@
 
                         </section>
                         @*<h3>Terms And Conditions</h3>
-                        <section class="FormWizard">
-                            <h3>Finish</h3>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox">
-                                    I agree with the Terms and Conditions.
-                                </label>
-                            </div>
-                        </section>*@
+                            <section class="FormWizard">
+                                <h3>Finish</h3>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="checkbox" type="checkbox">
+                                        I agree with the Terms and Conditions.
+                                    </label>
+                                </div>
+                            </section>*@
                     </div>
                 </form>
             </div>
@@ -549,7 +551,7 @@
 
             //$("#CNIC").attr("data-inputmask-alias", "(+99) 9999-9999")
 
-            
+
 
 
             $('.dropify').dropify();
@@ -667,4 +669,16 @@
 
 </div>
 
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
+
+<script>
+
+    $(document).ready(function () {
+        $('.RichTextJobDescription').summernote();
+
+    });
+</script>

@@ -14,9 +14,11 @@ namespace CareerPortal.Controllers
     public class AccountController : Controller
     {
         UserRegModule RegUser;
+        CandidateLogics candidateobj;
         public AccountController()
         {
             RegUser = new UserRegModule();
+            candidateobj = new CandidateLogics();
         }
 
         // GET: Account
@@ -108,7 +110,26 @@ namespace CareerPortal.Controllers
                     {
                         Session["UserImage"] = "";
                     }
-                    
+
+
+                    var dbobj = candidateobj.getCandidate(GlobalUserInfo.UserId);
+
+                    if (dbobj.UsersInfo != null)
+                    {
+                        if (dbobj.UsersInfo.CandidateJobApplies.Where(m => m.HrShortlistings.Count > 0).Count() > 0)
+                        {
+                            GlobalUserInfo.JobApplicationOpen = true;
+
+
+                        }
+                        if (dbobj.UsersInfo != null)
+                        {
+                            GlobalUserInfo.EmailAddress = dbobj.UsersInfo.UserEmail;
+                            GlobalUserInfo.FullName = dbobj.UsersInfo.FullName;
+
+
+                        }
+                    }
 
 
                     string userData = checkUser.userinfo.Id.ToString();

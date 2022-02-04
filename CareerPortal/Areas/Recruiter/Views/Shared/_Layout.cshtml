@@ -117,11 +117,17 @@
                             {
                                 <img src="~/assets/img/noProfile.png" alt="profile" style="height:40px;width:40px;" />
                             }
+                            <p>@BAL.GlobalUserInfo.FullName</p>
 
                         </a>
-
-                        </a>
+ 
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item">
+                                <i class="ti-user text-primary"></i>
+
+                                @BAL.GlobalUserInfo.EmailAddress
+                            </a>
+
                             <a class="dropdown-item">
                                 <i class="ti-settings text-primary"></i>
                                 Settings
@@ -321,7 +327,7 @@
                 <ul class="nav">
                     <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Dashboard" ? "active" : "")">
                         <a class="nav-link" href="@Url.Action("Dashboard","AllJobs",new { area="Recruiter"})">
-                            <i class="icon-grid menu-icon"></i>
+                            <i class="ti-dashboard menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
@@ -344,7 +350,7 @@
 
                     <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "CreateJobs" ? "active" : "")">
                         <a class="nav-link" href="@Url.Action("CandidateList","AllJobs",new { area="Recruiter"})">
-                            <i class="icon-search menu-icon"></i>
+                            <i class="ti-user menu-icon"></i>
                             <span class="menu-title"> Candidates</span>
                         </a>
                     </li>
@@ -353,15 +359,8 @@
 
                     <li class="nav-item ">
                         <a class="nav-link" href="@Url.Action("Index","cvBank",new { area="Recruiter"})">
-                            <i class="icon-search menu-icon"></i>
+                            <i class="ti-home menu-icon"></i>
                             <span class="menu-title"> Cv Bank</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a class="nav-link" href="@Url.Action("jobApplicationForm","CandidateForm",new { area="Recruiter"})">
-                            <i class="icon-search menu-icon"></i>
-                            <span class="menu-title"> Job Application Form</span>
                         </a>
                     </li>
 

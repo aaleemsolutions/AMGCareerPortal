@@ -78,6 +78,7 @@
     <Compile Include="Ado.Net\AdoNetFetch.cs" />
     <Compile Include="CandidateLangg.cs" />
     <Compile Include="Cand_freindWorking.cs" />
+    <Compile Include="Cand_Shortlisting.cs" />
     <Compile Include="DbSaveClass\CandidateGeneric.cs" />
     <Compile Include="DbSaveClass\CandidateLang.cs" />
     <Compile Include="DbSaveClass\Cand_RelateFreindWorkingDbSave.CS" />
@@ -89,6 +90,7 @@
     <Compile Include="DbSaveClass\LangDbSave.cs" />
     <Compile Include="DependantNameDbSave.cs" />
     <Compile Include="Cand_ProReferenceClass.cs" />
+    <Compile Include="HR_SlotsTimings.cs" />
     <Compile Include="MostRecentEmployementClass.cs" />
     <Compile Include="DependantsTestClass.cs" />
     <Compile Include="GetUserDetails.cs" />

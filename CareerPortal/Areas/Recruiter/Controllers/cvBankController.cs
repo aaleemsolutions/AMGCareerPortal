@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CareerPortal.Areas.Recruiter.Controllers
 {
+    [Authorize]
     public class cvBankController : Controller
     {
         JobAllPositions jbPositions;

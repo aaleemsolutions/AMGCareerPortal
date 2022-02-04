@@ -21,7 +21,7 @@ namespace ViewModels
         public String UserDbImagebase64 { get; set; } = "";
         public Nullable<int> UserId { get; set; }
         public Nullable<int> CandidateId { get; set; }
-
+        [Required (ErrorMessage = "Candidate Name Is Required.")]
         public string CandidateName { get; set; }
         [AllowHtml]
         public string CandidateDescription { get; set; }
@@ -33,28 +33,39 @@ namespace ViewModels
 
         [Required]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Father Name Is Required.")]
         public string FathersName { get; set; }
         [Required]
         public string CNIC { get; set; }
         [Required]
         public string CandidateAddress { get; set; }
+        [Required(ErrorMessage = "Marital Status Required.")]
         public string MaritalStatus { get; set; }
 
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
+        [Required(ErrorMessage = "DOB Is Required.")]
         [DataType(DataType.Date)]
         public Nullable<DateTime> DOB { get; set; }
+        [Required(ErrorMessage = "Nationality Is Required.")]
         public string Nationality { get; set; }
+        [Required(ErrorMessage = "Religion Is Required.")]
         public string Religion { get; set; }
-        
+        [Required(ErrorMessage = "CNIC ExpiryDate Is Required.")]
         public Nullable<System.DateTime> ExpiryDate { get; set; }
+      
         public string ContactNo { get; set; }
+      
         public string ContactNoOffice { get; set; }
+        [Required(ErrorMessage = "Mobile No Is Required.")]
         public string MobileNo { get; set; }
+        [Required(ErrorMessage = "Email Address Is Required.")]
         public string EmailAddress { get; set; }
         public string PresentAddress { get; set; }
+        [Required(ErrorMessage = "Freind Working field Is Required.")]
         public Nullable<bool> IsRelateFreindWorking { get; set; }
+        [Required(ErrorMessage = "Previosult work field  Is Required.")]
         public Nullable<bool> PreviouslyWork { get; set; }
+
         public string HealthIssue { get; set; }
         public string PassportNo { get; set; }
         public Nullable<System.DateTime> PasExpiryDate { get; set; }
@@ -62,6 +73,7 @@ namespace ViewModels
         public Nullable<System.DateTime> DrlExpiryDate { get; set; }
         public string NtnNo { get; set; }
         public string EOBI { get; set; }
+        [Required(ErrorMessage = "Gender Is Required.")]
         public string Gender { get; set; }
         public string Bloodgroup { get; set; }
 
