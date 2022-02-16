@@ -8,17 +8,18 @@
         <EntityTypeShape EntityType="CareerPortalModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CareerPortalModel.candidate" Width="1.5" PointX="8" PointY="0.875" />
         <AssociationConnector Association="CareerPortalModel.FK__candidate__UserI__6FE99F9F" ManuallyRouted="true" >
-          <ConnectorPoint PointX="2.25" PointY="3.5716804702773595" />
+          <ConnectorPoint PointX="2.25" PointY="3.9382744246012833" />
+          <ConnectorPoint PointX="2.6323405151578312" PointY="3.5052954243679029" />
+          <ConnectorPoint PointX="2.8051594848421684" PointY="3.3095877194588437" />
           <ConnectorPoint PointX="2.876175" PointY="3.229166666666667" />
           <ConnectorPoint PointX="4.1475" PointY="3.229166666666667" />
           <ConnectorPoint PointX="4.1475" PointY="2.9895833333333335" />
           <ConnectorPoint PointX="6.1025" PointY="2.9895833333333335" />
           <ConnectorPoint PointX="6.1025" PointY="19.185544433593748" />
-          <ConnectorPoint PointX="7.6975547259159436" PointY="7.2092061763492135" />
+          <ConnectorPoint PointX="7.7195577463839538" PointY="7.2092061763492135" />
           <ConnectorPoint PointX="7.7195577463839538" PointY="7.0439982925540923" />
-          <ConnectorPoint PointX="7.7921124722998965" PointY="6.4992270532901744" />
-          <ConnectorPoint PointX="7.7921124722998965" PointY="6.3339823724078128" />
-          <ConnectorPoint PointX="8" PointY="4.7503283527821445" />
+          <ConnectorPoint PointX="7.8539600517589436" PointY="6.4992270532901744" />
+          <ConnectorPoint PointX="8" PointY="4.7501315426928779" />
         </AssociationConnector>
         <EntityTypeShape EntityType="CareerPortalModel.CandidateQualification" Width="1.5" PointX="3" PointY="4.375" />
         <AssociationConnector Association="CareerPortalModel.FK__Candidate__Candi__17036CC0" />
@@ -57,6 +58,32 @@
         <AssociationConnector Association="CareerPortalModel.FK__HrShortli__Creat__603D47BB" />
         <AssociationConnector Association="CareerPortalModel.FK__HrShortli__SlotI__5C6CB6D7" />
         <AssociationConnector Association="CareerPortalModel.FK__TimingSlo__Creat__55BFB948" />
+        <EntityTypeShape EntityType="CareerPortalModel.InterviewPanelDetail" Width="1.5" PointX="5.25" PointY="26" />
+        <EntityTypeShape EntityType="CareerPortalModel.InterviewPanel" Width="1.5" PointX="3" PointY="27.75" />
+        <EntityTypeShape EntityType="CareerPortalModel.InterviewPerson" Width="1.5" PointX="3" PointY="23.875" />
+        <AssociationConnector Association="CareerPortalModel.FK__Interview__IntPe__075714DC" />
+        <AssociationConnector Association="CareerPortalModel.FK__Interview__Panel__0662F0A3" />
+        <AssociationConnector Association="CareerPortalModel.FK__Interview__Creat__6E8B6712" />
+        <AssociationConnector Association="CareerPortalModel.FK__Interview__Creat__7814D14C" />
+        <AssociationConnector Association="CareerPortalModel.FK__HrShortli__Panel__0D0FEE32" />
+        <EntityTypeShape EntityType="CareerPortalModel.InterviewType" Width="1.5" PointX="15.375" PointY="0.875" />
+        <AssociationConnector Association="CareerPortalModel.FK__HrShortli__Inter__12C8C788" />
+        <EntityTypeShape EntityType="CareerPortalModel.cndEvDetail" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="CareerPortalModel.cndEvMaster" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="CareerPortalModel.IntEvaluationType" Width="1.5" PointX="0.75" PointY="42.25" />
+        <EntityTypeShape EntityType="CareerPortalModel.IntEvDecision" Width="1.5" PointX="0.75" PointY="18" />
+        <EntityTypeShape EntityType="CareerPortalModel.IntEvQuestion" Width="1.5" PointX="0.75" PointY="39" />
+        <EntityTypeShape EntityType="CareerPortalModel.IntQuestionMapping" Width="1.5" PointX="3" PointY="37.625" />
+        <EntityTypeShape EntityType="CareerPortalModel.IntScoreType" Width="1.5" PointX="0.75" PointY="36.5" />
+        <AssociationConnector Association="CareerPortalModel.FK__cndEvDeta__cndEv__2D7CBDC4" />
+        <AssociationConnector Association="CareerPortalModel.FK__cndEvDeta__MapId__2E70E1FD" />
+        <AssociationConnector Association="CareerPortalModel.FK__cndEvMast__fdGiv__28B808A7" />
+        <AssociationConnector Association="CareerPortalModel.FK__cndEvMast__IntEv__27C3E46E" />
+        <AssociationConnector Association="CareerPortalModel.FK__cndEvMast__UserI__26CFC035" />
+        <AssociationConnector Association="CareerPortalModel.FK__IntEvQues__IntEv__1E3A7A34" />
+        <AssociationConnector Association="CareerPortalModel.FK__IntQuesti__Quest__2116E6DF" />
+        <AssociationConnector Association="CareerPortalModel.FK__IntQuesti__Score__220B0B18" />
+        <AssociationConnector Association="CareerPortalModel.FK__cndEvMast__Short__324172E1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

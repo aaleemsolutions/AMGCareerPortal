@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -25,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -137,6 +139,7 @@
     <Compile Include="Areas\Recruiter\Controllers\AllJobsController.cs" />
     <Compile Include="Areas\Recruiter\Controllers\CandidateFormController.cs" />
     <Compile Include="Areas\Recruiter\Controllers\cvBankController.cs" />
+    <Compile Include="Areas\Recruiter\Controllers\HRPanelController.cs" />
     <Compile Include="Areas\Recruiter\Controllers\ShortlistingController.cs" />
     <Compile Include="Areas\Recruiter\RecruiterAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -423,8 +426,28 @@
     <Content Include="CndDashboardAssets\js\typeahead.js" />
     <Content Include="CndDashboardAssets\js\wizard.js" />
     <Content Include="CndDashboardAssets\js\x-editable.js" />
+    <Content Include="CndDashboardAssets\Multiselect\bootstrap-multiselect.css" />
+    <Content Include="CndDashboardAssets\Multiselect\bootstrap-multiselect.js" />
+    <Content Include="CndDashboardAssets\Multiselect\bootstrap-multiselect.min.css" />
+    <Content Include="CndDashboardAssets\Multiselect\bootstrap-multiselect.min.js" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\css\bootstrap-4.5.2.min.css" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\css\bootstrap-example.min.css" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\css\fontawesome-5.15.1-web\all.css" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\css\fontawesome-5.15.1-web\all.min.css" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\css\prettify.min.css" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-brands-400.svg" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-regular-400.svg" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-solid-900.svg" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\js\bootstrap.bundle-4.5.2.min.js" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\js\jquery-2.2.4.min.js" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\js\knockout-3.4.0.debug.js" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\js\prettify.min.js" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\js\require-2.3.5.min.js" />
     <Content Include="CndDashboardAssets\SummerNote\summernote.min.css" />
     <Content Include="CndDashboardAssets\SummerNote\summernote.min.js" />
+    <Content Include="CndDashboardAssets\Tagify\script.js" />
+    <Content Include="CndDashboardAssets\Tagify\style.css" />
     <Content Include="CndDashboardAssets\vendors\ace-builds\src-min\ace.js" />
     <Content Include="CndDashboardAssets\vendors\ace-builds\src-min\mode-javascript.js" />
     <Content Include="CndDashboardAssets\vendors\ace-builds\src-min\theme-chaos.js" />
@@ -680,6 +703,28 @@
     <Content Include="Areas\Recruiter\Views\Shared\_Education.cshtml" />
     <Content Include="Areas\Recruiter\Views\Shared\_Experience.cshtml" />
     <Content Include="Areas\Recruiter\Views\Shared\_ShortlistCandidate.cshtml" />
+    <Content Include="Areas\Recruiter\Views\HRPanel\HRPerson.cshtml" />
+    <Content Include="Areas\Recruiter\Views\HRPanel\InterviewPanels.cshtml" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-brands-400.eot" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-brands-400.ttf" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-brands-400.woff" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-brands-400.woff2" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-regular-400.eot" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-regular-400.ttf" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-regular-400.woff" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-regular-400.woff2" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-solid-900.eot" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-solid-900.ttf" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-solid-900.woff" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\fontawesome-5.15.1-web\fa-solid-900.woff2" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="CndDashboardAssets\Multiselect\docs\less\bootstrap-example.less" />
+    <Content Include="Areas\Recruiter\Views\Shortlisting\InterviewList.cshtml" />
+    <Content Include="Areas\Recruiter\Views\Shortlisting\InterviewEvaluationForm.cshtml" />
+    <Content Include="Areas\Recruiter\Views\Shared\_CndEvaluationForm.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Scripts\inputmask\inputmask.js" />
@@ -723,7 +768,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\CandidatePortal\Data\" />
     <Folder Include="Areas\Recruiter\Data\" />
-    <Folder Include="Areas\Recruiter\Views\Shortlisting\" />
     <Folder Include="Models\" />
     <Folder Include="UploadedDocuments\UploadedCV\" />
   </ItemGroup>
@@ -754,11 +798,15 @@
       <Name>ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

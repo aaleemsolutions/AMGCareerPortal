@@ -28,6 +28,8 @@
     <NavigationProperty Name="Cand_ProfessionalReferences" Relationship="CareerPortalModel.FK__Cand_Prof__UserI__40C49C62" FromRole="User" ToRole="Cand_ProfessionalReferences" />
     <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__Creat__603D47BB" FromRole="User" ToRole="HrShortlisting" />
     <NavigationProperty Name="TimingSlots" Relationship="CareerPortalModel.FK__TimingSlo__Creat__55BFB948" FromRole="User" ToRole="TimingSlot" />
+    <NavigationProperty Name="InterviewPanels" Relationship="CareerPortalModel.FK__Interview__Creat__6E8B6712" FromRole="User" ToRole="InterviewPanel" />
+    <NavigationProperty Name="InterviewPersons" Relationship="CareerPortalModel.FK__Interview__Creat__7814D14C" FromRole="User" ToRole="InterviewPerson" />
   </EntityType>
   <EntityContainer Name="CareerPortalEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
@@ -133,6 +135,25 @@
     <AssociationSet Name="FK__TimingSlo__Creat__55BFB948" Association="CareerPortalModel.FK__TimingSlo__Creat__55BFB948">
       <End Role="User" EntitySet="Users" />
       <End Role="TimingSlot" EntitySet="TimingSlots" />
+    </AssociationSet>
+    <EntitySet Name="InterviewPanelDetails" EntityType="CareerPortalModel.InterviewPanelDetail" />
+    <EntitySet Name="InterviewPanels" EntityType="CareerPortalModel.InterviewPanel" />
+    <EntitySet Name="InterviewPersons" EntityType="CareerPortalModel.InterviewPerson" />
+    <AssociationSet Name="FK__Interview__IntPe__075714DC" Association="CareerPortalModel.FK__Interview__IntPe__075714DC">
+      <End Role="InterviewPerson" EntitySet="InterviewPersons" />
+      <End Role="InterviewPanelDetail" EntitySet="InterviewPanelDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Interview__Panel__0662F0A3" Association="CareerPortalModel.FK__Interview__Panel__0662F0A3">
+      <End Role="InterviewPanel" EntitySet="InterviewPanels" />
+      <End Role="InterviewPanelDetail" EntitySet="InterviewPanelDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Interview__Creat__6E8B6712" Association="CareerPortalModel.FK__Interview__Creat__6E8B6712">
+      <End Role="User" EntitySet="Users" />
+      <End Role="InterviewPanel" EntitySet="InterviewPanels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Interview__Creat__7814D14C" Association="CareerPortalModel.FK__Interview__Creat__7814D14C">
+      <End Role="User" EntitySet="Users" />
+      <End Role="InterviewPerson" EntitySet="InterviewPersons" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="candidate">
@@ -686,6 +707,95 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="TimingSlot">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InterviewPanelDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PanelId" Type="Int32" />
+    <Property Name="IntPersonId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="InterviewPerson" Relationship="CareerPortalModel.FK__Interview__IntPe__075714DC" FromRole="InterviewPanelDetail" ToRole="InterviewPerson" />
+    <NavigationProperty Name="InterviewPanel" Relationship="CareerPortalModel.FK__Interview__Panel__0662F0A3" FromRole="InterviewPanelDetail" ToRole="InterviewPanel" />
+  </EntityType>
+  <EntityType Name="InterviewPanel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PanelName" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="InterviewPanelDetails" Relationship="CareerPortalModel.FK__Interview__Panel__0662F0A3" FromRole="InterviewPanel" ToRole="InterviewPanelDetail" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Interview__Creat__6E8B6712" FromRole="InterviewPanel" ToRole="User" />
+  </EntityType>
+  <EntityType Name="InterviewPerson">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EmpId" Type="Int32" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="InterviewPanelDetails" Relationship="CareerPortalModel.FK__Interview__IntPe__075714DC" FromRole="InterviewPerson" ToRole="InterviewPanelDetail" />
+    <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Interview__Creat__7814D14C" FromRole="InterviewPerson" ToRole="User" />
+    <Property Name="GarmentDivision" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK__Interview__IntPe__075714DC">
+    <End Type="CareerPortalModel.InterviewPerson" Role="InterviewPerson" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.InterviewPanelDetail" Role="InterviewPanelDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InterviewPerson">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterviewPanelDetail">
+        <PropertyRef Name="IntPersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Interview__Panel__0662F0A3">
+    <End Type="CareerPortalModel.InterviewPanel" Role="InterviewPanel" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.InterviewPanelDetail" Role="InterviewPanelDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InterviewPanel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterviewPanelDetail">
+        <PropertyRef Name="PanelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Interview__Creat__6E8B6712">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.InterviewPanel" Role="InterviewPanel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterviewPanel">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Interview__Creat__7814D14C">
+    <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.InterviewPerson" Role="InterviewPerson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterviewPerson">
         <PropertyRef Name="CreatedBy" />
       </Dependent>
     </ReferentialConstraint>

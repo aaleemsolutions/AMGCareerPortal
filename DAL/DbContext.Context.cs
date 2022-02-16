@@ -46,6 +46,17 @@ namespace DAL
         public virtual DbSet<Cand_ProfessionalReferences> Cand_ProfessionalReferences { get; set; }
         public virtual DbSet<HrShortlisting> HrShortlistings { get; set; }
         public virtual DbSet<TimingSlot> TimingSlots { get; set; }
+        public virtual DbSet<InterviewPanelDetail> InterviewPanelDetails { get; set; }
+        public virtual DbSet<InterviewPanel> InterviewPanels { get; set; }
+        public virtual DbSet<InterviewPerson> InterviewPersons { get; set; }
+        public virtual DbSet<InterviewType> InterviewTypes { get; set; }
+        public virtual DbSet<cndEvDetail> cndEvDetails { get; set; }
+        public virtual DbSet<cndEvMaster> cndEvMasters { get; set; }
+        public virtual DbSet<IntEvaluationType> IntEvaluationTypes { get; set; }
+        public virtual DbSet<IntEvDecision> IntEvDecisions { get; set; }
+        public virtual DbSet<IntEvQuestion> IntEvQuestions { get; set; }
+        public virtual DbSet<IntQuestionMapping> IntQuestionMappings { get; set; }
+        public virtual DbSet<IntScoreType> IntScoreTypes { get; set; }
     
         public virtual ObjectResult<usp_getallDegree_Result> usp_getallDegree()
         {

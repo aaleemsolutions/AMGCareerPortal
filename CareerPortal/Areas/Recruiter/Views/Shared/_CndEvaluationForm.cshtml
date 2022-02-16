@@ -1,0 +1,421 @@
+﻿@model ViewModels.IntEvaluationViewModel
+
+<style>
+    .table th, .jsgrid .jsgrid-table th, .table td, .jsgrid .jsgrid-table td {
+        white-space: normal;
+    }
+</style>
+ 
+
+<div class="row ">
+    <div class="col-md-12 grid-margin ">
+        <div class="card">
+            <div class="card-header">
+                Interview Evaluation
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Applicant Name <span class="text-danger">*</span> </label>
+                            <div id="the-basics">
+                                @Html.HiddenFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.User.Id)
+                                @Html.HiddenFor(m => m.CandShortListViewModel.HrShortlisting.Id)
+                                @Html.HiddenFor(m => m.CndEvMaster.Id)
+                                @Html.HiddenFor(m => m.CndEvMaster.fdGivenBy)
+                                @Html.HiddenFor(m => m.CndEvMaster.ShortListId)
+                                @Html.HiddenFor(m => m.CndEvMaster.creationdate)
+                                @Html.HiddenFor(m => m.CndEvMaster.fdGivenBy)
+
+                                @Html.TextBoxFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.User.FullName, new { @class = "typeahead validateTextOnly", placeholder = "Candidate Name", @readonly = "readonly" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Position Applied<span class="text-danger">*</span> </label>
+                            <div id="the-basics">
+
+                                @Html.TextBoxFor(m => m.CandShortListViewModel.HrShortlisting.AllPosition.JobTitle, new { @class = "typeahead validateTextOnly", placeholder = "Position Applied", @readonly = "readonly" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Division / Unit <span class="text-danger">*</span> </label>
+                            <div id="the-basics">
+
+                                @Html.TextBoxFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.AllPosition.DivisionName, new { @class = "typeahead validateTextOnly", placeholder = "Division", @readonly = "readonly" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Department<span class="text-danger">*</span> </label>
+                            <div id="the-basics">
+
+                                @Html.TextBoxFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.AllPosition.DepartmentName, new { @class = "typeahead validateTextOnly", placeholder = "Department", @readonly = "readonly" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Interviewer Name <span class="text-danger">*</span> </label>
+                            <div id="the-basics">
+
+                                @Html.TextBoxFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.User.FullName, new { @class = "typeahead validateTextOnly", placeholder = "Interviewer Name", @readonly = "readonly" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Designation<span class="text-danger">*</span> </label>
+                            <div id="the-basics">
+
+                                @Html.TextBoxFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.AllPosition.DesignationName, new { @class = "typeahead validateTextOnly", placeholder = "Designation Name", @readonly = "readonly" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <table class="table table-responsive tableRadioButton" border="1">
+                        <thead class="text-center">
+                            <tr class="d-flex">
+                                <th class="text-center col-7" style="">
+                                    Evaluation Factors
+                                </th>
+
+
+                                @foreach (var item in Model.intQuestionMappings.OrderByDescending(m => m.Id).Select(m => new { ScoreMarks = m.IntScoreType.TotalMarks, ScoreTypeName = m.IntScoreType.ScoreTypeName }).Distinct())
+                                {
+                                    <th class="col-1" style="white-space: nowrap;">
+                                        <text>@item.ScoreTypeName (@item.ScoreMarks)</text>
+                                    </th>
+                                }
+
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @{
+                                int questionCount = 0;
+                                int radiobuttonCount = 0;
+
+                                foreach (var quesionType in Model.intQuestionMappings.OrderByDescending(m => m.Id).Select(m => new { QuestionTypeId = m.IntEvQuestion.IntEvaluationType.Id, TypeName = m.IntEvQuestion.IntEvaluationType.TypeName }).Distinct())
+                                {
+
+                                    <tr class="d-flex">
+                                        <td colspan="6" class="col-12">
+                                            <strong>@quesionType.TypeName</strong>
+
+                                        </td>
+
+                                    </tr>
+
+                                    foreach (var item in Model.intQuestionMappings.OrderByDescending(m => m.Id).Where(m => m.IntEvQuestion.IntEvQTypeId == quesionType.QuestionTypeId).Select(m => new { QuestionId = m.IntEvQuestion.Id, Question = m.IntEvQuestion.EvaluationType }).Distinct())
+                                    {
+                                        questionCount += 1;
+                                        <tr class="d-flex">
+
+
+                                            <td class="col-7" style="text-align:justify"><strong> @questionCount.</strong> @item.Question </td>
+
+                                            @foreach (var ScoreType in Model.intQuestionMappings.OrderByDescending(m => m.Id).Select(m => new { ScoreId = m.IntScoreType.Id, ScoreTypeName = m.IntScoreType.ScoreTypeName }).Distinct())
+                                            {
+                                                foreach (var checkboxitems in Model.intQuestionMappings.OrderByDescending(m => m.Id).Where(m => m.QuestionId == item.QuestionId && m.IntScoreType.Id == ScoreType.ScoreId))
+                                                {
+
+                                                    var radioName = "radiobutton[" + checkboxitems.IntEvQuestion.Id + "].name";
+                                                    var LangRequiredmessage = "Please select marks";
+
+
+                                                    var ischeckfound = false;
+
+                                                    if (Model.cndEvDetails!=null)
+                                                    {
+                                                        ischeckfound = Model.cndEvDetails.Where(m => m.MapId == checkboxitems.Id).Count() > 0 ? true : false;
+                                                    }
+
+
+                                                    <td class="col-1" style="text-align:center;">
+
+
+
+                                                        @Html.Hidden("hdnClosestMarks", checkboxitems.IntScoreType.TotalMarks, new { @class = "hdnClosestMarks" })
+                                                        @if (ischeckfound)
+                                                        {
+                                                            @Html.RadioButtonFor(m => m.cndEvDetails[radiobuttonCount].MapId, checkboxitems.Id, new { @class = "rdofactors", required = "required", @checked = "checked" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.RadioButtonFor(m => m.cndEvDetails[radiobuttonCount].MapId, checkboxitems.Id, new { @class = "rdofactors", required = "required" })
+                                                        }
+
+                                                        @Html.ValidationMessageFor(m => m.cndEvDetails[radiobuttonCount].MapId, "", new { @class = "text-danger" })
+                                                    </td>
+                                                }
+
+
+                                            }
+
+                                        </tr>
+                                        radiobuttonCount += 1;
+                                    }
+                                }
+                            }
+
+
+                        </tbody>
+                    </table>
+
+
+                    <div class="row">
+                        <hr />
+                        <h4 style="text-align:center">Overall Interview Performance Score</h4>
+                        <hr />
+
+
+
+                        <div class="col-md-4">
+
+                            <div class="table-responsive">
+                                <table class="table table-responsive" border="1">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th colspan="2">Overall Rating Criteria</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Excellent (5)</td>
+                                            <td>91-100%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Very Good (4)</td>
+                                            <td>76-90%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Good (3)</td>
+                                            <td>61-75%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Average (2)</td>
+                                            <td>46-60%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Poor (1)</td>
+                                            <td>45% or below</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="vertical-align: middle;margin: auto;">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    Total Points
+                                </div>
+                                <div class="col-md-8">
+                                    @*<input type="text" class="form-control" placeholder="Total Points" />*@
+                                    @Html.TextBoxFor(m => m.CndEvMaster.TotalMarks, new { @readonly = "readonly", @class = "form-control" })
+
+                                </div>
+
+
+
+                                <div class="col-md-4">
+                                    Total Obtained Points
+                                </div>
+                                <div class="col-md-8" style="margin-top:10px;">
+                                    @Html.TextBoxFor(m => m.CndEvMaster.ObtainedMarks, new { @readonly = "readonly", @class = "form-control" })
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-4" style="vertical-align: middle;margin: auto;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Overall Rating
+                                </div>
+                                <div class="col-md-4">
+
+                                    @Html.TextBox("OverrallRating", "", new { @value = 0, type = "number", @readonly = "readonly", @class = "form-control" })
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col">
+                                <label>Additional Comments <span class="text-danger">*</span> </label>
+                                <div id="the-basics">
+                                    @Html.TextAreaFor(m => m.CndEvMaster.AdditionalComments, new { @class = "form-control", rows = "3" })
+                                    @*<textarea class="form-control" rows="3"> </textarea>*@
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <strong>Decision</strong>
+                        </div>
+                        @foreach (var item in Model.intEvDecisions)
+                        {
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        @{
+                                            var checkfound = false;
+                                            if (Model.CndEvMaster != null)
+                                            {
+
+                                                checkfound = item.Id == Model.CndEvMaster.IntEvDecisionId ? true : false;
+
+                                            }
+                                        }
+
+
+                                        <label>
+                                            @item.DecisionName
+                                            @if (checkfound)
+                                            {
+                                                @Html.RadioButtonFor(m => m.CndEvMaster.IntEvDecisionId, item.Id, new { @checked = "checked" })
+                                            }
+                                            else
+                                            {
+                                                @Html.RadioButtonFor(m => m.CndEvMaster.IntEvDecisionId, item.Id, new { })
+                                            }
+
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                        @Html.ValidationMessageFor(M => M.CndEvMaster.IntEvDecisionId, "", new { @class = "text-danger" })
+
+                        <hr />
+                        <div class="row">
+
+
+                            <div class="col-md-3">
+                                <span>If selected, the employee will </span>
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <span>join from</span>
+                                <div class="input-group date datepicker ">
+
+                                    @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, "{0:dd-MMM-yyyy}", new { @class = "form-control datepickerfuture" })
+
+                                    <span class="input-group-addon input-group-append border-left">
+                                        <span class="ti-calendar input-group-text"></span>
+                                    </span>
+                                </div>
+
+                                @Html.ValidationMessageFor(M => M.CndEvMaster.JoinDate, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="col-md-3">
+
+
+
+                                <span> on Salary</span> @Html.TextBoxFor(m => m.CndEvMaster.Salary, new { @class = "form-control txtSalaryInputMask " })
+
+
+                                @Html.ValidationMessageFor(M => M.CndEvMaster.Salary, "", new { @class = "text-danger" })
+
+                            </div>
+
+
+                            <div class="col-md-3">
+
+
+                                <span>Designation</span>
+                                <span>  @Html.TextBoxFor(m => m.CndEvMaster.DesignationId, new { @class = "form-control" })  </span>
+
+
+                                @Html.ValidationMessageFor(M => M.CndEvMaster.DesignationId, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="col-md-3">
+
+
+                                <span>at Grade</span>
+                                <span>  @Html.TextBoxFor(m => m.CndEvMaster.GradeId, new { @class = "form-control" })  </span>
+                                @Html.ValidationMessageFor(M => M.CndEvMaster.GradeId, "", new { @class = "text-danger" })
+                            </div>
+
+
+
+                            <div class="col-md-3">
+
+                                <span>in Department</span>
+
+
+                                <span>  @Html.TextBoxFor(m => m.CndEvMaster.DepartmentId, new { @class = "form-control" })  </span>
+
+                                @Html.ValidationMessageFor(M => M.CndEvMaster.DepartmentId, "", new { @class = "text-danger" })
+                            </div>
+
+
+
+                            <div class="col-md-3">
+
+
+
+                                <span>and with benifits</span>
+                                <span>  @Html.TextBoxFor(m => m.CndEvMaster.Benifits, new { @class = "form-control" })  </span>
+
+                                @Html.ValidationMessageFor(M => M.CndEvMaster.Benifits, "", new { @class = "text-danger" })
+
+
+                            </div>
+                            @*date, on
+                                @ @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Designation, at @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Grade, in @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Department/Unit/Unit. And with @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Benfitis*@
+
+                        </div>
+                        @if (ViewData.ModelState["DesignationId"] != null)
+                        {
+                            ViewData.ModelState["DesignationId"].Errors[0].ErrorMessage.ToString();
+
+                        }
+
+                        @Html.ValidationSummary(false)
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Submit </button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

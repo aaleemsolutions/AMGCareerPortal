@@ -14,22 +14,34 @@ namespace DAL
     
     public partial class HrShortlisting
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HrShortlisting()
+        {
+            this.cndEvMasters = new HashSet<cndEvMaster>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> JobId { get; set; }
         public Nullable<int> CandApplyId { get; set; }
         public Nullable<System.DateTime> InterviewDate { get; set; }
         public Nullable<int> SlotId { get; set; }
         public Nullable<bool> IsSendJobForm { get; set; }
-    public Nullable<bool> IsEmailSend { get; set; } = true;
+        public Nullable<bool> IsEmailSend { get; set; }
         public Nullable<bool> IsInterviewComfirmed { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> PanelId { get; set; }
+        public Nullable<int> InterviewTypeId { get; set; }
     
         public virtual AllPosition AllPosition { get; set; }
         public virtual CandidateJobApply CandidateJobApply { get; set; }
         public virtual User User { get; set; }
         public virtual TimingSlot TimingSlot { get; set; }
+        public virtual InterviewPanel InterviewPanel { get; set; }
+        public virtual InterviewType InterviewType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cndEvMaster> cndEvMasters { get; set; }
     }
 }

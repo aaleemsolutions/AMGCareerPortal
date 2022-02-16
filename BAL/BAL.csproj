@@ -90,7 +90,9 @@
     <Compile Include="DbSaveClass\LangDbSave.cs" />
     <Compile Include="DependantNameDbSave.cs" />
     <Compile Include="Cand_ProReferenceClass.cs" />
+    <Compile Include="HRPanelDB.cs" />
     <Compile Include="HR_SlotsTimings.cs" />
+    <Compile Include="IntEvaluation.cs" />
     <Compile Include="MostRecentEmployementClass.cs" />
     <Compile Include="DependantsTestClass.cs" />
     <Compile Include="GetUserDetails.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="DbSaveClass\UsersReg.cs" />
     <Compile Include="Utilities\ImageSaving.cs" />
     <Compile Include="Utilities\SendEmail.cs" />
+    <Compile Include="Utilities\SenJsonResponse.cs" />
     <Compile Include="Utilities\VariableCasting.cs" />
   </ItemGroup>
   <ItemGroup>

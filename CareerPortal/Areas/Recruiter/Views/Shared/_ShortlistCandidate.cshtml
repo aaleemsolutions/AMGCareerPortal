@@ -8,7 +8,7 @@
         @Html.HiddenFor(m => m.jobApplyViewModels.CndJobApply.Id)
         @Html.HiddenFor(m => m.jobApplyViewModels.User.Id)
         @Html.HiddenFor(m => m.jobApplyViewModels.CndJobApply.User.UserEmail)
-       
+
 
         <div class="col-md-2 col-sm-4">
             <label>Candidate Name <span class="text-danger">*</span> </label>
@@ -47,10 +47,11 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
                 </div>
 
                 <span class="ErrorSH_InterviewDate text-danger"></span>
+
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-4">
+        <div class="col-md-2 col-sm-4">
             <label>Interview Timings <span class="text-danger">*</span></label>
             <div id="the-basics1">
                 @*<input class="typeahead" type="text" placeholder="First Name" >*@
@@ -60,16 +61,40 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
 
             </div>
         </div>
-        <div class="col-md-2">
-            <label> &nbsp;<span class="text-danger">*</span></label>
+
+     
+
+        <div class="col-md-3 col-sm-4">
+            <label>Interview Panel <span class="text-danger">*</span></label>
             <div id="the-basics1">
+                @*<input class="typeahead" type="text" placeholder="First Name" >*@
+                @Html.DropDownListFor(m => m.HrShortlisting.PanelId, new SelectList(ViewBag.DrpInterviewPanel, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "InterviewPanel" })
+
+                <span class="ErrorSH_InterviewTiming text-danger"></span>
+
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div id="the-basics1">
+
                 <label>@Html.CheckBoxFor(m => m.IsEmailSend, new { @id = "isEmailSend" }) Send Email</label>
+
+
+                <span class="ErrorSH_CheckboxError text-danger"></span>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+
+            <div id="the-basics1">
+
+
                 <label>@Html.CheckBoxFor(m => m.IsSendJobForm, new { @id = "isJobFormSend" }) Send JobFrom</label>
 
                 <span class="ErrorSH_CheckboxError text-danger"></span>
             </div>
         </div>
-
     </div>
     <div class="row" id="EmailTemplateShortlist" style="margin-top:10px;">
         <div class="accordion accordion-solid-header" id="accordion-4" role="tablist">

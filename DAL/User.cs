@@ -28,6 +28,10 @@ namespace DAL
             this.Cand_ProfessionalReferences = new HashSet<Cand_ProfessionalReferences>();
             this.HrShortlistings = new HashSet<HrShortlisting>();
             this.TimingSlots = new HashSet<TimingSlot>();
+            this.InterviewPanels = new HashSet<InterviewPanel>();
+            this.InterviewPersons = new HashSet<InterviewPerson>();
+            this.cndEvMasters = new HashSet<cndEvMaster>();
+            this.cndEvMasters1 = new HashSet<cndEvMaster>();
         }
     
         public int Id { get; set; }
@@ -43,6 +47,9 @@ namespace DAL
         public string EmailTokens { get; set; }
         public Nullable<System.DateTime> CVUpdatedOn { get; set; }
         public Nullable<bool> isCandidate { get; set; }
+        public Nullable<bool> IsSideBarOpen { get; set; }
+        public string HeaderColor { get; set; }
+        public string SideBarColor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<candidate> candidates { get; set; }
@@ -66,5 +73,13 @@ namespace DAL
         public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimingSlot> TimingSlots { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InterviewPanel> InterviewPanels { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InterviewPerson> InterviewPersons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cndEvMaster> cndEvMasters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cndEvMaster> cndEvMasters1 { get; set; }
     }
 }

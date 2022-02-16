@@ -191,8 +191,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             var GetAllDegrees = new SelectList(getusrDetail.GetAllDegrees().ToList(), "Qualification_ID", "Qualification_Name").ToList();
             GetAllDegrees.Insert(0, (new SelectListItem { Text = "Select Degree", Value = "0" }));
             ViewBag.DegreeDropDown = GetAllDegrees;
-            //ViewBag.DegreeDropDown = getusrDetail.GetAllDegrees().ToList();
-
+       
             List<SelectListItem> MonthNameDropDown = VariableCasting.GetMonthsName.ToList();
             MonthNameDropDown.Insert(0, (new SelectListItem { Text = "Select Month", Value = "0" }));
             ViewBag.MonthNameDropdown = MonthNameDropDown.ToList();

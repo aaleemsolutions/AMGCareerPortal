@@ -30,7 +30,11 @@ namespace BAL.AbstractClasses
         public int DeleteRecords(object Id)
         {
             T Existing = table.Find(Id);
-            table.Remove(Existing);
+            if (Existing!=null)
+            {
+                table.Remove(Existing);
+            }
+           
             return 1;
             
         }

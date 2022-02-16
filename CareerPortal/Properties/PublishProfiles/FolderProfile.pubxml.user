@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>F:\AbdulAleem\MyWorkingFolder\WebProjects\PublishedWebsites\CareerPortal</_PublishTargetUrl>
-    <History>True|2022-02-04T12:34:32.8938517Z;True|2022-02-04T16:19:36.7571710+05:00;True|2022-02-03T14:18:03.5928671+05:00;True|2022-01-14T15:43:51.7154371+05:00;True|2022-01-11T16:51:21.6133301+05:00;True|2022-01-08T12:33:12.3276845+05:00;True|2022-01-07T10:15:45.0644978+05:00;False|2022-01-07T10:15:12.8891438+05:00;True|2022-01-06T17:11:21.9763632+05:00;False|2022-01-06T17:10:38.0066356+05:00;True|2022-01-06T15:33:45.4816120+05:00;False|2022-01-06T15:32:55.6254893+05:00;False|2021-12-30T11:33:33.9528930+05:00;False|2021-12-30T11:33:08.1686369+05:00;True|2021-12-29T15:48:45.9739946+05:00;</History>
+    <History>True|2022-02-12T10:39:36.3879596Z;True|2022-02-12T15:34:47.3116263+05:00;True|2022-02-04T17:34:32.8938517+05:00;True|2022-02-04T16:19:36.7571710+05:00;True|2022-02-03T14:18:03.5928671+05:00;True|2022-01-14T15:43:51.7154371+05:00;True|2022-01-11T16:51:21.6133301+05:00;True|2022-01-08T12:33:12.3276845+05:00;True|2022-01-07T10:15:45.0644978+05:00;False|2022-01-07T10:15:12.8891438+05:00;True|2022-01-06T17:11:21.9763632+05:00;False|2022-01-06T17:10:38.0066356+05:00;True|2022-01-06T15:33:45.4816120+05:00;False|2022-01-06T15:32:55.6254893+05:00;False|2021-12-30T11:33:33.9528930+05:00;False|2021-12-30T11:33:08.1686369+05:00;True|2021-12-29T15:48:45.9739946+05:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Code/HelloWorldModule.cs">
@@ -243,7 +243,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/04/2022 11:35:51</publishTime>
     </File>
     <File Include="Areas/CandidatePortal/Views/Candidatejob/Index.cshtml">
-      <publishTime>01/06/2022 12:38:15</publishTime>
+      <publishTime>02/12/2022 15:36:33</publishTime>
     </File>
     <File Include="Areas/CandidatePortal/Views/Shared/_JobDetailPartial.cshtml">
       <publishTime>01/05/2022 12:32:15</publishTime>
@@ -261,10 +261,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/08/2022 12:54:40</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/AllJobs/CandidateProfile.cshtml">
-      <publishTime>02/04/2022 17:32:12</publishTime>
+      <publishTime>02/08/2022 16:13:45</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/AllJobs/CreateJobs.cshtml">
-      <publishTime>01/24/2022 11:56:05</publishTime>
+      <publishTime>02/12/2022 15:17:16</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/AllJobs/Dashboard.cshtml">
       <publishTime>01/14/2022 17:37:39</publishTime>
@@ -282,10 +282,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/04/2022 17:30:35</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/cvBank/CvDetail.cshtml">
-      <publishTime>01/20/2022 15:08:34</publishTime>
+      <publishTime>02/12/2022 15:24:42</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/cvBank/Index.cshtml">
       <publishTime>01/17/2022 15:45:24</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/HRPanel/HRPerson.cshtml">
+      <publishTime>02/11/2022 17:41:48</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/HRPanel/InterviewPanels.cshtml">
+      <publishTime>02/12/2022 10:51:24</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/Shared/_Education.cshtml">
       <publishTime>01/24/2022 10:21:14</publishTime>
@@ -294,10 +300,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/04/2022 11:33:34</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/Shared/_Layout.cshtml">
-      <publishTime>02/04/2022 15:58:26</publishTime>
+      <publishTime>02/12/2022 15:20:33</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/Shared/_ShortlistCandidate.cshtml">
       <publishTime>02/02/2022 17:56:28</publishTime>
+    </File>
+    <File Include="Areas/Recruiter/Views/Shortlisting/InterviewList.cshtml">
+      <publishTime>02/12/2022 12:59:31</publishTime>
     </File>
     <File Include="Areas/Recruiter/Views/web.config">
       <publishTime>01/06/2022 16:06:13</publishTime>
@@ -621,28 +630,28 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/BAL.dll">
-      <publishTime>02/04/2022 16:19:19</publishTime>
+      <publishTime>02/12/2022 15:34:16</publishTime>
     </File>
     <File Include="bin/BAL.dll.config">
       <publishTime>01/08/2022 16:30:15</publishTime>
     </File>
     <File Include="bin/BAL.pdb">
-      <publishTime>02/04/2022 16:19:19</publishTime>
+      <publishTime>02/12/2022 15:34:16</publishTime>
     </File>
     <File Include="bin/CareerPortal.dll">
-      <publishTime>02/04/2022 17:34:09</publishTime>
+      <publishTime>02/12/2022 15:34:18</publishTime>
     </File>
     <File Include="bin/CareerPortal.pdb">
-      <publishTime>02/04/2022 17:34:09</publishTime>
+      <publishTime>02/12/2022 15:34:18</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>02/03/2022 14:17:16</publishTime>
+      <publishTime>02/12/2022 15:34:13</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
       <publishTime>12/16/2021 16:22:14</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>02/03/2022 14:17:16</publishTime>
+      <publishTime>02/12/2022 15:34:13</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -831,13 +840,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/ViewModels.dll">
-      <publishTime>02/04/2022 16:19:17</publishTime>
+      <publishTime>02/12/2022 15:34:15</publishTime>
     </File>
     <File Include="bin/ViewModels.dll.config">
       <publishTime>12/18/2021 14:53:42</publishTime>
     </File>
     <File Include="bin/ViewModels.pdb">
-      <publishTime>02/04/2022 16:19:17</publishTime>
+      <publishTime>02/12/2022 15:34:15</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
@@ -1253,6 +1262,111 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="CndDashboardAssets/js/x-editable.js">
       <publishTime>12/16/2021 18:05:08</publishTime>
     </File>
+    <File Include="CndDashboardAssets/Multiselect/bootstrap-multiselect.css">
+      <publishTime>02/11/2022 12:07:57</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/bootstrap-multiselect.js">
+      <publishTime>02/11/2022 12:08:04</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/bootstrap-multiselect.min.css">
+      <publishTime>02/11/2022 12:07:57</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/bootstrap-multiselect.min.js">
+      <publishTime>02/11/2022 12:08:04</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/css/bootstrap-4.5.2.min.css">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/css/bootstrap-example.min.css">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/css/fontawesome-5.15.1-web/all.css">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/css/fontawesome-5.15.1-web/all.min.css">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/css/prettify.min.css">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-brands-400.eot">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-brands-400.svg">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-brands-400.ttf">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-brands-400.woff">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-brands-400.woff2">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-regular-400.eot">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-regular-400.svg">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-regular-400.ttf">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-regular-400.woff">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-regular-400.woff2">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-solid-900.eot">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-solid-900.svg">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-solid-900.ttf">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-solid-900.woff">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/fontawesome-5.15.1-web/fa-solid-900.woff2">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/js/bootstrap.bundle-4.5.2.min.js">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/js/jquery-2.2.4.min.js">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/js/knockout-3.4.0.debug.js">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/js/prettify.min.js">
+      <publishTime>02/11/2022 12:35:20</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/js/require-2.3.5.min.js">
+      <publishTime>02/11/2022 12:35:21</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Multiselect/docs/less/bootstrap-example.less">
+      <publishTime>02/11/2022 12:35:21</publishTime>
+    </File>
     <File Include="CndDashboardAssets/SummerNote/font/summernote.eot">
       <publishTime>01/06/2022 17:06:42</publishTime>
     </File>
@@ -1270,6 +1384,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="CndDashboardAssets/SummerNote/summernote.min.js">
       <publishTime>01/05/2022 11:55:06</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Tagify/script.js">
+      <publishTime>02/11/2022 11:08:44</publishTime>
+    </File>
+    <File Include="CndDashboardAssets/Tagify/style.css">
+      <publishTime>02/10/2022 16:56:31</publishTime>
     </File>
     <File Include="CndDashboardAssets/vendors/ace-builds/src-min/ace.js">
       <publishTime>12/16/2021 18:05:08</publishTime>
@@ -1923,7 +2043,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/16/2021 12:44:12</publishTime>
     </File>
     <File Include="Scripts/Main.js">
-      <publishTime>02/04/2022 11:37:30</publishTime>
+      <publishTime>02/12/2022 15:38:28</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
       <publishTime>12/09/2021 15:56:17</publishTime>
@@ -1944,7 +2064,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/09/2021 15:56:10</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/03/2022 12:24:06</publishTime>
+      <publishTime>02/12/2022 10:53:31</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutHome.cshtml">
       <publishTime>01/06/2022 14:25:41</publishTime>

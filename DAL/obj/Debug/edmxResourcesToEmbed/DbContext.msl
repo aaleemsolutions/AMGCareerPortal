@@ -4,6 +4,9 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="CareerPortalModel.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="SideBarColor" ColumnName="SideBarColor" />
+          <ScalarProperty Name="HeaderColor" ColumnName="HeaderColor" />
+          <ScalarProperty Name="IsSideBarOpen" ColumnName="IsSideBarOpen" />
           <ScalarProperty Name="isCandidate" ColumnName="isCandidate" />
           <ScalarProperty Name="CVUpdatedOn" ColumnName="CVUpdatedOn" />
           <ScalarProperty Name="EmailTokens" ColumnName="EmailTokens" />
@@ -286,6 +289,8 @@
     <EntitySetMapping Name="HrShortlistings">
       <EntityTypeMapping TypeName="CareerPortalModel.HrShortlisting">
         <MappingFragment StoreEntitySet="HrShortlisting">
+          <ScalarProperty Name="InterviewTypeId" ColumnName="InterviewTypeId" />
+          <ScalarProperty Name="PanelId" ColumnName="PanelId" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -310,6 +315,129 @@
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="EndTime" ColumnName="EndTime" />
           <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterviewPanelDetails">
+      <EntityTypeMapping TypeName="CareerPortalModel.InterviewPanelDetail">
+        <MappingFragment StoreEntitySet="InterviewPanelDetail">
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IntPersonId" ColumnName="IntPersonId" />
+          <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterviewPanels">
+      <EntityTypeMapping TypeName="CareerPortalModel.InterviewPanel">
+        <MappingFragment StoreEntitySet="InterviewPanels">
+          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PanelName" ColumnName="PanelName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterviewPersons">
+      <EntityTypeMapping TypeName="CareerPortalModel.InterviewPerson">
+        <MappingFragment StoreEntitySet="InterviewPersons">
+          <ScalarProperty Name="GarmentDivision" ColumnName="GarmentDivision" />
+          <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterviewTypes">
+      <EntityTypeMapping TypeName="CareerPortalModel.InterviewType">
+        <MappingFragment StoreEntitySet="InterviewTypes">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Typename" ColumnName="Typename" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cndEvDetails">
+      <EntityTypeMapping TypeName="CareerPortalModel.cndEvDetail">
+        <MappingFragment StoreEntitySet="cndEvDetail">
+          <ScalarProperty Name="obtainMarks" ColumnName="obtainMarks" />
+          <ScalarProperty Name="MapId" ColumnName="MapId" />
+          <ScalarProperty Name="cndEvMasterId" ColumnName="cndEvMasterId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cndEvMasters">
+      <EntityTypeMapping TypeName="CareerPortalModel.cndEvMaster">
+        <MappingFragment StoreEntitySet="cndEvMaster">
+          <ScalarProperty Name="ShortListId" ColumnName="ShortListId" />
+          <ScalarProperty Name="ObtainedMarks" ColumnName="ObtainedMarks" />
+          <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+          <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+          <ScalarProperty Name="creationdate" ColumnName="creationdate" />
+          <ScalarProperty Name="fdGivenBy" ColumnName="fdGivenBy" />
+          <ScalarProperty Name="Benifits" ColumnName="Benifits" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="GradeId" ColumnName="GradeId" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+          <ScalarProperty Name="IntEvDecisionId" ColumnName="IntEvDecisionId" />
+          <ScalarProperty Name="AdditionalComments" ColumnName="AdditionalComments" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntEvaluationTypes">
+      <EntityTypeMapping TypeName="CareerPortalModel.IntEvaluationType">
+        <MappingFragment StoreEntitySet="IntEvaluationType">
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntEvDecisions">
+      <EntityTypeMapping TypeName="CareerPortalModel.IntEvDecision">
+        <MappingFragment StoreEntitySet="IntEvDecision">
+          <ScalarProperty Name="DecisionName" ColumnName="DecisionName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntEvQuestions">
+      <EntityTypeMapping TypeName="CareerPortalModel.IntEvQuestion">
+        <MappingFragment StoreEntitySet="IntEvQuestions">
+          <ScalarProperty Name="EvaluationType" ColumnName="EvaluationType" />
+          <ScalarProperty Name="IntEvQTypeId" ColumnName="IntEvQTypeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntQuestionMappings">
+      <EntityTypeMapping TypeName="CareerPortalModel.IntQuestionMapping">
+        <MappingFragment StoreEntitySet="IntQuestionMapping">
+          <ScalarProperty Name="ScoreId" ColumnName="ScoreId" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntScoreTypes">
+      <EntityTypeMapping TypeName="CareerPortalModel.IntScoreType">
+        <MappingFragment StoreEntitySet="IntScoreType">
+          <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+          <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

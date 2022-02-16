@@ -8,13 +8,17 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using BAL;
+using CareerPortal.Controllers;
 
 namespace CareerPortal
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+      
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+         
+
             HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
 
          
@@ -51,12 +55,13 @@ namespace CareerPortal
         }
         protected void Application_Error()
         {
+         
+           
 
-            if (Session["UserEmail"] == null)
+            if (GlobalUserInfo.UserId ==0)
             {
                 FormsAuthentication.SignOut();
                 Response.Redirect("~/Home/Index");
-                // Response.Redirect("~/Account/Login");
             }
             //log an exception
         }

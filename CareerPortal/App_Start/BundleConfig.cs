@@ -111,23 +111,24 @@ namespace CareerPortal
 
 
             bundles.Add(new StyleBundle("~/bundles/RecruiterThemesCSS").Include(
-                    "~/CndDashboardAssets/vendors/feather/feather.css",
-                    "~/CndDashboardAssets/vendors/ti-icons/css/themify-icons.css",
-                    "~/CndDashboardAssets/vendors/css/vendor.bundle.base.css",
-                    "~/CndDashboardAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.css",
-                    "~/CndDashboardAssets/vendors/dropify/dropify.min.css",
-                    "~/CndDashboardAssets/css/vertical-layout-light/style.css",
-                    "~/Content/CustomStyle.css",
-                    "~/CndDashboardAssets/vendors/jquery-toast-plugin/jquery.toast.min.css",
-                    "~/CndDashboardAssets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css",
-                    "~/CndDashboardAssets/SummerNote/summernote.min.css"
+        "~/CndDashboardAssets/vendors/feather/feather.css",
+        "~/CndDashboardAssets/vendors/ti-icons/css/themify-icons.css",
+        "~/CndDashboardAssets/vendors/css/vendor.bundle.base.css",
+        "~/CndDashboardAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.css",
+        "~/CndDashboardAssets/vendors/dropify/dropify.min.css",
+        "~/CndDashboardAssets/css/vertical-layout-light/style.css",
+        "~/Content/CustomStyle.css",
+        "~/CndDashboardAssets/vendors/jquery-toast-plugin/jquery.toast.min.css",
+        "~/CndDashboardAssets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css",
+        "~/CndDashboardAssets/SummerNote/summernote.min.css"
+
 
 
         ));
 
             bundles.Add(new ScriptBundle("~/bundles/RecruiterThemesAssets").Include(
                     "~/Scripts/jquery-3.4.1.min.js",
-                    "~/Scripts/jquery-ui-1.13.0.js",
+                    //"~/Scripts/jquery-ui-1.13.0.js",
                     "~/Scripts/jquery.inputmask.bundle.min.js",
                     "~/CndDashboardAssets/vendors/js/vendor.bundle.base.js",
                     "~/CndDashboardAssets/vendors/dropify/dropify.min.js",
@@ -158,8 +159,10 @@ namespace CareerPortal
                 "~/CndDashboardAssets/js/toastDemo.js",
                "~/CndDashboardAssets/js/jq.tablesort.js",
                "~/CndDashboardAssets/js/tablesorter.js",
-                "~/Scripts/Main.js",
-                "~/CndDashboardAssets/SummerNote/summernote.min.js"
+                "~/CndDashboardAssets/SummerNote/summernote.min.js",
+                "~/Scripts/Main.js"
+         
+
 
                ));
 

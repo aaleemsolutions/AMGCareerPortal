@@ -20,7 +20,7 @@ namespace BAL
             }
             else
             {
-                ConnectionString = ConfigurationManager.ConnectionStrings["GarmentsDb"].ToString();
+                ConnectionString = ConfigurationManager.ConnectionStrings["DenimDb"].ToString();
             }
 
             return ConnectionString;

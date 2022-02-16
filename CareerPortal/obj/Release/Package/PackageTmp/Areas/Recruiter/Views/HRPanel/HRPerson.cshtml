@@ -1,0 +1,146 @@
+﻿@using ViewModels;
+@model InterviewPanelViewModel
+
+
+<div class="container-fluid">
+    <div class="row">
+        <form id="HRAddUpdatePanelEmpoyee" enctype="multipart/form-data">
+
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group row " id="NewJobArea">
+                            <h3 style="text-decoration:underline"> Add/Edit Panel Employees</h3>
+                            <div class="row">
+
+                                <div class="col">
+                                    <label>Unit <span class="text-danger">*</span> </label>
+                                    <div id="the-basics">
+                                        @Html.HiddenFor(m => m.InterviewPerson.Id)
+
+
+                                        @Html.DropDownList("UnitType", new SelectList(ViewBag.UnitTypeDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpHRUnitType" })
+
+
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col">
+                                    <label>Department <span class="text-danger">*</span> </label>
+                                    <div id="the-basics">
+
+                                        @Html.DropDownList("DepartmentDropDown", new SelectList(ViewBag.DepartmentDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpHRDepartment" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col">
+                                    <label>Employee <span class="text-danger">*</span> </label>
+                                    <div id="the-basics">
+
+
+
+                                        @Html.DropDownListFor(m => m.InterviewPerson.EmpId, new SelectList(ViewBag.EmployeeViewDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpHREmployee" })
+
+                                        <span class="panelEmployeeError text-danger"></span>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label>Email <span class="text-danger">*</span></label>
+                                    <div id="the-basics1">
+                                        @Html.TextBoxFor(Model => Model.InterviewPerson.Email,
+                        new { @class = "typeahead validatenumeric", placeholder = "Email" })
+
+                                        @Html.ValidationMessageFor(m => m.InterviewPerson.Email, null, new { @class = "text-danger" })
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col">
+                                    <label>Mobile No <span class="text-danger">*</span></label>
+                                    <div id="the-basics2">
+
+                                        @Html.TextBoxFor(Model => Model.InterviewPerson.MobileNo,
+                                       new { @class = "typeahead validatenumeric", placeholder = "Mobile." })
+
+                                        @Html.ValidationMessageFor(m => m.InterviewPerson.MobileNo, null, new { @class = "text-danger" })
+
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-md-12 clearfix float-right ">
+                                    <button class="btn btn-primary float-right" type="button" style="float: right;" id="btnaddPanelEmployee">Add Employee in Panel</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 container-fluid">
+                            <div class="table-responsive">
+                                <table id="DataTableHRPanelEmployee" class="table  text-center">
+                                    <thead class="">
+                                        <tr>
+                                            <th>Panel Person Id</th>
+                                            <th> Employee Name</th>
+                                            <th>Designation</th>
+                                            <th>Department</th>
+                                            <th>Branch</th>
+                                            <th>Action</th>
+
+
+                                        </tr>
+                                    </thead>
+
+
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="loading" id="PostLoaderHRPerson">Loading&#8230;</div>
+
+
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+
+
+<script>
+
+
+    $(document).ready(function () {
+        $('.RichTextJobDescription').summernote();
+        $('#PostLoaderHRPerson').hide();
+    });
+
+
+</script>

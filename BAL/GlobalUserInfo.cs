@@ -12,23 +12,60 @@ namespace BAL
     {
         public static string UserName
         {
-            get{
+            get
+            {
+                try
+                {
+                    return HttpContext.Current.Session["UserEmail"].ToString();
+                }
+                catch
+                {
+                    return "";
 
-                    return HttpContext.Current.Session["UserEmail"].ToString(); 
+                }
+
+
+               
 
             }
         }
         public static int UserId
         {
-            get { return Convert.ToInt32(HttpContext.Current.Session["UserId"]); } 
+            get
+            {
+
+                try
+                {
+                    return Convert.ToInt32(HttpContext.Current.Session["UserId"]);
+
+                }
+                catch (Exception)
+                {
+                    return 0;
+
+                }
+
+
+                    ;
+
+            }
         }
 
 
         public static bool JobApplicationOpen
-        {get;set;} = false;
+        { get; set; } = false;
+        public static bool IsSideBarOpen { get {
+                return Convert.ToBoolean(HttpContext.Current.Request.Cookies["IsSideBarOpen"].Value);
+            }
+     
+        } 
 
-        public static string FullName{ get; set; }
-        public static string  EmailAddress{ get; set; }
+        public static string FullName { get; set; }
+        public static string EmailAddress { get; set; }
+
+
+        public static bool IsUserIdnull { get; set; } = (UserId == 0 ? false : true);
+
 
 
 

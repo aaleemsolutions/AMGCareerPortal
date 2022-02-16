@@ -17,49 +17,40 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="border-bottom text-center pb-4">
-
-
-
                             @if (Model.CandidateInfo != null)
                             {
                                 if (Model.CandidateInfo.User.UserImage != null)
                                 {
                                     if (Model.CandidateInfo.User.UserImage.Length > 10)
                                     {
-                                        <img src="data:image/jpeg;base64,@Model.CandidateInfo.User.UserImage.ToString().Replace(" &quot;","")" alt="profile" style="height: 92px; width: 92px;" class="img-lg rounded-circle mb-3" />
+                                        <img src="data:image/jpeg;base64,@Model.CandidateInfo.User.UserImage.ToString().Replace(" &quot;", "")" alt="profile" style="height: 92px; width: 92px;" class="img-lg rounded-circle mb-3" />
                                     }
                                     else
                                     {
-
-
+                                        <img src="~/assets/img/noProfile.png" alt="profile" style="height: 92px; width: 92px; " class="img-lg rounded-circle mb-3" />
                                     }
+                                }
+                                else
+                                {
                                     <img src="~/assets/img/noProfile.png" alt="profile" style="height: 92px; width: 92px; " class="img-lg rounded-circle mb-3" />
                                 }
-
                             }
                             else
                             {
                                 <img src="~/assets/img/noProfile.png" alt="profile" style="height: 92px; width: 92px; " class="img-lg rounded-circle mb-3" />
                             }
-                            <div class="mb-3">
-                                <h3>@Model.UsersInfo.FullName  </h3>
-                                <div class="d-flex align-items-center">
 
-
-
+                            @if (Model.UsersInfo != null)
+                            {
+                                <div class="mb-3">
+                                    <h3>@Model.UsersInfo.FullName  </h3>
+                                    <div class="d-flex align-items-center">
+                                    </div>
                                 </div>
-                            </div>
-                            @*<p class="w-75 mx-auto mb-3">
-            Bureau Oberhaeuser is a design bureau focused on Information- and
-            Interface Design.
-        </p>*@
-                            <div class="d-flex justify-content-center">
-                                @*<button class="btn btn-sm btn-success me-1">Download Profile <span class="ti-download"></span> </button>*@
-
-                                <button class="btn btn-sm btn-primary me-1" onclick="DownloadCandidateResume('',@Model.UsersInfo.Id.ToString())">Download CV <span class="ti-download"></span>  </button>
-
-
-                            </div>
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-sm btn-primary me-1" onclick="DownloadCandidateResume('',@Model.UsersInfo.Id.ToString())">Download CV <span class="ti-download"></span>  </button>
+                                </div>
+                            }
                         </div>
 
 
@@ -85,7 +76,10 @@
                                     Mail
                                 </span>
                                 <span class="float-right text-muted">
-                                    @Model.UsersInfo.UserEmail
+                                    @if (Model.UsersInfo != null)
+                                    {
+                                        @Model.UsersInfo.UserEmail
+                                    }
                                 </span>
                             </p>
                             <p class="clearfix">
@@ -105,10 +99,8 @@
                                 </span>
                             </p>
                         </div>
-                        @*<button class="btn btn-primary btn-block mb-2">Preview</button>*@
                     </div>
                     <div class="col-lg-8">
-
                         <div class="col-md-10 mx-auto">
                             <ul class="nav nav-pills nav-pills-custom" id="pills-tab-custom" role="tablist">
                                 <li class="nav-item">
@@ -129,15 +121,11 @@
                                         <h3>About Candidate</h3>
                                         <br />
                                         @Html.Raw(Model.CandidateDescription)
-
                                     </div>
 
                                     <div class="profile-feed border-bottom">
                                         <br />
                                         <h4 class="card-title">Education</h4>
-
-
-
                                         <ul class="bullet-line-list">
                                             @if (Model.CandidateInfo != null)
                                             {
@@ -174,53 +162,42 @@
                                         </ul>
                                     </div>
 
-
-
                                     <div class="profile-feed border-bottom">
                                         <br />
                                         <h4 class="card-title">Experience</h4>
-
-
-
                                         <ul class="bullet-line-list">
                                             @if (Model.CandidateInfo != null)
                                             {
                                                 foreach (var item in Model.CandidateInfo.CandidateExperinces)
                                                 {
-                                            <li>
-                                                <h5><strong>@item.DesignationName - @item.CompanyName </strong></h5>
+                                                    <li>
+                                                        <h5><strong>@item.DesignationName - @item.CompanyName </strong></h5>
 
-                                                <p class="text-muted mb-4">
-                                                    <i class="ti-time"> </i>
-                                                    @{
-                                                        var FromYear = item.FromYear == 0 || item.FromYear == null ? " - " : new DateTime(item.FromYear.Value, item.FromMonth.Value, 1).ToString("MMM-yyyy");
-                                                        var ToYear = item.ToYear == null || item.ToYear == 0 ? " - " : new DateTime(item.ToYear.Value, item.ToMonth.Value, 1).ToString("MMM-yyyy");
-                                                        <text>
-                                                            @FromYear  -  @ToYear
-                                                        </text>
-
-
-
-                                                    }
-                                                </p>
-                                                <p>Job Duties: <span> @Html.Raw(item.JobDuties)</span> </p>
+                                                        <p class="text-muted mb-4">
+                                                            <i class="ti-time"> </i>
+                                                            @{
+                                                                var FromYear = item.FromYear == 0 || item.FromYear == null ? " - " : new DateTime(item.FromYear.Value, item.FromMonth.Value, 1).ToString("MMM-yyyy");
+                                                                var ToYear = item.ToYear == null || item.ToYear == 0 ? " - " : new DateTime(item.ToYear.Value, item.ToMonth.Value, 1).ToString("MMM-yyyy");
+                                                                <text>
+                                                                    @FromYear  -  @ToYear
+                                                                </text>
 
 
-                                            </li>
 
+                                                            }
+                                                        </p>
+                                                        <p>Job Duties: <span> @Html.Raw(item.JobDuties)</span> </p>
+
+
+                                                    </li>
                                                 }
                                             }
                                             else
                                             {
                                                 <li>No Record Found</li>
                                             }
-
-
                                         </ul>
                                     </div>
-
-
-
                                 </div>
                                 <div class="tab-pane fade" id="pills-career" role="tabpanel" aria-labelledby="pills-profile-tab-custom">
                                     <table class="table">
@@ -235,64 +212,52 @@
                                                 <th class="pt-1 text-center">
                                                     Applied Channel
                                                 </th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var item in Model.UsersInfo.CandidateJobApplies)
+                                            @if (Model.UsersInfo != null)
                                             {
-
-
-                                                <tr>
-                                                    <td class="py-1 ps-0">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="ms-3">
-                                                                <p class="mb-0">@item.AllPosition.JobTitle</p>
-                                                                <p class="mb-0 text-muted text-small">Product Designer</p>
+                                                foreach (var item in Model.UsersInfo.CandidateJobApplies)
+                                                {
+                                                    <tr>
+                                                        <td class="py-1 ps-0">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="ms-3">
+                                                                    <p class="mb-0">@item.AllPosition.JobTitle</p>
+                                                                    <p class="mb-0 text-muted text-small">Product Designer</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        @item.AppliedOn.Value.ToString("dd-MMM-yyyy HH:mm tt")
-                                                    </td>
-                                                    <td class="text-center">
-                                                        @if (item.ApplyByCV == false)
-                                                        {
-                                                            <label class="badge badge-success">Profile</label>
-                                                        }
-                                                        else
-                                                        {
-                                                            <label class="badge badge-success">CV</label>
-                                                        }
+                                                        </td>
+                                                        <td>
+                                                            @item.AppliedOn.Value.ToString("dd-MMM-yyyy HH:mm tt")
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (item.ApplyByCV == false)
+                                                            {
+                                                                <label class="badge badge-success">Profile</label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label class="badge badge-success">CV</label>
+                                                            }
 
-                                                    </td>
-
-
-                                                </tr>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                if (Model.UsersInfo.CandidateJobApplies.Count == 0)
+                                                {
+                                                    <tr class="text-center">
+                                                        <td colspan="3">No Record Found</td>
+                                                    </tr>
+                                                }
                                             }
-                                            @if (Model.UsersInfo.CandidateJobApplies.Count==0)
-                                            {
-                                                <tr class="text-center">
-                                                    <td colspan="3">No Record Found</td>
-                                                </tr>
-                                            }
-
-
-
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

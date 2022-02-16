@@ -112,6 +112,49 @@ namespace BAL.Ado.Net
 
         }
 
+        public List<Department> GetAllDepartment(string UnitType)
+        {
+            try
+            {
+                string query = "select 1";
+                var reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString());
+                if (UnitType.ToUpper()=="Garments".ToUpper())
+                {
+                    query = "select * from Department";
+                    reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString());
+                }
+                else
+                {
+                     query = "select * from denim_db.dbo.Department";
+                     reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString(false));
+                }
+
+                
+                List<Department> DepartmentList = new List<Department>();
+                while (reader.Read())
+                {
+                    Department c = new Department();
+                    c.Department_ID = (Int32)reader["Department_Id"];
+                    c.Department_Name = reader["Department_Name"].ToString();
+                    c.isActive = (bool)reader["isActive"];
+
+                    DepartmentList.Add(c);
+                }
+
+                return DepartmentList;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                ado.CloseSqlConnection();
+            }
+
+        }
+
         public List<Designation> GetAllDesignation()
         {
             try
@@ -388,6 +431,155 @@ namespace BAL.Ado.Net
 
         }
 
+
+        public List<EmployeeView> GetAllEmployeeView()
+        {
+            try
+            {
+                string query = "select * from vuAllEmpInfo";
+                var reader = ado1.GetReader(query, null);
+                List<EmployeeView> CategoryList = new List<EmployeeView>();
+                while (reader.Read())
+                {
+                    EmployeeView cq = new EmployeeView();
+                    cq.EmployeeID = (int)reader["EmployeeID"];
+                    cq.EmployeeName = Convert.ToString(reader["EmployeeName"]);
+                    cq.Department_Name = Convert.ToString(reader["Department_Name"]);
+                    cq.Designation_Name = Convert.ToString(reader["Designation_Name"]);
+                    cq.EmployeenameWithCode = Convert.ToString(reader["EmployeeCode"]) + "-" + Convert.ToString(reader["EmployeeName"]) + " - " + Convert.ToString(reader["Designation_Name"]);
+                    cq.Email = Convert.ToString(reader["Email"]);
+                    cq.Mobile = Convert.ToString(reader["Mobile"]);
+                    
+
+
+                    CategoryList.Add(cq);
+                }
+
+                return CategoryList;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                ado1.CloseSqlConnection();
+            }
+
+        }
+
+
+        public EmployeeView GetEmployeeInView(int EmpId)
+        {
+            try
+            {
+                string query = "select * from vuAllEmpInfo where EmployeeID = "+EmpId+" ";
+                var reader = ado1.GetReader(query, null);
+                EmployeeView CategoryList = new EmployeeView();
+                while (reader.Read())
+                {
+                    EmployeeView cq = new EmployeeView();
+                    cq.EmployeeID = (int)reader["EmployeeID"];
+                    cq.Department_ID = (int)reader["Department_ID"];
+                    cq.EmployeeCode = Convert.ToString(reader["EmployeeCode"]);
+                    cq.EmployeeName = Convert.ToString(reader["EmployeeName"]);
+                    cq.BranchName = Convert.ToString(reader["BranchName"]);
+                    cq.Department_Name = Convert.ToString(reader["Department_Name"]);
+                    cq.Designation_Name = Convert.ToString(reader["Designation_Name"]);
+                    cq.Email = Convert.ToString(reader["Email"]);
+                    cq.Mobile = Convert.ToString(reader["Mobile"]);
+                    CategoryList = cq;
+                }
+
+                return CategoryList;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                ado1.CloseSqlConnection();
+            }
+
+        }
+
+
+        public List<EmployeeView> GetEmployeeByDeptIdInView(int DepartmentId,string UnitType)
+        {
+            try
+            {
+                string query = "select * from vuAllEmpInfo where Department_ID = " + DepartmentId + " and DB = '"+UnitType+ "' order by Designation_Name,EmployeeName";
+
+                 
+                
+                var reader = ado1.GetReader(query, null);
+                List<EmployeeView> CategoryList = new List<EmployeeView>();
+                while (reader.Read())
+                {
+                    EmployeeView cq = new EmployeeView();
+                    cq.EmployeeID = (int)reader["EmployeeID"];
+                    cq.EmployeeName = Convert.ToString(reader["EmployeeName"]);
+                    cq.EmployeenameWithCode = Convert.ToString(reader["EmployeeCode"]) +"-"+ Convert.ToString(reader["EmployeeName"]) +" - "+ Convert.ToString(reader["Designation_Name"]);
+                    cq.Department_Name = Convert.ToString(reader["Department_Name"]);
+                    cq.Designation_Name = Convert.ToString(reader["Designation_Name"]);
+                    cq.Email = Convert.ToString(reader["Email"]);
+                    cq.Mobile = Convert.ToString(reader["Mobile"]);
+                    CategoryList.Add(cq);
+                }
+
+                return CategoryList;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                ado1.CloseSqlConnection();
+            }
+
+        }
+
+        public EmployeeView GetEmployeeByEmpIdIdInView(int EmpId, string UnitType)
+        {
+            try
+            {
+                string query = "select * from vuAllEmpInfo where EmployeeID = " + EmpId + " and DB = '" + UnitType + "' order by Designation_Name,EmployeeName";
+
+
+
+                var reader = ado1.GetReader(query, null);
+                EmployeeView CategoryList = new EmployeeView();
+                while (reader.Read())
+                {
+                    EmployeeView cq = new EmployeeView();
+                    cq.EmployeeID = (int)reader["EmployeeID"];
+                    cq.EmployeeName = Convert.ToString(reader["EmployeeName"]);
+                    cq.EmployeenameWithCode = Convert.ToString(reader["EmployeeCode"]) + "-" + Convert.ToString(reader["EmployeeName"]) + " - " + Convert.ToString(reader["Designation_Name"]);
+                    cq.Department_Name = Convert.ToString(reader["Department_Name"]);
+                    cq.Designation_Name = Convert.ToString(reader["Designation_Name"]);
+                    cq.Email = Convert.ToString(reader["Email"]);
+                    cq.Mobile = Convert.ToString(reader["Mobile"]);
+                    CategoryList = cq;
+                }
+
+                return CategoryList;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                ado1.CloseSqlConnection();
+            }
+
+        }
 
 
     }

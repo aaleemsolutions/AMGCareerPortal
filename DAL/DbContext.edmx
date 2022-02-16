@@ -189,6 +189,36 @@
           <Property Name="ResultType" Type="varchar" MaxLength="100" />
           <Property Name="ResultValue" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="cndEvDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cndEvMasterId" Type="int" />
+          <Property Name="MapId" Type="int" />
+          <Property Name="obtainMarks" Type="float" />
+        </EntityType>
+        <EntityType Name="cndEvMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="AdditionalComments" Type="varchar(max)" />
+          <Property Name="IntEvDecisionId" Type="int" />
+          <Property Name="JoinDate" Type="date" />
+          <Property Name="Salary" Type="float" />
+          <Property Name="DesignationId" Type="int" />
+          <Property Name="GradeId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="Benifits" Type="varchar(max)" />
+          <Property Name="fdGivenBy" Type="int" />
+          <Property Name="creationdate" Type="datetime" />
+          <Property Name="updatetime" Type="datetime" />
+          <Property Name="TotalMarks" Type="float" />
+          <Property Name="ObtainedMarks" Type="float" />
+          <Property Name="ShortListId" Type="int" />
+        </EntityType>
         <EntityType Name="HrShortlisting">
           <Key>
             <PropertyRef Name="Id" />
@@ -205,6 +235,90 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="PanelId" Type="int" />
+          <Property Name="InterviewTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="InterviewPanelDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PanelId" Type="int" />
+          <Property Name="IntPersonId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="EmpId" Type="int" />
+        </EntityType>
+        <EntityType Name="InterviewPanels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PanelName" Type="varchar" MaxLength="450" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdateDatetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="InterviewPersons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpName" Type="varchar" MaxLength="500" />
+          <Property Name="Email" Type="varchar" MaxLength="500" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="EmpId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdateDatetime" Type="datetime" />
+          <Property Name="GarmentDivision" Type="bit" />
+        </EntityType>
+        <EntityType Name="InterviewTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Typename" Type="varchar" MaxLength="250" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="IntEvaluationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="IntEvDecision">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DecisionName" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="IntEvQuestions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IntEvQTypeId" Type="int" />
+          <Property Name="EvaluationType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="IntQuestionMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionId" Type="int" />
+          <Property Name="ScoreId" Type="int" />
+        </EntityType>
+        <EntityType Name="IntScoreType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScoreTypeName" Type="varchar" MaxLength="400" />
+          <Property Name="TotalMarks" Type="float" />
         </EntityType>
         <EntityType Name="LangScoreType">
           <Key>
@@ -289,6 +403,9 @@
           <Property Name="UserImage" Type="nvarchar(max)" />
           <Property Name="CVUpdatedOn" Type="datetime" />
           <Property Name="isCandidate" Type="bit" />
+          <Property Name="IsSideBarOpen" Type="bit" />
+          <Property Name="HeaderColor" Type="varchar" MaxLength="250" />
+          <Property Name="SideBarColor" Type="varchar" MaxLength="250" />
         </EntityType>
         <Association Name="FK__Cand_AMPr__UserI__2704CA5F">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
@@ -434,6 +551,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__cndEvDeta__cndEv__2D7CBDC4">
+          <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="0..1" />
+          <End Role="cndEvDetail" Type="Self.cndEvDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cndEvMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvDetail">
+              <PropertyRef Name="cndEvMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvDeta__MapId__2E70E1FD">
+          <End Role="IntQuestionMapping" Type="Self.IntQuestionMapping" Multiplicity="0..1" />
+          <End Role="cndEvDetail" Type="Self.cndEvDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntQuestionMapping">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvDetail">
+              <PropertyRef Name="MapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvMast__fdGiv__28B808A7">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvMaster">
+              <PropertyRef Name="fdGivenBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvMast__IntEv__27C3E46E">
+          <End Role="IntEvDecision" Type="Self.IntEvDecision" Multiplicity="0..1" />
+          <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntEvDecision">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvMaster">
+              <PropertyRef Name="IntEvDecisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvMast__Short__324172E1">
+          <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="0..1" />
+          <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HrShortlisting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvMaster">
+              <PropertyRef Name="ShortListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvMast__UserI__26CFC035">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvMaster">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__HrShortli__CandA__5B78929E">
           <End Role="CandidateJobApply" Type="Self.CandidateJobApply" Multiplicity="0..1" />
           <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
@@ -458,6 +647,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__HrShortli__Inter__12C8C788">
+          <End Role="InterviewTypes" Type="Self.InterviewTypes" Multiplicity="0..1" />
+          <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterviewTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HrShortlisting">
+              <PropertyRef Name="InterviewTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__HrShortli__JobId__5A846E65">
           <End Role="AllPositions" Type="Self.AllPositions" Multiplicity="0..1" />
           <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
@@ -470,6 +671,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__HrShortli__Panel__0D0FEE32">
+          <End Role="InterviewPanels" Type="Self.InterviewPanels" Multiplicity="0..1" />
+          <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterviewPanels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HrShortlisting">
+              <PropertyRef Name="PanelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__HrShortli__SlotI__5C6CB6D7">
           <End Role="TimingSlots" Type="Self.TimingSlots" Multiplicity="0..1" />
           <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
@@ -479,6 +692,90 @@
             </Principal>
             <Dependent Role="HrShortlisting">
               <PropertyRef Name="SlotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Interview__Creat__6E8B6712">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="InterviewPanels" Type="Self.InterviewPanels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InterviewPanels">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Interview__Creat__7814D14C">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="InterviewPersons" Type="Self.InterviewPersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InterviewPersons">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Interview__IntPe__075714DC">
+          <End Role="InterviewPersons" Type="Self.InterviewPersons" Multiplicity="0..1" />
+          <End Role="InterviewPanelDetail" Type="Self.InterviewPanelDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterviewPersons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InterviewPanelDetail">
+              <PropertyRef Name="IntPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Interview__Panel__0662F0A3">
+          <End Role="InterviewPanels" Type="Self.InterviewPanels" Multiplicity="0..1" />
+          <End Role="InterviewPanelDetail" Type="Self.InterviewPanelDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterviewPanels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InterviewPanelDetail">
+              <PropertyRef Name="PanelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IntEvQues__IntEv__1E3A7A34">
+          <End Role="IntEvaluationType" Type="Self.IntEvaluationType" Multiplicity="0..1" />
+          <End Role="IntEvQuestions" Type="Self.IntEvQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntEvaluationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IntEvQuestions">
+              <PropertyRef Name="IntEvQTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IntQuesti__Quest__2116E6DF">
+          <End Role="IntEvQuestions" Type="Self.IntEvQuestions" Multiplicity="0..1" />
+          <End Role="IntQuestionMapping" Type="Self.IntQuestionMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntEvQuestions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IntQuestionMapping">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IntQuesti__Score__220B0B18">
+          <End Role="IntScoreType" Type="Self.IntScoreType" Multiplicity="0..1" />
+          <End Role="IntQuestionMapping" Type="Self.IntQuestionMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntScoreType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IntQuestionMapping">
+              <PropertyRef Name="ScoreId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -555,7 +852,18 @@
           <EntitySet Name="CandidateJobApply" EntityType="Self.CandidateJobApply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateLang" EntityType="Self.CandidateLang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cndEvDetail" EntityType="Self.cndEvDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cndEvMaster" EntityType="Self.cndEvMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HrShortlisting" EntityType="Self.HrShortlisting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewPanelDetail" EntityType="Self.InterviewPanelDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewPanels" EntityType="Self.InterviewPanels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewPersons" EntityType="Self.InterviewPersons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewTypes" EntityType="Self.InterviewTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntEvaluationType" EntityType="Self.IntEvaluationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntEvDecision" EntityType="Self.IntEvDecision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntEvQuestions" EntityType="Self.IntEvQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntQuestionMapping" EntityType="Self.IntQuestionMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntScoreType" EntityType="Self.IntScoreType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LangScoreType" EntityType="Self.LangScoreType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LanguageMaping" EntityType="Self.LanguageMaping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
@@ -611,6 +919,30 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="candidate" EntitySet="candidate" />
           </AssociationSet>
+          <AssociationSet Name="FK__cndEvDeta__cndEv__2D7CBDC4" Association="Self.FK__cndEvDeta__cndEv__2D7CBDC4">
+            <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+            <End Role="cndEvDetail" EntitySet="cndEvDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvDeta__MapId__2E70E1FD" Association="Self.FK__cndEvDeta__MapId__2E70E1FD">
+            <End Role="IntQuestionMapping" EntitySet="IntQuestionMapping" />
+            <End Role="cndEvDetail" EntitySet="cndEvDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvMast__fdGiv__28B808A7" Association="Self.FK__cndEvMast__fdGiv__28B808A7">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvMast__IntEv__27C3E46E" Association="Self.FK__cndEvMast__IntEv__27C3E46E">
+            <End Role="IntEvDecision" EntitySet="IntEvDecision" />
+            <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvMast__Short__324172E1" Association="Self.FK__cndEvMast__Short__324172E1">
+            <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+            <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvMast__UserI__26CFC035" Association="Self.FK__cndEvMast__UserI__26CFC035">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+          </AssociationSet>
           <AssociationSet Name="FK__HrShortli__CandA__5B78929E" Association="Self.FK__HrShortli__CandA__5B78929E">
             <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
             <End Role="HrShortlisting" EntitySet="HrShortlisting" />
@@ -619,13 +951,49 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="HrShortlisting" EntitySet="HrShortlisting" />
           </AssociationSet>
+          <AssociationSet Name="FK__HrShortli__Inter__12C8C788" Association="Self.FK__HrShortli__Inter__12C8C788">
+            <End Role="InterviewTypes" EntitySet="InterviewTypes" />
+            <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+          </AssociationSet>
           <AssociationSet Name="FK__HrShortli__JobId__5A846E65" Association="Self.FK__HrShortli__JobId__5A846E65">
             <End Role="AllPositions" EntitySet="AllPositions" />
+            <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HrShortli__Panel__0D0FEE32" Association="Self.FK__HrShortli__Panel__0D0FEE32">
+            <End Role="InterviewPanels" EntitySet="InterviewPanels" />
             <End Role="HrShortlisting" EntitySet="HrShortlisting" />
           </AssociationSet>
           <AssociationSet Name="FK__HrShortli__SlotI__5C6CB6D7" Association="Self.FK__HrShortli__SlotI__5C6CB6D7">
             <End Role="TimingSlots" EntitySet="TimingSlots" />
             <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Interview__Creat__6E8B6712" Association="Self.FK__Interview__Creat__6E8B6712">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="InterviewPanels" EntitySet="InterviewPanels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Interview__Creat__7814D14C" Association="Self.FK__Interview__Creat__7814D14C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="InterviewPersons" EntitySet="InterviewPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Interview__IntPe__075714DC" Association="Self.FK__Interview__IntPe__075714DC">
+            <End Role="InterviewPersons" EntitySet="InterviewPersons" />
+            <End Role="InterviewPanelDetail" EntitySet="InterviewPanelDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Interview__Panel__0662F0A3" Association="Self.FK__Interview__Panel__0662F0A3">
+            <End Role="InterviewPanels" EntitySet="InterviewPanels" />
+            <End Role="InterviewPanelDetail" EntitySet="InterviewPanelDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IntEvQues__IntEv__1E3A7A34" Association="Self.FK__IntEvQues__IntEv__1E3A7A34">
+            <End Role="IntEvaluationType" EntitySet="IntEvaluationType" />
+            <End Role="IntEvQuestions" EntitySet="IntEvQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IntQuesti__Quest__2116E6DF" Association="Self.FK__IntQuesti__Quest__2116E6DF">
+            <End Role="IntEvQuestions" EntitySet="IntEvQuestions" />
+            <End Role="IntQuestionMapping" EntitySet="IntQuestionMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IntQuesti__Score__220B0B18" Association="Self.FK__IntQuesti__Score__220B0B18">
+            <End Role="IntScoreType" EntitySet="IntScoreType" />
+            <End Role="IntQuestionMapping" EntitySet="IntQuestionMapping" />
           </AssociationSet>
           <AssociationSet Name="FK__LanguageM__langg__04AFB25B" Association="Self.FK__LanguageM__langg__04AFB25B">
             <End Role="Languages" EntitySet="Languages" />
@@ -680,6 +1048,13 @@
           <NavigationProperty Name="Cand_ProfessionalReferences" Relationship="CareerPortalModel.FK__Cand_Prof__UserI__40C49C62" FromRole="User" ToRole="Cand_ProfessionalReferences" />
           <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__Creat__603D47BB" FromRole="User" ToRole="HrShortlisting" />
           <NavigationProperty Name="TimingSlots" Relationship="CareerPortalModel.FK__TimingSlo__Creat__55BFB948" FromRole="User" ToRole="TimingSlot" />
+          <NavigationProperty Name="InterviewPanels" Relationship="CareerPortalModel.FK__Interview__Creat__6E8B6712" FromRole="User" ToRole="InterviewPanel" />
+          <NavigationProperty Name="InterviewPersons" Relationship="CareerPortalModel.FK__Interview__Creat__7814D14C" FromRole="User" ToRole="InterviewPerson" />
+          <Property Name="IsSideBarOpen" Type="Boolean" />
+          <Property Name="HeaderColor" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SideBarColor" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cndEvMasters" Relationship="CareerPortalModel.FK__cndEvMast__fdGiv__28B808A7" FromRole="User" ToRole="cndEvMaster" />
+          <NavigationProperty Name="cndEvMasters1" Relationship="CareerPortalModel.FK__cndEvMast__UserI__26CFC035" FromRole="User" ToRole="cndEvMaster" />
         </EntityType>
         <EntityContainer Name="CareerPortalEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -785,6 +1160,77 @@
           <AssociationSet Name="FK__TimingSlo__Creat__55BFB948" Association="CareerPortalModel.FK__TimingSlo__Creat__55BFB948">
             <End Role="User" EntitySet="Users" />
             <End Role="TimingSlot" EntitySet="TimingSlots" />
+          </AssociationSet>
+          <EntitySet Name="InterviewPanelDetails" EntityType="CareerPortalModel.InterviewPanelDetail" />
+          <EntitySet Name="InterviewPanels" EntityType="CareerPortalModel.InterviewPanel" />
+          <EntitySet Name="InterviewPersons" EntityType="CareerPortalModel.InterviewPerson" />
+          <AssociationSet Name="FK__Interview__IntPe__075714DC" Association="CareerPortalModel.FK__Interview__IntPe__075714DC">
+            <End Role="InterviewPerson" EntitySet="InterviewPersons" />
+            <End Role="InterviewPanelDetail" EntitySet="InterviewPanelDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Interview__Panel__0662F0A3" Association="CareerPortalModel.FK__Interview__Panel__0662F0A3">
+            <End Role="InterviewPanel" EntitySet="InterviewPanels" />
+            <End Role="InterviewPanelDetail" EntitySet="InterviewPanelDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Interview__Creat__6E8B6712" Association="CareerPortalModel.FK__Interview__Creat__6E8B6712">
+            <End Role="User" EntitySet="Users" />
+            <End Role="InterviewPanel" EntitySet="InterviewPanels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Interview__Creat__7814D14C" Association="CareerPortalModel.FK__Interview__Creat__7814D14C">
+            <End Role="User" EntitySet="Users" />
+            <End Role="InterviewPerson" EntitySet="InterviewPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HrShortli__Panel__0D0FEE32" Association="CareerPortalModel.FK__HrShortli__Panel__0D0FEE32">
+            <End Role="InterviewPanel" EntitySet="InterviewPanels" />
+            <End Role="HrShortlisting" EntitySet="HrShortlistings" />
+          </AssociationSet>
+          <EntitySet Name="InterviewTypes" EntityType="CareerPortalModel.InterviewType" />
+          <AssociationSet Name="FK__HrShortli__Inter__12C8C788" Association="CareerPortalModel.FK__HrShortli__Inter__12C8C788">
+            <End Role="InterviewType" EntitySet="InterviewTypes" />
+            <End Role="HrShortlisting" EntitySet="HrShortlistings" />
+          </AssociationSet>
+          <EntitySet Name="cndEvDetails" EntityType="CareerPortalModel.cndEvDetail" />
+          <EntitySet Name="cndEvMasters" EntityType="CareerPortalModel.cndEvMaster" />
+          <EntitySet Name="IntEvaluationTypes" EntityType="CareerPortalModel.IntEvaluationType" />
+          <EntitySet Name="IntEvDecisions" EntityType="CareerPortalModel.IntEvDecision" />
+          <EntitySet Name="IntEvQuestions" EntityType="CareerPortalModel.IntEvQuestion" />
+          <EntitySet Name="IntQuestionMappings" EntityType="CareerPortalModel.IntQuestionMapping" />
+          <EntitySet Name="IntScoreTypes" EntityType="CareerPortalModel.IntScoreType" />
+          <AssociationSet Name="FK__cndEvDeta__cndEv__2D7CBDC4" Association="CareerPortalModel.FK__cndEvDeta__cndEv__2D7CBDC4">
+            <End Role="cndEvMaster" EntitySet="cndEvMasters" />
+            <End Role="cndEvDetail" EntitySet="cndEvDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvDeta__MapId__2E70E1FD" Association="CareerPortalModel.FK__cndEvDeta__MapId__2E70E1FD">
+            <End Role="IntQuestionMapping" EntitySet="IntQuestionMappings" />
+            <End Role="cndEvDetail" EntitySet="cndEvDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvMast__fdGiv__28B808A7" Association="CareerPortalModel.FK__cndEvMast__fdGiv__28B808A7">
+            <End Role="User" EntitySet="Users" />
+            <End Role="cndEvMaster" EntitySet="cndEvMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvMast__IntEv__27C3E46E" Association="CareerPortalModel.FK__cndEvMast__IntEv__27C3E46E">
+            <End Role="IntEvDecision" EntitySet="IntEvDecisions" />
+            <End Role="cndEvMaster" EntitySet="cndEvMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvMast__UserI__26CFC035" Association="CareerPortalModel.FK__cndEvMast__UserI__26CFC035">
+            <End Role="User" EntitySet="Users" />
+            <End Role="cndEvMaster" EntitySet="cndEvMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IntEvQues__IntEv__1E3A7A34" Association="CareerPortalModel.FK__IntEvQues__IntEv__1E3A7A34">
+            <End Role="IntEvaluationType" EntitySet="IntEvaluationTypes" />
+            <End Role="IntEvQuestion" EntitySet="IntEvQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IntQuesti__Quest__2116E6DF" Association="CareerPortalModel.FK__IntQuesti__Quest__2116E6DF">
+            <End Role="IntEvQuestion" EntitySet="IntEvQuestions" />
+            <End Role="IntQuestionMapping" EntitySet="IntQuestionMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IntQuesti__Score__220B0B18" Association="CareerPortalModel.FK__IntQuesti__Score__220B0B18">
+            <End Role="IntScoreType" EntitySet="IntScoreTypes" />
+            <End Role="IntQuestionMapping" EntitySet="IntQuestionMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cndEvMast__Short__324172E1" Association="CareerPortalModel.FK__cndEvMast__Short__324172E1">
+            <End Role="HrShortlisting" EntitySet="HrShortlistings" />
+            <End Role="cndEvMaster" EntitySet="cndEvMasters" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="candidate">
@@ -1267,6 +1713,11 @@
           <NavigationProperty Name="CandidateJobApply" Relationship="CareerPortalModel.FK__HrShortli__CandA__5B78929E" FromRole="HrShortlisting" ToRole="CandidateJobApply" />
           <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__HrShortli__Creat__603D47BB" FromRole="HrShortlisting" ToRole="User" />
           <NavigationProperty Name="TimingSlot" Relationship="CareerPortalModel.FK__HrShortli__SlotI__5C6CB6D7" FromRole="HrShortlisting" ToRole="TimingSlot" />
+          <Property Name="PanelId" Type="Int32" />
+          <Property Name="InterviewTypeId" Type="Int32" />
+          <NavigationProperty Name="InterviewPanel" Relationship="CareerPortalModel.FK__HrShortli__Panel__0D0FEE32" FromRole="HrShortlisting" ToRole="InterviewPanel" />
+          <NavigationProperty Name="InterviewType" Relationship="CareerPortalModel.FK__HrShortli__Inter__12C8C788" FromRole="HrShortlisting" ToRole="InterviewType" />
+          <NavigationProperty Name="cndEvMasters" Relationship="CareerPortalModel.FK__cndEvMast__Short__324172E1" FromRole="HrShortlisting" ToRole="cndEvMaster" />
         </EntityType>
         <EntityType Name="TimingSlot">
           <Key>
@@ -1342,6 +1793,321 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="InterviewPanelDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PanelId" Type="Int32" />
+          <Property Name="IntPersonId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="InterviewPerson" Relationship="CareerPortalModel.FK__Interview__IntPe__075714DC" FromRole="InterviewPanelDetail" ToRole="InterviewPerson" />
+          <NavigationProperty Name="InterviewPanel" Relationship="CareerPortalModel.FK__Interview__Panel__0662F0A3" FromRole="InterviewPanelDetail" ToRole="InterviewPanel" />
+          <Property Name="EmpId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="InterviewPanel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PanelName" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InterviewPanelDetails" Relationship="CareerPortalModel.FK__Interview__Panel__0662F0A3" FromRole="InterviewPanel" ToRole="InterviewPanelDetail" />
+          <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Interview__Creat__6E8B6712" FromRole="InterviewPanel" ToRole="User" />
+          <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__Panel__0D0FEE32" FromRole="InterviewPanel" ToRole="HrShortlisting" />
+        </EntityType>
+        <EntityType Name="InterviewPerson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="EmpId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InterviewPanelDetails" Relationship="CareerPortalModel.FK__Interview__IntPe__075714DC" FromRole="InterviewPerson" ToRole="InterviewPanelDetail" />
+          <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__Interview__Creat__7814D14C" FromRole="InterviewPerson" ToRole="User" />
+          <Property Name="GarmentDivision" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK__Interview__IntPe__075714DC">
+          <End Type="CareerPortalModel.InterviewPerson" Role="InterviewPerson" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.InterviewPanelDetail" Role="InterviewPanelDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterviewPerson">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InterviewPanelDetail">
+              <PropertyRef Name="IntPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Interview__Panel__0662F0A3">
+          <End Type="CareerPortalModel.InterviewPanel" Role="InterviewPanel" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.InterviewPanelDetail" Role="InterviewPanelDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterviewPanel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InterviewPanelDetail">
+              <PropertyRef Name="PanelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Interview__Creat__6E8B6712">
+          <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.InterviewPanel" Role="InterviewPanel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InterviewPanel">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Interview__Creat__7814D14C">
+          <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.InterviewPerson" Role="InterviewPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InterviewPerson">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HrShortli__Panel__0D0FEE32">
+          <End Type="CareerPortalModel.InterviewPanel" Role="InterviewPanel" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.HrShortlisting" Role="HrShortlisting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterviewPanel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HrShortlisting">
+              <PropertyRef Name="PanelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InterviewType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Typename" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__Inter__12C8C788" FromRole="InterviewType" ToRole="HrShortlisting" />
+        </EntityType>
+        <Association Name="FK__HrShortli__Inter__12C8C788">
+          <End Type="CareerPortalModel.InterviewType" Role="InterviewType" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.HrShortlisting" Role="HrShortlisting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterviewType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HrShortlisting">
+              <PropertyRef Name="InterviewTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="cndEvDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cndEvMasterId" Type="Int32" />
+          <Property Name="MapId" Type="Int32" />
+          <Property Name="obtainMarks" Type="Double" />
+          <NavigationProperty Name="cndEvMaster" Relationship="CareerPortalModel.FK__cndEvDeta__cndEv__2D7CBDC4" FromRole="cndEvDetail" ToRole="cndEvMaster" />
+          <NavigationProperty Name="IntQuestionMapping" Relationship="CareerPortalModel.FK__cndEvDeta__MapId__2E70E1FD" FromRole="cndEvDetail" ToRole="IntQuestionMapping" />
+        </EntityType>
+        <EntityType Name="cndEvMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="AdditionalComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IntEvDecisionId" Type="Int32" />
+          <Property Name="JoinDate" Type="DateTime" Precision="0" />
+          <Property Name="Salary" Type="Double" />
+          <Property Name="DesignationId" Type="Int32" />
+          <Property Name="GradeId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="Benifits" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fdGivenBy" Type="Int32" />
+          <Property Name="creationdate" Type="DateTime" Precision="3" />
+          <Property Name="updatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="cndEvDetails" Relationship="CareerPortalModel.FK__cndEvDeta__cndEv__2D7CBDC4" FromRole="cndEvMaster" ToRole="cndEvDetail" />
+          <NavigationProperty Name="User" Relationship="CareerPortalModel.FK__cndEvMast__fdGiv__28B808A7" FromRole="cndEvMaster" ToRole="User" />
+          <NavigationProperty Name="IntEvDecision" Relationship="CareerPortalModel.FK__cndEvMast__IntEv__27C3E46E" FromRole="cndEvMaster" ToRole="IntEvDecision" />
+          <NavigationProperty Name="User1" Relationship="CareerPortalModel.FK__cndEvMast__UserI__26CFC035" FromRole="cndEvMaster" ToRole="User" />
+          <Property Name="TotalMarks" Type="Double" />
+          <Property Name="ObtainedMarks" Type="Double" />
+          <Property Name="ShortListId" Type="Int32" />
+          <NavigationProperty Name="HrShortlisting" Relationship="CareerPortalModel.FK__cndEvMast__Short__324172E1" FromRole="cndEvMaster" ToRole="HrShortlisting" />
+        </EntityType>
+        <EntityType Name="IntEvaluationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IntEvQuestions" Relationship="CareerPortalModel.FK__IntEvQues__IntEv__1E3A7A34" FromRole="IntEvaluationType" ToRole="IntEvQuestion" />
+        </EntityType>
+        <EntityType Name="IntEvDecision">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DecisionName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cndEvMasters" Relationship="CareerPortalModel.FK__cndEvMast__IntEv__27C3E46E" FromRole="IntEvDecision" ToRole="cndEvMaster" />
+        </EntityType>
+        <EntityType Name="IntEvQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IntEvQTypeId" Type="Int32" />
+          <Property Name="EvaluationType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IntEvaluationType" Relationship="CareerPortalModel.FK__IntEvQues__IntEv__1E3A7A34" FromRole="IntEvQuestion" ToRole="IntEvaluationType" />
+          <NavigationProperty Name="IntQuestionMappings" Relationship="CareerPortalModel.FK__IntQuesti__Quest__2116E6DF" FromRole="IntEvQuestion" ToRole="IntQuestionMapping" />
+        </EntityType>
+        <EntityType Name="IntQuestionMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionId" Type="Int32" />
+          <Property Name="ScoreId" Type="Int32" />
+          <NavigationProperty Name="cndEvDetails" Relationship="CareerPortalModel.FK__cndEvDeta__MapId__2E70E1FD" FromRole="IntQuestionMapping" ToRole="cndEvDetail" />
+          <NavigationProperty Name="IntEvQuestion" Relationship="CareerPortalModel.FK__IntQuesti__Quest__2116E6DF" FromRole="IntQuestionMapping" ToRole="IntEvQuestion" />
+          <NavigationProperty Name="IntScoreType" Relationship="CareerPortalModel.FK__IntQuesti__Score__220B0B18" FromRole="IntQuestionMapping" ToRole="IntScoreType" />
+        </EntityType>
+        <EntityType Name="IntScoreType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScoreTypeName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="TotalMarks" Type="Double" />
+          <NavigationProperty Name="IntQuestionMappings" Relationship="CareerPortalModel.FK__IntQuesti__Score__220B0B18" FromRole="IntScoreType" ToRole="IntQuestionMapping" />
+        </EntityType>
+        <Association Name="FK__cndEvDeta__cndEv__2D7CBDC4">
+          <End Type="CareerPortalModel.cndEvMaster" Role="cndEvMaster" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.cndEvDetail" Role="cndEvDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cndEvMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvDetail">
+              <PropertyRef Name="cndEvMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvDeta__MapId__2E70E1FD">
+          <End Type="CareerPortalModel.IntQuestionMapping" Role="IntQuestionMapping" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.cndEvDetail" Role="cndEvDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntQuestionMapping">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvDetail">
+              <PropertyRef Name="MapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvMast__fdGiv__28B808A7">
+          <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.cndEvMaster" Role="cndEvMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvMaster">
+              <PropertyRef Name="fdGivenBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvMast__IntEv__27C3E46E">
+          <End Type="CareerPortalModel.IntEvDecision" Role="IntEvDecision" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.cndEvMaster" Role="cndEvMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntEvDecision">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvMaster">
+              <PropertyRef Name="IntEvDecisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvMast__UserI__26CFC035">
+          <End Type="CareerPortalModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.cndEvMaster" Role="cndEvMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvMaster">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IntEvQues__IntEv__1E3A7A34">
+          <End Type="CareerPortalModel.IntEvaluationType" Role="IntEvaluationType" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.IntEvQuestion" Role="IntEvQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntEvaluationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IntEvQuestion">
+              <PropertyRef Name="IntEvQTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IntQuesti__Quest__2116E6DF">
+          <End Type="CareerPortalModel.IntEvQuestion" Role="IntEvQuestion" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.IntQuestionMapping" Role="IntQuestionMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntEvQuestion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IntQuestionMapping">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IntQuesti__Score__220B0B18">
+          <End Type="CareerPortalModel.IntScoreType" Role="IntScoreType" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.IntQuestionMapping" Role="IntQuestionMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IntScoreType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IntQuestionMapping">
+              <PropertyRef Name="ScoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cndEvMast__Short__324172E1">
+          <End Type="CareerPortalModel.HrShortlisting" Role="HrShortlisting" Multiplicity="0..1" />
+          <End Type="CareerPortalModel.cndEvMaster" Role="cndEvMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HrShortlisting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cndEvMaster">
+              <PropertyRef Name="ShortListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1351,6 +2117,9 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CareerPortalModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="SideBarColor" ColumnName="SideBarColor" />
+                <ScalarProperty Name="HeaderColor" ColumnName="HeaderColor" />
+                <ScalarProperty Name="IsSideBarOpen" ColumnName="IsSideBarOpen" />
                 <ScalarProperty Name="isCandidate" ColumnName="isCandidate" />
                 <ScalarProperty Name="CVUpdatedOn" ColumnName="CVUpdatedOn" />
                 <ScalarProperty Name="EmailTokens" ColumnName="EmailTokens" />
@@ -1633,6 +2402,8 @@
           <EntitySetMapping Name="HrShortlistings">
             <EntityTypeMapping TypeName="CareerPortalModel.HrShortlisting">
               <MappingFragment StoreEntitySet="HrShortlisting">
+                <ScalarProperty Name="InterviewTypeId" ColumnName="InterviewTypeId" />
+                <ScalarProperty Name="PanelId" ColumnName="PanelId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1657,6 +2428,129 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewPanelDetails">
+            <EntityTypeMapping TypeName="CareerPortalModel.InterviewPanelDetail">
+              <MappingFragment StoreEntitySet="InterviewPanelDetail">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IntPersonId" ColumnName="IntPersonId" />
+                <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewPanels">
+            <EntityTypeMapping TypeName="CareerPortalModel.InterviewPanel">
+              <MappingFragment StoreEntitySet="InterviewPanels">
+                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PanelName" ColumnName="PanelName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewPersons">
+            <EntityTypeMapping TypeName="CareerPortalModel.InterviewPerson">
+              <MappingFragment StoreEntitySet="InterviewPersons">
+                <ScalarProperty Name="GarmentDivision" ColumnName="GarmentDivision" />
+                <ScalarProperty Name="UpdateDatetime" ColumnName="UpdateDatetime" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewTypes">
+            <EntityTypeMapping TypeName="CareerPortalModel.InterviewType">
+              <MappingFragment StoreEntitySet="InterviewTypes">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Typename" ColumnName="Typename" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cndEvDetails">
+            <EntityTypeMapping TypeName="CareerPortalModel.cndEvDetail">
+              <MappingFragment StoreEntitySet="cndEvDetail">
+                <ScalarProperty Name="obtainMarks" ColumnName="obtainMarks" />
+                <ScalarProperty Name="MapId" ColumnName="MapId" />
+                <ScalarProperty Name="cndEvMasterId" ColumnName="cndEvMasterId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cndEvMasters">
+            <EntityTypeMapping TypeName="CareerPortalModel.cndEvMaster">
+              <MappingFragment StoreEntitySet="cndEvMaster">
+                <ScalarProperty Name="ShortListId" ColumnName="ShortListId" />
+                <ScalarProperty Name="ObtainedMarks" ColumnName="ObtainedMarks" />
+                <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+                <ScalarProperty Name="creationdate" ColumnName="creationdate" />
+                <ScalarProperty Name="fdGivenBy" ColumnName="fdGivenBy" />
+                <ScalarProperty Name="Benifits" ColumnName="Benifits" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="GradeId" ColumnName="GradeId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="IntEvDecisionId" ColumnName="IntEvDecisionId" />
+                <ScalarProperty Name="AdditionalComments" ColumnName="AdditionalComments" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IntEvaluationTypes">
+            <EntityTypeMapping TypeName="CareerPortalModel.IntEvaluationType">
+              <MappingFragment StoreEntitySet="IntEvaluationType">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IntEvDecisions">
+            <EntityTypeMapping TypeName="CareerPortalModel.IntEvDecision">
+              <MappingFragment StoreEntitySet="IntEvDecision">
+                <ScalarProperty Name="DecisionName" ColumnName="DecisionName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IntEvQuestions">
+            <EntityTypeMapping TypeName="CareerPortalModel.IntEvQuestion">
+              <MappingFragment StoreEntitySet="IntEvQuestions">
+                <ScalarProperty Name="EvaluationType" ColumnName="EvaluationType" />
+                <ScalarProperty Name="IntEvQTypeId" ColumnName="IntEvQTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IntQuestionMappings">
+            <EntityTypeMapping TypeName="CareerPortalModel.IntQuestionMapping">
+              <MappingFragment StoreEntitySet="IntQuestionMapping">
+                <ScalarProperty Name="ScoreId" ColumnName="ScoreId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IntScoreTypes">
+            <EntityTypeMapping TypeName="CareerPortalModel.IntScoreType">
+              <MappingFragment StoreEntitySet="IntScoreType">
+                <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+                <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

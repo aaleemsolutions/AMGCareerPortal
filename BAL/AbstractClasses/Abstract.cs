@@ -40,6 +40,12 @@ namespace BAL.AbstractClasses
             repository.DeleteRecords(model);
             return 1;
         }
+        public  void Delete(List<T> model)
+        {
+
+            repository.DeleteRange(model);
+       
+        }
         public void DeleteById(int Id)
         {
             repository.DeleteRecords(Id);
@@ -67,7 +73,7 @@ namespace BAL.AbstractClasses
             return repository.GetAllRecord();
         }
 
-        public List<T> GetList()
+        public virtual List<T> GetList()
         {
 
             return repository.GetAllRecord();

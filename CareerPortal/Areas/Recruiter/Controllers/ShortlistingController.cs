@@ -17,6 +17,12 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         Cand_Shortlisting Cand_Shortlisting;
         HR_SlotsTimings HR_SlotsTimings;
         JobApplied jobApplied;
+        HRPanelDB HRPanelDB;
+        IntEvQuestions dbIntEvQuestions;
+        IntEvQuestionsMapping DbIntEvQuestionsMaping;
+        DecisionList decisionList;
+        CndEvaluationMaster dbcndEvaluationMaster;
+        CndEvaluationDetail dbcndEvaluationDetail;
 
 
         public ShortlistingController()
@@ -24,23 +30,26 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             Cand_Shortlisting = new Cand_Shortlisting();
             HR_SlotsTimings = new HR_SlotsTimings();
             jobApplied = new JobApplied();
-           
+            HRPanelDB = new HRPanelDB();
 
-
+            dbIntEvQuestions = new IntEvQuestions();
+            DbIntEvQuestionsMaping = new IntEvQuestionsMapping();
+            decisionList = new DecisionList();
+            dbcndEvaluationMaster = new CndEvaluationMaster();
+            dbcndEvaluationDetail = new CndEvaluationDetail();
         }
-        public ActionResult Shortlist_Cand(int JobApplyId,int CandId)
-        
+        public ActionResult Shortlist_Cand(int JobApplyId, int CandId)
         {
-            var GetJobApp = jobApplied.GetJobApplied(JobApplyId,CandId);
+            var GetJobApp = jobApplied.GetJobApplied(JobApplyId, CandId);
 
-            CandShortListViewModel CandShortListViewModel   = new CandShortListViewModel(); ;
+            CandShortListViewModel CandShortListViewModel = new CandShortListViewModel(); ;
 
             CandShortListViewModel.jobApplyViewModels = GetJobApp;
-            if (GetJobApp!=null)
+            if (GetJobApp != null)
             {
                 var dbshortlist = Cand_Shortlisting.GetById(GetJobApp.CndJobApply.Id);
                 CandShortListViewModel.HrShortlisting = dbshortlist;
-                if (dbshortlist!=null)
+                if (dbshortlist != null)
                 {
                     CandShortListViewModel.IsEmailSend = dbshortlist.IsEmailSend.Value;
 
@@ -55,20 +64,19 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             var UrlLink = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
             UrlLink += "Recruiter/CandidateForm/jobApplicationForm";
 
-            CandShortListViewModel.ShortListEmailBody = SendEmail.CallForInterviewEmailBody(GetJobApp.CndJobApply.User.FullName, "Artistic Milliner 2 Head Office","","Korangi Industrial near bilal chorangi","", UrlLink, CandShortListViewModel.IsSendJobForm);
+            CandShortListViewModel.ShortListEmailBody = SendEmail.CallForInterviewEmailBody(GetJobApp.CndJobApply.User.FullName, "Artistic Milliner 2 Head Office", "", "Korangi Industrial near bilal chorangi", "", UrlLink, CandShortListViewModel.IsSendJobForm);
             BindDropdowns();
 
-            
+
 
 
             return PartialView("~/Areas/Recruiter/Views/Shared/_ShortlistCandidate.cshtml", CandShortListViewModel);
 
-         
+
         }
 
         [HttpPost]
         public ActionResult Shortlist_Cand(CandShortListViewModel model)
-
         {
             try
             {
@@ -82,10 +90,11 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 shortlistModel.CreatedBy = GlobalUserInfo.UserId;
 
 
+
                 Cand_Shortlisting.AddData(shortlistModel);
                 var UrlLink = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
                 UrlLink += "Recruiter/CandidateForm/jobApplicationForm";
-                var emailbody = SendEmail.CallForInterviewEmailBody(model.jobApplyViewModels.CndJobApply.User.FullName, "Artistic Milliner 2 Head Office", "", "Korangi Industrial near bilal chorangi", "", UrlLink, shortlistModel.IsSendJobForm.Value); 
+                var emailbody = SendEmail.CallForInterviewEmailBody(model.jobApplyViewModels.CndJobApply.User.FullName, "Artistic Milliner 2 Head Office", "", "Korangi Industrial near bilal chorangi", "", UrlLink, shortlistModel.IsSendJobForm.Value);
 
                 try
                 {
@@ -94,10 +103,10 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 catch (Exception ex)
                 {
 
-                    return Json(new { status = false, message = "Shortlist but failed to send email error message: " + ex.Message}, JsonRequestBehavior.AllowGet);
- 
+                    return Json(new { status = false, message = "Shortlist but failed to send email error message: " + ex.Message }, JsonRequestBehavior.AllowGet);
+
                 }
-                
+
 
                 //var GetJobApp = jobApplied.GetJobApplied(JobApplyId, CandId);
 
@@ -119,7 +128,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             }
             catch (Exception ex)
             {
-                
+
 
 
                 return Json(new { status = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
@@ -131,75 +140,172 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
         }
 
-
+        public ActionResult InterviewList()
+        {
+ 
+            return View();
+        }
+     
         public void BindDropdowns()
         {
 
             var getSlots = HR_SlotsTimings.GetList();
-            //var getSlotstiming = test.Select(m=>new { SlotsId = m.Id,SlotsTimings = m.StartTime.Value.ToString("HH:mm") + " - " + m.EndTime.Value.ToString("HH:mm") }).ToList();
-            var getSlotstiming = getSlots.Select(m => new { SlotsId = m.Id, SlotsTimings = Convert.ToString(m.StartTime.Value.ToString() + " - " + m.EndTime.Value.ToString() ) }).ToList();
+            var getSlotstiming = getSlots.Select(m => new { SlotsId = m.Id, SlotsTimings = Convert.ToString(m.StartTime.Value.ToString() + " - " + m.EndTime.Value.ToString()) }).ToList();
 
             var HRSlotsTimings = new SelectList(getSlotstiming, "SlotsId", "SlotsTimings").ToList();
             HRSlotsTimings.Insert(0, (new SelectListItem { Text = "Select Slots", Value = "0" }));
             ViewBag.TimingsSlotsDropdown = HRSlotsTimings;
-            //ViewBag.DegreeDropDown = getusrDetail.GetAllDegrees().ToList();
-            
-            //var GetAllDegrees = new SelectList(getusrDetail.GetAllDegrees().ToList(), "Qualification_ID", "Qualification_Name").ToList();
-            //GetAllDegrees.Insert(0, (new SelectListItem { Text = "Select Degree", Value = "0" }));
-            //ViewBag.DegreeDropDown = GetAllDegrees;
-            ////ViewBag.DegreeDropDown = getusrDetail.GetAllDegrees().ToList();
 
-            //List<SelectListItem> MonthNameDropDown = VariableCasting.GetMonthsName.ToList();
-            //MonthNameDropDown.Insert(0, (new SelectListItem { Text = "Select Month", Value = "0" }));
-            //ViewBag.MonthNameDropdown = MonthNameDropDown.ToList();
-
-            //List<SelectListItem> YearDropdown = new SelectList(Enumerable.Range(1960, (DateTime.Now.Year - 1960) + 1)).ToList();
-            //YearDropdown = YearDropdown.Select(m => new SelectListItem { Text = m.Text, Value = m.Text }).ToList();
-            //YearDropdown.Insert(0, (new SelectListItem { Text = "Select Year", Value = "0" }));
-            //ViewBag.YearDropdown = YearDropdown.ToList().OrderByDescending(m => m.Text);
-
-            //ViewBag.GradeTypes = VariableCasting.GradeTypes().ToList();
-
-            //var MartialStatus = new List<SelectListItem>
-            //{
-            //   new SelectListItem { Text = "Select ", Value = "Select"},
-            //    new SelectListItem { Text = "Single", Value = "Single"},
-            //    new SelectListItem { Text = "Married", Value = "1" }
-
-            //};
-            //ViewBag.MartialStatusDropDown = MartialStatus;
+            var getPanel = HRPanelDB.GetList();
+            var DrpPanel = new SelectList(getPanel, "Id", "PanelName").ToList();
+            DrpPanel.Insert(0, (new SelectListItem { Text = "Select Panel", Value = "" }));
+            ViewBag.DrpInterviewPanel = DrpPanel;
 
 
 
-            //var Gender = new List<SelectListItem>
-            //{
-            //   new SelectListItem { Text = "Select ", Value = "Select"},
-            //    new SelectListItem { Text = "Male", Value = "Male"},
-            //    new SelectListItem { Text = "Female", Value = "Female" },
-            //    new SelectListItem { Text = "Other", Value = "Other" }
-
-            //};
-            //ViewBag.GenderDropDown = Gender;
 
 
 
-            //var Dependants = new List<SelectListItem>
-            //{
-            //   new SelectListItem { Text = "Select ", Value = "Select"},
-            //    new SelectListItem { Text = "Parents", Value = "Parents"},
-            //    new SelectListItem { Text = "Spouse", Value = "Spouse" },
-            //    new SelectListItem { Text = "Kids", Value = "Kids" }
 
-            //};
-            //ViewBag.DependantsDropDown = Dependants;
+        }
 
- 
+        public JsonResult GetInterviewListDataTable()
+        {
+
+            var GetShortlistEmployees = Cand_Shortlisting.GetList();
+
+            if (GetShortlistEmployees.Count != 0)
+            {
+
+
+                var dtInterview = GetShortlistEmployees.Select(m => new
+                {
+                    HRShortlistId = m.Id,
+                    CandidateName = m.CandidateJobApply.User.FullName,
+                    PosTitle = m.CandidateJobApply.AllPosition.JobTitle,
+                    InterviewDate = m.InterviewDate.Value.ToString("dd-MMM-yyyy"),
+                    InterviewTime = m.TimingSlot.StartTime + " - " + m.TimingSlot.EndTime.Value,
+                    InterviewStatus = "Shortlist For Interview"
+                }).OrderByDescending(m => m.InterviewDate);
+
+                var JsonResult = Json(new { data = dtInterview }, JsonRequestBehavior.AllowGet);
+
+                JsonResult.MaxJsonLength = int.MaxValue;
+
+                return JsonResult;
+            }
+            else
+            {
+                return Json(new { data = "" }, JsonRequestBehavior.AllowGet);
+
+            }
+
+
+
 
 
         }
 
 
+        public ActionResult InterviewEvaluationForm(int ShortlistId = 0)
+        {
+            ViewModels.IntEvaluationViewModel intEvaluationViewModel = new IntEvaluationViewModel();
+            var cndShortlist = Cand_Shortlisting.GetByid(ShortlistId);
+
+            intEvaluationViewModel.CandShortListViewModel.HrShortlisting = cndShortlist;
+            intEvaluationViewModel.intEvDecisions = decisionList.GetList();
+            intEvaluationViewModel.intQuestionMappings = DbIntEvQuestionsMaping.GetList();
+
+            intEvaluationViewModel.CndEvMaster = dbcndEvaluationMaster.GetById(ShortlistId);
+            if (intEvaluationViewModel.CndEvMaster!=null)
+            {
+                intEvaluationViewModel.cndEvDetails = dbcndEvaluationDetail.GetList(intEvaluationViewModel.CndEvMaster.Id);
 
 
+            }
+
+
+            return View(intEvaluationViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult InterviewEvaluationForm(IntEvaluationViewModel intEvaluationViewModel,List<cndEvDetail> cndEvDetails)
+        {
+            if (ModelState.IsValid)
+            {
+                if (intEvaluationViewModel.CndEvMaster.Id == 0)
+                {
+                    intEvaluationViewModel.CndEvMaster.fdGivenBy = GlobalUserInfo.UserId;
+                    intEvaluationViewModel.CndEvMaster.ShortListId = intEvaluationViewModel.CandShortListViewModel.HrShortlisting.Id;
+                    intEvaluationViewModel.CndEvMaster.creationdate = DateTime.Now;
+                    intEvaluationViewModel.CndEvMaster.updatetime = DateTime.Now;
+
+
+
+                    dbcndEvaluationMaster.AddData(intEvaluationViewModel.CndEvMaster);
+
+                    foreach (var item in intEvaluationViewModel.cndEvDetails)
+                    {
+                        item.cndEvMasterId = intEvaluationViewModel.CndEvMaster.Id;
+
+                        item.obtainMarks = DbIntEvQuestionsMaping.GetByid(item.MapId.Value).IntScoreType.TotalMarks;
+                        dbcndEvaluationDetail.AddData(item);
+                    }
+
+                }
+                else
+                {
+                    intEvaluationViewModel.CndEvMaster.updatetime = DateTime.Now;
+                    dbcndEvaluationMaster.UpdateData(intEvaluationViewModel.CndEvMaster);
+                    
+
+
+                    //foreach (var item in intEvaluationViewModel.cndEvDetails)
+                    //{
+
+                    //    item.cndEvMasterId = intEvaluationViewModel.CndEvMaster.Id;
+                    //    item.obtainMarks = DbIntEvQuestionsMaping.GetByid(item.MapId.Value).IntScoreType.TotalMarks;
+                    //    dbcndEvaluationDetail.AddData(item);
+                    //}
+
+
+                }
+
+
+                var cndShortlist = Cand_Shortlisting.GetByid(intEvaluationViewModel.CandShortListViewModel.HrShortlisting.Id);
+
+                intEvaluationViewModel.CandShortListViewModel.HrShortlisting = cndShortlist;
+                intEvaluationViewModel.intEvDecisions = decisionList.GetList();
+                intEvaluationViewModel.intQuestionMappings = DbIntEvQuestionsMaping.GetList();
+
+                intEvaluationViewModel.CndEvMaster = dbcndEvaluationMaster.GetById(intEvaluationViewModel.CandShortListViewModel.HrShortlisting.Id);
+                if (intEvaluationViewModel.CndEvMaster != null)
+                {
+                    intEvaluationViewModel.cndEvDetails = dbcndEvaluationDetail.GetList(intEvaluationViewModel.CndEvMaster.Id);
+
+
+                }
+                return View(intEvaluationViewModel);
+
+            }
+            else
+            {
+                var cndShortlist = Cand_Shortlisting.GetByid(intEvaluationViewModel.CandShortListViewModel.HrShortlisting.Id);
+
+                intEvaluationViewModel.CandShortListViewModel.HrShortlisting = cndShortlist;
+                intEvaluationViewModel.intEvDecisions = decisionList.GetList();
+                intEvaluationViewModel.intQuestionMappings = DbIntEvQuestionsMaping.GetList();
+
+
+
+                //               return View(intEvaluationViewModel);
+
+                return PartialView("~/Areas/Recruiter/Views/Shared/_CndEvaluationForm.cshtml", intEvaluationViewModel);
+
+            }
+        
+
+        
+        }
     }
 }

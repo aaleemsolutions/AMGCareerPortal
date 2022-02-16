@@ -201,6 +201,41 @@
     <Property Name="UpdateDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" />
   </EntityType>
+  <EntityType Name="InterviewPanelDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PanelId" Type="int" />
+    <Property Name="IntPersonId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="InterviewPanels">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PanelName" Type="varchar" MaxLength="450" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdateDatetime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="InterviewPersons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpName" Type="varchar" MaxLength="500" />
+    <Property Name="Email" Type="varchar" MaxLength="500" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="500" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EmpId" Type="int" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdateDatetime" Type="datetime" />
+    <Property Name="GarmentDivision" Type="bit" />
+  </EntityType>
   <EntityType Name="LangScoreType">
     <Key>
       <PropertyRef Name="Id" />
@@ -477,6 +512,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Interview__Creat__6E8B6712">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="InterviewPanels" Type="Self.InterviewPanels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterviewPanels">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Interview__Creat__7814D14C">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="InterviewPersons" Type="Self.InterviewPersons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterviewPersons">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Interview__IntPe__075714DC">
+    <End Role="InterviewPersons" Type="Self.InterviewPersons" Multiplicity="0..1" />
+    <End Role="InterviewPanelDetail" Type="Self.InterviewPanelDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InterviewPersons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterviewPanelDetail">
+        <PropertyRef Name="IntPersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Interview__Panel__0662F0A3">
+    <End Role="InterviewPanels" Type="Self.InterviewPanels" Multiplicity="0..1" />
+    <End Role="InterviewPanelDetail" Type="Self.InterviewPanelDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InterviewPanels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InterviewPanelDetail">
+        <PropertyRef Name="PanelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__LanguageM__langg__04AFB25B">
     <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
     <End Role="LanguageMaping" Type="Self.LanguageMaping" Multiplicity="*" />
@@ -551,6 +634,9 @@
     <EntitySet Name="CandidateLang" EntityType="Self.CandidateLang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HrShortlisting" EntityType="Self.HrShortlisting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InterviewPanelDetail" EntityType="Self.InterviewPanelDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InterviewPanels" EntityType="Self.InterviewPanels" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InterviewPersons" EntityType="Self.InterviewPersons" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LangScoreType" EntityType="Self.LangScoreType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LanguageMaping" EntityType="Self.LanguageMaping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
@@ -621,6 +707,22 @@
     <AssociationSet Name="FK__HrShortli__SlotI__5C6CB6D7" Association="Self.FK__HrShortli__SlotI__5C6CB6D7">
       <End Role="TimingSlots" EntitySet="TimingSlots" />
       <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Interview__Creat__6E8B6712" Association="Self.FK__Interview__Creat__6E8B6712">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="InterviewPanels" EntitySet="InterviewPanels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Interview__Creat__7814D14C" Association="Self.FK__Interview__Creat__7814D14C">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="InterviewPersons" EntitySet="InterviewPersons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Interview__IntPe__075714DC" Association="Self.FK__Interview__IntPe__075714DC">
+      <End Role="InterviewPersons" EntitySet="InterviewPersons" />
+      <End Role="InterviewPanelDetail" EntitySet="InterviewPanelDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Interview__Panel__0662F0A3" Association="Self.FK__Interview__Panel__0662F0A3">
+      <End Role="InterviewPanels" EntitySet="InterviewPanels" />
+      <End Role="InterviewPanelDetail" EntitySet="InterviewPanelDetail" />
     </AssociationSet>
     <AssociationSet Name="FK__LanguageM__langg__04AFB25B" Association="Self.FK__LanguageM__langg__04AFB25B">
       <End Role="Languages" EntitySet="Languages" />

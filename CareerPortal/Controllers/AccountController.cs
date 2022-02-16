@@ -129,6 +129,16 @@ namespace CareerPortal.Controllers
 
 
                         }
+
+                        HttpCookie myCookie = new HttpCookie("IsSideBarOpen");
+                        DateTime now = DateTime.Now;
+
+                        myCookie.Value = (Convert.ToBoolean(dbobj.UsersInfo.IsSideBarOpen)).ToString();
+
+                        myCookie.Expires = now.AddYears(50); // For a cookie to effectively never expire
+
+                        Response.Cookies.Add(myCookie);
+                        //GlobalUserInfo.IsSideBarOpen = dbobj.UsersInfo.IsSideBarOpen.Value;
                     }
 
 
@@ -168,9 +178,6 @@ namespace CareerPortal.Controllers
 
                         
                     }
-
-            
-                    
 
                 }
                 else
@@ -267,6 +274,41 @@ namespace CareerPortal.Controllers
             
         }
 
+
+        public JsonResult SaveSideBarStats(string sideBarOpenStats)
+        {
+          
+            var dbuser = RegUser.getUser(GlobalUserInfo.UserName);
+
+            dbuser.userinfo.IsSideBarOpen = !Convert.ToBoolean(sideBarOpenStats);
+
+            RegUser.UpdateUser(dbuser);
+
+            HttpCookie myCookie = new HttpCookie("IsSideBarOpen");
+            DateTime now = DateTime.Now;
+            
+            myCookie.Value = (!Convert.ToBoolean(sideBarOpenStats)).ToString();
+            
+            myCookie.Expires = now.AddYears(50); // For a cookie to effectively never expire
+
+            Response.Cookies.Add(myCookie);
+ 
+
+
+            return Json(true,JsonRequestBehavior.AllowGet);
+            //var test = RegUser.IsUserExist(UserEmail);
+            //if (test != null)
+            //{
+            //    return Json(false);
+            //}
+            //else
+            //{
+            //    return Json(true);
+            //}
+
+        }
+
+     
 
     }
 }

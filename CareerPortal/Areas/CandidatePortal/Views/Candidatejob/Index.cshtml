@@ -113,10 +113,10 @@
                                                 </ul>
                                             </div>
                                             <div class="text-right col-auto order-sm-3 p-0">
-                                                
+
                                                 @{
                                                     var test = item.CandidateJobApplies.Where(m => m.UserId == GlobalUserInfo.UserId).Count();
-                                                   if (test>0)
+                                                    if (test > 0)
                                                     {
 
 
@@ -137,29 +137,29 @@
 
 
                                     @*<a href="#" type="button" class="job-data JobDetail" value="1221">
-                                        <div class="company-logo col-auto pl-0">
-                                            <img src="~/assets/img/icons/company-1.png" alt="Company Logo">
-                                        </div>
-                                        <div class="list-content col">
-                                            <h6 class="title">ERP Developer</h6>
-                                            <ul class="meta">
-                                                <li><strong class="text-primary">Artistic Milliners</strong></li>
-                                            </ul>
-                                        </div>
-                                        <div class="list-content col">
-                                            <ul class="meta">
-                                                <li><strong>Location : Karachi-Pakistan</strong></li>
-                                            </ul>
-                                        </div>
-                                        <div class="list-content col-auto order-sm-3">
-                                            <ul class="meta pr-3">
-                                                <li><i class="fa fa-heart-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="text-right col-auto order-sm-3 p-0">
-                                            <span class="button btn border-primary">FULL TIME </span>
-                                        </div>
-                                    </a>*@
+                                            <div class="company-logo col-auto pl-0">
+                                                <img src="~/assets/img/icons/company-1.png" alt="Company Logo">
+                                            </div>
+                                            <div class="list-content col">
+                                                <h6 class="title">ERP Developer</h6>
+                                                <ul class="meta">
+                                                    <li><strong class="text-primary">Artistic Milliners</strong></li>
+                                                </ul>
+                                            </div>
+                                            <div class="list-content col">
+                                                <ul class="meta">
+                                                    <li><strong>Location : Karachi-Pakistan</strong></li>
+                                                </ul>
+                                            </div>
+                                            <div class="list-content col-auto order-sm-3">
+                                                <ul class="meta pr-3">
+                                                    <li><i class="fa fa-heart-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div class="text-right col-auto order-sm-3 p-0">
+                                                <span class="button btn border-primary">FULL TIME </span>
+                                            </div>
+                                        </a>*@
 
 
                                 </div>
@@ -193,7 +193,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                
+
             </div>
         </div>
     </div>
@@ -202,3 +202,4 @@
 @Scripts.Render("~/bundles/ThemeOtherPagesJS")
 
 
+<div class="loading" id="JobDetailLoader">Loading&#8230;</div>

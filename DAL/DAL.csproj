@@ -83,6 +83,13 @@
     <Compile Include="Cand_RelateFreindWorking.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="cndEvDetail.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cndEvMaster.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomAttributes\RequiredIfAttribute.cs" />
     <Compile Include="CustomModel\Category.cs" />
     <Compile Include="CustomModel\CvExperience.cs" />
     <Compile Include="CustomModel\CvMain.cs" />
@@ -92,6 +99,8 @@
     <Compile Include="CustomModel\Department.cs" />
     <Compile Include="CustomModel\Designation.cs" />
     <Compile Include="CustomModel\Division.cs" />
+    <Compile Include="CustomModel\EmployeeView.cs" />
+    <Compile Include="CustomModel\vuAllEmpInfoClass.cs" />
     <Compile Include="DbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -108,6 +117,33 @@
       <DependentUpon>DbContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="HrShortlisting.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InterviewPanel.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InterviewPanelDetail.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InterviewPerson.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InterviewType.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IntEvaluationType.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IntEvDecision.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IntEvQuestion.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IntQuestionMapping.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IntScoreType.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="LangScoreType.cs">
