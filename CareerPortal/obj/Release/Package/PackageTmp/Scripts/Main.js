@@ -798,7 +798,7 @@ function ShowJobDescription(JobId) {
         type: "GET",
         data: { "JobId": JobId },
         beforeSend: function () {
-            $("#JobDetailLoader").show();
+            $("#JobDetailLoader").show ();
         },
         success: function (data) {
 
@@ -1915,8 +1915,35 @@ function deleteInterviewPanel(PanelId) {
 
 }
 
+function SaveBodySidebarStats(sideBarStats) {
+
+
+    $.ajax({
+        url: "/Account/SaveSideBarStats",
+
+        dataType: 'json',
+
+        data: { "sideBarOpenStats": sideBarStats },
+        beforeSend: function () {
+       
+        },
+        success: function (data) {
+            return true;
+        },
+        complete: function (data) {
+            return true;
+        }
+    });
+
+
+
+}
 
 $(document).ready(function () {
+
+  $(".nav.flex-column.sub-menu > li:has(a.active) i").css({  "color": "white" })
+
+
     $("#JobDetailLoader").hide();
     $("#DrpDepart").change(function () {
 
@@ -2268,6 +2295,7 @@ $(document).ready(function () {
     //CV Bank List
     var table = $('#CvCandidateList').DataTable({
         stateSave: true,
+        fixedHeader: true,
         "pageLength": 100,
         "lengthMenu": [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, "All"]],
         "ajax": {
@@ -2334,15 +2362,16 @@ $(document).ready(function () {
         $('#CvCandidateList tbody > tr').removeClass('focusedRow');
         $(this).addClass('focusedRow');
     });
-
-    if (window.location.pathname.toString() == "/Recruiter/AllJobs") {
+    
+    if (  window.location.pathname.toString().includes("/Recruiter/AllJobs")) {
         $("#AllListedJobs ul li:nth-child(1)").removeClass("active");
-        $("#AllListedJobs ul li:nth-child(3)").removeClass("active");
+        $("#AllListedJobs ul li:nth-child(2)").removeClass("active");
         $("#AllListedJobs ul li:nth-child(4)").removeClass("active");
         $("#AllListedJobs ul li:nth-child(5)").removeClass("active");
     }
-    if (window.location.pathname.toString() == "/Recruiter/AllJobs/CreateJobs") {
+    if (window.location.pathname.toString().includes("/Recruiter/AllJobs/CreateJobs")) {
 
+        $("#AllListedJobs ul li:nth-child(2)").addClass("active");
         $("#AllListedJobs ul li:nth-child(5)").removeClass("active");
     }
 
@@ -2540,7 +2569,7 @@ $(document).ready(function () {
             { "data": "InterviewStatus" },
           
             {
-                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="#"  title="View Candidates" ><span class="ti-eye")></span></a> <a class="btn" type=""  href="/Recruiter/AllJobs/CreateJobs/' + full.JobId + '"><span class="ti-pencil")></span></a> '; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.HRShortlistId + '"  title="Give Feedback" ><span class="ti-comment-alt")></span></a>  '; }
             }
 
 
@@ -2564,6 +2593,11 @@ $(document).ready(function () {
             CreateUpdatePanel();
         }
 
+    });
+
+
+    $(".saveSideBarStats").click(function () {
+    SaveBodySidebarStats($("body").hasClass("sidebar-icon-only"))
     });
 
 

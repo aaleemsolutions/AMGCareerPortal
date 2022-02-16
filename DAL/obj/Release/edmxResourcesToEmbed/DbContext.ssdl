@@ -184,6 +184,36 @@
     <Property Name="ResultType" Type="varchar" MaxLength="100" />
     <Property Name="ResultValue" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="cndEvDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cndEvMasterId" Type="int" />
+    <Property Name="MapId" Type="int" />
+    <Property Name="obtainMarks" Type="float" />
+  </EntityType>
+  <EntityType Name="cndEvMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="AdditionalComments" Type="varchar(max)" />
+    <Property Name="IntEvDecisionId" Type="int" />
+    <Property Name="JoinDate" Type="date" />
+    <Property Name="Salary" Type="float" />
+    <Property Name="DesignationId" Type="int" />
+    <Property Name="GradeId" Type="int" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="Benifits" Type="varchar(max)" />
+    <Property Name="fdGivenBy" Type="int" />
+    <Property Name="creationdate" Type="datetime" />
+    <Property Name="updatetime" Type="datetime" />
+    <Property Name="TotalMarks" Type="float" />
+    <Property Name="ObtainedMarks" Type="float" />
+    <Property Name="ShortListId" Type="int" />
+  </EntityType>
   <EntityType Name="HrShortlisting">
     <Key>
       <PropertyRef Name="Id" />
@@ -200,6 +230,8 @@
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="UpdateDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" />
+    <Property Name="PanelId" Type="int" />
+    <Property Name="InterviewTypeId" Type="int" />
   </EntityType>
   <EntityType Name="InterviewPanelDetail">
     <Key>
@@ -209,6 +241,7 @@
     <Property Name="PanelId" Type="int" />
     <Property Name="IntPersonId" Type="int" />
     <Property Name="IsActive" Type="bit" />
+    <Property Name="EmpId" Type="int" />
   </EntityType>
   <EntityType Name="InterviewPanels">
     <Key>
@@ -235,6 +268,52 @@
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="UpdateDatetime" Type="datetime" />
     <Property Name="GarmentDivision" Type="bit" />
+  </EntityType>
+  <EntityType Name="InterviewTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Typename" Type="varchar" MaxLength="250" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="IntEvaluationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="IntEvDecision">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DecisionName" Type="varchar" MaxLength="400" />
+  </EntityType>
+  <EntityType Name="IntEvQuestions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IntEvQTypeId" Type="int" />
+    <Property Name="EvaluationType" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="IntQuestionMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionId" Type="int" />
+    <Property Name="ScoreId" Type="int" />
+  </EntityType>
+  <EntityType Name="IntScoreType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ScoreTypeName" Type="varchar" MaxLength="400" />
+    <Property Name="TotalMarks" Type="float" />
   </EntityType>
   <EntityType Name="LangScoreType">
     <Key>
@@ -319,6 +398,9 @@
     <Property Name="UserImage" Type="nvarchar(max)" />
     <Property Name="CVUpdatedOn" Type="datetime" />
     <Property Name="isCandidate" Type="bit" />
+    <Property Name="IsSideBarOpen" Type="bit" />
+    <Property Name="HeaderColor" Type="varchar" MaxLength="250" />
+    <Property Name="SideBarColor" Type="varchar" MaxLength="250" />
   </EntityType>
   <Association Name="FK__Cand_AMPr__UserI__2704CA5F">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
@@ -464,6 +546,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__cndEvDeta__cndEv__2D7CBDC4">
+    <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="0..1" />
+    <End Role="cndEvDetail" Type="Self.cndEvDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cndEvMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cndEvDetail">
+        <PropertyRef Name="cndEvMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cndEvDeta__MapId__2E70E1FD">
+    <End Role="IntQuestionMapping" Type="Self.IntQuestionMapping" Multiplicity="0..1" />
+    <End Role="cndEvDetail" Type="Self.cndEvDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IntQuestionMapping">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cndEvDetail">
+        <PropertyRef Name="MapId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cndEvMast__fdGiv__28B808A7">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cndEvMaster">
+        <PropertyRef Name="fdGivenBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cndEvMast__IntEv__27C3E46E">
+    <End Role="IntEvDecision" Type="Self.IntEvDecision" Multiplicity="0..1" />
+    <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IntEvDecision">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cndEvMaster">
+        <PropertyRef Name="IntEvDecisionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cndEvMast__Short__324172E1">
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="0..1" />
+    <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrShortlisting">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cndEvMaster">
+        <PropertyRef Name="ShortListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cndEvMast__UserI__26CFC035">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cndEvMaster">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__HrShortli__CandA__5B78929E">
     <End Role="CandidateJobApply" Type="Self.CandidateJobApply" Multiplicity="0..1" />
     <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
@@ -488,6 +642,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__HrShortli__Inter__12C8C788">
+    <End Role="InterviewTypes" Type="Self.InterviewTypes" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InterviewTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="InterviewTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__HrShortli__JobId__5A846E65">
     <End Role="AllPositions" Type="Self.AllPositions" Multiplicity="0..1" />
     <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
@@ -497,6 +663,18 @@
       </Principal>
       <Dependent Role="HrShortlisting">
         <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__Panel__0D0FEE32">
+    <End Role="InterviewPanels" Type="Self.InterviewPanels" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InterviewPanels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="PanelId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -557,6 +735,42 @@
       </Principal>
       <Dependent Role="InterviewPanelDetail">
         <PropertyRef Name="PanelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__IntEvQues__IntEv__1E3A7A34">
+    <End Role="IntEvaluationType" Type="Self.IntEvaluationType" Multiplicity="0..1" />
+    <End Role="IntEvQuestions" Type="Self.IntEvQuestions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IntEvaluationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IntEvQuestions">
+        <PropertyRef Name="IntEvQTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__IntQuesti__Quest__2116E6DF">
+    <End Role="IntEvQuestions" Type="Self.IntEvQuestions" Multiplicity="0..1" />
+    <End Role="IntQuestionMapping" Type="Self.IntQuestionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IntEvQuestions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IntQuestionMapping">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__IntQuesti__Score__220B0B18">
+    <End Role="IntScoreType" Type="Self.IntScoreType" Multiplicity="0..1" />
+    <End Role="IntQuestionMapping" Type="Self.IntQuestionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IntScoreType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IntQuestionMapping">
+        <PropertyRef Name="ScoreId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -633,10 +847,18 @@
     <EntitySet Name="CandidateJobApply" EntityType="Self.CandidateJobApply" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateLang" EntityType="Self.CandidateLang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cndEvDetail" EntityType="Self.cndEvDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cndEvMaster" EntityType="Self.cndEvMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HrShortlisting" EntityType="Self.HrShortlisting" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InterviewPanelDetail" EntityType="Self.InterviewPanelDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InterviewPanels" EntityType="Self.InterviewPanels" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InterviewPersons" EntityType="Self.InterviewPersons" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InterviewTypes" EntityType="Self.InterviewTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IntEvaluationType" EntityType="Self.IntEvaluationType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IntEvDecision" EntityType="Self.IntEvDecision" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IntEvQuestions" EntityType="Self.IntEvQuestions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IntQuestionMapping" EntityType="Self.IntQuestionMapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IntScoreType" EntityType="Self.IntScoreType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LangScoreType" EntityType="Self.LangScoreType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LanguageMaping" EntityType="Self.LanguageMaping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
@@ -692,6 +914,30 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="candidate" EntitySet="candidate" />
     </AssociationSet>
+    <AssociationSet Name="FK__cndEvDeta__cndEv__2D7CBDC4" Association="Self.FK__cndEvDeta__cndEv__2D7CBDC4">
+      <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+      <End Role="cndEvDetail" EntitySet="cndEvDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cndEvDeta__MapId__2E70E1FD" Association="Self.FK__cndEvDeta__MapId__2E70E1FD">
+      <End Role="IntQuestionMapping" EntitySet="IntQuestionMapping" />
+      <End Role="cndEvDetail" EntitySet="cndEvDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cndEvMast__fdGiv__28B808A7" Association="Self.FK__cndEvMast__fdGiv__28B808A7">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cndEvMast__IntEv__27C3E46E" Association="Self.FK__cndEvMast__IntEv__27C3E46E">
+      <End Role="IntEvDecision" EntitySet="IntEvDecision" />
+      <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cndEvMast__Short__324172E1" Association="Self.FK__cndEvMast__Short__324172E1">
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+      <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cndEvMast__UserI__26CFC035" Association="Self.FK__cndEvMast__UserI__26CFC035">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+    </AssociationSet>
     <AssociationSet Name="FK__HrShortli__CandA__5B78929E" Association="Self.FK__HrShortli__CandA__5B78929E">
       <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
       <End Role="HrShortlisting" EntitySet="HrShortlisting" />
@@ -700,8 +946,16 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="HrShortlisting" EntitySet="HrShortlisting" />
     </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__Inter__12C8C788" Association="Self.FK__HrShortli__Inter__12C8C788">
+      <End Role="InterviewTypes" EntitySet="InterviewTypes" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
     <AssociationSet Name="FK__HrShortli__JobId__5A846E65" Association="Self.FK__HrShortli__JobId__5A846E65">
       <End Role="AllPositions" EntitySet="AllPositions" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__Panel__0D0FEE32" Association="Self.FK__HrShortli__Panel__0D0FEE32">
+      <End Role="InterviewPanels" EntitySet="InterviewPanels" />
       <End Role="HrShortlisting" EntitySet="HrShortlisting" />
     </AssociationSet>
     <AssociationSet Name="FK__HrShortli__SlotI__5C6CB6D7" Association="Self.FK__HrShortli__SlotI__5C6CB6D7">
@@ -723,6 +977,18 @@
     <AssociationSet Name="FK__Interview__Panel__0662F0A3" Association="Self.FK__Interview__Panel__0662F0A3">
       <End Role="InterviewPanels" EntitySet="InterviewPanels" />
       <End Role="InterviewPanelDetail" EntitySet="InterviewPanelDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__IntEvQues__IntEv__1E3A7A34" Association="Self.FK__IntEvQues__IntEv__1E3A7A34">
+      <End Role="IntEvaluationType" EntitySet="IntEvaluationType" />
+      <End Role="IntEvQuestions" EntitySet="IntEvQuestions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__IntQuesti__Quest__2116E6DF" Association="Self.FK__IntQuesti__Quest__2116E6DF">
+      <End Role="IntEvQuestions" EntitySet="IntEvQuestions" />
+      <End Role="IntQuestionMapping" EntitySet="IntQuestionMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK__IntQuesti__Score__220B0B18" Association="Self.FK__IntQuesti__Score__220B0B18">
+      <End Role="IntScoreType" EntitySet="IntScoreType" />
+      <End Role="IntQuestionMapping" EntitySet="IntQuestionMapping" />
     </AssociationSet>
     <AssociationSet Name="FK__LanguageM__langg__04AFB25B" Association="Self.FK__LanguageM__langg__04AFB25B">
       <End Role="Languages" EntitySet="Languages" />

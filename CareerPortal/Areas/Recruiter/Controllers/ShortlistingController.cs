@@ -257,9 +257,22 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 {
                     intEvaluationViewModel.CndEvMaster.updatetime = DateTime.Now;
                     dbcndEvaluationMaster.UpdateData(intEvaluationViewModel.CndEvMaster);
-                    
 
 
+                    var masterdetail = dbcndEvaluationDetail.GetList(intEvaluationViewModel.CndEvMaster.Id);
+
+                    foreach (var item in masterdetail)
+                    {
+                        dbcndEvaluationDetail.DeleteById(item.Id);
+                    }
+
+                    foreach (var item in intEvaluationViewModel.cndEvDetails)
+                    {
+                        item.cndEvMasterId = intEvaluationViewModel.CndEvMaster.Id;
+
+                        item.obtainMarks = DbIntEvQuestionsMaping.GetByid(item.MapId.Value).IntScoreType.TotalMarks;
+                        dbcndEvaluationDetail.AddData(item);
+                    }
                     //foreach (var item in intEvaluationViewModel.cndEvDetails)
                     //{
 
@@ -285,7 +298,8 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
 
                 }
-                return View(intEvaluationViewModel);
+                //return View(intEvaluationViewModel);
+                return PartialView("~/Areas/Recruiter/Views/Shared/_CndEvaluationForm.cshtml", intEvaluationViewModel);
 
             }
             else

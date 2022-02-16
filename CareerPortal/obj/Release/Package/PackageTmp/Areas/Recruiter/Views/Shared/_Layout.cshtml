@@ -21,15 +21,50 @@
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <style>
+      /*  .sidebar .nav:not(.sub-menu) > .nav-item > .nav-link[aria-expanded="true"] {
+            border-radius: 8px 8px 0 0;
+            background: #FFF;
+            color: #000;
+        }
+        .sidebar .nav.sub-menu {
+            margin-bottom: 0;
+            margin-top: 0;
+            list-style: none;
+            padding: 0.25rem 0 0 3.07rem;
+            background: #FFF;
+            padding-bottom: 12px;
+            color: #000;
+        }
+        .sidebar .nav .nav-item .nav-link .menu-title {
+            color: #000;
+            display: inline-block;
+            font-size: 0.875rem;
+            line-height: 1;
+            vertical-align: middle;
+        }*/
+    /*    .sidebar .nav.sub-menu {
+            margin-bottom: 0;
+            margin-top: 0;
+            list-style: none;
+            padding: 0.25rem 0 0 3.07rem;
+            background: #FFF;
+            padding-bottom: 12px;
+        }*/
+    /*    .sidebar .nav.sub-menu * {
+            color:#000 !important;
+        }*/
 
+        
+    </style>
 
 
 </head>
-<body class="sidebar-mini">
+<body class="sidebar-mini @(BAL.GlobalUserInfo.IsSideBarOpen == false?"sidebar-icon-only":"") sidebar-dark">
     <div class="container-scroller">
 
         <!-- partial:partials/_navbar.html -->
-        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row navbar-dark">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
                 <a class="navbar-brand brand-logo me-5" href="@Url.Action("Index","CandidateDashboard",new { area="CandidatePortal"})">
 
@@ -41,7 +76,7 @@
                 </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <button class="navbar-toggler navbar-toggler align-self-center saveSideBarStats" type="button" data-toggle="minimize">
                     <span class="icon-menu"></span>
                 </button>
 
@@ -108,7 +143,7 @@
                     </li>
                     <li class="nav-item nav-profile dropdown">
                         <a href="@Url.Action("Index","CandidateDashboard",new { area="CandidatePortal"})" type="button" class="btn btn-primary">Visit as a Candidate</a>
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown" style="text-align:center    ">
                             @*<img src="~/CndDashboardAssets/images/faces/face28.jpg" alt="profile" />*@
 
                             @if (Session["UserImage"] != null)
@@ -167,8 +202,13 @@
                 <div id="theme-settings" class="settings-panel">
                     <i class="settings-close ti-close"></i>
                     <p class="settings-heading">SIDEBAR SKINS</p>
-                    <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border me-3"></div>Light</div>
-                    <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border me-3"></div>Dark</div>
+                    <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+                        <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+                    </div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
+                        <div class="img-ss rounded-circle bg-dark border me-3">
+                        </div>Dark
+                    </div>
                     <p class="settings-heading mt-2">HEADER SKINS</p>
                     <div class="color-tiles mx-0 px-4">
                         <div class="tiles success"></div>
@@ -177,6 +217,17 @@
                         <div class="tiles light"></div>
                         <div class="tiles info"></div>
                         <div class="tiles dark"></div>
+                        <div class="tiles default"></div>
+                    </div>
+
+                    <p class="settings-body mt-2">Body</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles success"></div>
+                        <div class="tiles warning"></div>
+                        <div class="tiles danger"></div>
+                        <div class="tiles light"></div>
+                        <div class="tiles info"></div>
+                        <div class="tiles dark selected"></div>
                         <div class="tiles default"></div>
                     </div>
                 </div>
@@ -342,6 +393,17 @@
                         </a>
                     </li>
 
+                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "CreateJobs" ? "active" : "")">
+                        <a class="nav-link" href="@Url.Action("CreateJobs","AllJobs",new { area="Recruiter"})">
+                            <i class="icon-search menu-icon"></i>
+                            <span class="menu-title">Create Jobs</span>
+                        </a>
+                    </li>
+
+
+
+
+
                     <li class="nav-item ">
                         <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString().Contains("ViewJobCandidates") ? "active" : "")" href="@Url.Action("Index","AllJobs",new { area="Recruiter"})">
                             <i class="icon-grid menu-icon"></i>
@@ -352,16 +414,11 @@
                     <li class="nav-item ">
                         <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString().Contains("InterviewList") ? "active" : "")" href="@Url.Action("InterviewList","Shortlisting",new { area="Recruiter"})">
                             <i class="icon-grid menu-icon"></i>
-                            <span class="menu-title">Interview List  </span>
+                            <span class="menu-title">Shortlist Candidates </span>
                         </a>
                     </li>
 
-                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "CreateJobs" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("CreateJobs","AllJobs",new { area="Recruiter"})">
-                            <i class="icon-search menu-icon"></i>
-                            <span class="menu-title">Create Jobs</span>
-                        </a>
-                    </li>
+
 
 
 
@@ -380,25 +437,47 @@
                             <span class="menu-title"> Cv Bank</span>
                         </a>
                     </li>
-
-
                     <li class="nav-item ">
-                        <a class="nav-link" href="@Url.Action("HRPerson","HRPanel",new { area="Recruiter"})">
-
-                            <i class="ti-user menu-icon"></i>
-
-
-                            <span class="menu-title"> Panels Employees </span>
+                        <a class="nav-link" href="@Url.Action("InterviewEvaluationForm","Shortlisting",new { area="Recruiter"})">
+                            <i class="ti-home menu-icon"></i>
+                            <span class="menu-title"> Interview Evaluation</span>
                         </a>
                     </li>
 
 
-                    <li class="nav-item ">
-                        <a class="nav-link" href="@Url.Action("InterviewPanels","HRPanel",new { area="Recruiter"})">
-                            <i class="ti-pencil-alt2 menu-icon"></i>
-                            <span class="menu-title"> Add/Edit Interview Panels </span>
+
+                
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="icon-layout menu-icon"></i>
+                            <span class="menu-title">Setup Screens</span>
+                            <i class="menu-arrow"></i>
                         </a>
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item ">
+                                    <a class="nav-link" style="text-align: center;" href="@Url.Action("HRPerson","HRPanel",new { area="Recruiter"})">
+
+                                        <i class="ti-user menu-icon"></i>
+
+
+                                        <span class="menu-title"> Panels Employees </span>
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-item ">
+                                    <a class="nav-link" style="text-align: center;" href="@Url.Action("InterviewPanels","HRPanel",new { area="Recruiter"})">
+                                        <i class="ti-pencil-alt2 menu-icon"></i>
+                                        <span class="menu-title"> Interview Panels </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
+
+
 
 
 

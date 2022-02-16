@@ -58,11 +58,12 @@ namespace CareerPortal
          
            
 
-            if (GlobalUserInfo.UserId ==0)
-            {
-                FormsAuthentication.SignOut();
-                Response.Redirect("~/Home/Index");
-            }
+            //if (GlobalUserInfo.UserId ==0)
+            //{
+            //    FormsAuthentication.SignOut();
+            //    Response.Redirect("~/Home/Index");
+            //}
+
             //log an exception
         }
 
