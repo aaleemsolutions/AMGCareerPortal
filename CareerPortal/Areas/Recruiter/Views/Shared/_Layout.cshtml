@@ -66,11 +66,14 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row navbar-dark">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-                <a class="navbar-brand brand-logo me-5" href="@Url.Action("Index","CandidateDashboard",new { area="CandidatePortal"})">
+                <a class="navbar-brand brand-logo me-5" href="@Url.Action("Dashboard","AllJobs",new { area="Recruiter"})">
 
-                    <img src="~/assets/img/logo-dark.png" style="height: 52px;" />
+                    @*<img src="~/assets/img/logo-dark.png" style="height: 52px;" />*@
+
+                    <img src="~/assets/img/logo-light.png" alt="logo" style="max-width: 202px; height: 58px;" />
+
                 </a>
-                <a class="navbar-brand brand-logo-mini" href="@Url.Action("Index","CandidateDashboard",new { area="CandidatePortal"})">
+                <a class="navbar-brand brand-logo-mini" href="@Url.Action("Dashboard","AllJobs",new { area="Recruiter"})">
 
                     <img src="~/CndDashboardAssets/images/smalllogo.png" alt="logo" />
                 </a>
@@ -438,9 +441,9 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="@Url.Action("InterviewEvaluationForm","Shortlisting",new { area="Recruiter"})">
+                        <a class="nav-link" href="@Url.Action("InterviewEvaluationList","Shortlisting",new { area="Recruiter"})">
                             <i class="ti-home menu-icon"></i>
-                            <span class="menu-title"> Interview Evaluation</span>
+                            <span class="menu-title"> Interview Evaluation List</span>
                         </a>
                     </li>
 

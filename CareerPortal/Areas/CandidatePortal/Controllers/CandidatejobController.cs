@@ -9,6 +9,7 @@ using BAL.Utilities;
 
 namespace CareerPortal.Areas.CandidatePortal.Controllers
 {
+    [Authorize]
     public class CandidatejobController : Controller
     {
         // GET: CandidatePortal/Candidatejob

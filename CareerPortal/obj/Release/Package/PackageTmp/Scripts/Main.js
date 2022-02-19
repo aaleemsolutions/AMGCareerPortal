@@ -2569,7 +2569,7 @@ $(document).ready(function () {
             { "data": "InterviewStatus" },
           
             {
-                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.HRShortlistId + '"  title="Give Feedback" ><span class="ti-comment-alt")></span></a>  '; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.HRShortlistId + '"  title="Give Feedback" ><span class="ti-comment-alt")></span></a>  <a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationList/?search=' + full.CandidateName + '"  title="View all feedbacks" ><span class="ti-eye")></span></a>  '; }
             }
 
 
@@ -2585,6 +2585,66 @@ $(document).ready(function () {
 
         }
     });
+
+
+    var table = $('#InterviewEvaluationDT').DataTable({
+
+        "ajax": {
+            "url": "/Recruiter/Shortlisting/GetInterviewEVDataTable/",
+            "datatype": "json",
+            "dataSrc": function (json) {
+                return json.data;
+            }
+        },
+        "columnDefs":
+            [{
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                }
+            ],
+        "oLanguage": {
+            "sEmptyTable": "No Job List Found.."
+        },
+
+        "columns": [
+
+
+            { "data": "EVID" },
+            { "data": "ShortListId" },
+            {
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.ShortListId + '"  title="Check Feedback" ><span class="ti-comment-alt")></span></a>  '; }
+            },
+            { "data": "CandidateName" },
+            { "data": "PosTitle" },
+            { "data": "FeedbackGivenBy" },
+            { "data": "Status" },
+            { "data": "OverallRating" },
+            
+            { "data": "FeedbackOn" },
+            { "data": "FeedbackUpdatedOn" }
+
+            
+
+
+
+        ],
+        "initComplete": function () {
+            var searchparam = decodeURIComponent(getUrlVars()['search']);
+
+            if (searchparam != "undefined" && undefined != "") {
+
+                this.api().search(searchparam).draw();
+            }
+
+        }
+    });
+
 
 
     $("#btnPanel").unbind().click(function () {

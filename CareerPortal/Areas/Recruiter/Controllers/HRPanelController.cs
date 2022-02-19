@@ -22,8 +22,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         
         public HRPanelController()
         {
-            AdoNet = new AdoNetFetch();
-            hrEmployeePanel = new HRPanelEmployee();
+            AdoNet = new AdoNetFetch(CareerGlobalFields.GetConnectionString());            hrEmployeePanel = new HRPanelEmployee();
             InterviewPanel = new HRPanelDB();
             InterviewPanelDetail = new InterviewPanelDetail();
         }
@@ -343,7 +342,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
         public JsonResult FillDepartmentOnUnit(string UnitType) 
         {
-            var GetAllDepartment = new SelectList(AdoNet.GetAllDepartment(UnitType), "Department_Id", "Department_Name").ToList();
+            var GetAllDepartment = new SelectList(AdoNet.GetAllDepartment(UnitType, CareerGlobalFields.GetConnectionString()), "Department_Id", "Department_Name").ToList();
             GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "Select" }));
 
             return Json(GetAllDepartment, JsonRequestBehavior.AllowGet);   

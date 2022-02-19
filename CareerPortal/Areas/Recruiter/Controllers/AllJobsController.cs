@@ -23,7 +23,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             jbPositions = new JobAllPositions();
             candidateobj = new CandidateLogics();
             RegUser = new UserRegModule() ;
-            AdoNet = new AdoNetFetch();
+            AdoNet = new AdoNetFetch(CareerGlobalFields.GetConnectionString());
         }
 
         public ActionResult Dashboard()

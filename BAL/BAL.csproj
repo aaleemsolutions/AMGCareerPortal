@@ -96,7 +96,7 @@
     <Compile Include="MostRecentEmployementClass.cs" />
     <Compile Include="DependantsTestClass.cs" />
     <Compile Include="GetUserDetails.cs" />
-    <Compile Include="GlobalFields.cs" />
+    <Compile Include="GlobalFields__sealed.cs" />
     <Compile Include="Interfaces\GenericDbSAVE.cs" />
     <Compile Include="Interfaces\ICandidate.cs" />
     <Compile Include="Interfaces\ICandidateExperince.cs" />

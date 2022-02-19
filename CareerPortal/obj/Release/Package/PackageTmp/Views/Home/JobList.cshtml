@@ -1,7 +1,7 @@
 ﻿@using BAL;
 @model ViewModels.JobPositionViewModels
 @{
-    ViewBag.Title = "JobList";
+    ViewBag.Title = "Job List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -27,72 +27,88 @@
                             <h3 class="sb-title mb-3">Specialism</h3>
                             <div class="specialism_widget" style="">
                                 <div class="simple-checkbox">
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">Accountancy (2)</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <label class="custom-control-label" for="customCheck2">Banking (2)</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                        <label class="custom-control-label" for="customCheck3">UI & UX (3)</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                        <label class="custom-control-label" for="customCheck4">Digital &amp; Creative (4)</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                        <label class="custom-control-label" for="customCheck5">Estate Agency (3)</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                        <label class="custom-control-label" for="customCheck6">Graduate (2)</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                        <label class="custom-control-label" for="customCheck7">IT Contractor (7)</label>
-                                    </div>
+
+                                    @foreach (var item in Model.ListAlljobs.Select(m=>new { DepartmentId = m.DepartmentId, DepartmentName = m.DepartmentName,Count = m.JobTitle.Count() }).Distinct())
+                                    {
+                                        var checkboxname = "chk" + item;
+                                        <div class="custom-control custom-checkbox sec-wrap">
+                                            <input type="checkbox" class="custom-control-input" id="@checkboxname">
+                                            <label class="custom-control-label" for="@checkboxname">@item.DepartmentName (@item.Count) </label>
+                                        </div>
+                                    }
+
+                                    @*<div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                        <label class="custom-control-label" for="customCheck2">Banking (2)</label>
+                    </div>
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                        <label class="custom-control-label" for="customCheck3">UI & UX (3)</label>
+                    </div>
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                        <label class="custom-control-label" for="customCheck4">Digital &amp; Creative (4)</label>
+                    </div>
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                        <label class="custom-control-label" for="customCheck5">Estate Agency (3)</label>
+                    </div>
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck6">
+                        <label class="custom-control-label" for="customCheck6">Graduate (2)</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck7">
+                        <label class="custom-control-label" for="customCheck7">IT Contractor (7)</label>
+                    </div>*@
                                 </div>
                             </div>
                         </div>
-                        <div class="widget border mb-0">
-                            <h3 class="sb-title mb-3">Team Size</h3>
+
+
+                        <div class="widget ">
+                            
                             <div class="specialism_widget" style="">
-                                <div class="simple-checkbox">
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                        <label class="custom-control-label" for="customCheck8">1 - 10</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck9">
-                                        <label class="custom-control-label" for="customCheck9">100 - 200</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck10">
-                                        <label class="custom-control-label" for="customCheck10">201 - 301</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                        <label class="custom-control-label" for="customCheck11">301 - 401</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck12">
-                                        <label class="custom-control-label" for="customCheck12">401 - 501</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox sec-wrap">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck13">
-                                        <label class="custom-control-label" for="customCheck13">501 - 601</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck14">
-                                        <label class="custom-control-label" for="customCheck14">601 - 701</label>
-                                    </div>
-                                </div>
+                                
+                                <button class="btn btn-primary form-control text-white">Search</button>
                             </div>
                         </div>
+
+                        @*<div class="widget border mb-0">
+            <h3 class="sb-title mb-3">Team Size</h3>
+            <div class="specialism_widget" style="">
+                <div class="simple-checkbox">
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck8">
+                        <label class="custom-control-label" for="customCheck8">1 - 10</label>
+                    </div>
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck9">
+                        <label class="custom-control-label" for="customCheck9">100 - 200</label>
+                    </div>
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck10">
+                        <label class="custom-control-label" for="customCheck10">201 - 301</label>
+                    </div>
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck11">
+                        <label class="custom-control-label" for="customCheck11">301 - 401</label>
+                    </div>
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck12">
+                        <label class="custom-control-label" for="customCheck12">401 - 501</label>
+                    </div>
+                    <div class="custom-control custom-checkbox sec-wrap">
+                        <input type="checkbox" class="custom-control-input" id="customCheck13">
+                        <label class="custom-control-label" for="customCheck13">501 - 601</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck14">
+                        <label class="custom-control-label" for="customCheck14">601 - 701</label>
+                    </div>
+                </div>
+            </div>
+        </div>*@
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -148,7 +164,8 @@
                                                     }
                                                     else
                                                     {
-                                                        <span class="button btn border-primary">Apply Now. </span>
+                                                        <a href="@Url.Action("Index","Candidatejob",new { area="CandidatePortal"})"><span class="button btn border-primary">Apply Now. </span></a>
+                                                        
                                                     }
 
                                                 }

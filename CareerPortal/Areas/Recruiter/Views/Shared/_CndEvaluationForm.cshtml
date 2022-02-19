@@ -4,8 +4,30 @@
     .table th, .jsgrid .jsgrid-table th, .table td, .jsgrid .jsgrid-table td {
         white-space: normal;
     }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        display: block;
+        padding-left: 0px;
+        padding-right: 0px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .select2-selection__rendered {
+        line-height: 24px !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 50px !important;
+        background: #fff !important;
+    }
+
+    .select2-selection__arrow {
+        height: 50px !important;
+    }
 </style>
- 
+
 
 <div class="row ">
     <div class="col-md-12 grid-margin ">
@@ -131,7 +153,7 @@
 
                                                     var ischeckfound = false;
 
-                                                    if (Model.cndEvDetails!=null)
+                                                    if (Model.cndEvDetails != null)
                                                     {
                                                         ischeckfound = Model.cndEvDetails.Where(m => m.MapId == checkboxitems.Id).Count() > 0 ? true : false;
                                                     }
@@ -314,7 +336,7 @@
                         @Html.ValidationMessageFor(M => M.CndEvMaster.IntEvDecisionId, "", new { @class = "text-danger" })
 
                         <hr />
-                        <div class="row">
+                        <div class="row" id="SelectedDiv">
 
 
                             <div class="col-md-3">
@@ -353,10 +375,13 @@
 
 
                                 <span>Designation</span>
-                                <span>  @Html.TextBoxFor(m => m.CndEvMaster.DesignationId, new { @class = "form-control" })  </span>
+                                <span> @Html.DropDownListFor(m => m.CndEvMaster.DesignationId, new SelectList(ViewBag.DesignationDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDesig" })</span>
 
 
                                 @Html.ValidationMessageFor(M => M.CndEvMaster.DesignationId, "", new { @class = "text-danger" })
+
+
+
 
                             </div>
 
@@ -375,9 +400,11 @@
                                 <span>in Department</span>
 
 
-                                <span>  @Html.TextBoxFor(m => m.CndEvMaster.DepartmentId, new { @class = "form-control" })  </span>
+                                <span>  @Html.DropDownListFor(m => m.CndEvMaster.DepartmentId, new SelectList(ViewBag.DepartmentDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDepart" })</span>
 
                                 @Html.ValidationMessageFor(M => M.CndEvMaster.DepartmentId, "", new { @class = "text-danger" })
+
+
                             </div>
 
 
@@ -393,9 +420,15 @@
 
 
                             </div>
-                            @*date, on
-                                @ @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Designation, at @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Grade, in @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Department/Unit/Unit. And with @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Benfitis*@
 
+
+
+                        </div>
+                        <div class="row" id="SecondInterviewDiv">
+
+ 
+                                @Html.Partial("~/Areas/Recruiter/Views/Shared/_ShortlistCandidate.cshtml", Model.CandShortListViewModel)
+                          
                         </div>
                         @if (ViewData.ModelState["DesignationId"] != null)
                         {
@@ -412,7 +445,6 @@
                 </div>
 
 
-
             </div>
         </div>
 
@@ -420,22 +452,56 @@
 </div>
 
 
-<script>
+
+<script type="text/javascript">
+    //function ShowEvaluationsDiv() {
+    //    var radiovalue = $("input[type='radio'][name='CndEvMaster.IntEvDecisionId']:checked").val()
+    //    var SecondInterviewDiv = $("#SelectedDiv");
+    //    var SelectedDiv = $("#SecondInterviewDiv");
+
+    //    $(SecondInterviewDiv).css({ "display": "none" });
+    //    $(SelectedDiv).css({ "display": "none" });
+    //    if (radiovalue == 1) {
+    //        $(SecondInterviewDiv).css({ "display": "content" });
+    //    } else if (radiovalue == 2) {
+
+    //        $(SelectedDiv).css({ "display": "content" });
+    //    }
+
+    //}
+
+
 
     $(document).ready(function () {
-        
+
+
+   @if (Model.Status==true)
+     {
+         <text>
+        ShowToaster(1, '@(Model.Message.ToString())', "Feedback!");
+            @*alert('@(Model.Message.ToString())')*@
+         </text>
+
+     }
+
         var date = new Date();
         date.setDate(date.getDate() - 1);
-        
-            $('.datepickerfuture').datepicker({
-                format: "dd-M-yyyy",
-                enableOnReadonly: true,
-                //todayHighlight: true,
-                startDate: date,
-                autoclose: true
-            });
-        
 
+        $('.datepickerfuture').datepicker({
+            format: "dd-M-yyyy",
+            enableOnReadonly: true,
+            //todayHighlight: true,
+            startDate: date,
+            autoclose: true
+        });
+        ShowEvaluationsDiv();
+
+        $("input[name='CndEvMaster.IntEvDecisionId']").change(function () {
+            ShowEvaluationsDiv();
+        });
+
+        
     });
+  
 
 </script>

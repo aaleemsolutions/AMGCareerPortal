@@ -9,7 +9,6 @@
 
 namespace DAL
 {
-    using CareerPortal.CustomAttributes;
     using System;
     using System.Collections.Generic;
     
@@ -19,26 +18,18 @@ namespace DAL
         public cndEvMaster()
         {
             this.cndEvDetails = new HashSet<cndEvDetail>();
+            this.HrShortlistings = new HashSet<HrShortlisting>();
         }
     
         public int Id { get; set; }
         public Nullable<int> UserId { get; set; }
         public string AdditionalComments { get; set; }
         public Nullable<int> IntEvDecisionId { get; set; }
-        [RequiredIf(nameof(IntEvDecisionId), "1", ErrorMessage = "Joining Date Is Required If Candidate Selected")]
         public Nullable<System.DateTime> JoinDate { get; set; }
-
-        [RequiredIf(nameof(IntEvDecisionId), "1", ErrorMessage = "Salary Is Required If Candidate Selected")]
         public Nullable<double> Salary { get; set; }
-
-        [RequiredIf(nameof(IntEvDecisionId), "1", ErrorMessage = "Designation Is Required If Candidate Selected")]
         public Nullable<int> DesignationId { get; set; }
-
-        [RequiredIf(nameof(IntEvDecisionId), "1", ErrorMessage = "Grade Is Required If Candidate Selected")]
         public Nullable<int> GradeId { get; set; }
-        [RequiredIf(nameof(IntEvDecisionId), "1", ErrorMessage = " Department Required If Candidate Selected")]
         public Nullable<int> DepartmentId { get; set; }
-        [RequiredIf(nameof(IntEvDecisionId), "1", ErrorMessage = "Benifites Is Required If Candidate Selected")]
         public string Benifits { get; set; }
         public Nullable<int> fdGivenBy { get; set; }
         public Nullable<System.DateTime> creationdate { get; set; }
@@ -53,5 +44,7 @@ namespace DAL
         public virtual IntEvDecision IntEvDecision { get; set; }
         public virtual User User1 { get; set; }
         public virtual HrShortlisting HrShortlisting { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
     }
 }

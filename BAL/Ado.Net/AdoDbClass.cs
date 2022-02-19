@@ -18,20 +18,22 @@ namespace BAL.Ado.Net
 
         public string ConnectionString { get; set; }
 
-        public AdoDbClass()
-        {
-            ConnectionString =  GlobalFields.GetConnectionString(true);
-            dbconn = new SqlConnection(ConnectionString);
-            sqlCmd = new SqlCommand();
-            sdp = new SqlDataAdapter();
+        //public AdoDbClass()
+        //{
+        //       ConnectionString =  GlobalFields.GetConnectionString(true);
+        //    //ConnectionString = _ConnectionString;
+        //    dbconn = new SqlConnection(ConnectionString);
+        //    sqlCmd = new SqlCommand();
+        //    sdp = new SqlDataAdapter();
    
-        }
+        //}
 
         public AdoDbClass(string connectionS)
         {
             
             dbconn = new SqlConnection(connectionS);
             sqlCmd = new SqlCommand();
+            sdp = new SqlDataAdapter();
 
         }
 

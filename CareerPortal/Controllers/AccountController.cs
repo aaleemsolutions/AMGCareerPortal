@@ -173,7 +173,7 @@ namespace CareerPortal.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("CreateJobs", "AllJobs", new { area = "Recruiter" });
+                            return RedirectToAction("Dashboard", "AllJobs", new { area = "Recruiter" });
                         }
 
                         

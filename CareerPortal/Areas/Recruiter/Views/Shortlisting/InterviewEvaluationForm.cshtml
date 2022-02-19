@@ -7,17 +7,21 @@
         white-space: normal;
     }
 </style>
- 
+
 
 @using (Ajax.BeginForm("InterviewEvaluationForm",
     new { Controller = "Shortlisting", area = "Recruiter", @enctype = "multipart/form-data" },
     new AjaxOptions { OnFailure = "OnJobFailure", OnSuccess = "OnJobSubmit", OnBegin = "BeginRequest", LoadingElementId = "PostLoader", UpdateTargetId = "PartialCndEvaluationForm" }
     ))
 {
+
+<div id="PartialCndEvaluationForm">
     
-                    <div id="PartialCndEvaluationForm">
-                       @Html.Partial("~/Areas/Recruiter/Views/Shared/_CndEvaluationForm.cshtml", Model)
-                    </div>
+    @Html.Partial("~/Areas/Recruiter/Views/Shared/_CndEvaluationForm.cshtml", Model)
+</div>
+
+
+ 
 
 
 }
@@ -69,11 +73,10 @@
 
     }
     function OnJobSubmit(data) {
+       
 
 
-    
-
-    //    ShowToaster(1, "Job Application Form Updated Successfully!", "Job Application!");
+        //    ShowToaster(1, "Job Application Form Updated Successfully!", "Job Application!");
 
     }
 
@@ -103,4 +106,3 @@
 
 </script>
 
- 

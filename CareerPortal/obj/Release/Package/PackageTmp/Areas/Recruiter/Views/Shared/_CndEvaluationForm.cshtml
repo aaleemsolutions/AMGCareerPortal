@@ -5,7 +5,7 @@
         white-space: normal;
     }
 </style>
- 
+
 
 <div class="row ">
     <div class="col-md-12 grid-margin ">
@@ -131,7 +131,7 @@
 
                                                     var ischeckfound = false;
 
-                                                    if (Model.cndEvDetails!=null)
+                                                    if (Model.cndEvDetails != null)
                                                     {
                                                         ischeckfound = Model.cndEvDetails.Where(m => m.MapId == checkboxitems.Id).Count() > 0 ? true : false;
                                                     }
@@ -412,7 +412,6 @@
                 </div>
 
 
-
             </div>
         </div>
 
@@ -420,21 +419,35 @@
 </div>
 
 
-<script>
+
+<script type="text/javascript">
+
+
+
 
     $(document).ready(function () {
-        
+
+
+   @if (Model.Status==true)
+     {
+         <text>
+        ShowToaster(1, '@(Model.Message.ToString())', "Feedback!");
+            @*alert('@(Model.Message.ToString())')*@
+         </text>
+
+     }
+
         var date = new Date();
         date.setDate(date.getDate() - 1);
-        
-            $('.datepickerfuture').datepicker({
-                format: "dd-M-yyyy",
-                enableOnReadonly: true,
-                //todayHighlight: true,
-                startDate: date,
-                autoclose: true
-            });
-        
+
+        $('.datepickerfuture').datepicker({
+            format: "dd-M-yyyy",
+            enableOnReadonly: true,
+            //todayHighlight: true,
+            startDate: date,
+            autoclose: true
+        });
+
 
     });
 

@@ -62,7 +62,7 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
             </div>
         </div>
 
-     
+
 
         <div class="col-md-3 col-sm-4">
             <label>Interview Panel <span class="text-danger">*</span></label>
@@ -85,16 +85,20 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
             </div>
 
         </div>
-        <div class="col-md-2">
+        @if (Model.IsSecondInterviewSchedule != true)
+        {<div class="col-md-2">
 
-            <div id="the-basics1">
+                <div id="the-basics1">
 
 
-                <label>@Html.CheckBoxFor(m => m.IsSendJobForm, new { @id = "isJobFormSend" }) Send JobFrom</label>
+                    <label>@Html.CheckBoxFor(m => m.IsSendJobForm, new { @id = "isJobFormSend" }) Send JobFrom</label>
 
-                <span class="ErrorSH_CheckboxError text-danger"></span>
+                    <span class="ErrorSH_CheckboxError text-danger"></span>
+                </div>
             </div>
-        </div>
+
+        }
+
     </div>
     <div class="row" id="EmailTemplateShortlist" style="margin-top:10px;">
         <div class="accordion accordion-solid-header" id="accordion-4" role="tablist">
@@ -148,6 +152,6 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
             });
         }
     });
-
+    
 
 </script>

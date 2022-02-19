@@ -12,10 +12,10 @@ namespace BAL.Ado.Net
     {
         AdoDbClass ado;
         AdoDbClass ado1;
-        public AdoNetFetch()
+        public AdoNetFetch(string connectionstring)
         {
-            ado = new AdoDbClass();
-            ado1 = new AdoDbClass();
+            ado = new AdoDbClass(connectionstring);
+            ado1 = new AdoDbClass(connectionstring);
 
         }
 
@@ -29,9 +29,9 @@ namespace BAL.Ado.Net
                 while (reader.Read())
                 {
                     Division d = new Division();
-                    d.DivisionID = (Int32)reader["DivisionID"];
+                    d.DivisionID = Convert.ToInt32( reader["DivisionID"]);
                     d.DivisionName = reader["Division"].ToString();
-                    d.isActive = (bool)reader["isActive"];
+                    d.isActive = Convert.ToBoolean(reader["isActive"]);
 
                     divisionList.Add(d);
                 }
@@ -60,9 +60,9 @@ namespace BAL.Ado.Net
                 while (reader.Read())
                 {
                     Category c = new Category();
-                    c.CategoryId = (Int32)reader["CategoryId"];
-                    c.CategoryDesc = reader["CategoryDesc"].ToString();
-                    c.Active = (bool)reader["Active"];
+                    c.CategoryId = Convert.ToInt32(reader["CategoryId"]);
+                    c.CategoryDesc = Convert.ToString(reader["CategoryDesc"].ToString());
+                    c.Active = Convert.ToBoolean(reader["Active"]);
 
                     CategoryList.Add(c);
                 }
@@ -91,9 +91,9 @@ namespace BAL.Ado.Net
                 while (reader.Read())
                 {
                     Department c = new Department();
-                    c.Department_ID = (Int32)reader["Department_Id"];
-                    c.Department_Name = reader["Department_Name"].ToString();
-                    c.isActive = (bool)reader["isActive"];
+                    c.Department_ID = Convert.ToInt32(reader["Department_Id"]);
+                    c.Department_Name = Convert.ToString(reader["Department_Name"].ToString());
+                    c.isActive = Convert.ToBoolean( reader["isActive"]);
 
                     DepartmentList.Add(c);
                 }
@@ -112,21 +112,24 @@ namespace BAL.Ado.Net
 
         }
 
-        public List<Department> GetAllDepartment(string UnitType)
+        public List<Department> GetAllDepartment(string UnitType,string connectionString)
         {
             try
             {
                 string query = "select 1";
-                var reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString());
+                //var reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString());
+                var reader = ado.GetReader(query, null, System.Data.CommandType.Text, connectionString);
                 if (UnitType.ToUpper()=="Garments".ToUpper())
                 {
                     query = "select * from Department";
-                    reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString());
+                    //reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString());
+                    reader = ado.GetReader(query, null, System.Data.CommandType.Text, connectionString);
                 }
                 else
                 {
                      query = "select * from denim_db.dbo.Department";
-                     reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString(false));
+                    //reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString(false));
+                    reader = ado.GetReader(query, null, System.Data.CommandType.Text, connectionString);
                 }
 
                 
@@ -165,9 +168,9 @@ namespace BAL.Ado.Net
                 while (reader.Read())
                 {
                     Designation c = new Designation();
-                    c.Designation_ID = (Int32)reader["Designation_Id"];
+                    c.Designation_ID = Convert.ToInt32(reader["Designation_Id"]);
                     c.Designation_Name = reader["Designation_Name"].ToString();
-                    c.isActive = (bool)reader["isActive"];
+                    c.isActive = Convert.ToBoolean(reader["isActive"]);
 
                     CategoryList.Add(c);
                 }
@@ -480,8 +483,8 @@ namespace BAL.Ado.Net
                 while (reader.Read())
                 {
                     EmployeeView cq = new EmployeeView();
-                    cq.EmployeeID = (int)reader["EmployeeID"];
-                    cq.Department_ID = (int)reader["Department_ID"];
+                    cq.EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
+                    cq.Department_ID = Convert.ToInt32(reader["Department_ID"]);
                     cq.EmployeeCode = Convert.ToString(reader["EmployeeCode"]);
                     cq.EmployeeName = Convert.ToString(reader["EmployeeName"]);
                     cq.BranchName = Convert.ToString(reader["BranchName"]);

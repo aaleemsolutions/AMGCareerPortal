@@ -17,6 +17,8 @@ namespace ViewModels
         }
 
         public  HrShortlisting HrShortlisting { get; set; }
+
+        public bool IsSecondInterviewSchedule { get; set; } = false;
         public List<TimingSlot> timingSlots{ get; set; }
         public JobApplyViewModels jobApplyViewModels { get; set; }
 

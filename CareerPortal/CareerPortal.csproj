@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="CareerGlobalFields.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -725,6 +726,7 @@
     <Content Include="Areas\Recruiter\Views\Shortlisting\InterviewList.cshtml" />
     <Content Include="Areas\Recruiter\Views\Shortlisting\InterviewEvaluationForm.cshtml" />
     <Content Include="Areas\Recruiter\Views\Shared\_CndEvaluationForm.cshtml" />
+    <Content Include="Areas\Recruiter\Views\Shortlisting\InterviewEvaluationList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Scripts\inputmask\inputmask.js" />

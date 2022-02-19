@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BAL
 {
-     public class GlobalFields
+    public class GlobalFields
     {
         public static string UploadDocumentsPath { get; set; }
         public static string ConnectionString { get; set; }

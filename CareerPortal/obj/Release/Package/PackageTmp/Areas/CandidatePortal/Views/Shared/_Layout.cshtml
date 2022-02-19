@@ -38,15 +38,17 @@
         }
     </style>
 </head>
-<body class="sidebar-mini">
+<body class="sidebar-mini @(BAL.GlobalUserInfo.IsSideBarOpen == false?"sidebar-icon-only":"") sidebar-dark">
     <div class="container-scroller">
 
         <!-- partial:partials/_navbar.html -->
-        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row navbar-dark">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
                 <a class="navbar-brand brand-logo me-5" href="@Url.Action("Index","CandidateDashboard",new { area="CandidatePortal"})">
 
-                    <img src="~/assets/img/logo-dark.png" style="height: 52px;" />
+                    @*<img src="~/assets/img/logo-dark.png" style="height: 52px;" />*@
+                    <img src="~/assets/img/logo-light.png" alt="logo" style="max-width: 202px; height: 58px;" />
+
                 </a>
                 <a class="navbar-brand brand-logo-mini" href="@Url.Action("Index","CandidateDashboard",new { area="CandidatePortal"})">
 
@@ -54,7 +56,7 @@
                 </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <button class="navbar-toggler navbar-toggler align-self-center saveSideBarStats" type="button" data-toggle="minimize">
                     <span class="icon-menu"></span>
                 </button>
 
@@ -351,7 +353,7 @@
             </div>
             <!-- partial -->
             <!-- partial:partials/_sidebar.html -->
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar" >
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index","CandidateDashboard",new { area="CandidatePortal"})">

@@ -19,7 +19,7 @@
                            placeholder="Artistic Milliners Jobs ....." />
                 </div>
 
-                <div class="hr"></div>
+                @*<div class="hr"></div>
                 <div class="col-lg-auto col-sm-12 col-12 flex-grow-1 mb-sm-0">
                     <select class="form-control">
                         <option value="1">All Categories</option>
@@ -29,13 +29,13 @@
                         <option value="5">App Developer</option>
                         <option value="6">UI &amp; UX Expert</option>
                     </select>
-                </div>
+                </div>*@
                 <div class="hr no-border"></div>
-                <div class="col-lg-auto col-sm-12 col-12 flex-grow-1 mb-sm-0">
+                <div class="col-lg-auto col-sm-10 col-10 flex-grow-1 mb-sm-0">
                     <button class="btn btn-primary w-100">Search</button>
                 </div>
             </div>
-            <p class="small-text">Search by tags : Design</p>
+            @*<p class="small-text">Search by tags : Design</p>*@
         </div>
     </div>
 </div>
@@ -52,6 +52,33 @@
             <div class="row all-center sub-section">
                 <div class="col-md-12 d-flex all-center">
                     <ul class="row justify-content-center cate-box">
+                        @foreach (var item in Model.ListAlljobs.GroupBy(m=>m.DepartmentName).Select(m=> new { DepartmentName = m.Key,JobCount = m.Count()}).Distinct())
+                        {
+
+                            <li class="job-category blue-bg">
+
+                                <div>
+                                    <span class="icon-circle">
+                                        <i class="fa fa-spinner"></i>
+                                    </span>
+                                    <h6 class="title">@item.DepartmentName</h6>
+
+                                    <p>( @item.JobCount )</p>
+                                </div>
+                            </li>
+                        }
+
+
+                        @*<li class="job-category blue-bg">
+                            <div>
+                                <span class="icon-circle">
+                                    <i class="fa fa-medkit"></i>
+                                </span>
+                                <h6 class="title">Administration</h6>
+                                <p>( 27 openings )</p>
+                            </div>
+                        </li>
+
                         <li class="job-category vio-bg">
                             <div>
                                 <span class="icon-circle">
@@ -70,15 +97,7 @@
                                 <p>( 11 openings )</p>
                             </div>
                         </li>
-                        <li class="job-category blue-bg">
-                            <div>
-                                <span class="icon-circle">
-                                    <i class="fa fa-medkit"></i>
-                                </span>
-                                <h6 class="title">Administration</h6>
-                                <p>( 27 openings )</p>
-                            </div>
-                        </li>
+
                         <li class="job-category light-gree-bg">
                             <div>
                                 <span class="icon-circle">
@@ -141,12 +160,12 @@
                                 <h6 class="title">Banking</h6>
                                 <p>( 20 openings )</p>
                             </div>
-                        </li>
+                        </li>*@
                     </ul>
                 </div>
             </div>
             <div class="text-center">
-                <a href="category.html" class="view-more">
+                <a href="@Url.Action("JobList","Home",new { area=""})" class="view-more">
                     Browse all Categories
                     <i class="fa fa-angle-double-right"></i>
                 </a>
@@ -200,7 +219,8 @@
                                         }
                                         else
                                         {
-                                            <span class="button btn border-primary">Apply Now. </span>
+
+                            <a href="@Url.Action("Index","Candidatejob",new { area="CandidatePortal"})"><span class="button btn border-primary">Apply Now. </span></a>  
                                         }
 
                                     }

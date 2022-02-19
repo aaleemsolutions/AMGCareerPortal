@@ -32,6 +32,13 @@ namespace CareerPortal
                 "~/assets/css/style.css"
                 ));
 
+            bundles.Add(new StyleBundle("~/bundles/ThemeCssCreateJob").Include(
+           //"~/assets/css/bootstrap.min.css",
+           "~/assets/css/font-awesome.min.css",
+           "~/assets/css/style.css"
+           ));
+
+            
             bundles.Add(new ScriptBundle("~/bundles/ThemeJS").Include(
                       "~/assets/js/jquery-3.4.1.min.js",
                       "~/assets/plugins/owl.carousel.js",

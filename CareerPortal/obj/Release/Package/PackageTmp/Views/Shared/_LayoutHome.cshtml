@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+﻿             <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Career Portal</title>
     @*@Styles.Render("~/Content/css")*@
     
     @Styles.Render("~/bundles/ThemeCss")
@@ -22,8 +22,8 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-lg-2 logo-wrap">
                         <div class="main-logo">
-                            <a href="index.html">
-                                <img src="~/assets/img/logo-light.png" alt="logo" />
+                            <a href="@Url.Action("Index","Home",new { area=""})">
+                                <img src="~/assets/img/logo-light.png" alt="logo" style="max-width: 202px;height: 67px;" />
                             </a>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="col-auto menu-link order-lg-3">
                         <a href="@Url.Action("RegisterUser","Account",null)" class="login-item @(ViewContext.RouteData.Values["Action"].ToString() == "RegisterUser" ? "active" : "") "><i class="fa  fa-user-plus"></i> Signup</a>
                         <span class="login-item"> / </span>
-                        <a href="@Url.Action("Login","Account",null)" class="login-item @(ViewContext.RouteData.Values["Action"].ToString() == "Login" ? "active" : "")"> Login</a>
+                        <a href="@Url.Action("Login","Account",null)" class="login-item @(ViewContext.RouteData.Values["Action"].ToString() == "Login" ? "active" : "")"> @(Request.IsAuthenticated== true ?"Goto Account":"Login")</a>
                     </div>
                 </div>
             </div>
@@ -143,7 +143,7 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
-                                    <img src="~/assets/img/logo-light.png" alt="logo" />
+                                    <img src="~/assets/img/logo-light.png" alt="logo"  style="max-width: 202px;height: 67px;"/>
                                 </div>
                                 <div class="footer-about-content">
                                     <p>
@@ -172,7 +172,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
+                        @*<div class="col-lg-3 col-md-6">
                             <div class="footer-widget footer-menu">
                                 <h2 class="footer-title">Trending Jobs</h2>
                                 <ul>
@@ -197,7 +197,7 @@
                                     <li><a href="job-list.html"> FnceJobs in Deuts</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -208,7 +208,7 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
                                 <div class="copyright-text text-center">
-                                    <p class="mb-0">© 2021 Job Portal. All rights reserved.</p>
+                                    <p class="mb-0">© @DateTime.Now.Year Job Portal. All rights reserved.</p>
                                 </div>
                             </div>
                         </div>

@@ -289,6 +289,8 @@
     <EntitySetMapping Name="HrShortlistings">
       <EntityTypeMapping TypeName="CareerPortalModel.HrShortlisting">
         <MappingFragment StoreEntitySet="HrShortlisting">
+          <ScalarProperty Name="EvDecisionId" ColumnName="EvDecisionId" />
+          <ScalarProperty Name="EvaluationId" ColumnName="EvaluationId" />
           <ScalarProperty Name="InterviewTypeId" ColumnName="InterviewTypeId" />
           <ScalarProperty Name="PanelId" ColumnName="PanelId" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />

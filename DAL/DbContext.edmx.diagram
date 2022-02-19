@@ -84,6 +84,8 @@
         <AssociationConnector Association="CareerPortalModel.FK__IntQuesti__Quest__2116E6DF" />
         <AssociationConnector Association="CareerPortalModel.FK__IntQuesti__Score__220B0B18" />
         <AssociationConnector Association="CareerPortalModel.FK__cndEvMast__Short__324172E1" />
+        <AssociationConnector Association="CareerPortalModel.FK__HrShortli__Evalu__45544755" />
+        <AssociationConnector Association="CareerPortalModel.FK__HrShortli__EvDec__46486B8E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -232,6 +232,8 @@
     <Property Name="IsActive" Type="bit" />
     <Property Name="PanelId" Type="int" />
     <Property Name="InterviewTypeId" Type="int" />
+    <Property Name="EvaluationId" Type="int" />
+    <Property Name="EvDecisionId" Type="int" />
   </EntityType>
   <EntityType Name="InterviewPanelDetail">
     <Key>
@@ -642,6 +644,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__HrShortli__Evalu__45544755">
+    <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cndEvMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="EvaluationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__EvDec__46486B8E">
+    <End Role="IntEvDecision" Type="Self.IntEvDecision" Multiplicity="0..1" />
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IntEvDecision">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="EvDecisionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__HrShortli__Inter__12C8C788">
     <End Role="InterviewTypes" Type="Self.InterviewTypes" Multiplicity="0..1" />
     <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
@@ -944,6 +970,14 @@
     </AssociationSet>
     <AssociationSet Name="FK__HrShortli__Creat__603D47BB" Association="Self.FK__HrShortli__Creat__603D47BB">
       <End Role="Users" EntitySet="Users" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__Evalu__45544755" Association="Self.FK__HrShortli__Evalu__45544755">
+      <End Role="cndEvMaster" EntitySet="cndEvMaster" />
+      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__EvDec__46486B8E" Association="Self.FK__HrShortli__EvDec__46486B8E">
+      <End Role="IntEvDecision" EntitySet="IntEvDecision" />
       <End Role="HrShortlisting" EntitySet="HrShortlisting" />
     </AssociationSet>
     <AssociationSet Name="FK__HrShortli__Inter__12C8C788" Association="Self.FK__HrShortli__Inter__12C8C788">

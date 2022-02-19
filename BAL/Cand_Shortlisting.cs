@@ -24,6 +24,12 @@ namespace BAL
             return modeldata.Where(m => m.CandApplyId == Id).ToList();
         }
 
+        public List<HrShortlisting> GetList(int JobId,int candidateAppliedId)
+        {
+            var modeldata = repository.GetAllRecord();
+            return modeldata.Where(m => m.CandApplyId == candidateAppliedId && m.JobId  == JobId).ToList();
+        }
+
         public HrShortlisting GetById(int JobApplyId)
         {
             var modeldata = repository.GetAllRecord();

@@ -34,7 +34,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             langmodel = new LanguagesModel();
             candidateobj = new CandidateLogics();
             RegUser = new UserRegModule();
-            AdoNet = new AdoNetFetch();
+            AdoNet = new AdoNetFetch(CareerGlobalFields.GetConnectionString());
             getusrDetail = new GetUserDetails();
             cndLang = new CandidateLangDbSave();
             cand_FreindWorking = new Cand_freindWorking();

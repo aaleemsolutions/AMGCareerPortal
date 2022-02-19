@@ -14,6 +14,10 @@ namespace ViewModels
             CandShortListViewModel = new CandShortListViewModel();
             //cndEvDetails = new List<cndEvDetail>();
         }
+
+        public Boolean Status { get; set; }
+        public string Message { get; set; }
+
         public IntScoreType IntScoreType{ get; set; }
         public List<IntEvaluationType> intEvaluationTypes { get; set; }
         public List<IntEvQuestion> intEvQuestions { get; set; }

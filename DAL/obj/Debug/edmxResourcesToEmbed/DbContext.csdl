@@ -212,6 +212,14 @@
       <End Role="HrShortlisting" EntitySet="HrShortlistings" />
       <End Role="cndEvMaster" EntitySet="cndEvMasters" />
     </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__Evalu__45544755" Association="CareerPortalModel.FK__HrShortli__Evalu__45544755">
+      <End Role="cndEvMaster" EntitySet="cndEvMasters" />
+      <End Role="HrShortlisting" EntitySet="HrShortlistings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__EvDec__46486B8E" Association="CareerPortalModel.FK__HrShortli__EvDec__46486B8E">
+      <End Role="IntEvDecision" EntitySet="IntEvDecisions" />
+      <End Role="HrShortlisting" EntitySet="HrShortlistings" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="candidate">
     <Key>
@@ -698,6 +706,10 @@
     <NavigationProperty Name="InterviewPanel" Relationship="CareerPortalModel.FK__HrShortli__Panel__0D0FEE32" FromRole="HrShortlisting" ToRole="InterviewPanel" />
     <NavigationProperty Name="InterviewType" Relationship="CareerPortalModel.FK__HrShortli__Inter__12C8C788" FromRole="HrShortlisting" ToRole="InterviewType" />
     <NavigationProperty Name="cndEvMasters" Relationship="CareerPortalModel.FK__cndEvMast__Short__324172E1" FromRole="HrShortlisting" ToRole="cndEvMaster" />
+    <Property Name="EvaluationId" Type="Int32" />
+    <Property Name="EvDecisionId" Type="Int32" />
+    <NavigationProperty Name="cndEvMaster" Relationship="CareerPortalModel.FK__HrShortli__Evalu__45544755" FromRole="HrShortlisting" ToRole="cndEvMaster" />
+    <NavigationProperty Name="IntEvDecision" Relationship="CareerPortalModel.FK__HrShortli__EvDec__46486B8E" FromRole="HrShortlisting" ToRole="IntEvDecision" />
   </EntityType>
   <EntityType Name="TimingSlot">
     <Key>
@@ -933,6 +945,7 @@
     <Property Name="ObtainedMarks" Type="Double" />
     <Property Name="ShortListId" Type="Int32" />
     <NavigationProperty Name="HrShortlisting" Relationship="CareerPortalModel.FK__cndEvMast__Short__324172E1" FromRole="cndEvMaster" ToRole="HrShortlisting" />
+    <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__Evalu__45544755" FromRole="cndEvMaster" ToRole="HrShortlisting" />
   </EntityType>
   <EntityType Name="IntEvaluationType">
     <Key>
@@ -949,6 +962,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DecisionName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="cndEvMasters" Relationship="CareerPortalModel.FK__cndEvMast__IntEv__27C3E46E" FromRole="IntEvDecision" ToRole="cndEvMaster" />
+    <NavigationProperty Name="HrShortlistings" Relationship="CareerPortalModel.FK__HrShortli__EvDec__46486B8E" FromRole="IntEvDecision" ToRole="HrShortlisting" />
   </EntityType>
   <EntityType Name="IntEvQuestion">
     <Key>
@@ -1085,6 +1099,30 @@
       </Principal>
       <Dependent Role="cndEvMaster">
         <PropertyRef Name="ShortListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__Evalu__45544755">
+    <End Type="CareerPortalModel.cndEvMaster" Role="cndEvMaster" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.HrShortlisting" Role="HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cndEvMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="EvaluationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__EvDec__46486B8E">
+    <End Type="CareerPortalModel.IntEvDecision" Role="IntEvDecision" Multiplicity="0..1" />
+    <End Type="CareerPortalModel.HrShortlisting" Role="HrShortlisting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IntEvDecision">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlisting">
+        <PropertyRef Name="EvDecisionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

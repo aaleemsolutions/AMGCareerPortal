@@ -26,6 +26,26 @@
         height: 95%;
         padding: 2.5%;
     }
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        display: block;
+        padding-left: 0px;
+        padding-right: 0px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .select2-selection__rendered {
+        line-height: 24px !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 50px !important;
+        background: #fff !important;
+    }
+
+    .select2-selection__arrow {
+        height: 50px !important;
+    }
 </style>
 
 @*<form id="FormNewJob">*@
@@ -104,9 +124,9 @@
 
                     <div class="col-md-2">
                         <label>Division </label>
-                        <div id="the-basics">
+                        <div id="the-basics input-group ">
                             @*<input class="typeahead" type="text" placeholder="CNIC" required>*@
-                            @Html.DropDownListFor(m => m.DivisionId, new SelectList(ViewBag.DivisionDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDivision" })
+                            @Html.DropDownListFor(m => m.DivisionId, new SelectList(ViewBag.DivisionDropDown, "Value", "Text"), new { @class = "", @Id = "DrpDivision" })
 
                             @Html.HiddenFor(m => m.DivisionName, new { @id = "DivisionName" })
                             @Html.ValidationMessageFor(m => m.DivisionId, null, new { @class = "text-danger" })
@@ -114,7 +134,7 @@
 
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label>Category </label>
                         <div id="bloodhound">
 
@@ -128,7 +148,7 @@
                     </div>
 
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label>Department  </label>
                         <div id="bloodhound">
 
