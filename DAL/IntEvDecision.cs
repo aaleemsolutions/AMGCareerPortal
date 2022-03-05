@@ -19,6 +19,7 @@ namespace DAL
         {
             this.cndEvMasters = new HashSet<cndEvMaster>();
             this.HrShortlistings = new HashSet<HrShortlisting>();
+            this.HrShortlistingDetails = new HashSet<HrShortlistingDetail>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace DAL
         public virtual ICollection<cndEvMaster> cndEvMasters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HrShortlistingDetail> HrShortlistingDetails { get; set; }
     }
 }

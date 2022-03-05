@@ -12,11 +12,11 @@ namespace BAL
 {
     class UsersReg : IUsers<User>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public UsersReg()
         {
 
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
         }
 
         public User AddUser(User user)

@@ -91,16 +91,19 @@
     </Compile>
     <Compile Include="CustomAttributes\RequiredIfAttribute.cs" />
     <Compile Include="CustomModel\Category.cs" />
+    <Compile Include="CustomModel\cs_companyInfo.cs" />
     <Compile Include="CustomModel\CvExperience.cs" />
     <Compile Include="CustomModel\CvMain.cs" />
     <Compile Include="CustomModel\Cv_Internship.cs" />
     <Compile Include="CustomModel\Cv_Qualification.cs" />
     <Compile Include="CustomModel\Cv_skills.cs" />
-    <Compile Include="CustomModel\Department.cs" />
+    <Compile Include="CustomModel\cs_Department.cs" />
     <Compile Include="CustomModel\Designation.cs" />
     <Compile Include="CustomModel\Division.cs" />
+    <Compile Include="CustomModel\EmployeeHiringClass.cs" />
     <Compile Include="CustomModel\EmployeeView.cs" />
     <Compile Include="CustomModel\vuAllEmpInfoClass.cs" />
+    <Compile Include="CustomValidationsClass\CS_DataAnotation.cs" />
     <Compile Include="DbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,6 +120,9 @@
       <DependentUpon>DbContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="HrShortlisting.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HrShortlistingDetail.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="InterviewPanel.cs">
@@ -173,32 +179,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="DbContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DbContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="DbContext.edmx.diagram">
       <DependentUpon>DbContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DbContext.Context.cs</LastGenOutput>
       <DependentUpon>DbContext.edmx</DependentUpon>
+      <LastGenOutput>DbContext.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DbContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DbContext.edmx</DependentUpon>
       <LastGenOutput>DbContext.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,10 +11,10 @@ namespace BAL.DbSaveClass
     public class Cand_RelateFreindWorkingDbSave : IMainInterface<Cand_RelateFreindWorking>
     {
   
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public Cand_RelateFreindWorkingDbSave()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
         }
         public Cand_RelateFreindWorking AddData(Cand_RelateFreindWorking model)
         {

@@ -84,7 +84,7 @@
                                 <div id="the-basics2">
 
 
-                                    @Html.DropDownListFor(m => m.CandidateViewModel.MaritalStatus, new SelectList(ViewBag.MartialStatusDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDesig" })
+                                    @Html.DropDownListFor(m => m.CandidateViewModel.MaritalStatus, new SelectList(ViewBag.MartialStatusDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "" })
 
                                     @Html.ValidationMessageFor(m => m.CandidateViewModel.MaritalStatus, null, new { @class = "text-danger" })
 

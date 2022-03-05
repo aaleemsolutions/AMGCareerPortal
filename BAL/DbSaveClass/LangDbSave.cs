@@ -10,10 +10,10 @@ namespace BAL.DbSaveClass
 {
     public class LanguagesClass : IMainInterface<Language>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public LanguagesClass()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
         }
 
         public Language AddData(Language model)
@@ -69,10 +69,10 @@ namespace BAL.DbSaveClass
     }
     public class LangScoreTypeClass : IMainInterface<LangScoreType>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public LangScoreTypeClass()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
         }
 
         public LangScoreType AddData(LangScoreType model)
@@ -129,10 +129,10 @@ namespace BAL.DbSaveClass
     }
     public class LanguageScoreClass : IMainInterface<LanguageScore>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public LanguageScoreClass()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
         }
         public LanguageScore AddData(LanguageScore model)
         {
@@ -188,10 +188,10 @@ namespace BAL.DbSaveClass
     }
     public class LanguageMapingClass : IMainInterface<LanguageMaping>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public LanguageMapingClass()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
         }
 
         public LanguageMaping AddData(LanguageMaping model)

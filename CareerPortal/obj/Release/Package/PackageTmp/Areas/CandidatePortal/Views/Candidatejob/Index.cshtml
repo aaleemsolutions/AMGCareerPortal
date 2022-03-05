@@ -5,7 +5,7 @@
     ViewBag.Title = "Index";
 }
 
-@Styles.Render("~/bundles/ThemeCss")
+@Styles.Render("~/bundles/ThemeCssCreateJob")
 @Scripts.Render("~/bundles/modernizr")
 
 
@@ -36,12 +36,12 @@
                                 <h3 class="sb-title mb-3">Specialism</h3>
                                 <div class="specialism_widget" style="">
                                     <div class="simple-checkbox">
-                                        @foreach (var item in Model.ListAlljobs.Select(m => new { DepartmentId = m.DepartmentId, DepartmentName = m.DepartmentName, Count = m.JobTitle.Count() }).Distinct())
+                                        @foreach (var item in Model.ListAlljobs.GroupBy(m => m.DepartmentName).Select(m => new { DepartmentName = m.Key, JobCount = m.Count() }).Distinct())
                                         {
                                             var checkboxname = "chk" + item;
                                             <div class="custom-control custom-checkbox sec-wrap">
                                                 <input type="checkbox" class="custom-control-input" id="@checkboxname">
-                                                <label class="custom-control-label" for="@checkboxname">@item.DepartmentName (@item.Count) </label>
+                                                <label class="custom-control-label" for="@checkboxname">@item.DepartmentName (@item.JobCount) </label>
                                             </div>
                                         }
                                     </div>
@@ -179,7 +179,9 @@
     </div>
 </div>
 
+
+
+<div class="loading" id="JobDetailLoader" style="z-index:99999">Loading&#8230;</div>
+
+
 @Scripts.Render("~/bundles/ThemeOtherPagesJS")
-
-
-<div class="loading" id="JobDetailLoader">Loading&#8230;</div>

@@ -28,12 +28,12 @@
                             <div class="specialism_widget" style="">
                                 <div class="simple-checkbox">
 
-                                    @foreach (var item in Model.ListAlljobs.Select(m=>new { DepartmentId = m.DepartmentId, DepartmentName = m.DepartmentName,Count = m.JobTitle.Count() }).Distinct())
+                                    @foreach (var item in Model.ListAlljobs.GroupBy(m => m.DepartmentName).Select(m => new { DepartmentName = m.Key, JobCount = m.Count() }).Distinct())
                                     {
                                         var checkboxname = "chk" + item;
                                         <div class="custom-control custom-checkbox sec-wrap">
                                             <input type="checkbox" class="custom-control-input" id="@checkboxname">
-                                            <label class="custom-control-label" for="@checkboxname">@item.DepartmentName (@item.Count) </label>
+                                            <label class="custom-control-label" for="@checkboxname">@item.DepartmentName (@item.JobCount) </label>
                                         </div>
                                     }
 

@@ -44,6 +44,13 @@ namespace DAL
         public string DesignationName { get; set; }
         public Nullable<int> CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public Nullable<bool> IsPositionClosed { get; set; }
+        public Nullable<int> BranchId { get; set; }
+        public string BranchName { get; set; }
+        public Nullable<int> CompanyId { get; set; }
+        public string CompanyName { get; set; }
+        public Nullable<int> GradeId { get; set; }
+        public string GradeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateJobApply> CandidateJobApplies { get; set; }

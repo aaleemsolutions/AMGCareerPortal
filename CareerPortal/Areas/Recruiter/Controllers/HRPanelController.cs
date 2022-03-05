@@ -348,6 +348,8 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             return Json(GetAllDepartment, JsonRequestBehavior.AllowGet);   
         }
 
+        
+
 
         public JsonResult FillEmployeeOnDepartment(int DepartmentId,string UnitType)
         {

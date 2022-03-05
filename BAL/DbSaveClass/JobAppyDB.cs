@@ -10,10 +10,10 @@ namespace BAL.DbSaveClass
 {
     internal class JobAppyDB : IjobApply<CandidateJobApply>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public JobAppyDB()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
         }
         public bool ApplyJob(CandidateJobApply JPosition)
         {

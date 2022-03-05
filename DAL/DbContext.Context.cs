@@ -15,10 +15,10 @@ namespace DAL
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class CareerPortalEntities : DbContext
+    public partial class CareerPortalEntities1 : DbContext
     {
-        public CareerPortalEntities()
-            : base("name=CareerPortalEntities")
+        public CareerPortalEntities1()
+            : base("name=CareerPortalEntities1")
         {
         }
     
@@ -27,36 +27,37 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<candidate> candidates { get; set; }
-        public virtual DbSet<CandidateQualification> CandidateQualifications { get; set; }
-        public virtual DbSet<CandidateExperince> CandidateExperinces { get; set; }
         public virtual DbSet<AllPosition> AllPositions { get; set; }
-        public virtual DbSet<CandidateJobApply> CandidateJobApplies { get; set; }
-        public virtual DbSet<LangScoreType> LangScoreTypes { get; set; }
-        public virtual DbSet<LanguageMaping> LanguageMapings { get; set; }
-        public virtual DbSet<Language> Languages { get; set; }
-        public virtual DbSet<LanguageScore> LanguageScores { get; set; }
-        public virtual DbSet<CandidateLang> CandidateLangs { get; set; }
         public virtual DbSet<Cand_AMPreviousWork> Cand_AMPreviousWork { get; set; }
         public virtual DbSet<Cand_Dependants> Cand_Dependants { get; set; }
         public virtual DbSet<Cand_JobFilledByHr> Cand_JobFilledByHr { get; set; }
-        public virtual DbSet<Cand_RelateFreindWorking> Cand_RelateFreindWorking { get; set; }
-        public virtual DbSet<MoseRecentEmployement> MoseRecentEmployements { get; set; }
         public virtual DbSet<Cand_ProfessionalReferences> Cand_ProfessionalReferences { get; set; }
+        public virtual DbSet<Cand_RelateFreindWorking> Cand_RelateFreindWorking { get; set; }
+        public virtual DbSet<candidate> candidates { get; set; }
+        public virtual DbSet<CandidateExperince> CandidateExperinces { get; set; }
+        public virtual DbSet<CandidateJobApply> CandidateJobApplies { get; set; }
+        public virtual DbSet<CandidateLang> CandidateLangs { get; set; }
+        public virtual DbSet<CandidateQualification> CandidateQualifications { get; set; }
+        public virtual DbSet<cndEvDetail> cndEvDetails { get; set; }
+        public virtual DbSet<cndEvMaster> cndEvMasters { get; set; }
         public virtual DbSet<HrShortlisting> HrShortlistings { get; set; }
-        public virtual DbSet<TimingSlot> TimingSlots { get; set; }
+        public virtual DbSet<HrShortlistingDetail> HrShortlistingDetails { get; set; }
         public virtual DbSet<InterviewPanelDetail> InterviewPanelDetails { get; set; }
         public virtual DbSet<InterviewPanel> InterviewPanels { get; set; }
         public virtual DbSet<InterviewPerson> InterviewPersons { get; set; }
         public virtual DbSet<InterviewType> InterviewTypes { get; set; }
-        public virtual DbSet<cndEvDetail> cndEvDetails { get; set; }
-        public virtual DbSet<cndEvMaster> cndEvMasters { get; set; }
         public virtual DbSet<IntEvaluationType> IntEvaluationTypes { get; set; }
         public virtual DbSet<IntEvDecision> IntEvDecisions { get; set; }
         public virtual DbSet<IntEvQuestion> IntEvQuestions { get; set; }
         public virtual DbSet<IntQuestionMapping> IntQuestionMappings { get; set; }
         public virtual DbSet<IntScoreType> IntScoreTypes { get; set; }
+        public virtual DbSet<LangScoreType> LangScoreTypes { get; set; }
+        public virtual DbSet<LanguageMaping> LanguageMapings { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<LanguageScore> LanguageScores { get; set; }
+        public virtual DbSet<MoseRecentEmployement> MoseRecentEmployements { get; set; }
+        public virtual DbSet<TimingSlot> TimingSlots { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     
         public virtual ObjectResult<usp_getallDegree_Result> usp_getallDegree()
         {

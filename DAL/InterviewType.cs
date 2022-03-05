@@ -14,17 +14,8 @@ namespace DAL
     
     public partial class InterviewType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InterviewType()
-        {
-            this.HrShortlistings = new HashSet<HrShortlisting>();
-        }
-    
         public int Id { get; set; }
         public string Typename { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
     }
 }

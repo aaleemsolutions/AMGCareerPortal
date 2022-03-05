@@ -200,7 +200,7 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_settings-panel.html -->
-            <div class="theme-setting-wrapper">
+            @*<div class="theme-setting-wrapper">
                 <div id="settings-trigger"><i class="ti-settings"></i></div>
                 <div id="theme-settings" class="settings-panel">
                     <i class="settings-close ti-close"></i>
@@ -234,7 +234,8 @@
                         <div class="tiles default"></div>
                     </div>
                 </div>
-            </div>
+            </div>*@
+            
             <div id="right-sidebar" class="settings-panel">
                 <i class="settings-close ti-close"></i>
                 <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
@@ -434,12 +435,13 @@
 
 
 
-                    <li class="nav-item ">
+                    @*<li class="nav-item ">
                         <a class="nav-link" href="@Url.Action("Index","cvBank",new { area="Recruiter"})">
                             <i class="ti-home menu-icon"></i>
                             <span class="menu-title"> Cv Bank</span>
                         </a>
-                    </li>
+                    </li>*@
+
                     <li class="nav-item ">
                         <a class="nav-link" href="@Url.Action("InterviewEvaluationList","Shortlisting",new { area="Recruiter"})">
                             <i class="ti-home menu-icon"></i>
@@ -459,12 +461,10 @@
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
+
                                 <li class="nav-item ">
                                     <a class="nav-link" style="text-align: center;" href="@Url.Action("HRPerson","HRPanel",new { area="Recruiter"})">
-
                                         <i class="ti-user menu-icon"></i>
-
-
                                         <span class="menu-title"> Panels Employees </span>
                                     </a>
                                 </li>
@@ -503,13 +503,9 @@
 
     @Scripts.Render("~/bundles/RecruiterThemesAssets")
 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    @*<script src="~/CndDashboardAssets/SummerNote/summernote.min.js"></script>
 
-        <script src="~/CndDashboardAssets/SummerNote/summernote.min.js"></script>
-        <script src="~/Scripts/jquery.inputmask.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-        <script src="~/CndDashboardAssets/vendors/datatables.net/jquery.dataTables.js"></script>*@
 
 
 </body>

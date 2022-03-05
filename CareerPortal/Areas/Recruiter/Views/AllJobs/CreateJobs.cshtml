@@ -123,10 +123,22 @@
                 <div class="form-group row ">
 
                     <div class="col-md-2">
-                        <label>Division </label>
-                        <div id="the-basics input-group ">
+                        <label>Unit </label>
+                        <div id="bloodhound">
                             @*<input class="typeahead" type="text" placeholder="CNIC" required>*@
-                            @Html.DropDownListFor(m => m.DivisionId, new SelectList(ViewBag.DivisionDropDown, "Value", "Text"), new { @class = "", @Id = "DrpDivision" })
+                            @Html.DropDownListFor(m => m.BranchId, new SelectList(ViewBag.BranchDropdown, "Value", "Text"), new { @class = "DrpTextSearch aaDropdownStyle", @Id = "cmbBranch" })
+
+                            @Html.HiddenFor(m => m.BranchId, new { @id = "BranchName" })
+                            @Html.ValidationMessageFor(m => m.BranchId, null, new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Division </label>
+                        <div id="bloodhound ">
+                            @*<input class="typeahead" type="text" placeholder="CNIC" required>*@
+                            @Html.DropDownListFor(m => m.DivisionId, new SelectList(ViewBag.DivisionDropDown, "Value", "Text"), new { @class = "aaDropdownStyle", @Id = "DrpDivision" })
 
                             @Html.HiddenFor(m => m.DivisionName, new { @id = "DivisionName" })
                             @Html.ValidationMessageFor(m => m.DivisionId, null, new { @class = "text-danger" })
@@ -148,12 +160,12 @@
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label>Department  </label>
                         <div id="bloodhound">
 
                             @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ViewBag.DepartmentDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDepart" })
-                            @Html.HiddenFor(m=>m.DepartmentName,new { @id = "DepartmentName"})
+                            @Html.HiddenFor(m => m.DepartmentName, new { @id = "DepartmentName" })
 
                             @Html.ValidationMessageFor(m => m.DepartmentId, null, new { @class = "text-danger" })
 
@@ -161,7 +173,12 @@
                     </div>
 
 
-                    <div class="col-md-4">
+
+                </div>
+
+                <div class="form-group row ">
+
+                    <div class="col-md-3">
                         <label>Designation </label>
                         <div id="bloodhound">
                             @Html.DropDownListFor(m => m.DesignationId, new SelectList(ViewBag.DesignationDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDesig" })
@@ -174,11 +191,6 @@
 
                         </div>
                     </div>
-
-                </div>
-
-                <div class="form-group row ">
-
                     <div class="col-md-2">
                         <label>Experince </label>
                         <div id="the-basics">
@@ -192,7 +204,7 @@
 
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <label>Job Location </label>
                         <div id="bloodhound">
 
@@ -221,7 +233,7 @@
                     </div>
 
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label>Applicatin Deadline </label>
                         <div id="bloodhound">
 

@@ -11,14 +11,15 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(CustomValidationsClass.CndEvMasterValidate))]
     public partial class cndEvMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public cndEvMaster()
         {
             this.cndEvDetails = new HashSet<cndEvDetail>();
-            this.HrShortlistings = new HashSet<HrShortlisting>();
         }
     
         public int Id { get; set; }
@@ -37,14 +38,14 @@ namespace DAL
         public Nullable<double> TotalMarks { get; set; }
         public Nullable<double> ObtainedMarks { get; set; }
         public Nullable<int> ShortListId { get; set; }
+        public string GradeName { get; set; }
+        public string HiredEmpCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cndEvDetail> cndEvDetails { get; set; }
         public virtual User User { get; set; }
         public virtual IntEvDecision IntEvDecision { get; set; }
-        public virtual User User1 { get; set; }
         public virtual HrShortlisting HrShortlisting { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

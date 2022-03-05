@@ -49,7 +49,36 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             return View();
         }
 
-    
+
+        public JobApplicationViewModel GetJobAppViewModels(int UserId) {
+            var JobApplicationmodel = langmodel.Getdata();
+             
+            JobApplicationmodel.Cand_RelateFreindWorking = cand_FreindWorking.GetList(UserId);
+            JobApplicationmodel.Cand_AMPreviousWork = Cand_AMPreviousWork.GetByid(UserId);
+            JobApplicationmodel.Cand_Dependants = DependantsTestClass.GetList(UserId);
+            JobApplicationmodel.MostRecentEmployment = MostRecentEmployementClass.GetById(UserId);
+            JobApplicationmodel.Cand_ProfessionalReferences = Cand_ProReferenceClass.GetList(UserId);
+
+            if (JobApplicationmodel.Cand_ProfessionalReferences.Count == 0)
+            {
+                JobApplicationmodel.Cand_ProfessionalReferences = null;
+
+            }
+            if (JobApplicationmodel.Cand_Dependants.Count == 0)
+            {
+                JobApplicationmodel.Cand_Dependants = null;
+
+            }
+
+            if (JobApplicationmodel.Cand_RelateFreindWorking.Count == 0)
+            {
+                JobApplicationmodel.Cand_RelateFreindWorking = null;
+
+            }
+
+            return JobApplicationmodel;
+        }
+
         public ActionResult jobApplicationForm()
         {
             BindDropdowns();

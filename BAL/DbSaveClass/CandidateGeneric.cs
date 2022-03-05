@@ -10,10 +10,10 @@ namespace BAL
 {
     class CandidateGeneric : ICandidate<candidate>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public CandidateGeneric()
         {
-              dbcontext = new CareerPortalEntities();
+              dbcontext = new CareerPortalEntities1();
         }
 
         public candidate AddCandidate(candidate Candidate)

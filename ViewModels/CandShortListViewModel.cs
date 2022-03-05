@@ -17,10 +17,15 @@ namespace ViewModels
         }
 
         public  HrShortlisting HrShortlisting { get; set; }
+        public HrShortlistingDetail HrShortlistingDetail { get; set; }
 
+        public int OldShortlistDecisionId { get; set; } 
         public bool IsSecondInterviewSchedule { get; set; } = false;
         public List<TimingSlot> timingSlots{ get; set; }
         public JobApplyViewModels jobApplyViewModels { get; set; }
+
+        public InterviewHistory interviewHistory { get; set; }
+
 
         public bool IsEmailSend { get; set; } = true;
         public bool IsSendJobForm { get; set; } = true;
@@ -28,5 +33,11 @@ namespace ViewModels
         [AllowHtml]
         public string ShortListEmailBody { get; set; }
 
+
+
+    }
+
+    public class InterviewHistory {
+        public int MyProperty { get; set; }
     }
 }

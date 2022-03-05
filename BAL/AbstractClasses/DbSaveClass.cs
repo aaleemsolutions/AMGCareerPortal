@@ -12,13 +12,13 @@ namespace BAL.AbstractClasses
     public class DbSaveClass<T> : GenericDbSAVE<T> where T : class
 
     {
-        private CareerPortalEntities _context;
+        private CareerPortalEntities1 _context;
         private DbSet<T> table = null;
         public DbSaveClass()
         {
-            this._context = new CareerPortalEntities();
+            this._context = new CareerPortalEntities1();
             table = _context.Set<T>();
-            //dbcontext = new CareerPortalEntities();
+            //dbcontext = new CareerPortalEntities1();
         }
 
         public T AddRecords(T AddRecordModel)

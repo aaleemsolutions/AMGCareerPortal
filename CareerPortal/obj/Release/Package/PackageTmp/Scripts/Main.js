@@ -1003,6 +1003,9 @@ function ShortlistCandidate() {
             processData: false,
             contentType: false,
             data: valdata,
+            beforeSend: function () {
+                EnableDisabledButotonwithId("#btnSubmitShortlistCand");
+            },
             success: function (data) {
                 if (data.status == true) {
                     ShowToaster(1, "Candidate Shortlist Successfully ", "Shortlist Successfully");
@@ -1015,7 +1018,7 @@ function ShortlistCandidate() {
 
             },
             complete: function (data) {
-
+                EnableDisabledButotonwithId("#btnSubmitShortlistCand",true);
             }
         });
 
@@ -1672,6 +1675,7 @@ function DeletePanelPerson(PersonId) {
 }
 
 
+
 function PanelEmployeesSelectDelete(isselect, PanelPersonId) {
     if (isselect == 1) {
 
@@ -1939,7 +1943,131 @@ function SaveBodySidebarStats(sideBarStats) {
 
 }
 
+function ShowEvaluationsDiv() {
+    var radiovalue = $("input[type='radio'][name='CndEvMaster.IntEvDecisionId']:checked").val()
+    var SecondInterviewDiv = $("#SelectedDiv");
+    var SelectedDiv = $("#SecondInterviewDiv");
+
+    $(SelectedDiv).css({ "display": "none" });
+
+    $(SecondInterviewDiv).css({ "display":"none"});
+ 
+    if (radiovalue == 1) {
+        $(SecondInterviewDiv).css({ "display": "flex" });
+    } else if(radiovalue == 2) {
+        
+        $(SelectedDiv).css({ "display": "block" });
+    }
+  
+}
+
+
+function ShowInterviewHistoryModal(shortlistId) {
+
+
+    var options = {
+        "backdrop": "static",
+        keyboard: true
+    };
+
+    $.ajax({
+        url: "/Recruiter/Shortlisting/LoadShortlistHistory/",
+        type: "GET",
+        data: { "ShortListId": shortlistId },
+        success: function (data) {
+
+            if (data != undefined && data != "") {
+
+                $('#ShorListDetailHistoryModal').html(data);
+                //$('#ShorListHistoryModal').modal(options);
+                $('#ShorListHistoryModal').modal('show');
+
+
+
+
+            }
+
+        }, beforeSend: function () {
+            $(".loader").show();
+
+        }, complete: function () {
+
+            $(".loader").hide();
+        },
+        error: function () {
+            alert("Content load failed.");
+        }
+    });
+
+
+
+
+}
+
+function showHideDomwithId(ButtonId, isshow = false) {
+    if (isshow == true) {
+        $(ButtonId).show()
+    } else {
+        $(ButtonId).hide()
+    }
+
+}
+
+function EnableDisabledButotonwithId(ButtonId, isshow = false) {
+    if (isshow == true) {
+        $(ButtonId).removeAttr("disabled")
+        $(ButtonId).html("Successfully Complete.")
+        
+    } else {
+        $(ButtonId).attr("disabled", "disabled")
+        $(ButtonId).html("updating...")
+        
+    }
+
+}
+
+
+function HireEmployeeInHrms(ParametersFormData) {
+
+    console.log(ParametersFormData);
+    $.ajax({
+        url: "/Recruiter/Shortlisting/HireEmployeeInHRMS",
+
+        dataType: 'json',
+
+        data: ParametersFormData,
+        processData: true,
+        //contentType: false,
+        beforeSend: function () {
+            $('.loader').show();
+        },
+        success: function (data) {
+            ShowToaster(data.IsSuccess, data.message, data.title);
+
+        },
+        complete: function (data) {
+            $('.loader').hide();
+        }
+    });
+
+
+
+}
+
+
 $(document).ready(function () {
+
+    $(".DrpTextSearch").select2({
+        //dropdownCssClass: "form-control"
+        //theme: "bootstrap"
+    });
+    $("#DrpDivision").select2({
+        //dropdownCssClass: "form-control"
+        //theme: "bootstrap"
+    });
+    $("#DrpCategory").select2();
+    $("#DrpDepart").select2();
+    $("#DrpDesig").select2();
 
   $(".nav.flex-column.sub-menu > li:has(a.active) i").css({  "color": "white" })
 
@@ -1963,6 +2091,13 @@ $(document).ready(function () {
 
         var drpvalue = $("#DrpDivision option:selected").text();;
         $("#DivisionName").val(drpvalue)
+
+    });
+
+    $("#cmbBranch").change(function () {
+
+        var drpvalue = $("#cmbBranch option:selected").text();;
+        $("#BranchName").val(drpvalue)
 
     });
 
@@ -2001,6 +2136,12 @@ $(document).ready(function () {
         var UnitTypeValue = $("#DrpHRUnitType").val();
         FillEmployeeOnDepartment(DepartmentId, UnitTypeValue);
     });
+
+    $("input[name='CndEvMaster.IntEvDecisionId']").change(function () {
+        ShowEvaluationsDiv();
+    });
+
+
 
     $("#DrpHREmployee").change(function () {
 
@@ -2140,6 +2281,9 @@ $(document).ready(function () {
 
 
 
+
+
+
     //Experince Save add more button
     $("#btnSaveExperienceData").click(function () {
         addCandExperience(2, false);
@@ -2230,7 +2374,10 @@ $(document).ready(function () {
                 //                "render": function (data, type, full, meta) { return '<a class="btn" type="" onClick="EditNewJob(' + full.JobId + ')"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
                 "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/AllJobs/ViewJobCandidates/?JobId=' + full.JobId + '"  title="View Cabdidates" ><span class="ti-eye")></span></a> <a class="btn" type=""  href="/Recruiter/AllJobs/CreateJobs/' + full.JobId + '"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
             },
+
+            { "data": "JobStatus" },
             { "data": "JobTitle" },
+
             { "data": "JobLocation" },
 
             { "data": "PostedDate" },
@@ -2569,7 +2716,7 @@ $(document).ready(function () {
             { "data": "InterviewStatus" },
           
             {
-                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.HRShortlistId + '"  title="Give Feedback" ><span class="ti-comment-alt")></span></a>  <a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationList/?search=' + full.CandidateName + '"  title="View all feedbacks" ><span class="ti-eye")></span></a>  '; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.HRShortlistId + '"  title="Give Feedback" ><span class="ti-comment-alt")></span></a>   '; }
             }
 
 
@@ -2618,7 +2765,7 @@ $(document).ready(function () {
             { "data": "EVID" },
             { "data": "ShortListId" },
             {
-                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.ShortListId + '"  title="Check Feedback" ><span class="ti-comment-alt")></span></a>  '; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.ShortListId + '"  title="Check Feedback" ><span class="ti-comment-alt")></span></a>  <a class="btn"  href="#" onClick="ShowInterviewHistoryModal(' + full.ShortListId+')"  title="View Interview History" ><span class="ti-time")></span></a>'; }
             },
             { "data": "CandidateName" },
             { "data": "PosTitle" },
@@ -2659,6 +2806,7 @@ $(document).ready(function () {
     $(".saveSideBarStats").click(function () {
     SaveBodySidebarStats($("body").hasClass("sidebar-icon-only"))
     });
+
 
 
 });

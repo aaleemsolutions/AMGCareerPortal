@@ -30,11 +30,7 @@ namespace BAL
         }
         public override bool AddDatabool(TimingSlot model)
         {
-            //if (model.UserId == null || model.UserId == 0)
-            //{
-            //    model.UserId = GlobalUserInfo.UserId;
-
-            //}
+           
             if (model.Id != 0)
             {
                 repository.UpdateRecords(model);

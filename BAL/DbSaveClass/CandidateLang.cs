@@ -10,10 +10,10 @@ namespace BAL.DbSaveClass
 {
    public class CandidateLangDbSave:IMainInterface<CandidateLang>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public CandidateLangDbSave()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
 
         }
 

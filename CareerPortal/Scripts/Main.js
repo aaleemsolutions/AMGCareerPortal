@@ -944,6 +944,7 @@ function validateShortListForm() {
 
     var InterviewDate = $("#InterviewDate").val();
     var InterviewTiming = $("#InterviewTiming").val();
+    var InterviewPanel = $("#InterviewPanel").val();
     var IsEmailSend = $("#isEmailSend").is('checked');
     var isJobFormSend = $("#isJobFormSend").is('checked');
     var ShortListId = $("#ShortListId").val();
@@ -956,6 +957,7 @@ function validateShortListForm() {
         $(".ErrorSH_InterviewDate").html("")
         isvalid = true;
     }
+
     if (InterviewTiming < 1 || InterviewTiming < 1) {
         $(".ErrorSH_InterviewTiming").html("Please select slots")
         isvalid = false;
@@ -967,6 +969,19 @@ function validateShortListForm() {
         isvalid = true;
     }
 
+    if (InterviewPanel < 1 || InterviewPanel < 1) {
+        $(".ErrorSH_InterviewPanel").html("Please select interview panel")
+        isvalid = false;
+
+        return isvalid;
+
+    } else {
+        $(".ErrorSH_InterviewPanel").html("")
+        isvalid = true;
+    }
+
+    
+
     if (ShortListId > 0) {
         ShowToaster(0, "Selectedt candidate already shortlist", "Already Shortlist");
         isvalid = false;
@@ -974,6 +989,63 @@ function validateShortListForm() {
         return isvalid;
 
     }
+
+
+
+
+
+    return isvalid;
+}
+
+
+function validateShortListEvaluation() {
+
+
+    var isvalid = true;
+
+
+
+
+
+    var InterviewDate = $("#InterviewDate").val();
+    var InterviewTiming = $("#InterviewTiming").val();
+    var InterviewPanel = $("#InterviewPanel").val();
+    var IsEmailSend = $("#isEmailSend").is('checked');
+    var isJobFormSend = $("#isJobFormSend").is('checked');
+    var ShortListId = $("#ShortListId").val();
+
+    if (isNaN(InterviewDate) == false || InterviewDate == "") {
+        $(".ErrorSH_InterviewDate").html("Interview date is required")
+        isvalid = false;
+        return isvalid;
+    } else {
+        $(".ErrorSH_InterviewDate").html("")
+        isvalid = true;
+    }
+
+    if (InterviewTiming < 1 || InterviewTiming < 1) {
+        $(".ErrorSH_InterviewTiming").html("Please select slots")
+        isvalid = false;
+
+        return isvalid;
+
+    } else {
+        $(".ErrorSH_InterviewTiming").html("")
+        isvalid = true;
+    }
+
+    if (InterviewPanel < 1 || InterviewPanel < 1) {
+        $(".ErrorSH_InterviewPanel").html("Please select interview panel")
+        isvalid = false;
+
+        return isvalid;
+
+    } else {
+        $(".ErrorSH_InterviewPanel").html("")
+        isvalid = true;
+    }
+
+
 
 
 
@@ -991,8 +1063,7 @@ function ShortlistCandidate() {
         var getformvalue = $('#CandShortListCand')[0];
 
         var valdata = new FormData(getformvalue);
-
-
+        valdata.append("InterviewTiming", $("#InterviewTiming").val())
 
 
 
@@ -1003,6 +1074,9 @@ function ShortlistCandidate() {
             processData: false,
             contentType: false,
             data: valdata,
+            beforeSend: function () {
+                EnableDisabledButotonwithId("#btnSubmitShortlistCand");
+            },
             success: function (data) {
                 if (data.status == true) {
                     ShowToaster(1, "Candidate Shortlist Successfully ", "Shortlist Successfully");
@@ -1015,7 +1089,7 @@ function ShortlistCandidate() {
 
             },
             complete: function (data) {
-
+                EnableDisabledButotonwithId("#btnSubmitShortlistCand",true);
             }
         });
 
@@ -1672,6 +1746,7 @@ function DeletePanelPerson(PersonId) {
 }
 
 
+
 function PanelEmployeesSelectDelete(isselect, PanelPersonId) {
     if (isselect == 1) {
 
@@ -1957,8 +2032,110 @@ function ShowEvaluationsDiv() {
   
 }
 
+
+function ShowInterviewHistoryModal(shortlistId) {
+
+
+    var options = {
+        "backdrop": "static",
+        keyboard: true
+    };
+
+    $.ajax({
+        url: "/Recruiter/Shortlisting/LoadShortlistHistory/",
+        type: "GET",
+        data: { "ShortListId": shortlistId },
+        success: function (data) {
+
+            if (data != undefined && data != "") {
+
+                $('#ShorListDetailHistoryModal').html(data);
+                //$('#ShorListHistoryModal').modal(options);
+                $('#ShorListHistoryModal').modal('show');
+
+
+
+
+            }
+
+        }, beforeSend: function () {
+            $(".loader").show();
+
+        }, complete: function () {
+
+            $(".loader").hide();
+        },
+        error: function () {
+            alert("Content load failed.");
+        }
+    });
+
+
+
+
+}
+
+function showHideDomwithId(ButtonId, isshow = false) {
+    if (isshow == true) {
+        $(ButtonId).show()
+    } else {
+        $(ButtonId).hide()
+    }
+
+}
+
+function EnableDisabledButotonwithId(ButtonId, isshow = false) {
+    if (isshow == true) {
+        $(ButtonId).removeAttr("disabled")
+        $(ButtonId).html("Successfully Complete.")
+        
+    } else {
+        $(ButtonId).attr("disabled", "disabled")
+        $(ButtonId).html("updating...")
+        
+    }
+
+}
+
+
+function HireEmployeeInHrms(ParametersFormData) {
+
+    console.log(ParametersFormData);
+    $.ajax({
+        url: "/Recruiter/Shortlisting/HireEmployeeInHRMS",
+
+        dataType: 'json',
+
+        data: ParametersFormData,
+        processData: true,
+        //contentType: false,
+        beforeSend: function () {
+            $('.loader').show();
+            $("#HireEmployeeInHRMS").attr("disabled", "disabled");
+        },
+        success: function (data) {
+            ShowToaster(data.IsSuccess, data.message, data.title);
+            $("#HireEmployeeInHRMS").attr("disabled", "disabled");
+        },
+        error: function () {
+            $("#HireEmployeeInHRMS").removeAttr("disabled");
+        },
+        complete: function (data) {
+            $('.loader').hide();
+        }
+    });
+
+
+
+}
+
+
 $(document).ready(function () {
 
+    $(".DrpTextSearch").select2({
+        //dropdownCssClass: "form-control"
+        //theme: "bootstrap"
+    });
     $("#DrpDivision").select2({
         //dropdownCssClass: "form-control"
         //theme: "bootstrap"
@@ -1989,6 +2166,13 @@ $(document).ready(function () {
 
         var drpvalue = $("#DrpDivision option:selected").text();;
         $("#DivisionName").val(drpvalue)
+
+    });
+
+    $("#cmbBranch").change(function () {
+
+        var drpvalue = $("#cmbBranch option:selected").text();;
+        $("#BranchName").val(drpvalue)
 
     });
 
@@ -2172,6 +2356,9 @@ $(document).ready(function () {
 
 
 
+
+
+
     //Experince Save add more button
     $("#btnSaveExperienceData").click(function () {
         addCandExperience(2, false);
@@ -2260,9 +2447,12 @@ $(document).ready(function () {
             { "data": "JobId" },
             {
                 //                "render": function (data, type, full, meta) { return '<a class="btn" type="" onClick="EditNewJob(' + full.JobId + ')"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
-                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/AllJobs/ViewJobCandidates/?JobId=' + full.JobId + '"  title="View Cabdidates" ><span class="ti-eye")></span></a> <a class="btn" type=""  href="/Recruiter/AllJobs/CreateJobs/' + full.JobId + '"><span class="ti-pencil")></span></a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")></a>'; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/AllJobs/ViewJobCandidates/?JobId=' + full.JobId + '"  title="View Cabdidates" ><span class="ti-eye")></span><br/> View</a> <a class="btn" type=""  href="/Recruiter/AllJobs/CreateJobs/' + full.JobId + '"><span class="ti-pencil")></span><br/> Edit</a> <a class="btn" type="button" onClick="DeleteNewJob(' + full.JobId + ')"><span class="ti-trash")><br/> Delete</a>'; }
             },
+
+            { "data": "JobStatus" },
             { "data": "JobTitle" },
+
             { "data": "JobLocation" },
 
             { "data": "PostedDate" },
@@ -2584,10 +2774,17 @@ $(document).ready(function () {
                 "targets": [0],
                 "visible": false,
                 "searchable": false
-            }
+            },
+                {
+                    "targets": [6],
+                    "visible": true,
+                    "searchable": false,
+                    className: 'text-center'
+                }
             ],
+     
         "oLanguage": {
-            "sEmptyTable": "No Job List Found.."
+            "sEmptyTable": "No Interview List Found.."
         },
 
         "columns": [
@@ -2596,12 +2793,13 @@ $(document).ready(function () {
             { "data": "HRShortlistId" },
             { "data": "CandidateName" },
             { "data": "PosTitle" },
+            { "data": "InterviewStatus" },
             { "data": "InterviewDate" },
             { "data": "InterviewTime" },
-            { "data": "InterviewStatus" },
+            
           
             {
-                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.HRShortlistId + '"  title="Give Feedback" ><span class="ti-comment-alt")></span></a>  <a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationList/?search=' + full.CandidateName + '"  title="View all feedbacks" ><span class="ti-eye")></span></a>  '; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.HRShortlistId + '"  title="Give Feedback" ><span class="ti-comment-alt")></span><br/>Feeback</a> <a class="btn"  href="#" onClick="ShowInterviewHistoryModal(' + full.HRShortlistId +')"  title="View Interview History" ><span class="ti-time")></span><br/>History</a>  '; }
             }
 
 
@@ -2641,7 +2839,7 @@ $(document).ready(function () {
                 }
             ],
         "oLanguage": {
-            "sEmptyTable": "No Job List Found.."
+            "sEmptyTable": "No Evaluation List Found.."
         },
 
         "columns": [
@@ -2650,7 +2848,7 @@ $(document).ready(function () {
             { "data": "EVID" },
             { "data": "ShortListId" },
             {
-                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.ShortListId + '"  title="Check Feedback" ><span class="ti-comment-alt")></span></a>  '; }
+                "render": function (data, type, full, meta) { return '<a class="btn" type="" target="_blank" href="/Recruiter/Shortlisting/InterviewEvaluationForm/?ShortlistId=' + full.ShortListId + '"  title="Check Feedback" > <span class="ti-comment-alt")></span><br/>Feedback</a>  <a class="btn"  href="#" onClick="ShowInterviewHistoryModal(' + full.ShortListId +')"  title="View Interview History" ><span class="ti-time")></span><br/>History </a>'; }
             },
             { "data": "CandidateName" },
             { "data": "PosTitle" },
@@ -2693,4 +2891,10 @@ $(document).ready(function () {
     });
 
 
+    $(document).on('mouseup touchend', function (e) {
+        var container = $(".bootstrap-datetimepicker-widget");
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.hide();
+        }
+    });
 });

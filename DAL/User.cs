@@ -17,34 +17,34 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.candidates = new HashSet<candidate>();
-            this.CandidateJobApplies = new HashSet<CandidateJobApply>();
-            this.CandidateLangs = new HashSet<CandidateLang>();
             this.Cand_AMPreviousWork = new HashSet<Cand_AMPreviousWork>();
             this.Cand_Dependants = new HashSet<Cand_Dependants>();
             this.Cand_JobFilledByHr = new HashSet<Cand_JobFilledByHr>();
-            this.Cand_RelateFreindWorking = new HashSet<Cand_RelateFreindWorking>();
-            this.MoseRecentEmployements = new HashSet<MoseRecentEmployement>();
             this.Cand_ProfessionalReferences = new HashSet<Cand_ProfessionalReferences>();
-            this.HrShortlistings = new HashSet<HrShortlisting>();
-            this.TimingSlots = new HashSet<TimingSlot>();
-            this.InterviewPanels = new HashSet<InterviewPanel>();
-            this.InterviewPersons = new HashSet<InterviewPerson>();
+            this.Cand_RelateFreindWorking = new HashSet<Cand_RelateFreindWorking>();
+            this.candidates = new HashSet<candidate>();
+            this.CandidateJobApplies = new HashSet<CandidateJobApply>();
+            this.CandidateLangs = new HashSet<CandidateLang>();
             this.cndEvMasters = new HashSet<cndEvMaster>();
             this.cndEvMasters1 = new HashSet<cndEvMaster>();
+            this.HrShortlistingDetails = new HashSet<HrShortlistingDetail>();
+            this.InterviewPanels = new HashSet<InterviewPanel>();
+            this.InterviewPersons = new HashSet<InterviewPerson>();
+            this.MoseRecentEmployements = new HashSet<MoseRecentEmployement>();
+            this.TimingSlots = new HashSet<TimingSlot>();
         }
     
         public int Id { get; set; }
-        public string UserPassword { get; set; }
         public string UserEmail { get; set; }
+        public string UserPassword { get; set; }
         public string UserPhoneNo { get; set; }
-        public string UserImage { get; set; }
         public Nullable<bool> IsEmailVerify { get; set; }
         public Nullable<bool> isNewPassword { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string FullName { get; set; }
         public string CandidateCVPath { get; set; }
         public string EmailTokens { get; set; }
+        public string UserImage { get; set; }
         public Nullable<System.DateTime> CVUpdatedOn { get; set; }
         public Nullable<bool> isCandidate { get; set; }
         public Nullable<bool> IsSideBarOpen { get; set; }
@@ -52,34 +52,34 @@ namespace DAL
         public string SideBarColor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<candidate> candidates { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CandidateJobApply> CandidateJobApplies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CandidateLang> CandidateLangs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cand_AMPreviousWork> Cand_AMPreviousWork { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cand_Dependants> Cand_Dependants { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cand_JobFilledByHr> Cand_JobFilledByHr { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cand_RelateFreindWorking> Cand_RelateFreindWorking { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MoseRecentEmployement> MoseRecentEmployements { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cand_ProfessionalReferences> Cand_ProfessionalReferences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
+        public virtual ICollection<Cand_RelateFreindWorking> Cand_RelateFreindWorking { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TimingSlot> TimingSlots { get; set; }
+        public virtual ICollection<candidate> candidates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CandidateJobApply> CandidateJobApplies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CandidateLang> CandidateLangs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cndEvMaster> cndEvMasters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cndEvMaster> cndEvMasters1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HrShortlistingDetail> HrShortlistingDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InterviewPanel> InterviewPanels { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InterviewPerson> InterviewPersons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cndEvMaster> cndEvMasters { get; set; }
+        public virtual ICollection<MoseRecentEmployement> MoseRecentEmployements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cndEvMaster> cndEvMasters1 { get; set; }
+        public virtual ICollection<TimingSlot> TimingSlots { get; set; }
     }
 }

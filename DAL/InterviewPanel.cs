@@ -17,8 +17,8 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public InterviewPanel()
         {
+            this.HrShortlistingDetails = new HashSet<HrShortlistingDetail>();
             this.InterviewPanelDetails = new HashSet<InterviewPanelDetail>();
-            this.HrShortlistings = new HashSet<HrShortlisting>();
         }
     
         public int Id { get; set; }
@@ -29,9 +29,9 @@ namespace DAL
         public Nullable<System.DateTime> UpdateDatetime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HrShortlistingDetail> HrShortlistingDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InterviewPanelDetail> InterviewPanelDetails { get; set; }
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
     }
 }

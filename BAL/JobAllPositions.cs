@@ -42,7 +42,10 @@ namespace BAL
             DesignationId = JPosition.DesignationId,
             DesignationName = JPosition.DesignationName,
             DivisionId = JPosition.DivisionId,
-            DivisionName = JPosition.DivisionName
+            DivisionName = JPosition.DivisionName,
+            BranchId = JPosition.BranchId,
+            BranchName = JPosition.BranchName
+
             };
         
              dbsaveJob.AddPositions(JobPos);
@@ -106,6 +109,19 @@ namespace BAL
             return JobList;
         }
 
+        public JobPositionViewModels GetAllPositionsInModel()
+        {
+            PositionListViewModel positionList = new PositionListViewModel();
+
+
+            JobPositionViewModels JobList = new JobPositionViewModels();
+            var Alljobs = dbsaveJob.GetAllPositions(false);
+
+            JobList.ListAlljobs = Alljobs;
+
+            return JobList;
+        }
+
         public JobPositionViewModels GetPosition(int PositionId)
         {
 
@@ -135,9 +151,10 @@ namespace BAL
                 DesignationName = Jb.DesignationName,
                 DivisionId = Jb.DivisionId.HasValue == true ? Jb.DivisionId.Value:0,
                 DivisionName = Jb.DivisionName,
-                CandidateJobApplies = Jb.CandidateJobApplies
+                CandidateJobApplies = Jb.CandidateJobApplies,
+                BranchId = Jb.BranchId,
+                BranchName = Jb.BranchName
 
-                
             };
 
 
@@ -148,6 +165,7 @@ namespace BAL
         {
             AllPosition JobPos = new AllPosition()
             {
+                
                 JobTitle = JPosition.JobTitle,
                 CreatedBy = JPosition.CreatedBy,
                 CreatedOn = JPosition.CreatedOn,
@@ -170,7 +188,9 @@ namespace BAL
                 DesignationId = JPosition.DesignationId,
                 DesignationName = JPosition.DesignationName,
                 DivisionId = JPosition.DivisionId,
-                DivisionName = JPosition.DivisionName
+                DivisionName = JPosition.DivisionName,
+                BranchId = JPosition.BranchId,
+                BranchName = JPosition.BranchName
 
             };
 

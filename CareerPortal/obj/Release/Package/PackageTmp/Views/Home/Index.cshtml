@@ -52,23 +52,24 @@
             <div class="row all-center sub-section">
                 <div class="col-md-12 d-flex all-center">
                     <ul class="row justify-content-center cate-box">
-                        <!--foreach (var item in Model.ListAlljobs)
+                        @foreach (var item in Model.ListAlljobs.GroupBy(m=>m.DepartmentName).Select(m=> new { DepartmentName = m.Key,JobCount = m.Count()}).Distinct())
                         {
-                            
+
                             <li class="job-category blue-bg">
 
                                 <div>
                                     <span class="icon-circle">
-                                        <i class="fa fa-file"></i>
+                                        <i class="fa fa-spinner"></i>
                                     </span>
-                                    <h6 class="title">item.DepartmentName</h6>-->
-                                    @*<p>( 27 openings )</p>*@
-                                <!--</div>
+                                    <h6 class="title">@item.DepartmentName</h6>
+
+                                    <p>( @item.JobCount )</p>
+                                </div>
                             </li>
-                        }-->
+                        }
 
 
-                        <li class="job-category blue-bg">
+                        @*<li class="job-category blue-bg">
                             <div>
                                 <span class="icon-circle">
                                     <i class="fa fa-medkit"></i>
@@ -159,7 +160,7 @@
                                 <h6 class="title">Banking</h6>
                                 <p>( 20 openings )</p>
                             </div>
-                        </li>
+                        </li>*@
                     </ul>
                 </div>
             </div>

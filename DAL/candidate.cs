@@ -53,11 +53,13 @@ namespace DAL
         public string EOBI { get; set; }
         public string Gender { get; set; }
         public string Bloodgroup { get; set; }
+        public Nullable<int> QualificationId { get; set; }
+        public string QualificationName { get; set; }
     
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateQualification> CandidateQualifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateExperince> CandidateExperinces { get; set; }
+        public virtual User User { get; set; }
     }
 }

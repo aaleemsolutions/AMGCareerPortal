@@ -206,7 +206,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         public JsonResult GetJobsDataTable()
         {
 
-            var GetAllJobs = jbPositions.GetAllPositionsInViewModel();
+            var GetAllJobs = jbPositions.GetAllPositionsInModel();
 
             if (GetAllJobs.ListAlljobs.Count!=0)
             {
@@ -215,6 +215,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 {
                     JobId = m.JobId,
                     JobTitle = m.JobTitle,
+                    JobStatus = m.IsPositionOpen == null || m.IsPositionOpen == true? "Open":"Closed",
                     JobLocation = m.JobLocation,
                     Department = m.DepartmentName,
                     Category = m.CategoryName,
@@ -326,7 +327,12 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             ViewBag.DesignationDropDown = GetAllDesgination;
 
 
-      
+            var GetAllBranches = new SelectList(AdoNet.GetAllbranch(), "BranchID", "BranchName").ToList();
+            GetAllBranches.Insert(0, (new SelectListItem { Text = "Select Branch", Value = "" }));
+            ViewBag.BranchDropdown = GetAllBranches;
+
+
+
 
 
 

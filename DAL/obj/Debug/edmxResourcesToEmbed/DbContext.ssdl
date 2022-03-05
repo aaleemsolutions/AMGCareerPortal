@@ -27,6 +27,13 @@
     <Property Name="DesignationName" Type="varchar" MaxLength="250" />
     <Property Name="CategoryId" Type="int" />
     <Property Name="CategoryName" Type="varchar" MaxLength="250" />
+    <Property Name="IsPositionClosed" Type="bit" />
+    <Property Name="BranchId" Type="int" />
+    <Property Name="BranchName" Type="varchar" MaxLength="400" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="400" />
+    <Property Name="GradeId" Type="int" />
+    <Property Name="GradeName" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="Cand_AMPreviousWork">
     <Key>
@@ -125,6 +132,8 @@
     <Property Name="EOBI" Type="varchar" MaxLength="250" />
     <Property Name="Gender" Type="varchar" MaxLength="250" />
     <Property Name="Bloodgroup" Type="varchar" MaxLength="250" />
+    <Property Name="QualificationId" Type="int" />
+    <Property Name="QualificationName" Type="varchar" MaxLength="400" />
   </EntityType>
   <EntityType Name="CandidateExperince">
     <Key>
@@ -213,6 +222,8 @@
     <Property Name="TotalMarks" Type="float" />
     <Property Name="ObtainedMarks" Type="float" />
     <Property Name="ShortListId" Type="int" />
+    <Property Name="GradeName" Type="varchar" MaxLength="250" />
+    <Property Name="HiredEmpCode" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="HrShortlisting">
     <Key>
@@ -221,19 +232,27 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="JobId" Type="int" />
     <Property Name="CandApplyId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EvDecisionId" Type="int" />
+  </EntityType>
+  <EntityType Name="HrShortlistingDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShortListId" Type="int" />
     <Property Name="InterviewDate" Type="date" />
     <Property Name="SlotId" Type="int" />
     <Property Name="IsSendJobForm" Type="bit" />
     <Property Name="IsEmailSend" Type="bit" />
-    <Property Name="IsInterviewComfirmed" Type="bit" />
+    <Property Name="IsInterviewConfirmed" Type="bit" />
     <Property Name="CreatedBy" Type="int" />
     <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="UpdateDate" Type="datetime" />
-    <Property Name="IsActive" Type="bit" />
     <Property Name="PanelId" Type="int" />
-    <Property Name="InterviewTypeId" Type="int" />
-    <Property Name="EvaluationId" Type="int" />
-    <Property Name="EvDecisionId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="DecisionId" Type="int" />
+    <Property Name="StartTime" Type="time" Precision="7" />
+    <Property Name="EndTime" Type="time" Precision="7" />
   </EntityType>
   <EntityType Name="InterviewPanelDetail">
     <Key>
@@ -632,27 +651,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__HrShortli__Creat__603D47BB">
+  <Association Name="FK__HrShortli__Creat__4DE98D56">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <End Role="HrShortlistingDetail" Type="Self.HrShortlistingDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="HrShortlisting">
+      <Dependent Role="HrShortlistingDetail">
         <PropertyRef Name="CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__HrShortli__Evalu__45544755">
-    <End Role="cndEvMaster" Type="Self.cndEvMaster" Multiplicity="0..1" />
-    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+  <Association Name="FK__HrShortli__Decis__58671BC9">
+    <End Role="IntEvDecision" Type="Self.IntEvDecision" Multiplicity="0..1" />
+    <End Role="HrShortlistingDetail" Type="Self.HrShortlistingDetail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="cndEvMaster">
+      <Principal Role="IntEvDecision">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="HrShortlisting">
-        <PropertyRef Name="EvaluationId" />
+      <Dependent Role="HrShortlistingDetail">
+        <PropertyRef Name="DecisionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -668,18 +687,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__HrShortli__Inter__12C8C788">
-    <End Role="InterviewTypes" Type="Self.InterviewTypes" Multiplicity="0..1" />
-    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InterviewTypes">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="HrShortlisting">
-        <PropertyRef Name="InterviewTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__HrShortli__JobId__5A846E65">
     <End Role="AllPositions" Type="Self.AllPositions" Multiplicity="0..1" />
     <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
@@ -692,26 +699,38 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__HrShortli__Panel__0D0FEE32">
+  <Association Name="FK__HrShortli__Panel__4FD1D5C8">
     <End Role="InterviewPanels" Type="Self.InterviewPanels" Multiplicity="0..1" />
-    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <End Role="HrShortlistingDetail" Type="Self.HrShortlistingDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InterviewPanels">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="HrShortlisting">
+      <Dependent Role="HrShortlistingDetail">
         <PropertyRef Name="PanelId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__HrShortli__SlotI__5C6CB6D7">
+  <Association Name="FK__HrShortli__Short__4924D839">
+    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="0..1" />
+    <End Role="HrShortlistingDetail" Type="Self.HrShortlistingDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HrShortlisting">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HrShortlistingDetail">
+        <PropertyRef Name="ShortListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HrShortli__SlotI__4A18FC72">
     <End Role="TimingSlots" Type="Self.TimingSlots" Multiplicity="0..1" />
-    <End Role="HrShortlisting" Type="Self.HrShortlisting" Multiplicity="*" />
+    <End Role="HrShortlistingDetail" Type="Self.HrShortlistingDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TimingSlots">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="HrShortlisting">
+      <Dependent Role="HrShortlistingDetail">
         <PropertyRef Name="SlotId" />
       </Dependent>
     </ReferentialConstraint>
@@ -876,6 +895,7 @@
     <EntitySet Name="cndEvDetail" EntityType="Self.cndEvDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cndEvMaster" EntityType="Self.cndEvMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HrShortlisting" EntityType="Self.HrShortlisting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HrShortlistingDetail" EntityType="Self.HrShortlistingDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InterviewPanelDetail" EntityType="Self.InterviewPanelDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InterviewPanels" EntityType="Self.InterviewPanels" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InterviewPersons" EntityType="Self.InterviewPersons" Schema="dbo" store:Type="Tables" />
@@ -968,33 +988,33 @@
       <End Role="CandidateJobApply" EntitySet="CandidateJobApply" />
       <End Role="HrShortlisting" EntitySet="HrShortlisting" />
     </AssociationSet>
-    <AssociationSet Name="FK__HrShortli__Creat__603D47BB" Association="Self.FK__HrShortli__Creat__603D47BB">
+    <AssociationSet Name="FK__HrShortli__Creat__4DE98D56" Association="Self.FK__HrShortli__Creat__4DE98D56">
       <End Role="Users" EntitySet="Users" />
-      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+      <End Role="HrShortlistingDetail" EntitySet="HrShortlistingDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK__HrShortli__Evalu__45544755" Association="Self.FK__HrShortli__Evalu__45544755">
-      <End Role="cndEvMaster" EntitySet="cndEvMaster" />
-      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+    <AssociationSet Name="FK__HrShortli__Decis__58671BC9" Association="Self.FK__HrShortli__Decis__58671BC9">
+      <End Role="IntEvDecision" EntitySet="IntEvDecision" />
+      <End Role="HrShortlistingDetail" EntitySet="HrShortlistingDetail" />
     </AssociationSet>
     <AssociationSet Name="FK__HrShortli__EvDec__46486B8E" Association="Self.FK__HrShortli__EvDec__46486B8E">
       <End Role="IntEvDecision" EntitySet="IntEvDecision" />
-      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
-    </AssociationSet>
-    <AssociationSet Name="FK__HrShortli__Inter__12C8C788" Association="Self.FK__HrShortli__Inter__12C8C788">
-      <End Role="InterviewTypes" EntitySet="InterviewTypes" />
       <End Role="HrShortlisting" EntitySet="HrShortlisting" />
     </AssociationSet>
     <AssociationSet Name="FK__HrShortli__JobId__5A846E65" Association="Self.FK__HrShortli__JobId__5A846E65">
       <End Role="AllPositions" EntitySet="AllPositions" />
       <End Role="HrShortlisting" EntitySet="HrShortlisting" />
     </AssociationSet>
-    <AssociationSet Name="FK__HrShortli__Panel__0D0FEE32" Association="Self.FK__HrShortli__Panel__0D0FEE32">
+    <AssociationSet Name="FK__HrShortli__Panel__4FD1D5C8" Association="Self.FK__HrShortli__Panel__4FD1D5C8">
       <End Role="InterviewPanels" EntitySet="InterviewPanels" />
-      <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+      <End Role="HrShortlistingDetail" EntitySet="HrShortlistingDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK__HrShortli__SlotI__5C6CB6D7" Association="Self.FK__HrShortli__SlotI__5C6CB6D7">
-      <End Role="TimingSlots" EntitySet="TimingSlots" />
+    <AssociationSet Name="FK__HrShortli__Short__4924D839" Association="Self.FK__HrShortli__Short__4924D839">
       <End Role="HrShortlisting" EntitySet="HrShortlisting" />
+      <End Role="HrShortlistingDetail" EntitySet="HrShortlistingDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HrShortli__SlotI__4A18FC72" Association="Self.FK__HrShortli__SlotI__4A18FC72">
+      <End Role="TimingSlots" EntitySet="TimingSlots" />
+      <End Role="HrShortlistingDetail" EntitySet="HrShortlistingDetail" />
     </AssociationSet>
     <AssociationSet Name="FK__Interview__Creat__6E8B6712" Association="Self.FK__Interview__Creat__6E8B6712">
       <End Role="Users" EntitySet="Users" />

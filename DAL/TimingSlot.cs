@@ -17,7 +17,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TimingSlot()
         {
-            this.HrShortlistings = new HashSet<HrShortlisting>();
+            this.HrShortlistingDetails = new HashSet<HrShortlistingDetail>();
         }
     
         public int Id { get; set; }
@@ -29,7 +29,7 @@ namespace DAL
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HrShortlisting> HrShortlistings { get; set; }
+        public virtual ICollection<HrShortlistingDetail> HrShortlistingDetails { get; set; }
         public virtual User User { get; set; }
     }
 }

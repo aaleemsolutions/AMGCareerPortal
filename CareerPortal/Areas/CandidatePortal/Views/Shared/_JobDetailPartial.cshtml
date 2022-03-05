@@ -131,24 +131,27 @@
           }
       }
 
+
       $(document).ready(function () {
           debugger;
           if ($("input[type='radio'][name='AppliedByCv']:checked").val() != "true") {
               $(".file-upload-wrapper").css('display', 'none');
           }
+
+          $('input[type=radio][name=AppliedByCv]').change(function () {
+
+              if ($(this).val() == "true") {
+                  $(".loading").show()
+                  $(".file-upload-wrapper").css('display', 'block');
+                  $(".loading").hide()
+              }
+              else if ($(this).val() == "false") {
+                  $(".file-upload-wrapper").css('display', 'none');
+              }
+          });
         
       });
 
-      $('input[type=radio][name=AppliedByCv]').change(function () {
-          
-          if ($(this).val() == "true") {
-              $(".loading").show()
-              $(".file-upload-wrapper").css('display', 'block');
-              $(".loading").hide()
-          }
-          else if ($(this).val() == "false") {
-              $(".file-upload-wrapper").css('display', 'none');
-          }
-      });
+     
 
   </script>

@@ -18,34 +18,21 @@ namespace DAL
         public HrShortlisting()
         {
             this.cndEvMasters = new HashSet<cndEvMaster>();
+            this.HrShortlistingDetails = new HashSet<HrShortlistingDetail>();
         }
     
         public int Id { get; set; }
         public Nullable<int> JobId { get; set; }
         public Nullable<int> CandApplyId { get; set; }
-        public Nullable<System.DateTime> InterviewDate { get; set; }
-        public Nullable<int> SlotId { get; set; }
-        public Nullable<bool> IsSendJobForm { get; set; }
-        public Nullable<bool> IsEmailSend { get; set; }
-        public Nullable<bool> IsInterviewComfirmed { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
-        public Nullable<int> PanelId { get; set; }
-        public Nullable<int> InterviewTypeId { get; set; }
-        public Nullable<int> EvaluationId { get; set; }
         public Nullable<int> EvDecisionId { get; set; }
     
         public virtual AllPosition AllPosition { get; set; }
         public virtual CandidateJobApply CandidateJobApply { get; set; }
-        public virtual User User { get; set; }
-        public virtual TimingSlot TimingSlot { get; set; }
-        public virtual InterviewPanel InterviewPanel { get; set; }
-        public virtual InterviewType InterviewType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cndEvMaster> cndEvMasters { get; set; }
-        public virtual cndEvMaster cndEvMaster { get; set; }
         public virtual IntEvDecision IntEvDecision { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HrShortlistingDetail> HrShortlistingDetails { get; set; }
     }
 }

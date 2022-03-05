@@ -10,11 +10,11 @@ namespace BAL.CandidateDbSaveClass
 {
     public class JobPositionsDbClass : IJobPositions<AllPosition>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
 
         public JobPositionsDbClass()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
         }
         public bool AddPositions(AllPosition Applied)
         {
@@ -48,22 +48,36 @@ namespace BAL.CandidateDbSaveClass
 
         public List<AllPosition> GetAllPositions()
         {
-            var getallpositions  = dbcontext.AllPositions.ToList();
-            
+            //var getallpositions  = dbcontext.AllPositions.ToList();
+
+            //return getallpositions;
+            var getallpositions = dbcontext.AllPositions.Where(m => m.IsPositionOpen == null || m.IsPositionOpen == true).ToList();
+
+            return getallpositions;
+
+        }
+
+        public List<AllPosition> GetAllPositions(bool OpenPositionsOnly = true)
+        {
+
+            var getallpositions = dbcontext.AllPositions.ToList();
+
             return getallpositions;
 
         }
 
         public AllPosition GetPosition(int Applied)
         {
-            var getpositions = dbcontext.AllPositions.Where(m=>m.JobId== Applied).FirstOrDefault();
+            var getpositions = dbcontext.AllPositions.AsNoTracking().Where(m=>m.JobId== Applied).FirstOrDefault();
 
             return getpositions;
         }
 
         public bool UpdatePosition(AllPosition Applied)
         {
+            
             dbcontext.Entry(Applied).State = System.Data.Entity.EntityState.Modified;
+        
             dbcontext.SaveChanges();
 
             return true;

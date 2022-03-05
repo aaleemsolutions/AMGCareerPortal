@@ -9,6 +9,9 @@
         @Html.HiddenFor(m => m.jobApplyViewModels.User.Id)
         @Html.HiddenFor(m => m.jobApplyViewModels.CndJobApply.User.UserEmail)
 
+        @Html.HiddenFor(m => m.OldShortlistDecisionId)
+
+
 
         <div class="col-md-2 col-sm-4">
             <label>Candidate Name <span class="text-danger">*</span> </label>
@@ -22,7 +25,19 @@
 
             </div>
         </div>
-        <div class="col-md-2 col-sm-4">
+        <div class="col-md-4 col-sm-4">
+            <label>User Email <span class="text-danger">*</span> </label>
+            <div id="the-basics">
+
+                @Html.TextBoxFor(m => m.jobApplyViewModels.CndJobApply.User.UserEmail, new { @class = "typeahead ", placeholder = "User Email", @readonly = "true" })
+
+
+
+
+
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4">
             <label>Job Title <span class="text-danger">*</span></label>
             <div id="the-basics1">
                 @*<input class="typeahead" type="text" placeholder="First Name" >*@
@@ -38,7 +53,7 @@
             <div id="bloodhound">
 
                 <div id="dobDate" class="input-group date datepickerfuture ">
-                    @Html.TextBoxFor(Model => Model.HrShortlisting.InterviewDate, "{0:dd-MMM-yyyy}",
+                    @Html.TextBoxFor(Model => Model.HrShortlistingDetail.InterviewDate, "{0:dd-MMM-yyyy}",
 new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder = "Interview Date" })
 
                     <span class="input-group-addon input-group-append border-left">
@@ -47,7 +62,7 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
                 </div>
 
                 <span class="ErrorSH_InterviewDate text-danger"></span>
-
+                @Html.ValidationMessageFor(M => M.HrShortlistingDetail.InterviewDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -55,27 +70,29 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
             <label>Interview Timings <span class="text-danger">*</span></label>
             <div id="the-basics1">
                 @*<input class="typeahead" type="text" placeholder="First Name" >*@
-                @Html.DropDownListFor(m => m.HrShortlisting.SlotId, new SelectList(ViewBag.TimingsSlotsDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "InterviewTiming" })
+
+                @Html.DropDownListFor(m => m.HrShortlistingDetail.SlotId, new SelectList(ViewBag.TimingsSlotsDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "InterviewTiming" })
 
                 <span class="ErrorSH_InterviewTiming text-danger"></span>
-
+                @Html.ValidationMessageFor(M => M.HrShortlistingDetail.SlotId, "", new { @class = "text-danger" })
             </div>
         </div>
 
-     
+
 
         <div class="col-md-3 col-sm-4">
             <label>Interview Panel <span class="text-danger">*</span></label>
             <div id="the-basics1">
                 @*<input class="typeahead" type="text" placeholder="First Name" >*@
-                @Html.DropDownListFor(m => m.HrShortlisting.PanelId, new SelectList(ViewBag.DrpInterviewPanel, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "InterviewPanel" })
+                @Html.DropDownListFor(m => m.HrShortlistingDetail.PanelId, new SelectList(ViewBag.DrpInterviewPanel, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "InterviewPanel" })
+                @Html.ValidationMessageFor(M => M.HrShortlistingDetail.PanelId, "", new { @class = "text-danger" })
 
                 <span class="ErrorSH_InterviewTiming text-danger"></span>
 
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-2" style="/*! margin: auto; */margin-top: auto;">
             <div id="the-basics1">
 
                 <label>@Html.CheckBoxFor(m => m.IsEmailSend, new { @id = "isEmailSend" }) Send Email</label>
@@ -84,9 +101,6 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
                 <span class="ErrorSH_CheckboxError text-danger"></span>
             </div>
 
-        </div>
-        <div class="col-md-2">
-
             <div id="the-basics1">
 
 
@@ -94,7 +108,10 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
 
                 <span class="ErrorSH_CheckboxError text-danger"></span>
             </div>
+
         </div>
+
+
     </div>
     <div class="row" id="EmailTemplateShortlist" style="margin-top:10px;">
         <div class="accordion accordion-solid-header" id="accordion-4" role="tablist">
@@ -123,8 +140,16 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
 
 
 <script>
-    $(document).ready(function () {
+    function loadInterviewDateTime() {
+        var InterviewDate = $("#InterviewDate").val();
+        var InterviewTimings = $("#InterviewTiming option:selected").text();
+      
         
+        $("#rtbInterviewTiming").html(InterviewDate + " - " + InterviewTimings);
+
+    }
+    $(document).ready(function () {
+        loadInterviewDateTime();
         $('.RichEmailBody').summernote({
             height: 200
         });
@@ -148,6 +173,43 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
             });
         }
     });
+    
+    $("#InterviewDate").change(function () {
+
+        loadInterviewDateTime();
+    });
+    $("#InterviewTiming").change(function () {
+
+        loadInterviewDateTime();
+    });
+
+
+
+    $("#isEmailSend").change(function () {
+
+        if (this.checked) {
+
+            showHideDomwithId("#EmailTemplateShortlist", true)
+
+
+        } else {
+            showHideDomwithId("#EmailTemplateShortlist", false)
+        }
+    });
+
+    $("#isJobFormSend").change(function () {
+
+        if (this.checked) {
+
+            showHideDomwithId("#rtbJobAppForm", true)
+
+
+        } else {
+            showHideDomwithId("#rtbJobAppForm", false)
+        }
+    });
 
 
 </script>
+
+

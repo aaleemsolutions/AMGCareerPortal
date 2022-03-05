@@ -8,26 +8,22 @@
     }
 </style>
 
-
 @using (Ajax.BeginForm("InterviewEvaluationForm",
     new { Controller = "Shortlisting", area = "Recruiter", @enctype = "multipart/form-data" },
-    new AjaxOptions { OnFailure = "OnJobFailure", OnSuccess = "OnJobSubmit", OnBegin = "BeginRequest", LoadingElementId = "PostLoader", UpdateTargetId = "PartialCndEvaluationForm" }
+    new AjaxOptions { OnFailure = "OnJobFailure", OnSuccess = "OnJobSubmit",
+        InsertionMode = InsertionMode.Replace,
+        OnBegin = "BeginRequest", LoadingElementId = "PostLoader", UpdateTargetId = "PartialCndEvaluationForm" }
     ))
 {
 
-<div id="PartialCndEvaluationForm">
-    
-    @Html.Partial("~/Areas/Recruiter/Views/Shared/_CndEvaluationForm.cshtml", Model)
-</div>
-
-
- 
-
+    <div id="PartialCndEvaluationForm">
+        @Html.Partial("~/Areas/Recruiter/Views/Shared/_CndEvaluationForm.cshtml", Model)
+    </div>
 
 }
 <div class="loading" id="PostLoader">Loading&#8230;</div>
 
-
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
@@ -43,38 +39,33 @@
 
         $("#CndEvMaster_TotalMarks").val($(".tableRadioButton").find("tbody > tr").has("input:radio").length * 5);
 
-        calculateRadioValue();
-    });
-
-    $('.rdofactors').change(function () {
-
-        calculateRadioValue();
+      //  calculateRadioValue();
 
     });
-    function calculateRadioValue() {
-        var totalvalue = 0;
-        $('.rdofactors').each(function () {
-
-            var $this = $(this),
-                id = $this.attr('id'),
-                url = $this.attr('datasrc');
-
-            if ($(this).prop('checked')) {
-
-                totalvalue += parseInt($(this).closest('td').find(".hdnClosestMarks").val());
-
-            }
-
-        });
-        $("#CndEvMaster_ObtainedMarks").val(totalvalue)
-        var overallrating = Math.round(($("#CndEvMaster_ObtainedMarks").val() * 5) / $("#CndEvMaster_TotalMarks").val());
-        $("#OverrallRating").val(overallrating)
 
 
-    }
+    //$('.rdofactors').change(function () {
+    //    calculateRadioValue();
+    //});
+
+    //function calculateRadioValue() {
+    //    var totalvalue = 0;
+    //    $('.rdofactors').each(function () {
+    //        var $this = $(this),
+    //            id = $this.attr('id'),
+    //            url = $this.attr('datasrc');
+    //        if ($(this).prop('checked')) {
+    //            totalvalue += parseInt($(this).closest('td').find(".hdnClosestMarks").val());
+    //        }
+    //    });
+    //    $("#CndEvMaster_ObtainedMarks").val(totalvalue)
+    //    var overallrating = Math.round(($("#CndEvMaster_ObtainedMarks").val() * 5) / $("#CndEvMaster_TotalMarks").val());
+    //    $("#OverrallRating").val(overallrating)
+    //}
+
     function OnJobSubmit(data) {
        
-
+        console.log(data);
 
         //    ShowToaster(1, "Job Application Form Updated Successfully!", "Job Application!");
 
@@ -101,6 +92,15 @@
         }
     }
 
+    $("#btnIntEvaluation").unbind().click(function () {
+        var radiovalue = $("input[type='radio'][name='CndEvMaster.IntEvDecisionId']:checked").val()
+        if (radiovalue == "2") {
+            return validateShortListEvaluation();
+        }
+ 
+        /*return false;*/
+
+    });
 
 //end sticky button
 

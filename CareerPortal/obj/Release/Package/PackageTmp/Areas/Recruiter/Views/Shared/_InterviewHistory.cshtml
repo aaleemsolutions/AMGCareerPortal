@@ -1,0 +1,46 @@
+﻿
+
+@model ViewModels.CandShortListViewModel
+
+@{BAL.UserRegModule userReg = new BAL.UserRegModule();}
+
+
+<div class="row">
+    <ul class="bullet-line-list">
+        @if (Model.HrShortlisting != null)
+        {
+            foreach (var item in Model.HrShortlisting.HrShortlistingDetails.OrderByDescending(m => m.Id))
+            {
+                <li style="margin-bottom:30px;">
+                    <h5>
+
+                        <strong>@(item.IntEvDecision!=null?item.IntEvDecision.DecisionName:"Shortlist for Interview") By  @(userReg.getUser(item.CreatedBy.Value).userinfo.FullName.ToString()) </strong>
+                    </h5>
+                    <p>Interview Panel: @item.InterviewPanel.PanelName on @item.InterviewDate - @item.TimingSlot.StartTime -@item.TimingSlot.EndTime </p>
+                        @*<p class="text-muted mb-4">
+                            <i class="ti-time"> </i>
+                            @{
+                                var FromYear = new DateTime(item.DgrFrmYear.Value, item.DgrFrmMonth.Value, 1).ToString("MMM-yyyy");
+                                var ToYear = item.DgrToYear == null ? " - " : new DateTime(item.DgrToYear.Value, item.DgrToMonth.Value, 1).ToString("MMM-yyyy");
+                                <text>
+                                    @FromYear  -  @ToYear
+                                </text>
+
+
+
+                            }
+                        </p>*@
+
+                </li>
+
+            }
+        }
+        else
+        {
+            <li>No Record Found</li>
+
+        }
+
+
+    </ul>
+</div>

@@ -21,7 +21,7 @@ namespace CareerPortal.CustomAttributes
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var instance = validationContext.ObjectInstance;
-            var type = instance.GetType();
+            var type = instance.GetType(); 
             var proprtyvalue = type.GetProperty(PropertyName).GetValue(instance, null);
             if (proprtyvalue.ToString() == Value.ToString() && value == null)
             {

@@ -10,11 +10,11 @@ namespace BAL
 {
     public class CndQualificationGeneric : ICandidateQualification<CandidateQualification>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
 
         public CndQualificationGeneric()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
         }
 
         public CandidateQualification AddCandidateQualification(CandidateQualification Candidatequal)

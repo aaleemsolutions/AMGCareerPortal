@@ -26,10 +26,10 @@ namespace DAL
         public Nullable<int> ScoreId { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CandidateLang> CandidateLangs { get; set; }
         public virtual LangScoreType LangScoreType { get; set; }
         public virtual Language Language { get; set; }
         public virtual LanguageScore LanguageScore { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CandidateLang> CandidateLangs { get; set; }
     }
 }

@@ -82,6 +82,7 @@
     <Compile Include="CndExperienceViewModel.cs" />
     <Compile Include="CndQualificationViewModel.cs" />
     <Compile Include="CvDetailViewModel.cs" />
+    <Compile Include="EmployeeHiringViewModel.cs" />
     <Compile Include="InterviewPanelViewModel.cs" />
     <Compile Include="IntEvaluationViewModel.cs" />
     <Compile Include="JobApplicationViewModel.cs" />

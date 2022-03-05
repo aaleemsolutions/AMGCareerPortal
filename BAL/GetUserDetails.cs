@@ -10,10 +10,10 @@ namespace BAL
 {
     public class GetUserDetails
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public GetUserDetails()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
 
         }
 
@@ -24,7 +24,7 @@ namespace BAL
         }
 
 
-    
+
 
     }
 }

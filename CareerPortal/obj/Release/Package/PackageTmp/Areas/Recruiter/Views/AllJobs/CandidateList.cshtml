@@ -108,7 +108,7 @@
                                     </td>
                                     <td class="text-center">
 
-                                        @item.CreatedOn.Value.ToString("dd-MMM-yyyy HH:mm tt")
+                                        @(item.CreatedOn!=null?item.CreatedOn.Value.ToString("dd-MMM-yyyy HH:mm tt"):"")
                                     </td>
                                     <td class="text-center">
 

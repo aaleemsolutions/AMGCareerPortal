@@ -449,6 +449,8 @@
     <Content Include="CndDashboardAssets\SummerNote\summernote.min.js" />
     <Content Include="CndDashboardAssets\Tagify\script.js" />
     <Content Include="CndDashboardAssets\Tagify\style.css" />
+    <Content Include="CndDashboardAssets\tempusdominus-bootstrap-4\tempusdominus-bootstrap-4.js" />
+    <Content Include="CndDashboardAssets\tempusdominus-bootstrap-4\tempusdominus-bootstrap-4.min.css" />
     <Content Include="CndDashboardAssets\vendors\ace-builds\src-min\ace.js" />
     <Content Include="CndDashboardAssets\vendors\ace-builds\src-min\mode-javascript.js" />
     <Content Include="CndDashboardAssets\vendors\ace-builds\src-min\theme-chaos.js" />
@@ -727,6 +729,7 @@
     <Content Include="Areas\Recruiter\Views\Shortlisting\InterviewEvaluationForm.cshtml" />
     <Content Include="Areas\Recruiter\Views\Shared\_CndEvaluationForm.cshtml" />
     <Content Include="Areas\Recruiter\Views\Shortlisting\InterviewEvaluationList.cshtml" />
+    <Content Include="Areas\Recruiter\Views\Shared\_InterviewHistory.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Scripts\inputmask\inputmask.js" />

@@ -11,10 +11,10 @@ namespace BAL.CandidateDbSaveClass
 {
     internal class CndExpeDbSave : ICandidateExperince<CandidateExperince>
     {
-        CareerPortalEntities dbcontext;
+        CareerPortalEntities1 dbcontext;
         public CndExpeDbSave()
         {
-            dbcontext = new CareerPortalEntities();
+            dbcontext = new CareerPortalEntities1();
 
         }
         public CandidateExperince AddCandidateExperince(CandidateExperince candExpId)

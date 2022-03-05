@@ -24,12 +24,12 @@ namespace BAL.Ado.Net
             try
             {
                 string query = "select * from Division";
-                var reader = ado.GetReader(query, null); 
+                var reader = ado.GetReader(query, null);
                 List<Division> divisionList = new List<Division>();
                 while (reader.Read())
                 {
                     Division d = new Division();
-                    d.DivisionID = Convert.ToInt32( reader["DivisionID"]);
+                    d.DivisionID = Convert.ToInt32(reader["DivisionID"]);
                     d.DivisionName = reader["Division"].ToString();
                     d.isActive = Convert.ToBoolean(reader["isActive"]);
 
@@ -47,7 +47,7 @@ namespace BAL.Ado.Net
             {
                 ado.CloseSqlConnection();
             }
-          
+
         }
 
         public List<Category> GetAllCatgory()
@@ -81,19 +81,19 @@ namespace BAL.Ado.Net
 
         }
 
-        public List<Department> GetAllDepartment()
+        public List<cs_Department> GetAllDepartment()
         {
             try
             {
                 string query = "select * from Department";
                 var reader = ado.GetReader(query, null);
-                List<Department> DepartmentList = new List<Department>();
+                List<cs_Department> DepartmentList = new List<cs_Department>();
                 while (reader.Read())
                 {
-                    Department c = new Department();
+                    cs_Department c = new cs_Department();
                     c.Department_ID = Convert.ToInt32(reader["Department_Id"]);
                     c.Department_Name = Convert.ToString(reader["Department_Name"].ToString());
-                    c.isActive = Convert.ToBoolean( reader["isActive"]);
+                    c.isActive = Convert.ToBoolean(reader["isActive"]);
 
                     DepartmentList.Add(c);
                 }
@@ -112,14 +112,14 @@ namespace BAL.Ado.Net
 
         }
 
-        public List<Department> GetAllDepartment(string UnitType,string connectionString)
+        public List<cs_Department> GetAllDepartment(string UnitType, string connectionString)
         {
             try
             {
                 string query = "select 1";
                 //var reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString());
                 var reader = ado.GetReader(query, null, System.Data.CommandType.Text, connectionString);
-                if (UnitType.ToUpper()=="Garments".ToUpper())
+                if (UnitType.ToUpper() == "Garments".ToUpper())
                 {
                     query = "select * from Department";
                     //reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString());
@@ -127,16 +127,16 @@ namespace BAL.Ado.Net
                 }
                 else
                 {
-                     query = "select * from denim_db.dbo.Department";
+                    query = "select * from denim_db.dbo.Department";
                     //reader = ado.GetReader(query, null, System.Data.CommandType.Text, GlobalFields.GetConnectionString(false));
                     reader = ado.GetReader(query, null, System.Data.CommandType.Text, connectionString);
                 }
 
-                
-                List<Department> DepartmentList = new List<Department>();
+
+                List<cs_Department> DepartmentList = new List<cs_Department>();
                 while (reader.Read())
                 {
-                    Department c = new Department();
+                    cs_Department c = new cs_Department();
                     c.Department_ID = (Int32)reader["Department_Id"];
                     c.Department_Name = reader["Department_Name"].ToString();
                     c.isActive = (bool)reader["isActive"];
@@ -190,12 +190,12 @@ namespace BAL.Ado.Net
         }
 
 
-        public List<CvMain> GetAllCVCandidate(int CvId = 0,bool withQlf = false,bool withExper = false,bool withSkils = false,bool withInternship = false)
+        public List<CvMain> GetAllCVCandidate(int CvId = 0, bool withQlf = false, bool withExper = false, bool withSkils = false, bool withInternship = false)
         {
             try
             {
-                string Condition = CvId.ToString()!="0"?" and cv.CVID = "+CvId:"";
-                string query = "select distinct cv.CVID,cv.CategoryID,c.CategoryDesc,cv.DepartmentID,d.Department_Name,cv.CandidateName, cv.FatherHusbandName,cv.Relation,cv.Gender, cv.MaritalStatus,cv.CNIC,cv.CNICExpire,cv.DOB,cv.Mobile, cv.Email,cv.CurrentAddress,cv.DisabilityID,cv.LastUpdateDate,cv.DivisionID,ds.Designation_Name from CV_Main cv left outer join Department d on d.Department_ID = cv.DepartmentID left outer join Designation ds on ds.Designation_ID = cv.DesignationID left outer join Category c on c.CategoryID = cv.CategoryID where 1=1 "+Condition +" and cv.CandidateName <> '' ";
+                string Condition = CvId.ToString() != "0" ? " and cv.CVID = " + CvId : "";
+                string query = "select distinct cv.CVID,cv.CategoryID,c.CategoryDesc,cv.DepartmentID,d.Department_Name,cv.CandidateName, cv.FatherHusbandName,cv.Relation,cv.Gender, cv.MaritalStatus,cv.CNIC,cv.CNICExpire,cv.DOB,cv.Mobile, cv.Email,cv.CurrentAddress,cv.DisabilityID,cv.LastUpdateDate,cv.DivisionID,ds.Designation_Name from CV_Main cv left outer join Department d on d.Department_ID = cv.DepartmentID left outer join Designation ds on ds.Designation_ID = cv.DesignationID left outer join Category c on c.CategoryID = cv.CategoryID where 1=1 " + Condition + " and cv.CandidateName <> '' ";
                 var reader = ado.GetReader(query, null);
                 List<CvMain> CategoryList = new List<CvMain>();
                 while (reader.Read())
@@ -203,7 +203,7 @@ namespace BAL.Ado.Net
                     CvMain c = new CvMain();
                     c.CVID = (int)reader["CVID"];
                     c.CategoryID = (int)reader["CategoryID"];
-                    c.DepartmentID = reader["DepartmentID"].ToString()==""?0: (int)reader["DepartmentID"];
+                    c.DepartmentID = reader["DepartmentID"].ToString() == "" ? 0 : (int)reader["DepartmentID"];
                     c.DepartmentName = Convert.ToString(reader["Department_Name"]);
                     c.CandidateName = Convert.ToString(reader["CandidateName"]);
                     c.FatherHusbandName = Convert.ToString(reader["FatherHusbandName"]);
@@ -211,7 +211,7 @@ namespace BAL.Ado.Net
                     c.Gender = Convert.ToString(reader["Gender"]);
                     c.MaritalStatus = Convert.ToString(reader["MaritalStatus"]);
                     c.CNIC = Convert.ToString(reader["CNIC"]);
-                    c.CNICExpire = reader["CNICExpire"].ToString() =="" ? DateTime.Now:(DateTime)reader["CNICExpire"];
+                    c.CNICExpire = reader["CNICExpire"].ToString() == "" ? DateTime.Now : (DateTime)reader["CNICExpire"];
                     DateTime validDate;
                     if (DateTime.TryParse(reader["CNICExpire"].ToString(), out validDate))
                     {
@@ -222,7 +222,7 @@ namespace BAL.Ado.Net
                         // Aww.. :(
                     }
 
-        
+
                     if (DateTime.TryParse(reader["CNICExpire"].ToString(), out validDate))
                     {
 
@@ -234,10 +234,10 @@ namespace BAL.Ado.Net
                     }
 
                     c.Mobile = Convert.ToString(reader["Mobile"]);
-                    c.Email = Convert.ToString( reader["Email"]);
+                    c.Email = Convert.ToString(reader["Email"]);
                     c.CurrentAddress = Convert.ToString(reader["CurrentAddress"]);
                     c.DisabilityID = (int)reader["DisabilityID"];
-                    c.LastUpdateDate = reader["LastUpdateDate"].ToString() ==""?DateTime.Now: (DateTime)reader["LastUpdateDate"];
+                    c.LastUpdateDate = reader["LastUpdateDate"].ToString() == "" ? DateTime.Now : (DateTime)reader["LastUpdateDate"];
                     c.DivisionID = (int)reader["DivisionID"];
                     c.DesignationName = Convert.ToString(reader["Designation_Name"]);
                     c.CategoryName = Convert.ToString(reader["CategoryDesc"]);
@@ -284,11 +284,11 @@ namespace BAL.Ado.Net
         }
 
 
-        public List<CV_Qualification> GetAllQualification(int CVID )
+        public List<CV_Qualification> GetAllQualification(int CVID)
         {
             try
             {
-                string query = "select cq.*,q.Qualification_Name,q.Degree from CV_Qualification cq inner join Qualification q  on q.Qualification_ID = cq.QualificationID where CVID = " + CVID+"";
+                string query = "select cq.*,q.Qualification_Name,q.Degree from CV_Qualification cq inner join Qualification q  on q.Qualification_ID = cq.QualificationID where CVID = " + CVID + "";
                 var reader = ado1.GetReader(query, null);
                 List<CV_Qualification> CategoryList = new List<CV_Qualification>();
                 while (reader.Read())
@@ -296,7 +296,7 @@ namespace BAL.Ado.Net
                     CV_Qualification cq = new CV_Qualification();
                     cq.CVID = (int)reader["CVID"];
                     cq.CV_QID = (int)reader["CV_QID"];
-                    cq.Duration = Convert.ToString (reader["Duration"]);
+                    cq.Duration = Convert.ToString(reader["Duration"]);
                     cq.StartDate = VariableCasting.ConvertToDatetime(reader["EndDate"]);
                     cq.EndDate = VariableCasting.ConvertToDatetime(reader["EndDate"]);
                     cq.Field = Convert.ToString(reader["Field"]);
@@ -452,7 +452,7 @@ namespace BAL.Ado.Net
                     cq.EmployeenameWithCode = Convert.ToString(reader["EmployeeCode"]) + "-" + Convert.ToString(reader["EmployeeName"]) + " - " + Convert.ToString(reader["Designation_Name"]);
                     cq.Email = Convert.ToString(reader["Email"]);
                     cq.Mobile = Convert.ToString(reader["Mobile"]);
-                    
+
 
 
                     CategoryList.Add(cq);
@@ -477,7 +477,7 @@ namespace BAL.Ado.Net
         {
             try
             {
-                string query = "select * from vuAllEmpInfo where EmployeeID = "+EmpId+" ";
+                string query = "select * from vuAllEmpInfo where EmployeeID = " + EmpId + " ";
                 var reader = ado1.GetReader(query, null);
                 EmployeeView CategoryList = new EmployeeView();
                 while (reader.Read())
@@ -510,14 +510,14 @@ namespace BAL.Ado.Net
         }
 
 
-        public List<EmployeeView> GetEmployeeByDeptIdInView(int DepartmentId,string UnitType)
+        public List<EmployeeView> GetEmployeeByDeptIdInView(int DepartmentId, string UnitType)
         {
             try
             {
-                string query = "select * from vuAllEmpInfo where Department_ID = " + DepartmentId + " and DB = '"+UnitType+ "' order by Designation_Name,EmployeeName";
+                string query = "select * from vuAllEmpInfo where Department_ID = " + DepartmentId + " and DB = '" + UnitType + "' order by Designation_Name,EmployeeName";
 
-                 
-                
+
+
                 var reader = ado1.GetReader(query, null);
                 List<EmployeeView> CategoryList = new List<EmployeeView>();
                 while (reader.Read())
@@ -525,7 +525,7 @@ namespace BAL.Ado.Net
                     EmployeeView cq = new EmployeeView();
                     cq.EmployeeID = (int)reader["EmployeeID"];
                     cq.EmployeeName = Convert.ToString(reader["EmployeeName"]);
-                    cq.EmployeenameWithCode = Convert.ToString(reader["EmployeeCode"]) +"-"+ Convert.ToString(reader["EmployeeName"]) +" - "+ Convert.ToString(reader["Designation_Name"]);
+                    cq.EmployeenameWithCode = Convert.ToString(reader["EmployeeCode"]) + "-" + Convert.ToString(reader["EmployeeName"]) + " - " + Convert.ToString(reader["Designation_Name"]);
                     cq.Department_Name = Convert.ToString(reader["Department_Name"]);
                     cq.Designation_Name = Convert.ToString(reader["Designation_Name"]);
                     cq.Email = Convert.ToString(reader["Email"]);
@@ -560,7 +560,7 @@ namespace BAL.Ado.Net
                 while (reader.Read())
                 {
                     EmployeeView cq = new EmployeeView();
-                    cq.EmployeeID = (int)reader["EmployeeID"];
+                    cq.EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
                     cq.EmployeeName = Convert.ToString(reader["EmployeeName"]);
                     cq.EmployeenameWithCode = Convert.ToString(reader["EmployeeCode"]) + "-" + Convert.ToString(reader["EmployeeName"]) + " - " + Convert.ToString(reader["Designation_Name"]);
                     cq.Department_Name = Convert.ToString(reader["Department_Name"]);
@@ -584,6 +584,40 @@ namespace BAL.Ado.Net
 
         }
 
+
+        public List<CS_Branch> GetAllbranch()
+        {
+            try
+            {
+                string query = "select * from Branch order by BranchName";
+
+
+
+                var reader = ado1.GetReader(query, null);
+                List<CS_Branch> CategoryList = new List<CS_Branch>();
+                while (reader.Read())
+                {
+                    CS_Branch cq = new CS_Branch();
+                    cq.BranchID = Convert.ToInt32(reader["BranchID"]);
+                    cq.BranchName = Convert.ToString(reader["BranchName"]);
+                    cq.CompanyID = Convert.ToInt32(reader["CompanyID"]);
+
+                    CategoryList.Add(cq);
+                }
+
+                return CategoryList;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                ado1.CloseSqlConnection();
+            }
+
+        }
 
     }
 }

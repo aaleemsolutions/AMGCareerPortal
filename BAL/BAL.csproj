@@ -90,6 +90,7 @@
     <Compile Include="DbSaveClass\LangDbSave.cs" />
     <Compile Include="DependantNameDbSave.cs" />
     <Compile Include="Cand_ProReferenceClass.cs" />
+    <Compile Include="EmployeeHiringClass\EmployeeHiringDbClass.cs" />
     <Compile Include="HRPanelDB.cs" />
     <Compile Include="HR_SlotsTimings.cs" />
     <Compile Include="IntEvaluation.cs" />

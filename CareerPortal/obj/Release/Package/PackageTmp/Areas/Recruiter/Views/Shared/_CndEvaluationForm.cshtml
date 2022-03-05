@@ -4,6 +4,28 @@
     .table th, .jsgrid .jsgrid-table th, .table td, .jsgrid .jsgrid-table td {
         white-space: normal;
     }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        display: block;
+        padding-left: 0px;
+        padding-right: 0px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .select2-selection__rendered {
+        line-height: 24px !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 50px !important;
+        background: #fff !important;
+    }
+
+    .select2-selection__arrow {
+        height: 50px !important;
+    }
 </style>
 
 
@@ -19,13 +41,13 @@
                         <div class="col-md-6">
                             <label>Applicant Name <span class="text-danger">*</span> </label>
                             <div id="the-basics">
-                                @Html.HiddenFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.User.Id)
-                                @Html.HiddenFor(m => m.CandShortListViewModel.HrShortlisting.Id)
-                                @Html.HiddenFor(m => m.CndEvMaster.Id)
-                                @Html.HiddenFor(m => m.CndEvMaster.fdGivenBy)
-                                @Html.HiddenFor(m => m.CndEvMaster.ShortListId)
-                                @Html.HiddenFor(m => m.CndEvMaster.creationdate)
-                                @Html.HiddenFor(m => m.CndEvMaster.fdGivenBy)
+                                @Html.HiddenFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.User.Id, new { @Id = "HiddenUserId" })
+                                @Html.HiddenFor(m => m.CandShortListViewModel.HrShortlisting.Id, new { @Id = "ShortListId" })
+                                @Html.HiddenFor(m => m.CndEvMaster.Id,new { @Id="EVMasterId"})
+                                @Html.HiddenFor(m => m.CndEvMaster.fdGivenBy, new { @Id = "EvMasterfdGivenBy" })
+                                @Html.HiddenFor(m => m.CndEvMaster.ShortListId, new { @Id = "EvMasterShortListId" })
+                                @Html.HiddenFor(m => m.CndEvMaster.creationdate, new { @Id = "EvMastercreationdate" })
+                                @Html.HiddenFor(m => m.CandShortListViewModel.OldShortlistDecisionId)
 
                                 @Html.TextBoxFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.User.FullName, new { @class = "typeahead validateTextOnly", placeholder = "Candidate Name", @readonly = "readonly" })
 
@@ -58,10 +80,11 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label>Interviewer Name <span class="text-danger">*</span> </label>
+                            <label>Interviewer Name<span class="text-danger">*</span> </label>
                             <div id="the-basics">
+                                
 
-                                @Html.TextBoxFor(m => m.CandShortListViewModel.HrShortlisting.CandidateJobApply.User.FullName, new { @class = "typeahead validateTextOnly", placeholder = "Interviewer Name", @readonly = "readonly" })
+                                @Html.TextBox("feedbackGivenBy",null, new { @class = "typeahead validateTextOnly", placeholder = "Interviewer Name", @readonly = "readonly", @value=ViewBag.FeedbackGivenBy })
 
                             </div>
                         </div>
@@ -314,7 +337,7 @@
                         @Html.ValidationMessageFor(M => M.CndEvMaster.IntEvDecisionId, "", new { @class = "text-danger" })
 
                         <hr />
-                        <div class="row">
+                        <div class="row" id="SelectedDiv">
 
 
                             <div class="col-md-3">
@@ -352,15 +375,18 @@
                             <div class="col-md-3">
 
 
-                                <span>Designation</span>
-                                <span>  @Html.TextBoxFor(m => m.CndEvMaster.DesignationId, new { @class = "form-control" })  </span>
+                                <div>Designation</div>
+                                <span> @Html.DropDownListFor(m => m.CndEvMaster.DesignationId, new SelectList(ViewBag.DesignationDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDesig" })</span>
 
 
                                 @Html.ValidationMessageFor(M => M.CndEvMaster.DesignationId, "", new { @class = "text-danger" })
 
+
+
+
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-3" style="margin-top:auto;">
 
 
                                 <span>at Grade</span>
@@ -370,20 +396,22 @@
 
 
 
-                            <div class="col-md-3">
+                            <div class="col-md-3" style="margin-top:auto;">
 
-                                <span>in Department</span>
+                                <div>in Department</div>
 
 
-                                <span>  @Html.TextBoxFor(m => m.CndEvMaster.DepartmentId, new { @class = "form-control" })  </span>
+                                <span>  @Html.DropDownListFor(m => m.CndEvMaster.DepartmentId, new SelectList(ViewBag.DepartmentDropDown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "DrpDepart" })</span>
 
                                 @Html.ValidationMessageFor(M => M.CndEvMaster.DepartmentId, "", new { @class = "text-danger" })
+
+
                             </div>
 
 
 
                             <div class="col-md-3">
-
+                                
 
 
                                 <span>and with benifits</span>
@@ -393,9 +421,17 @@
 
 
                             </div>
-                            @*date, on
-                                @ @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Designation, at @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Grade, in @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Department/Unit/Unit. And with @Html.TextBoxFor(m => m.CndEvMaster.JoinDate, new { @class = "" })  Benfitis*@
 
+                            <div class="col-md-2" style="margin-top:auto;">
+                                <button type="button" class="btn btn-success" id="HireEmployeeInHRMS">HIRE In HRMS </button>
+                            </div>
+
+                        </div>
+                        <div class="row" id="SecondInterviewDiv">
+
+ 
+                                @Html.Partial("~/Areas/Recruiter/Views/Shared/_ShortlistCandidate.cshtml", Model.CandShortListViewModel)
+                          
                         </div>
                         @if (ViewData.ModelState["DesignationId"] != null)
                         {
@@ -421,21 +457,80 @@
 
 
 <script type="text/javascript">
+    //function ShowEvaluationsDiv() {
+    //    var radiovalue = $("input[type='radio'][name='CndEvMaster.IntEvDecisionId']:checked").val()
+    //    var SecondInterviewDiv = $("#SelectedDiv");
+    //    var SelectedDiv = $("#SecondInterviewDiv");
+
+    //    $(SecondInterviewDiv).css({ "display": "none" });
+    //    $(SelectedDiv).css({ "display": "none" });
+    //    if (radiovalue == 1) {
+    //        $(SecondInterviewDiv).css({ "display": "content" });
+    //    } else if (radiovalue == 2) {
+
+    //        $(SelectedDiv).css({ "display": "content" });
+    //    }
+
+    //}
+
+    function calculateRadioValue() {
+        var totalvalue = 0;
+        $('.rdofactors').each(function () {
+
+            var $this = $(this),
+                id = $this.attr('id'),
+                url = $this.attr('datasrc');
+
+            if ($(this).prop('checked')) {
+
+                totalvalue += parseInt($(this).closest('td').find(".hdnClosestMarks").val());
+
+            }
+
+        });
+        $("#CndEvMaster_ObtainedMarks").val(totalvalue)
+        var overallrating = Math.round(($("#CndEvMaster_ObtainedMarks").val() * 5) / $("#CndEvMaster_TotalMarks").val());
+        $("#OverrallRating").val(overallrating)
 
 
+    }
 
 
     $(document).ready(function () {
 
+        $("#EVMasterId").val("@Model.CndEvMaster.Id");
+        $("#EvMasterfdGivenBy").val("@Model.CndEvMaster.fdGivenBy");
+        $("#EvMasterShortListId").val("@Model.CndEvMaster.ShortListId");
+        $("#EvMastercreationdate").val("@Model.CndEvMaster.creationdate");
+
+
+        var MasterId = $("#EVMasterId").val();
+        $("#HireEmployeeInHRMS").hide();
+        
+        if (MasterId!=0) {
+            $("#HireEmployeeInHRMS").show();
+        }
 
    @if (Model.Status==true)
      {
          <text>
         ShowToaster(1, '@(Model.Message.ToString())', "Feedback!");
             @*alert('@(Model.Message.ToString())')*@
-         </text>
+        </text>
 
      }
+
+        $('.loading').hide();
+
+        $("#CndEvMaster_TotalMarks").val($(".tableRadioButton").find("tbody > tr").has("input:radio").length * 5);
+
+        calculateRadioValue();
+
+        $('.rdofactors').change(function () {
+
+            calculateRadioValue();
+
+        });
 
         var date = new Date();
         date.setDate(date.getDate() - 1);
@@ -447,8 +542,61 @@
             startDate: date,
             autoclose: true
         });
+        ShowEvaluationsDiv();
+
+        $("input[name='CndEvMaster.IntEvDecisionId']").change(function () {
+            ShowEvaluationsDiv();
+        });
 
 
     });
+
+
+
+    $("#HireEmployeeInHRMS").unbind().click(function () {
+
+        swal({
+            title: 'Are you sure?',
+            text: "You ar going to hire this employee in HRMS! kindly make sure all the information is entered in system properly.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3f51b5',
+            cancelButtonColor: '#ff4081',
+            confirmButtonText: 'Great ',
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: false,
+                    visible: true,
+                    className: "btn btn-danger",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Yes Proceed",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-primary",
+                    closeModal: true
+                }
+            }
+        }).then(function (result) {
+            var EvMasterId = $("#EVMasterId").val();
+            var ShortListId = $("#ShortListId").val();
+            var UserId = $("#HiddenUserId").val();
+            //var params = new FormData();
+
+            //params.append("EvMasterId", EvMasterId)
+            //params.append("ShortListId", ShortListId)
+            //params.append("UserId", UserId)
+
+            var params = { "EvMasterId": EvMasterId, "ShortListId": ShortListId, "UserId": UserId }
+
+            HireEmployeeInHrms(params);
+        });
+
+
+    });
+
+
 
 </script>

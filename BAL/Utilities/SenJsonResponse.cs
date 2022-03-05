@@ -10,6 +10,7 @@ namespace BAL.Utilities
     {
         public object data{ get; set; } 
         public bool status { get; set; } = true;
+        public int IsSuccess { get; set; } = 1;
         public string message { get; set; }
         public string title { get; set; }
         public string errorMsg { get; set; }
