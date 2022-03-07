@@ -54,14 +54,14 @@
                                     <hr class="mt-0 ">
                                     <div class="">
                                         <label class="form-check-label">
-                                            
+
                                             <input type="radio" class="" name="AppliedByCv" id="optionsRadios1" value="false" checked>
                                             Profile
                                         </label>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-check-label">
-                                            <input type="radio" class="" name="AppliedByCv" id="optionsRadios2" value="true" >
+                                            <input type="radio" class="" name="AppliedByCv" id="optionsRadios2" value="true">
                                             CV Upload
                                         </label>
 
@@ -95,14 +95,20 @@
                                 <p><b>Employment Status: </b>@Model.EmployementType</p>
                                 <p><b>Experience: </b>@Model.MinExperinceYear  (s)</p>
                                 <p><b>Job Location: </b>@Model.JobLocation</p>
-                                <p><b>Salary: </b>
+                                <p>
+                                    <b>Salary: </b>
+
                                     @(Model.SalaryRange.ToString() == "0" ? "-" : Model.SalaryRange.ToString())
                                 
                                 </p>
+
                                 <p><b>Gender: </b>@Model.GenderSpecification</p>
-                                <p class="mb-0"><b> Application Deadline: </b> 
-                                @(Model.LastDateOfJob == null ? "-" : Model.LastDateOfJob.Value.ToString("dd-MMM-yyyy"))
+
+                                <p class="mb-0">
+                                    <b> Application Deadline: </b>
+                                    @(Model.LastDateOfJob == null ? "-" : Model.LastDateOfJob.Value.ToString("dd-MMM-yyyy"))
                                 </p>
+
                             </div>
                         </div>
                     </div>
@@ -111,8 +117,10 @@
             </div>
         </div>
     </div>
+
 </section>
 
+<div class="loading" id="JobDetailLoader" style="z-index:99999">Loading&#8230;</div>
 
 
 <script src="~/CndDashboardAssets/vendors/moment/moment.min.js"></script>
@@ -120,15 +128,17 @@
 <script src="~/CndDashboardAssets/js/jquery-file-upload.js"></script>
 <script src="~/Scripts/Main.js"></script>
 
-  <script>
+<script>
       @if (Model.AppliedBYCV!=null)
       {
+
           if (Model.AppliedBYCV == true)
           {
               <text>
       $("#optionsRadios2").prop("checked", true);
             </text>
           }
+
       }
 
 
@@ -149,9 +159,9 @@
                   $(".file-upload-wrapper").css('display', 'none');
               }
           });
-        
+
       });
 
-     
 
-  </script>
+
+</script>

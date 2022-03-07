@@ -8,7 +8,6 @@
         @Html.HiddenFor(m => m.jobApplyViewModels.CndJobApply.Id)
         @Html.HiddenFor(m => m.jobApplyViewModels.User.Id)
         @Html.HiddenFor(m => m.jobApplyViewModels.CndJobApply.User.UserEmail)
-
         @Html.HiddenFor(m => m.OldShortlistDecisionId)
 
 
@@ -16,13 +15,7 @@
         <div class="col-md-2 col-sm-4">
             <label>Candidate Name <span class="text-danger">*</span> </label>
             <div id="the-basics">
-
                 @Html.TextBoxFor(m => m.jobApplyViewModels.CndJobApply.User.FullName, new { @class = "typeahead validateTextOnly", placeholder = "Candidate Name", @readonly = "true" })
-
-
-
-
-
             </div>
         </div>
         <div class="col-md-4 col-sm-4">
@@ -64,18 +57,30 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
                 <span class="ErrorSH_InterviewDate text-danger"></span>
                 @Html.ValidationMessageFor(M => M.HrShortlistingDetail.InterviewDate, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div> 
 
         <div class="col-md-2 col-sm-4">
             <label>Interview Timings <span class="text-danger">*</span></label>
-            <div id="the-basics1">
-                @*<input class="typeahead" type="text" placeholder="First Name" >*@
 
-                @Html.DropDownListFor(m => m.HrShortlistingDetail.SlotId, new SelectList(ViewBag.TimingsSlotsDropdown, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "InterviewTiming" })
+        
 
-                <span class="ErrorSH_InterviewTiming text-danger"></span>
-                @Html.ValidationMessageFor(M => M.HrShortlistingDetail.SlotId, "", new { @class = "text-danger" })
+            <div id="bloodhound">
+                <div class="input-group date" id="timepicker-example" data-target-input="nearest">
+                    <div class="input-group" data-target="#timepicker-example" data-toggle="datetimepicker">
+                        @*<input type="text" class="form-control datetimepicker-input" data-target="#timepicker-example">*@
+
+                        @Html.TextBoxFor(Model => Model.HrShortlistingDetail.StartTime, "",
+                        new { @class = "form-control datetimepicker-input", @Id = "InterviewTiming", placeholder = "Interview Date", @datatarget = "#timepicker-example" })
+
+
+                        <div class="input-group-addon input-group-append"><i class="ti-time input-group-text"></i></div>
+
+
+                        <span class="ErrorSH_InterviewTiming text-danger"></span>
+                    </div>
+                </div>
             </div>
+
         </div>
 
 
@@ -87,7 +92,7 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
                 @Html.DropDownListFor(m => m.HrShortlistingDetail.PanelId, new SelectList(ViewBag.DrpInterviewPanel, "Value", "Text"), new { @class = " aaDropdownStyle", @Id = "InterviewPanel" })
                 @Html.ValidationMessageFor(M => M.HrShortlistingDetail.PanelId, "", new { @class = "text-danger" })
 
-                <span class="ErrorSH_InterviewTiming text-danger"></span>
+                <span class="ErrorSH_InterviewPanel text-danger"></span>
 
             </div>
         </div>
@@ -127,7 +132,7 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
                     <div class="card-body">
                         <div class="row">
                             @Html.TextAreaFor(m => m.ShortListEmailBody, new { @class = "RichEmailBody", @rows = "100" })
-                             
+
                             @Html.ValidationMessageFor(m => m.ShortListEmailBody, null, new { @class = "text-danger" })
 
                         </div>
@@ -143,8 +148,8 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
     function loadInterviewDateTime() {
         var InterviewDate = $("#InterviewDate").val();
         var InterviewTimings = $("#InterviewTiming option:selected").text();
-      
-        
+
+
         $("#rtbInterviewTiming").html(InterviewDate + " - " + InterviewTimings);
 
     }
@@ -172,8 +177,17 @@ new { @class = "typeahead datepickerfuture", @Id = "InterviewDate", placeholder 
                 autoclose: true
             });
         }
-    });
     
+
+        if ($("#timepicker-example").length) {
+            $('#timepicker-example').datetimepicker({
+                format: 'LT',
+                //format: ''
+            });
+        }
+
+    });
+
     $("#InterviewDate").change(function () {
 
         loadInterviewDateTime();

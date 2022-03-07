@@ -218,6 +218,7 @@
     <EntitySetMapping Name="cndEvMasters">
       <EntityTypeMapping TypeName="CareerPortalModel.cndEvMaster">
         <MappingFragment StoreEntitySet="cndEvMaster">
+          <ScalarProperty Name="HiredEmpCode" ColumnName="HiredEmpCode" />
           <ScalarProperty Name="GradeName" ColumnName="GradeName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -252,6 +253,8 @@
     <EntitySetMapping Name="HrShortlistingDetails">
       <EntityTypeMapping TypeName="CareerPortalModel.HrShortlistingDetail">
         <MappingFragment StoreEntitySet="HrShortlistingDetail">
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ShortListId" ColumnName="ShortListId" />
           <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />

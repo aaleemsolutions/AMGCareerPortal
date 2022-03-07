@@ -247,6 +247,7 @@
     <NavigationProperty Name="HrShortlisting" Relationship="Self.FK__cndEvMast__Short__324172E1" FromRole="cndEvMaster" ToRole="HrShortlisting" />
     <NavigationProperty Name="User1" Relationship="Self.FK__cndEvMast__UserI__26CFC035" FromRole="cndEvMaster" ToRole="Users" />
     <Property Name="GradeName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="HiredEmpCode" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="HrShortlisting">
     <Key>
@@ -284,6 +285,8 @@
     <NavigationProperty Name="IntEvDecision" Relationship="Self.FK__HrShortli__Decis__58671BC9" FromRole="HrShortlistingDetail" ToRole="IntEvDecision" />
     <NavigationProperty Name="InterviewPanel" Relationship="Self.FK__HrShortli__Panel__4FD1D5C8" FromRole="HrShortlistingDetail" ToRole="InterviewPanels" />
     <NavigationProperty Name="TimingSlot" Relationship="Self.FK__HrShortli__SlotI__4A18FC72" FromRole="HrShortlistingDetail" ToRole="TimingSlots" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
   </EntityType>
   <EntityType Name="InterviewPanelDetail">
     <Key>

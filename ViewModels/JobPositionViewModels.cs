@@ -20,9 +20,9 @@ namespace ViewModels
 
         public bool IsAlreadyApplied { get; set; } = false;
         public Nullable<bool> AppliedBYCV { get; set; }
-        [Required]
+        [Required (ErrorMessage ="Job Title is required")]
         public string JobTitle { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Job Location is required")]
         public string JobLocation { get; set; } = "Karachi";
         public Nullable<System.DateTime> PostedDate { get; set; } = DateTime.Now;
         public Nullable<long> JobTotalViews { get; set; }
@@ -41,21 +41,21 @@ namespace ViewModels
         public Nullable<System.DateTime> LastDateOfJob { get; set; } = null;
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please select division")]
         public int DivisionId { get; set; }
         public string DivisionName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please select department")]
         public Nullable<int> DepartmentId { get; set; }
         public string DepartmentName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please select designation")]
         public Nullable<int> DesignationId { get; set; }
         public string DesignationName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please select category")]
         public Nullable<int> CategoryId { get; set; }
         public string CategoryName { get; set; }
 
         public Nullable<bool> IsPositionClosed { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please select Branch")]
         public Nullable<int> BranchId { get; set; }
         public string BranchName { get; set; }
         public Nullable<int> CompanyId { get; set; }

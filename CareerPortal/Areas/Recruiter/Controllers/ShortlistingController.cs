@@ -181,6 +181,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
 
 
+                //    var UrlLink = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
                 var UrlLink = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
                 UrlLink += "Recruiter/CandidateForm/jobApplicationForm";
                 //                var emailbody = SendEmail.CallForInterviewEmailBody(model.jobApplyViewModels.CndJobApply.User.FullName, "Artistic Milliner 2 Head Office", "", "Korangi Industrial near bilal chorangi", "", UrlLink, shortlistingDetail.IsSendJobForm.Value);
@@ -371,8 +372,6 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             if (intEvaluationViewModel.CndEvMaster != null)
             {
                 intEvaluationViewModel.cndEvDetails = dbcndEvaluationDetail.GetList(intEvaluationViewModel.CndEvMaster.Id);
-
-
             }
             else
             {
@@ -388,6 +387,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 intEvaluationViewModel.CandShortListViewModel.HrShortlistingDetail.StartTime = null;
 
             }
+
             ViewBag.FeedbackGivenBy = intEvaluationViewModel.CndEvMaster.fdGivenBy != null ? dbUserInfo.getUser(intEvaluationViewModel.CndEvMaster.fdGivenBy.Value).userinfo.FullName : GlobalUserInfo.FullName;
 
             return View(intEvaluationViewModel);
@@ -539,19 +539,13 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             shortlistingDetail.IsEmailSend = shortListViewModel.IsEmailSend;
             shortlistingDetail.IsSendJobForm = shortListViewModel.IsSendJobForm;
             shortlistingDetail.StartTime = shortListViewModel.HrShortlistingDetail.StartTime;
-
-
             cndShortlist.EvDecisionId = intEvaluationViewModel.CndEvMaster.IntEvDecisionId;
-
-
             Cand_Shortlisting.UpdateData(cndShortlist);
 
             if (cndShortlist.Id != 0)
             {
-
                 shortlistingDetail.ShortListId = cndShortlist.Id;
                 shortlistingDetail.DecisionId = cndShortlist.EvDecisionId;
-
 
                 if (shortlistingDetail.DecisionId != 2 || shortlistingDetail.DecisionId != 5)
                 {
@@ -575,11 +569,9 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                     }
                     else
                     {
-
                         shortlistingDetail.IsInterviewConfirmed = false;
                         shortlistingDetail.CreatedBy = GlobalUserInfo.UserId;
                         shortlistingDetail.CreatedDate = DateTime.Now;
-
                         shortlistingDetail.IsActive = true;
                         Cand_ShortlistingDetail.AddData(shortlistingDetail);
 
@@ -660,7 +652,6 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             if (employeeHiringViewModel.JobApplicationViewModel.Cand_ProfessionalReferences == null)
             {
                 employeeHiringViewModel.JobApplicationViewModel.Cand_ProfessionalReferences = new List<Cand_ProfessionalReferences>();
-
             }
 
           
@@ -680,7 +671,6 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             employeeHiringClass.UnitID = 0;
             employeeHiringClass.PersonalEmail = employeeHiringViewModel.UserViewModel.userinfo.UserEmail;
             employeeHiringClass.ICENumber = null;
-
             employeeHiringClass.LanguageID = 1;
             employeeHiringClass.OfficialMobile = employeeHiringViewModel.CandidateViewModel.CandidateInfo.ContactNoOffice;
             employeeHiringClass.WhatsappNo = null;
@@ -689,7 +679,6 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             employeeHiringClass.Instagram = null;
             employeeHiringClass.EnableGarmentAttendance = false;
             employeeHiringClass.TaxAdjustment = null;
-
             employeeHiringClass.DottedlineReportedTo = null;
             employeeHiringClass.DottedLineReportToRemoteDB = false;
             employeeHiringClass.ReportToEmployeeID = 0;
@@ -732,10 +721,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 employeeHiringClass.Ref1Phone = employeeHiringViewModel.JobApplicationViewModel.Cand_ProfessionalReferences[0].RefContact;
                 employeeHiringClass.Reference2 = employeeHiringViewModel.JobApplicationViewModel.Cand_ProfessionalReferences[1].Refname;
                 employeeHiringClass.Ref2Phone = employeeHiringViewModel.JobApplicationViewModel.Cand_ProfessionalReferences[1].RefContact;
-
             }
-            
-
             employeeHiringClass.EmployeeTypeID = 1;
             employeeHiringClass.Salary = Convert.ToInt32(employeeHiringViewModel.IntEvaluationViewModel.CndEvMaster.Salary.Value);
             employeeHiringClass.SpecialAllowanceManagement = 0;
@@ -767,9 +753,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             employeeHiringClass.CNICExpire = employeeHiringViewModel.CandidateViewModel.CandidateInfo.ExpiryDate;
             employeeHiringClass.UserID = GlobalUserInfo.UserId;
             employeeHiringClass.EntryDate = DateTime.Now;
-
             int NewEmpCode = DbEmployeeHiring.Employee_Add(employeeHiringClass, GlobalUserInfo.UserId, CareerGlobalFields.GetConnectionString()) ;
-
             return NewEmpCode;
 
         }

@@ -1672,6 +1672,107 @@ function FillEmployeeDetailOnEmp(EmployeeId, UnitType) {
     });
 }
 
+
+//Creat Job Form Dropdown Starts 
+function FillUnitOnDivision(DivisionType) {
+    var ddl = $("#cmbBranch");
+    $.ajax({
+        url: "/Recruiter/HRPanel/FillUnitOnDivision",
+        type: "GET",
+        data: { "divisionName": DivisionType },
+        beforeSend: function () {
+            $('.loading').show();
+        },
+        success: function (data) {
+            console.log(data);
+            ddl.empty();
+            //ddlDepartment.empty().append('<option selected="selected" value="0">Please select</option>');
+            $.each(data, function () {
+
+                ddl.append($("<option></option>").val(this['Value']).html(this['Text']));
+            });
+
+        }, complete: function (data) {
+
+            $('.loading').hide();
+        }
+    });
+}
+
+function FillCategoryOnUnit(DivisionType) {
+    var ddl = $("#DrpCategory");
+    $.ajax({
+        url: "/Recruiter/HRPanel/FillCategoryOnDbType",
+        type: "GET",
+        data: { "divisionName": DivisionType },
+        beforeSend: function () {
+            $('.loading').show();
+        },
+        success: function (data) {
+            ddl.empty();
+            //ddlDepartment.empty().append('<option selected="selected" value="0">Please select</option>');
+            $.each(data, function () {
+
+                ddl.append($("<option></option>").val(this['Value']).html(this['Text']));
+            });
+
+        }, complete: function (data) {
+
+            $('.loading').hide();
+        }
+    });
+}
+
+function FillDeptOnCategory(DivisionType) {
+    var ddl = $("#DrpDepart");
+    $.ajax({
+        url: "/Recruiter/HRPanel/FillDepartmentonDbType",
+        type: "GET",
+        data: { "divisionName": DivisionType },
+        beforeSend: function () {
+            $('.loading').show();
+        },
+        success: function (data) {
+            ddl.empty();
+            //ddlDepartment.empty().append('<option selected="selected" value="0">Please select</option>');
+            $.each(data, function () {
+
+                ddl.append($("<option></option>").val(this['Value']).html(this['Text']));
+            });
+
+        }, complete: function (data) {
+
+            $('.loading').hide();
+        }
+    });
+}
+
+function FillDesigOnDept(DivisionType,DeptId) {
+    var ddl = $("#DrpDesig");
+    $.ajax({
+        url: "/Recruiter/HRPanel/FillDesignationOnDept",
+        type: "GET",
+        data: { "divisionName": DivisionType, "DeptId": DeptId},
+        beforeSend: function () {
+            $('.loading').show();
+        },
+        success: function (data) {
+            ddl.empty();
+            //ddlDepartment.empty().append('<option selected="selected" value="0">Please select</option>');
+            $.each(data, function () {
+
+                ddl.append($("<option></option>").val(this['Value']).html(this['Text']));
+            });
+
+        }, complete: function (data) {
+
+            $('.loading').hide();
+        }
+    });
+}
+//Creat Job Form Dropdown End
+
+
 function AddUpdatePanelEmployee() {
 
 
@@ -1679,6 +1780,7 @@ function AddUpdatePanelEmployee() {
     var UnitTypeValue = $("#DrpHRUnitType").val();
     var valdata = new FormData(getformvalue);
     valdata.append("UnitType", UnitTypeValue);
+
     $.ajax({
         url: "/Recruiter/HRPanel/AddUpdatePanelEmployee",
         type: "POST",
@@ -2889,6 +2991,57 @@ $(document).ready(function () {
     $(".saveSideBarStats").click(function () {
     SaveBodySidebarStats($("body").hasClass("sidebar-icon-only"))
     });
+
+
+    // Create Job DropDown Change Work.
+
+    $("#DrpDivision").change(function () {
+        $("#cmbBranch").empty()
+        $("#DrpCategory").empty()
+        $("#DrpDepart").empty()
+        $("#DrpDesig").empty()
+        
+        var drpSlctText = $("#DrpDivision option:selected").text()
+ 
+        FillUnitOnDivision(drpSlctText);
+    });
+
+
+    $("#cmbBranch").change(function () {
+        
+        $("#DrpCategory").empty()
+        $("#DrpDepart").empty()
+        $("#DrpDesig").empty()
+
+
+        var drpSlctText = $("#DrpDivision option:selected").text()
+
+        FillCategoryOnUnit(drpSlctText);
+    });
+
+    $("#DrpCategory").change(function () {
+        
+        $("#DrpDepart").empty()
+        $("#DrpDesig").empty()
+
+        var drpSlctText = $("#DrpDivision option:selected").text()
+
+        FillDeptOnCategory(drpSlctText);
+    });
+
+
+    $("#DrpDepart").change(function () {
+
+        
+        $("#DrpDesig").empty()
+
+        var drpSlctText = $("#DrpDepart option:selected").text()
+        var drpvalue = $("#DrpDesig").val()
+
+        FillDesigOnDept(drpSlctText, drpvalue);
+    });
+
+ 
 
 
     $(document).on('mouseup touchend', function (e) {

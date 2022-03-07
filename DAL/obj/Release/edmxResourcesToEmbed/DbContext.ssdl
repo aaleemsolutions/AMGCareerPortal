@@ -223,6 +223,7 @@
     <Property Name="ObtainedMarks" Type="float" />
     <Property Name="ShortListId" Type="int" />
     <Property Name="GradeName" Type="varchar" MaxLength="250" />
+    <Property Name="HiredEmpCode" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="HrShortlisting">
     <Key>
@@ -250,6 +251,8 @@
     <Property Name="PanelId" Type="int" />
     <Property Name="IsActive" Type="bit" />
     <Property Name="DecisionId" Type="int" />
+    <Property Name="StartTime" Type="time" Precision="7" />
+    <Property Name="EndTime" Type="time" Precision="7" />
   </EntityType>
   <EntityType Name="InterviewPanelDetail">
     <Key>

@@ -16,13 +16,17 @@ namespace CareerPortal.Areas.Recruiter.Controllers
     {
 
         AdoNetFetch AdoNet;
+        AdoNetFetch AdoNetDenim;
         HRPanelEmployee hrEmployeePanel;
         HRPanelDB InterviewPanel;
         InterviewPanelDetail InterviewPanelDetail;
         
         public HRPanelController()
         {
-            AdoNet = new AdoNetFetch(CareerGlobalFields.GetConnectionString());            hrEmployeePanel = new HRPanelEmployee();
+            AdoNet = new AdoNetFetch(CareerGlobalFields.GetConnectionString());
+            AdoNetDenim = new AdoNetFetch(CareerGlobalFields.GetConnectionString(false));
+
+            hrEmployeePanel = new HRPanelEmployee();
             InterviewPanel = new HRPanelDB();
             InterviewPanelDetail = new InterviewPanelDetail();
         }
@@ -366,6 +370,87 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             return Json(EmpDetail, JsonRequestBehavior.AllowGet);
         }
 
+
+        public JsonResult FillUnitOnDivision(string divisionName, int IsGarments =1)
+        {
+            List<CS_Branch> BranchesList;
+
+            if (!divisionName.Contains("Denim") && !divisionName.Contains("Spinning"))
+            {
+                BranchesList = AdoNet.GetAllbranch().ToList();
+            }
+            else
+            {
+                BranchesList = AdoNetDenim.GetAllbranch().ToList();
+            }
+
+            var DropDown = new SelectList(BranchesList, "BranchID", "BranchName").ToList();
+            DropDown.Insert(0, (new SelectListItem { Text = "Select Branch", Value = "" }));
+
+
+            return Json(DropDown, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult FillCategoryOnDbType(string divisionName)
+        {
+            List<Category> BranchesList;
+
+            if (!divisionName.Contains("Denim") && !divisionName.Contains("Spinning"))
+            {
+                BranchesList = AdoNet.GetAllCatgory().ToList();
+            }
+            else
+            {
+                BranchesList = AdoNetDenim.GetAllCatgory().ToList();
+            }
+
+            var DropDown = new SelectList(BranchesList, "CategoryId", "CategoryDesc").ToList();
+            DropDown.Insert(0, (new SelectListItem { Text = "Select Category", Value = "" }));
+
+
+            return Json(DropDown, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult FillDepartmentonDbType(string divisionName)
+        {
+            List<cs_Department> BranchesList;
+
+            if (!divisionName.Contains("Denim") && !divisionName.Contains("Spinning"))
+            {
+                BranchesList = AdoNet.GetAllDepartment().ToList();
+            }
+            else
+            {
+                BranchesList = AdoNetDenim.GetAllDepartment().ToList();
+            }
+
+            var DropDown = new SelectList(BranchesList, "Department_ID", "Department_Name").ToList();
+            DropDown.Insert(0, (new SelectListItem { Text = "Select Department", Value = "" }));
+
+
+            return Json(DropDown, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult FillDesignationOnDept(string divisionName,string DeptId)
+        {
+            List<Designation> BranchesList;
+
+            if (!divisionName.Contains("Denim") && !divisionName.Contains("Spinning"))
+            {
+                BranchesList = AdoNet.GetAllDesignation().ToList();
+            }
+            else
+            {
+                BranchesList = AdoNetDenim.GetAllDesignation().ToList();
+            }
+            
+            var DropDown = new SelectList(BranchesList, "Designation_ID", "Designation_Name").ToList();
+            DropDown.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "" }));
+
+
+            return Json(DropDown, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetPanelEmployeeTags()
         {
             var PanelEmployee = hrEmployeePanel.GetList();

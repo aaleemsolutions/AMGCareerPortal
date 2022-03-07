@@ -17,6 +17,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         CandidateLogics candidateobj;
         UserRegModule RegUser;
         AdoNetFetch AdoNet;
+        AdoNetFetch AdoNetDenim;
 
         public AllJobsController()
         {
@@ -24,6 +25,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             candidateobj = new CandidateLogics();
             RegUser = new UserRegModule() ;
             AdoNet = new AdoNetFetch(CareerGlobalFields.GetConnectionString());
+            AdoNetDenim = new AdoNetFetch(CareerGlobalFields.GetConnectionString(false));
         }
 
         public ActionResult Dashboard()
@@ -89,8 +91,6 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         public JsonResult GetBarChartData(string BarDataType = "Department")
         {
 
-
-
             if (BarDataType.ToUpper() == "Candidate".ToUpper())
             {
                 var GetAllJobs = (from t in candidateobj.GetAllUsers().UsersList
@@ -135,16 +135,16 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         }
         public ActionResult CreateJobs(int Id = 0)
         {
-            BindDropdowns();
-
+            
             JobPositionViewModels model = new JobPositionViewModels();
             if (Id!=0)
             {
                 model = jbPositions.GetPosition(Id);
 
             }
+            BindDropdowns(model);
 
-  
+
 
 
             return View(model);
@@ -152,9 +152,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         [HttpPost]
         public ActionResult CreateJobs(JobPositionViewModels model)
         {
-
-            BindDropdowns();
-
+            BindDropdowns(model);
 
             if (ModelState.IsValid)
             {
@@ -182,21 +180,16 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         }
         public JsonResult DeleteJob(int JobId)
         {
-
-
             try
             {
-
                 jbPositions.DeletePosition(JobId);
                 return Json(true, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception ex)
             {
 
 
                 return Json(false, JsonRequestBehavior.AllowGet);
-
             }
 
 
@@ -221,7 +214,6 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                     Category = m.CategoryName,
                     Division = m.DivisionName,
                     Designation = m.DesignationName,
-
                     PostedDate = m.PostedDate.Value.ToString("dd-MMM-yyyy"),
                     NoOfVacancy = m.NoOfVacancy,
                     EmployementType = m.EmployementType,
@@ -239,12 +231,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             else
             {
                 return Json(new { data = "" }, JsonRequestBehavior.AllowGet);
-
             }
-
-
-
-
 
         }
 
@@ -331,6 +318,122 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             GetAllBranches.Insert(0, (new SelectListItem { Text = "Select Branch", Value = "" }));
             ViewBag.BranchDropdown = GetAllBranches;
 
+
+
+
+
+
+
+        }
+
+        public void BindDropdowns(JobPositionViewModels model)
+        {
+           
+            var GenderDropdown = new List<SelectListItem>
+            {
+               new SelectListItem { Text = "Select ", Value = "Select"},
+                new SelectListItem { Text = "Any", Value = "3"},
+                new SelectListItem { Text = "Male", Value = "1" },
+                new SelectListItem { Text = "Female", Value = "2" }
+            };
+            ViewBag.GenderDropdown = GenderDropdown;
+
+
+            var EmploymentTypeDropDown = new List<SelectListItem>
+            {
+               new SelectListItem { Text = "Select ", Value = "Select"},
+                new SelectListItem { Text = "Contractual", Value = "Contractual"},
+                new SelectListItem { Text = "Permanant", Value = "Permanant" },
+                new SelectListItem { Text = "Daily Wage", Value = "Daily Wage" }
+            };
+            ViewBag.EmploymentType = EmploymentTypeDropDown;
+
+
+            if (model.DivisionName != null)
+            {
+
+                if (!model.DivisionName.Contains("Denim") && !model.DivisionName.Contains("Spinning"))
+                {
+                    var GetAllDivision = new SelectList(AdoNet.GetAllDivision(), "DivisionID", "DivisionName").ToList();
+                    GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "Select" }));
+                    ViewBag.DivisionDropDown = GetAllDivision;
+
+                    var GetAllCategory = new SelectList(AdoNet.GetAllCatgory(), "CategoryId", "CategoryDesc").ToList();
+                    GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "Select" }));
+                    ViewBag.CategoryDropDown = GetAllCategory;
+
+
+                    var GetAllDepartment = new SelectList(AdoNet.GetAllDepartment(), "Department_Id", "Department_Name").ToList();
+                    GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "Select" }));
+                    ViewBag.DepartmentDropDown = GetAllDepartment;
+
+                    var GetAllDesgination = new SelectList(AdoNet.GetAllDesignation(), "Designation_Id", "Designation_Name").ToList();
+                    GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "Select" }));
+                    ViewBag.DesignationDropDown = GetAllDesgination;
+
+
+                    var GetAllBranches = new SelectList(AdoNet.GetAllbranch(), "BranchID", "BranchName").ToList();
+                    GetAllBranches.Insert(0, (new SelectListItem { Text = "Select Branch", Value = "" }));
+                    ViewBag.BranchDropdown = GetAllBranches;
+
+                }
+                else
+                {
+                    var GetAllDivision = new SelectList(AdoNet.GetAllDivision(), "DivisionID", "DivisionName").ToList();
+                    GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "Select" }));
+                    ViewBag.DivisionDropDown = GetAllDivision;
+
+                    var GetAllCategory = new SelectList(AdoNetDenim.GetAllCatgory(), "CategoryId", "CategoryDesc").ToList();
+                    GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "Select" }));
+                    ViewBag.CategoryDropDown = GetAllCategory;
+
+
+                    var GetAllDepartment = new SelectList(AdoNetDenim.GetAllDepartment(), "Department_Id", "Department_Name").ToList();
+                    GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "Select" }));
+                    ViewBag.DepartmentDropDown = GetAllDepartment;
+
+                    var GetAllDesgination = new SelectList(AdoNetDenim.GetAllDesignation(), "Designation_Id", "Designation_Name").ToList();
+                    GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "Select" }));
+                    ViewBag.DesignationDropDown = GetAllDesgination;
+
+
+                    var GetAllBranches = new SelectList(AdoNetDenim.GetAllbranch(), "BranchID", "BranchName").ToList();
+                    GetAllBranches.Insert(0, (new SelectListItem { Text = "Select Branch", Value = "" }));
+                    ViewBag.BranchDropdown = GetAllBranches;
+
+
+                }
+
+
+            }
+            else
+            {
+
+                var GetAllDivision = new SelectList(AdoNet.GetAllDivision(), "DivisionID", "DivisionName").ToList();
+                GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "Select" }));
+                ViewBag.DivisionDropDown = GetAllDivision;
+
+                var GetAllCategory = new SelectList(AdoNet.GetAllCatgory(), "CategoryId", "CategoryDesc").ToList();
+                GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "Select" }));
+                ViewBag.CategoryDropDown = GetAllCategory;
+
+
+                var GetAllDepartment = new SelectList(AdoNet.GetAllDepartment(), "Department_Id", "Department_Name").ToList();
+                GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "Select" }));
+                ViewBag.DepartmentDropDown = GetAllDepartment;
+
+                var GetAllDesgination = new SelectList(AdoNet.GetAllDesignation(), "Designation_Id", "Designation_Name").ToList();
+                GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "Select" }));
+                ViewBag.DesignationDropDown = GetAllDesgination;
+
+
+                var GetAllBranches = new SelectList(AdoNet.GetAllbranch(), "BranchID", "BranchName").ToList();
+                GetAllBranches.Insert(0, (new SelectListItem { Text = "Select Branch", Value = "" }));
+                ViewBag.BranchDropdown = GetAllBranches;
+
+            }
+
+         
 
 
 

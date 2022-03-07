@@ -188,7 +188,7 @@ namespace BAL.Ado.Net
             }
 
         }
-
+      
 
         public List<CvMain> GetAllCVCandidate(int CvId = 0, bool withQlf = false, bool withExper = false, bool withSkils = false, bool withInternship = false)
         {
@@ -619,5 +619,7 @@ namespace BAL.Ado.Net
 
         }
 
+
+     
     }
 }

@@ -8,7 +8,6 @@
     }
 </style>
 
-
 @using (Ajax.BeginForm("InterviewEvaluationForm",
     new { Controller = "Shortlisting", area = "Recruiter", @enctype = "multipart/form-data" },
     new AjaxOptions { OnFailure = "OnJobFailure", OnSuccess = "OnJobSubmit",
@@ -17,13 +16,9 @@
     ))
 {
 
-<div id="PartialCndEvaluationForm">
-    @Html.Partial("~/Areas/Recruiter/Views/Shared/_CndEvaluationForm.cshtml", Model)
-</div>
-
-
- 
-
+    <div id="PartialCndEvaluationForm">
+        @Html.Partial("~/Areas/Recruiter/Views/Shared/_CndEvaluationForm.cshtml", Model)
+    </div>
 
 }
 <div class="loading" id="PostLoader">Loading&#8230;</div>
@@ -45,34 +40,27 @@
         $("#CndEvMaster_TotalMarks").val($(".tableRadioButton").find("tbody > tr").has("input:radio").length * 5);
 
       //  calculateRadioValue();
+
     });
 
+
     //$('.rdofactors').change(function () {
-
     //    calculateRadioValue();
-
     //});
 
     //function calculateRadioValue() {
     //    var totalvalue = 0;
     //    $('.rdofactors').each(function () {
-
     //        var $this = $(this),
     //            id = $this.attr('id'),
     //            url = $this.attr('datasrc');
-
     //        if ($(this).prop('checked')) {
-
     //            totalvalue += parseInt($(this).closest('td').find(".hdnClosestMarks").val());
-
     //        }
-
     //    });
     //    $("#CndEvMaster_ObtainedMarks").val(totalvalue)
     //    var overallrating = Math.round(($("#CndEvMaster_ObtainedMarks").val() * 5) / $("#CndEvMaster_TotalMarks").val());
     //    $("#OverrallRating").val(overallrating)
-
-
     //}
 
     function OnJobSubmit(data) {
@@ -104,6 +92,15 @@
         }
     }
 
+    $("#btnIntEvaluation").unbind().click(function () {
+        var radiovalue = $("input[type='radio'][name='CndEvMaster.IntEvDecisionId']:checked").val()
+        if (radiovalue == "2") {
+            return validateShortListEvaluation();
+        }
+ 
+        /*return false;*/
+
+    });
 
 //end sticky button
 
