@@ -278,7 +278,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
         {
             var GenderDropdown = new List<SelectListItem>
             {
-               new SelectListItem { Text = "Select ", Value = "Select"},
+               new SelectListItem { Text = "Select ", Value = ""},
                 new SelectListItem { Text = "Any", Value = "3"},
                 new SelectListItem { Text = "Male", Value = "1" },
                 new SelectListItem { Text = "Female", Value = "2" }
@@ -288,7 +288,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
             var EmploymentTypeDropDown = new List<SelectListItem>
             {
-               new SelectListItem { Text = "Select ", Value = "Select"},
+               new SelectListItem { Text = "Select ", Value = ""},
                 new SelectListItem { Text = "Contractual", Value = "Contractual"},
                 new SelectListItem { Text = "Permanant", Value = "Permanant" },
                 new SelectListItem { Text = "Daily Wage", Value = "Daily Wage" }
@@ -297,20 +297,20 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
 
             var GetAllDivision = new SelectList(AdoNet.GetAllDivision(), "DivisionID", "DivisionName").ToList();
-            GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "Select" }));
+            GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "" }));
             ViewBag.DivisionDropDown = GetAllDivision;
 
             var GetAllCategory = new SelectList(AdoNet.GetAllCatgory(), "CategoryId", "CategoryDesc").ToList();
-            GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "Select" }));
+            GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "" }));
             ViewBag.CategoryDropDown = GetAllCategory;
 
 
             var GetAllDepartment = new SelectList(AdoNet.GetAllDepartment(), "Department_Id", "Department_Name").ToList();
-            GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "Select" }));
+            GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "" }));
             ViewBag.DepartmentDropDown = GetAllDepartment;
 
             var GetAllDesgination = new SelectList(AdoNet.GetAllDesignation(), "Designation_Id", "Designation_Name").ToList();
-            GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "Select" }));
+            GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "" }));
             ViewBag.DesignationDropDown = GetAllDesgination;
 
 
@@ -331,7 +331,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
            
             var GenderDropdown = new List<SelectListItem>
             {
-               new SelectListItem { Text = "Select ", Value = "Select"},
+               new SelectListItem { Text = "Select ", Value = ""},
                 new SelectListItem { Text = "Any", Value = "3"},
                 new SelectListItem { Text = "Male", Value = "1" },
                 new SelectListItem { Text = "Female", Value = "2" }
@@ -341,7 +341,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
             var EmploymentTypeDropDown = new List<SelectListItem>
             {
-               new SelectListItem { Text = "Select ", Value = "Select"},
+               new SelectListItem { Text = "Select ", Value = ""},
                 new SelectListItem { Text = "Contractual", Value = "Contractual"},
                 new SelectListItem { Text = "Permanant", Value = "Permanant" },
                 new SelectListItem { Text = "Daily Wage", Value = "Daily Wage" }
@@ -355,22 +355,20 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 if (!model.DivisionName.Contains("Denim") && !model.DivisionName.Contains("Spinning"))
                 {
                     var GetAllDivision = new SelectList(AdoNet.GetAllDivision(), "DivisionID", "DivisionName").ToList();
-                    GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "Select" }));
+                    GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "" }));
                     ViewBag.DivisionDropDown = GetAllDivision;
 
                     var GetAllCategory = new SelectList(AdoNet.GetAllCatgory(), "CategoryId", "CategoryDesc").ToList();
-                    GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "Select" }));
+                    GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "" }));
                     ViewBag.CategoryDropDown = GetAllCategory;
 
-
                     var GetAllDepartment = new SelectList(AdoNet.GetAllDepartment(), "Department_Id", "Department_Name").ToList();
-                    GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "Select" }));
+                    GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "" }));
                     ViewBag.DepartmentDropDown = GetAllDepartment;
 
                     var GetAllDesgination = new SelectList(AdoNet.GetAllDesignation(), "Designation_Id", "Designation_Name").ToList();
-                    GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "Select" }));
+                    GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "" }));
                     ViewBag.DesignationDropDown = GetAllDesgination;
-
 
                     var GetAllBranches = new SelectList(AdoNet.GetAllbranch(), "BranchID", "BranchName").ToList();
                     GetAllBranches.Insert(0, (new SelectListItem { Text = "Select Branch", Value = "" }));
@@ -380,28 +378,24 @@ namespace CareerPortal.Areas.Recruiter.Controllers
                 else
                 {
                     var GetAllDivision = new SelectList(AdoNet.GetAllDivision(), "DivisionID", "DivisionName").ToList();
-                    GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "Select" }));
+                    GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "" }));
                     ViewBag.DivisionDropDown = GetAllDivision;
 
                     var GetAllCategory = new SelectList(AdoNetDenim.GetAllCatgory(), "CategoryId", "CategoryDesc").ToList();
-                    GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "Select" }));
+                    GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "" }));
                     ViewBag.CategoryDropDown = GetAllCategory;
 
-
                     var GetAllDepartment = new SelectList(AdoNetDenim.GetAllDepartment(), "Department_Id", "Department_Name").ToList();
-                    GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "Select" }));
+                    GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "" }));
                     ViewBag.DepartmentDropDown = GetAllDepartment;
 
                     var GetAllDesgination = new SelectList(AdoNetDenim.GetAllDesignation(), "Designation_Id", "Designation_Name").ToList();
-                    GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "Select" }));
+                    GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "" }));
                     ViewBag.DesignationDropDown = GetAllDesgination;
-
 
                     var GetAllBranches = new SelectList(AdoNetDenim.GetAllbranch(), "BranchID", "BranchName").ToList();
                     GetAllBranches.Insert(0, (new SelectListItem { Text = "Select Branch", Value = "" }));
                     ViewBag.BranchDropdown = GetAllBranches;
-
-
                 }
 
 
@@ -410,20 +404,20 @@ namespace CareerPortal.Areas.Recruiter.Controllers
             {
 
                 var GetAllDivision = new SelectList(AdoNet.GetAllDivision(), "DivisionID", "DivisionName").ToList();
-                GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "Select" }));
+                GetAllDivision.Insert(0, (new SelectListItem { Text = "Select Division", Value = "" }));
                 ViewBag.DivisionDropDown = GetAllDivision;
 
                 var GetAllCategory = new SelectList(AdoNet.GetAllCatgory(), "CategoryId", "CategoryDesc").ToList();
-                GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "Select" }));
+                GetAllCategory.Insert(0, (new SelectListItem { Text = "Select Category", Value = "" }));
                 ViewBag.CategoryDropDown = GetAllCategory;
 
 
                 var GetAllDepartment = new SelectList(AdoNet.GetAllDepartment(), "Department_Id", "Department_Name").ToList();
-                GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "Select" }));
+                GetAllDepartment.Insert(0, (new SelectListItem { Text = "Select Department", Value = "" }));
                 ViewBag.DepartmentDropDown = GetAllDepartment;
 
                 var GetAllDesgination = new SelectList(AdoNet.GetAllDesignation(), "Designation_Id", "Designation_Name").ToList();
-                GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "Select" }));
+                GetAllDesgination.Insert(0, (new SelectListItem { Text = "Select Designation", Value = "" }));
                 ViewBag.DesignationDropDown = GetAllDesgination;
 
 
@@ -437,7 +431,7 @@ namespace CareerPortal.Areas.Recruiter.Controllers
 
 
 
-
+              
 
 
         }

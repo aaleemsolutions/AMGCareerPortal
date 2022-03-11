@@ -11,9 +11,7 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(CustomValidationsClass.CndEvMasterValidate))]
+    
     public partial class cndEvMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

@@ -11,9 +11,7 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(CustomValidationsClass.cndEvDetail_Validate))]
+    
     public partial class cndEvDetail
     {
         public int Id { get; set; }

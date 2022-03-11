@@ -1486,7 +1486,6 @@ function loadJobPieaAjaxdata(PieType) {
         url: "/Recruiter/AllJobs/GetJobPieCharts",
         data: { "PieType": PieType },
         success: function (data) {
-
             if (PieType.toUpperCase() == "Department".toUpperCase()) {
                 loadPieChart(data, "Department wise Jobs");
             } else if (PieType.toUpperCase() == "Division".toUpperCase()) {
@@ -1495,7 +1494,6 @@ function loadJobPieaAjaxdata(PieType) {
             else if (PieType.toUpperCase() == "Category".toUpperCase()) {
                 loadPieChart(data, "Category wise Jobs");
             }
-
         }
     });
 }
@@ -1513,7 +1511,6 @@ function getUrlVars() {
 
 function DeleteCand_Dependants(Id, row) {
     if (Id != 0)
-
         swal({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -2687,7 +2684,7 @@ $(document).ready(function () {
         $(this).addClass('focusedRow');
     });
     
-    if (  window.location.pathname.toString().includes("/Recruiter/AllJobs")) {
+    if (  window.location.pathname.toString()==  "/Recruiter/AllJobs") {
         $("#AllListedJobs ul li:nth-child(1)").removeClass("active");
         $("#AllListedJobs ul li:nth-child(2)").removeClass("active");
         $("#AllListedJobs ul li:nth-child(4)").removeClass("active");

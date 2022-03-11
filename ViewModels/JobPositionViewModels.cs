@@ -36,6 +36,7 @@ namespace ViewModels
         public Nullable<bool> IsPositionOpen { get; set; }
         public string EmployementType { get; set; } = "Permanant";
         public string SalaryRange { get; set; } = "0";
+        [Required(ErrorMessage = "Please select gender")]
         public Nullable<int> GenderSpecification { get; set; } = 0;
         public Nullable<int> MinExperinceYear { get; set; } = 0;
         public Nullable<System.DateTime> LastDateOfJob { get; set; } = null;

@@ -21,19 +21,15 @@ namespace BAL
                 catch
                 {
                     return "";
-
                 }
-
-
-               
-
+ 
             }
         }
+
         public static int UserId
         {
             get
             {
-
                 try
                 {
                     return Convert.ToInt32(HttpContext.Current.Session["UserId"]);
@@ -42,32 +38,20 @@ namespace BAL
                 catch (Exception)
                 {
                     return 0;
-
-                }
-
-
-                    ;
+                } 
 
             }
         }
-
-
         public static bool JobApplicationOpen
         { get; set; } = false;
-        public static bool IsSideBarOpen { get {
+        public static bool IsSideBarOpen { 
+            get {
                 return Convert.ToBoolean(HttpContext.Current.Request.Cookies["IsSideBarOpen"].Value);
             }
-     
-        } 
-
+        }  
         public static string FullName { get; set; }
         public static string EmailAddress { get; set; }
-
-
         public static bool IsUserIdnull { get; set; } = (UserId == 0 ? false : true);
-
-
-
 
     }
 }

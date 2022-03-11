@@ -1,6 +1,10 @@
 ﻿@model ViewModels.IntEvaluationViewModel
 
 
+@{
+    ViewBag.Title = "InterviewEvaluationForm";
+}
+
 
 <style>
     .table th, .jsgrid .jsgrid-table th, .table td, .jsgrid .jsgrid-table td {
@@ -10,9 +14,15 @@
 
 @using (Ajax.BeginForm("InterviewEvaluationForm",
     new { Controller = "Shortlisting", area = "Recruiter", @enctype = "multipart/form-data" },
-    new AjaxOptions { OnFailure = "OnJobFailure", OnSuccess = "OnJobSubmit",
+    new AjaxOptions
+    {
+        OnFailure = "OnJobFailure",
+        OnSuccess = "OnJobSubmit",
         InsertionMode = InsertionMode.Replace,
-        OnBegin = "BeginRequest", LoadingElementId = "PostLoader", UpdateTargetId = "PartialCndEvaluationForm" }
+        OnBegin = "BeginRequest",
+        LoadingElementId = "PostLoader",
+        UpdateTargetId = "PartialCndEvaluationForm"
+    }
     ))
 {
 
@@ -39,7 +49,7 @@
 
         $("#CndEvMaster_TotalMarks").val($(".tableRadioButton").find("tbody > tr").has("input:radio").length * 5);
 
-      //  calculateRadioValue();
+        //  calculateRadioValue();
 
     });
 
@@ -64,7 +74,7 @@
     //}
 
     function OnJobSubmit(data) {
-       
+
         console.log(data);
 
         //    ShowToaster(1, "Job Application Form Updated Successfully!", "Job Application!");
@@ -97,7 +107,7 @@
         if (radiovalue == "2") {
             return validateShortListEvaluation();
         }
- 
+
         /*return false;*/
 
     });
